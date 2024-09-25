@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reveal App for Poker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Reveal App for Poker</h1>
+        <p>The ultimate tool for poker players on PPPOKER and XPoker!</p>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>Our Story</h2>
+            <p>It all started with a series of mysterious defeats against a skilled Russian player. We realized that there was a flaw in the code of these poker apps that could be exploited. In November 2023, we launched the Reveal App for Poker, turning the tables and giving players the power to see their opponents' cards. Our app has since become a huge success, empowering players worldwide with strategic insights and a competitive edge.</p>
+        </section>
+
+        <section id="demo-videos">
+            <h2>Demo Videos</h2>
+            <p>Watch our app in action and see how it can transform your poker game. Check out our demonstration videos below:</p>
+            <div class="video-row">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/wgzzXJx_TAI" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/re55vC5-7IQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="video-row">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/ptQIe4OyJrE" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="purchase">
+            <h2>Purchase the App</h2>
+            <button onclick="showPlatformOptions()">Get the App</button>
+        </section>
+        
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Have questions or need assistance? Reach us through:</p>
+            <div class="contact-icons">
+                <i class="fab fa-telegram" onclick="showTelegramOptions()"></i>
+                <a href="https://www.instagram.com/hackpoker_updated?igshid=MTV2MHd3dThucm1xcQ==" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Reveal App for Poker. All rights reserved.</p>
+    </footer>
+
+    <!-- Platform options dialog box -->
+    <div id="platform-dialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close" onclick="closePlatformDialog()">&times;</span>
+            <h3>Select Your Platform</h3>
+            <div class="platform-buttons">
+                <button onclick="selectPlatform('android')">Android</button>
+                <button onclick="selectPlatform('ios')">iOS</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment method dialog box -->
+    <div id="payment-method-dialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close" onclick="closePaymentMethodDialog()">&times;</span>
+            <h3>Select Payment Method</h3>
+            <div class="payment-method-buttons">
+                <button onclick="generateQRCode('usdt')">USDT</button>
+                <button onclick="generateQRCode('btc')">BTC</button>
+                <button onclick="generateQRCode('eth')">ETH</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment dialog with QR code -->
+    <div id="payment-dialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close" onclick="closePaymentDialog()">&times;</span>
+            <h3 id="platform-title">Pay with Cryptocurrency</h3>
+            <div id="loading" class="loading">Generating your QR Code...</div>
+            <img src="" alt="Payment QR Code" class="qr-code" id="qr-code" style="display: none;">
+            <div id="payment-details" style="display: none;">
+                <p id="amount"></p>
+                <input type="text" id="wallet-address" readonly class="wallet-address">
+            </div>
+        </div>
+    </div>
+
+    <!-- Telegram options dialog box -->
+    <div id="telegram-dialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close" onclick="closeTelegramDialog()">&times;</span>
+            <h3>Choose Telegram Channel</h3>
+            <ul class="contact-options">
+                <li><a href="https://t.me/xpoker_hack2023" target="_blank"><i class="fab fa-telegram"></i> XPoker Telegram</a></li>
+                <li><a href="https://t.me/crackpppokerhack" target="_blank"><i class="fab fa-telegram"></i> PPPoker Telegram</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let selectedPlatform = '';
+
+        function showPlatformOptions() {
+            document.getElementById('platform-dialog').style.display = 'flex';
+        }
+
+        function selectPlatform(platform) {
+            selectedPlatform = platform;
+            closePlatformDialog();
+            document.getElementById('payment-method-dialog').style.display = 'flex';
+        }
+
+        function closePlatformDialog() {
+            document.getElementById('platform-dialog').style.display = 'none';
+        }
+
+        function closePaymentMethodDialog() {
+            document.getElementById('payment-method-dialog').style.display = 'none';
+        }
+
+        function generateQRCode(paymentMethod) {
+            closePaymentMethodDialog();
+            const paymentDialog = document.getElementById('payment-dialog');
+            paymentDialog.style.display = 'flex';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('qr-code').style.display = 'none';
+            document.getElementById('payment-details').style.display = 'none';
+
+            setTimeout(() => {
+                const qrCode = document.getElementById('qr-code');
+                const amount = document.getElementById('amount');
+                const walletAddress = document.getElementById('wallet-address');
+                const platformTitle = document.getElementById('platform-title');
+                
+                qrCode.src = `${paymentMethod}-qr.png`;
+                const price = selectedPlatform === 'android' ? '\$500 USD' : '\$1500 USD';
+                amount.textContent = `Amount: ${price}`;
+                
+                // Set the wallet address based on the selected payment method
+                let address = '';
+                if (paymentMethod === 'btc') {
+                    address = 'bc1qd0l9j7llwxj875e43u8rycnjwvswk6lm4m3p5g';
+                } else if (paymentMethod === 'eth') {
+                    address = '0x1f930a8BBB1A3F54EEc89cFb87f6789a21fB6484';
+                } else if (paymentMethod === 'usdt') {
+                    address = 'TVwNs33BS7KrqvWAU7vkKRgvRZWPAPdtqC';
+                }
+                walletAddress.value = address; 
+                
+                platformTitle.textContent = `Pay with ${paymentMethod.toUpperCase()} for ${selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1)}`;
+                
+                document.getElementById('loading').style.display = 'none';
+                qrCode.style.display = 'block';
+                document.getElementById('payment-details').style.display = 'block';
+            }, 5000);
+        }
+
+        function closePaymentDialog() {
+            document.getElementById('payment-dialog').style.display = 'none';
+        }
+
+        function showTelegramOptions() {
+            const dialog = document.getElementById('telegram-dialog');
+            dialog.style.display = 'flex';
+        }
+
+        function closeTelegramDialog() {
+            const dialog = document.getElementById('telegram-dialog');
+            dialog.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
