@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal App for Poker</title>
-    <link rel="stylesheet" href="styles.css">
+    <!-- Link atualizado para HTTPS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -16,12 +17,12 @@
     <main>
         <section id="about">
             <h2>Our Story</h2>
-            <p>It all started with a series of mysterious defeats against a skilled Russian player. We realized that there was a flaw in the code of these poker apps that could be exploited. In November 2023, we launched the Reveal App for Poker, turning the tables and giving players the power to see their opponents' cards. Our app has since become a huge success, empowering players worldwide with strategic insights and a competitive edge.</p>
+            <p>Our journey began after encountering repeated mysterious defeats, exposing a hidden flaw in poker apps. With determination, we uncovered a critical vulnerability in popular poker platforms like PPPOKER and XPoker. In November 2023, we launched the Reveal App for Poker, giving players unprecedented insights by allowing them to reveal their opponents' cards. Since its launch, our app has empowered players globally, providing a strategic edge and leveling the playing field. Now, you can take control of your game like never before!</p>
         </section>
 
         <section id="demo-videos">
             <h2>Demo Videos</h2>
-            <p>Watch our app in action and see how it can transform your poker game. Check out our demonstration videos below:</p>
+            <p>See how the Reveal App transforms your poker experience. Watch the demonstration videos below and witness the game-changing impact for yourself:</p>
             <div class="video-row">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/wgzzXJx_TAI" frameborder="0" allowfullscreen></iframe>
@@ -39,12 +40,12 @@
 
         <section id="purchase">
             <h2>Purchase the App</h2>
-            <button onclick="showPlatformOptions()">Get the App</button>
+            <button onclick="showPlatformOptions()">Get the App Now</button>
         </section>
         
         <section id="contact">
             <h2>Contact Us</h2>
-            <p>Have questions or need assistance? Reach us through:</p>
+            <p>Have any questions or need support? Contact us directly via:</p>
             <div class="contact-icons">
                 <i class="fab fa-telegram" onclick="showTelegramOptions()"></i>
                 <a href="https://www.instagram.com/hackpoker_updated?igshid=MTV2MHd3dThucm1xcQ==" target="_blank">
@@ -148,7 +149,6 @@
                 const price = selectedPlatform === 'android' ? '\$500 USD' : '\$1500 USD';
                 amount.textContent = `Amount: ${price}`;
                 
-                // Set the wallet address based on the selected payment method
                 let address = '';
                 if (paymentMethod === 'btc') {
                     address = 'bc1qd0l9j7llwxj875e43u8rycnjwvswk6lm4m3p5g';
