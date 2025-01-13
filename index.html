@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal App for Poker</title>
-    <!-- Link atualizado para HTTPS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -146,7 +145,7 @@
                 const platformTitle = document.getElementById('platform-title');
                 
                 qrCode.src = `${paymentMethod}-qr.png`;
-                const price = selectedPlatform === 'android' ? '\$500 USD' : '\$1500 USD';
+                const price = selectedPlatform === 'android' ? '\$1500 USD' : '\$1500 USD';
                 amount.textContent = `Amount: ${price}`;
                 
                 let address = '';
