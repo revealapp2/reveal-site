@@ -3,28 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reveal App for Poker</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="description" content="Dominate PPPOKER and XPoker with the Reveal App. Discover opponents' cards and elevate your game. Access now and transform your poker experience!">
+    <meta name="keywords" content="Reveal App, poker tool, PPPOKER hack, XPoker hack, best poker app">
+    <meta name="author" content="Reveal App Team">
+    <title>Reveal App for Poker - Dominate the Game</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <nav class="top-menu">
-            <a href="https://t.me/bedmalcon_temp" target="_blank" class="top-menu-button">Access the App on Telegram</a>
-        </nav>
-        <h1>Reveal App for Poker</h1>
-        <p>The ultimate tool for poker players on PPPOKER and XPoker!</p>
+        <div class="fixed-toolbox">
+            <a href="https://t.me/Bedmalcon_temp" target="_blank" class="toolbox-button">Access the App</a>
+        </div>
+        <h1>Reveal App: Dominate PPPOKER and XPoker</h1>
+        <p class="tagline">The ultimate tool for poker players. Elevate your strategy today!</p>
     </header>
 
     <main>
         <section id="about">
-            <h2>Our Story</h2>
-            <p>Our journey began after encountering repeated mysterious defeats, exposing a hidden flaw in poker apps. With determination, we uncovered a critical vulnerability in popular poker platforms like PPPOKER and XPoker. In November 2023, we launched the Reveal App for Poker, giving players unprecedented insights by allowing them to reveal their opponents' cards. Since its launch, our app has empowered players globally, providing a strategic edge and leveling the playing field. Now, you can take control of your game like never before!</p>
+            <h2>Our Story: How We Revolutionized Poker</h2>
+            <p>
+                It all started with a series of unexpected defeats, sparking a quest to uncover hidden vulnerabilities in popular poker apps like PPPOKER and XPoker. 
+                Through months of rigorous research, we revealed critical flaws that were being exploited. 
+                In November 2023, the <strong>Reveal App</strong> was born, empowering players to level the playing field by revealing opponents' cards.
+            </p>
+            <p class="highlight">
+                This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game.
+                <strong>Act now, because every moment without this app is a missed opportunity to dominate!</strong>
+            </p>
         </section>
 
         <section id="demo-videos">
-            <h2>Demo Videos</h2>
-            <p>See how the Reveal App transforms your poker experience. Watch the demonstration videos below and witness the game-changing impact for yourself:</p>
+            <h2>See the App in Action</h2>
+            <p>Watch our demo videos to understand how the Reveal App gives you the edge in PPPOKER and XPoker:</p>
             <div class="video-row">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/wgzzXJx_TAI" frameborder="0" allowfullscreen></iframe>
@@ -32,8 +43,6 @@
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/re55vC5-7IQ" frameborder="0" allowfullscreen></iframe>
                 </div>
-            </div>
-            <div class="video-row">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/ptQIe4OyJrE" frameborder="0" allowfullscreen></iframe>
                 </div>
@@ -42,26 +51,147 @@
 
         <section id="purchase">
             <h2>Purchase the App</h2>
+            <p class="purchase-text">
+                Ready to dominate the game? The Reveal App is your ultimate advantage. With just one click, you can unlock unparalleled insights into your opponents' strategies. 
+                <strong>Don’t wait—every second counts!</strong>
+            </p>
             <button onclick="showPlatformOptions()">Get the App Now</button>
         </section>
-        
+
         <section id="contact">
             <h2>Contact Us</h2>
             <p>Have any questions or need support? Contact us directly via:</p>
             <div class="contact-icons">
                 <i class="fab fa-telegram" onclick="showTelegramOptions()"></i>
-                <a href="https://www.instagram.com/hackpoker_updated?igshid=MTV2MHd3dThucm1xcQ==" target="_blank">
+                <a href="https://www.instagram.com/hackpoker_updated" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>
-            </div>
-            <div class="telegram-link">
-                <a href="https://t.me/bedmalcon_temp" target="_blank" class="telegram-button">Access the App on Telegram</a>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Reveal App for Poker. All rights reserved.</p>
+        <p>&copy; 2024 Reveal App for Poker. Your success is our mission.</p>
     </footer>
+
+    <!-- Platform options dialog box -->
+    <div id="platform-dialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close" onclick="closePlatformDialog()">&times;</span>
+            <h3>Select Your Platform</h3>
+            <div class="platform-buttons">
+                <button onclick="selectPlatform('android')">Android</button>
+                <button onclick="selectPlatform('ios')">iOS</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment method dialog box -->
+    <div id="payment-method-dialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close" onclick="closePaymentMethodDialog()">&times;</span>
+            <h3>Select Payment Method</h3>
+            <div class="payment-method-buttons">
+                <button onclick="generateQRCode('usdt')">USDT</button>
+                <button onclick="generateQRCode('btc')">BTC</button>
+                <button onclick="generateQRCode('eth')">ETH</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment dialog with QR code -->
+    <div id="payment-dialog" class="dialog">
+        <div class="dialog-content">
+            <span class="close" onclick="closePaymentDialog()">&times;</span>
+            <h3 id="platform-title">Pay with Cryptocurrency</h3>
+            <div id="loading" class="loading">Generating your QR Code...</div>
+            <img src="" alt="Payment QR Code" class="qr-code" id="qr-code" style="display: none;">
+            <div id="payment-details" style="display: none;">
+                <p id="amount"></p>
+                <div class="wallet-container">
+                    <input type="text" id="wallet-address" readonly class="wallet-address">
+                    <button class="copy-button" onclick="copyWalletAddress()">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedPlatform = '';
+
+        function showPlatformOptions() {
+            document.getElementById('platform-dialog').style.display = 'flex';
+        }
+
+        function selectPlatform(platform) {
+            selectedPlatform = platform;
+            closePlatformDialog();
+            document.getElementById('payment-method-dialog').style.display = 'flex';
+        }
+
+        function closePlatformDialog() {
+            document.getElementById('platform-dialog').style.display = 'none';
+        }
+
+        function closePaymentMethodDialog() {
+            document.getElementById('payment-method-dialog').style.display = 'none';
+        }
+
+        function generateQRCode(paymentMethod) {
+            closePaymentMethodDialog();
+            const paymentDialog = document.getElementById('payment-dialog');
+            paymentDialog.style.display = 'flex';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('qr-code').style.display = 'none';
+            document.getElementById('payment-details').style.display = 'none';
+
+            setTimeout(() => {
+                const qrCode = document.getElementById('qr-code');
+                const amount = document.getElementById('amount');
+                const walletAddress = document.getElementById('wallet-address');
+                const platformTitle = document.getElementById('platform-title');
+
+                qrCode.src = `${paymentMethod}-qr.png`;
+                const price = selectedPlatform === 'android' ? '$1500 USD' : '$1500 USD';
+                amount.textContent = `Amount: ${price}`;
+
+                let address = '';
+                if (paymentMethod === 'btc') {
+                    address = 'bc1qd0l9j7llwxj875e43u8rycnjwvswk6lm4m3p5g';
+                } else if (paymentMethod === 'eth') {
+                    address = '0x1f930a8BBB1A3F54EEc89cFb87f6789a21fB6484';
+                } else if (paymentMethod === 'usdt') {
+                    address = 'TVwNs33BS7KrqvWAU7vkKRgvRZWPAPdtqC';
+                }
+                walletAddress.value = address;
+
+                platformTitle.textContent = `Pay with ${paymentMethod.toUpperCase()} for ${selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1)}`;
+
+                document.getElementById('loading').style.display = 'none';
+                qrCode.style.display = 'block';
+                document.getElementById('payment-details').style.display = 'block';
+            }, 5000);
+        }
+
+        function copyWalletAddress() {
+            const walletAddress = document.getElementById('wallet-address');
+            walletAddress.select();
+            walletAddress.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(walletAddress.value).then(() => {
+                alert('Wallet address copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy wallet address. Please try again.');
+                console.error('Copy error:', err);
+            });
+        }
+
+        function closePaymentDialog() {
+            document.getElementById('payment-dialog').style.display = 'none';
+        }
+
+        function showTelegramOptions() {
+            alert("Open Telegram options here.");
+        }
+    </script>
 </body>
 </html>
