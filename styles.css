@@ -1,3 +1,4 @@
+/* Base Styles */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -6,6 +7,7 @@ body {
     color: #f5f5f5;
 }
 
+/* Header and Top Menu */
 header {
     text-align: center;
     background-color: #1b5e20;
@@ -13,6 +15,31 @@ header {
     padding: 20px;
 }
 
+.top-menu {
+    background-color: #2e7d32;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.top-menu-button {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #0088cc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.top-menu-button:hover {
+    background-color: #005f99;
+    transform: scale(1.05);
+}
+
+/* Section Styles */
 main {
     padding: 20px;
 }
@@ -29,6 +56,7 @@ h2 {
     color: #4caf50;
 }
 
+/* Buttons */
 button {
     padding: 12px 24px;
     background-color: #2e7d32;
@@ -44,6 +72,7 @@ button:hover {
     background-color: #1b5e20;
 }
 
+/* Video Styles */
 .video-row {
     display: flex;
     flex-wrap: wrap;
@@ -72,6 +101,7 @@ button:hover {
     border-radius: 8px;
 }
 
+/* Footer */
 footer {
     text-align: center;
     background-color: #1b5e20;
@@ -82,7 +112,45 @@ footer {
     width: 100%;
 }
 
-/* Dialog boxes */
+/* Telegram Button */
+.telegram-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #0088cc;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.telegram-button:hover {
+    background-color: #005f99;
+    transform: scale(1.05);
+}
+
+/* Contact Icons */
+.contact-icons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.contact-icons i {
+    font-size: 40px;
+    color: #4caf50;
+    cursor: pointer;
+}
+
+.contact-icons i:hover {
+    color: #2e7d32;
+}
+
+/* Dialog Boxes */
 .dialog {
     display: none;
     position: fixed;
@@ -136,23 +204,7 @@ footer {
     color: #333;
 }
 
-.contact-icons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.contact-icons i {
-    font-size: 40px;
-    color: #4caf50;
-    cursor: pointer;
-}
-
-.contact-icons i:hover {
-    color: #2e7d32;
-}
-
+/* Loading Animation */
 .loading {
     margin: 20px 0;
     font-size: 18px;
@@ -165,14 +217,7 @@ footer {
     50% { opacity: 0.5; }
 }
 
-.platform-buttons,
-.payment-method-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 10px;
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
     .video-container {
         max-width: 100%;
