@@ -6,18 +6,12 @@
     <title>Reveal App for Poker</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11559872755"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-11559872755');
-</script>
 </head>
 <body>
     <header>
+        <nav class="top-menu">
+            <a href="https://t.me/bedmalcon_temp" target="_blank" class="top-menu-button">Access the App on Telegram</a>
+        </nav>
         <h1>Reveal App for Poker</h1>
         <p>The ultimate tool for poker players on PPPOKER and XPoker!</p>
     </header>
@@ -60,134 +54,14 @@
                     <i class="fab fa-instagram"></i>
                 </a>
             </div>
+            <div class="telegram-link">
+                <a href="https://t.me/bedmalcon_temp" target="_blank" class="telegram-button">Access the App on Telegram</a>
+            </div>
         </section>
     </main>
 
     <footer>
         <p>&copy; 2024 Reveal App for Poker. All rights reserved.</p>
     </footer>
-
-    <!-- Platform options dialog box -->
-    <div id="platform-dialog" class="dialog">
-        <div class="dialog-content">
-            <span class="close" onclick="closePlatformDialog()">&times;</span>
-            <h3>Select Your Platform</h3>
-            <div class="platform-buttons">
-                <button onclick="selectPlatform('android')">Android</button>
-                <button onclick="selectPlatform('ios')">iOS</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Payment method dialog box -->
-    <div id="payment-method-dialog" class="dialog">
-        <div class="dialog-content">
-            <span class="close" onclick="closePaymentMethodDialog()">&times;</span>
-            <h3>Select Payment Method</h3>
-            <div class="payment-method-buttons">
-                <button onclick="generateQRCode('usdt')">USDT</button>
-                <button onclick="generateQRCode('btc')">BTC</button>
-                <button onclick="generateQRCode('eth')">ETH</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Payment dialog with QR code -->
-    <div id="payment-dialog" class="dialog">
-        <div class="dialog-content">
-            <span class="close" onclick="closePaymentDialog()">&times;</span>
-            <h3 id="platform-title">Pay with Cryptocurrency</h3>
-            <div id="loading" class="loading">Generating your QR Code...</div>
-            <img src="" alt="Payment QR Code" class="qr-code" id="qr-code" style="display: none;">
-            <div id="payment-details" style="display: none;">
-                <p id="amount"></p>
-                <input type="text" id="wallet-address" readonly class="wallet-address">
-            </div>
-        </div>
-    </div>
-
-    <!-- Telegram options dialog box -->
-    <div id="telegram-dialog" class="dialog">
-        <div class="dialog-content">
-            <span class="close" onclick="closeTelegramDialog()">&times;</span>
-            <h3>Choose Telegram Channel</h3>
-            <ul class="contact-options">
-                <li><a href="https://t.me/xpoker_hack2023" target="_blank"><i class="fab fa-telegram"></i> XPoker Telegram</a></li>
-                <li><a href="https://t.me/crackpppokerhack" target="_blank"><i class="fab fa-telegram"></i> PPPoker Telegram</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <script>
-        let selectedPlatform = '';
-
-        function showPlatformOptions() {
-            document.getElementById('platform-dialog').style.display = 'flex';
-        }
-
-        function selectPlatform(platform) {
-            selectedPlatform = platform;
-            closePlatformDialog();
-            document.getElementById('payment-method-dialog').style.display = 'flex';
-        }
-
-        function closePlatformDialog() {
-            document.getElementById('platform-dialog').style.display = 'none';
-        }
-
-        function closePaymentMethodDialog() {
-            document.getElementById('payment-method-dialog').style.display = 'none';
-        }
-
-        function generateQRCode(paymentMethod) {
-            closePaymentMethodDialog();
-            const paymentDialog = document.getElementById('payment-dialog');
-            paymentDialog.style.display = 'flex';
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('qr-code').style.display = 'none';
-            document.getElementById('payment-details').style.display = 'none';
-
-            setTimeout(() => {
-                const qrCode = document.getElementById('qr-code');
-                const amount = document.getElementById('amount');
-                const walletAddress = document.getElementById('wallet-address');
-                const platformTitle = document.getElementById('platform-title');
-                
-                qrCode.src = `${paymentMethod}-qr.png`;
-                const price = selectedPlatform === 'android' ? '\$1500 USD' : '\$1500 USD';
-                amount.textContent = `Amount: ${price}`;
-                
-                let address = '';
-                if (paymentMethod === 'btc') {
-                    address = 'bc1qd0l9j7llwxj875e43u8rycnjwvswk6lm4m3p5g';
-                } else if (paymentMethod === 'eth') {
-                    address = '0x1f930a8BBB1A3F54EEc89cFb87f6789a21fB6484';
-                } else if (paymentMethod === 'usdt') {
-                    address = 'TVwNs33BS7KrqvWAU7vkKRgvRZWPAPdtqC';
-                }
-                walletAddress.value = address; 
-                
-                platformTitle.textContent = `Pay with ${paymentMethod.toUpperCase()} for ${selectedPlatform.charAt(0).toUpperCase() + selectedPlatform.slice(1)}`;
-                
-                document.getElementById('loading').style.display = 'none';
-                qrCode.style.display = 'block';
-                document.getElementById('payment-details').style.display = 'block';
-            }, 5000);
-        }
-
-        function closePaymentDialog() {
-            document.getElementById('payment-dialog').style.display = 'none';
-        }
-
-        function showTelegramOptions() {
-            const dialog = document.getElementById('telegram-dialog');
-            dialog.style.display = 'flex';
-        }
-
-        function closeTelegramDialog() {
-            const dialog = document.getElementById('telegram-dialog');
-            dialog.style.display = 'none';
-        }
-    </script>
 </body>
 </html>
