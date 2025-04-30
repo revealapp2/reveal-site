@@ -14,7 +14,7 @@ const translations = {
     "purchaseButton": "Get the App Now",
     "contactTitle": "Contact Us",
     "contactP": "Have any questions or need support? Contact us directly via:",
-    "footerText": "&copy; 2024 Reveal App for Poker. Your success is our mission.",
+    "footerText": "&copy; 2025 Reveal App for Poker. Your success is our mission.",
     "platformDialogTitle": "Select Your Platform",
     "platformAndroid": "Android",
     "platformIOS": "iOS",
