@@ -155,8 +155,7 @@
                 <button onclick="selectPokerApp('pppoke')" data-translate="pokerAppPPPOKER">PPPOKER</button>
                 <button onclick="selectPokerApp('xpoker')" data-translate="pokerAppXPOKER">XPoker</button>
                 <button onclick="selectPokerApp('clubgg')" data-translate="pokerAppCLUBGG">ClubGG</button>
-            </div>
-        </div>
+            </div>        </div>
     </div>
 
     <!-- Payment method dialog box -->
@@ -404,52 +403,26 @@
             }
         }
     </script>
+    <script src="chatbot.js"></script>
 </body>
 </html>
 
 
+<!-- Chatbot Structure -->
+<div id="chatbot-icon" class="chatbot-icon">
+    <i class="fas fa-comment-dots"></i>
+</div>
 
-
-        <section id="testimonials">
-            <h2 data-translate="testimonialsTitle">What Our Users Say</h2>
-            <div class="testimonial-container">
-                <div class="testimonial">
-                    <p class="quote" data-translate="testimonial1Quote">"Since using the Reveal App, my win rate has skyrocketed! I finally feel in control at the tables. It paid for itself in the first week!"</p>
-                    <p class="author" data-translate="testimonial1Author">- Alex R., Professional Player</p>
-                </div>
-                <div class="testimonial">
-                    <p class="quote" data-translate="testimonial2Quote">"I was skeptical at first, but Reveal App is the real deal. Knowing my opponents' cards is a game-changer. I'm consistently cashing out big."</p>
-                    <p class="author" data-translate="testimonial2Author">- Maria S., Poker Enthusiast</p>
-                </div>
-                <div class="testimonial">
-                    <p class="quote" data-translate="testimonial3Quote">"This app is insane! It's like having superpowers. Easily the best investment I've made for my poker game. Highly recommended!"</p>
-                    <p class="author" data-translate="testimonial3Author">- Chen L., Online Grinder</p>
-                </div>
-            </div>
-        </section>
-
-
-<!-- IMEI Input dialog box -->
-    <div id="imei-dialog" class="dialog">
-        <div class="dialog-content">
-            <span class="close" onclick="closeImeiDialog()">&times;</span>
-            <h3 data-translate="imeiDialogTitle">Enter Your Device IMEI</h3>
-            <input type="text" id="imei-input" placeholder="Enter IMEI here" data-translate-placeholder="imeiPlaceholder" class="imei-input">
-            <button onclick="submitImei()" data-translate="imeiSubmitButton">Submit IMEI</button>
-        </div>
+<div id="chatbot-window" class="chatbot-window">
+    <div class="chatbot-header">
+        <span data-translate="chatbotHeader">Chat Assistant</span>
+        <button id="chatbot-close" class="chatbot-close">&times;</button>
     </div>
-
-    <!-- Poker App Selection dialog box -->
-    <div id="poker-app-dialog" class="dialog">
-        <div class="dialog-content">
-            <span class="close" onclick="closePokerAppDialog()">&times;</span>
-            <h3 data-translate="pokerAppDialogTitle">Select Target Poker App</h3>
-            <div class="poker-app-buttons">
-                <button onclick="selectPokerApp("pppoke"")" data-translate="pokerAppPPPOKER">PPPOKER</button>
-                <button onclick="selectPokerApp("xpoker")" data-translate="pokerAppXPOKER">XPoker</button>
-                <button onclick="selectPokerApp("clubgg")" data-translate="pokerAppCLUBGG">ClubGG</button>
-            </div>
-        </div>
+    <div id="chatbot-messages" class="chatbot-messages">
+        <!-- Messages will be added here by JavaScript -->
     </div>
+    <div id="chatbot-buttons" class="chatbot-buttons">
+        <!-- Buttons will be added here by JavaScript -->
+    </div>
+</div>
 
-    <!-- Platform options dialog box -->
