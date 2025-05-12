@@ -1,263 +1,610 @@
-/* styles.css */
+/* styles.css - Redesigned for a Modern, Professional, and Engaging Look */
 
-/* General Styles */
+/* === Global Styles & Variables === */
+:root {
+    --primary-font: 'Roboto', 'Arial', sans-serif; /* Modern, readable sans-serif */
+    --heading-font: 'Montserrat', 'Arial', sans-serif; /* Stylish, modern heading font */
+
+    --dark-bg: #12181b; /* Slightly desaturated dark blue/grey */
+    --medium-dark-bg: #1f2933;
+    --light-dark-bg: #2c3a47; /* For cards and distinct sections */
+    
+    --text-light: #f0f4f8;
+    --text-medium: #c0c5c9;
+    --text-dark: #909599;
+
+    --primary-accent: #00A896; /* Vibrant Teal */
+    --primary-accent-dark: #007A76;
+    --secondary-accent: #F0C808; /* Warm Yellow/Gold */
+    --secondary-accent-dark: #D0A808;
+
+    --success-color: #4CAF50;
+    --error-color: #F44336;
+
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.2);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.3);
+    --shadow-lg: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: var(--primary-font);
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Dark background */
-    color: #e0e0e0; /* Light text */
-    line-height: 1.6;
-}
-
-header {
-    background: linear-gradient(to right, #004d40, #00796b); /* Teal gradient */
-    color: white;
-    padding: 3rem 1rem 2rem 1rem; /* Increased padding */
-    text-align: center;
-    position: relative;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-    font-weight: bold;
-}
-
-.tagline {
-    font-size: 1.2em;
-    margin-top: 0.5rem;
-    color: #b2dfdb; /* Lighter teal */
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.7;
+    font-size: 16px;
 }
 
 main {
-    padding: 2rem 1rem;
-    max-width: 1000px; /* Limit max width for better readability on large screens */
-    margin: 0 auto; /* Center content */
+    padding: 0; /* Sections will handle their own padding */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-section {
-    background-color: #1e1e1e; /* Slightly lighter dark shade */
-    margin-bottom: 2rem;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+.content-section {
+    padding: 4rem 2rem;
+    margin-bottom: 0; /* Remove default margin, manage spacing with padding or specific margins */
+}
+
+.content-section.alt-bg {
+    background-color: var(--medium-dark-bg);
+}
+
+section h1, section h2, section h3, section h4, section h5, section h6 {
+    font-family: var(--heading-font);
+    color: var(--primary-accent);
+    margin-top: 0;
 }
 
 section h2 {
-    color: #009688; /* Teal */
-    border-bottom: 2px solid #00796b;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-    font-size: 1.8em;
+    text-align: center; /* Centers text *within* the h2 */
+    font-size: 2.5em;
+    margin-bottom: 2.5rem;
+    border-bottom: 3px solid var(--primary-accent-dark);
+    padding-bottom: 0.8rem;
+    display: inline-block; /* To make border only as wide as text, parent's text-align:center will center this element */
 }
 
-.highlight {
-    background-color: #004d40; /* Darker teal */
-    color: #ffffff;
-    padding: 1rem;
-    border-radius: 5px;
-    margin-top: 1rem;
-    font-weight: bold;
+section p {
+    color: var(--text-medium);
+    margin-bottom: 1rem;
 }
 
-.highlight strong {
-    color: #ffab40; /* Amber accent */
+a {
+    color: var(--secondary-accent);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-/* Video Section */
-.video-row {
+a:hover {
+    color: var(--secondary-accent-dark);
+}
+
+/* === Navigation Bar === */
+.main-nav {
+    background-color: rgba(31, 41, 51, 0.9); /* Semi-transparent dark */
+    padding: 1rem 2rem;
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 1rem;
-    justify-content: center;
-}
-
-.video-container {
-    flex: 1 1 300px; /* Flex properties for responsiveness */
-    max-width: 400px; /* Limit video width */
-    aspect-ratio: 16 / 9; /* Maintain aspect ratio */
-}
-
-.video-container iframe {
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    border-radius: 8px;
+    z-index: 1000;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(5px); /* Frosted glass effect */
 }
 
-/* Purchase Section */
-#purchase {
+.nav-logo a {
+    font-family: var(--heading-font);
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-accent);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: var(--text-light);
+    font-weight: 500;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-accent);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+#language-selector select {
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--primary-accent-dark);
+    background-color: var(--light-dark-bg);
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: 0.9em;
+    font-family: var(--primary-font);
+}
+
+/* === Hero Section === */
+.hero-section {
+    background: linear-gradient(rgba(18, 24, 27, 0.8), rgba(18, 24, 27, 0.8)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover; /* Replace with a relevant, high-quality background image */
+    color: white;
+    padding: 10rem 2rem 8rem 2rem; /* More padding, especially top for nav bar */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh; /* Ensure it takes up significant viewport height */
+    margin-top: 70px; /* Offset for fixed navbar height */
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white; /* Override section h1 color */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-content .tagline {
+    font-size: 1.5em;
+    margin-bottom: 2rem;
+    color: var(--text-medium);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.primary-cta-button {
+    background-color: var(--secondary-accent);
+    color: var(--dark-bg);
+    padding: 0.8rem 2rem;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.primary-cta-button:hover {
+    background-color: var(--secondary-accent-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.hero-cta {
+    font-size: 1.3em;
+    padding: 1rem 2.5rem;
+}
+
+/* === Card Styling === */
+.card-style {
+    background-color: var(--light-dark-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-style:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* === Features Section === */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-item {
     text-align: center;
 }
 
+.feature-icon {
+    font-size: 3em;
+    color: var(--primary-accent);
+    margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+/* === How It Works Section === */
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+.step-number {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--secondary-accent);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.step-item h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+/* === Purchase Section === */
+.purchase-section {
+    text-align: center; /* This helps center the H2 title and other inline/inline-block content */
+}
+
 .purchase-text {
-    margin-bottom: 1rem;
+    font-size: 1.1em;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.urgency {
-    color: #ff6f61; /* Coral color for urgency */
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-}
-
-#purchase button {
-    background-color: #ffab40; /* Amber */
-    color: #121212;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.2em;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-bottom: 1rem;
-}
-
-#purchase button:hover {
-    background-color: #ffd54f; /* Lighter amber */
-    transform: translateY(-2px);
+.get-app-main-button {
+    font-size: 1.3em;
+    padding: 1rem 2.5rem;
+    margin-bottom: 2rem;
 }
 
 .trust-badges span {
     display: inline-block;
     margin: 0.5rem 1rem;
-    color: #009688; /* Teal */
+    color: var(--text-dark);
     font-size: 0.9em;
 }
 
 .trust-badges i {
     margin-right: 0.5rem;
+    color: var(--primary-accent);
 }
 
-/* Contact Section */
-#contact {
+/* === Demo Section === */
+.video-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.video-container iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: var(--border-radius-md); /* Consistent with card style */
+}
+
+/* === Story Section === */
+.story-section p {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
 }
 
-.contact-icons i {
-    font-size: 2.5em;
+.story-section .highlight {
+    background-color: var(--medium-dark-bg);
+    color: var(--text-light);
+    padding: 1.5rem;
+    border-radius: var(--border-radius-md);
+    margin-top: 1.5rem;
+    font-weight: 500;
+    border-left: 5px solid var(--secondary-accent);
+}
+
+.story-section .highlight strong {
+    color: var(--secondary-accent);
+}
+
+/* === Testimonials Section === */
+.testimonials-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background-color: var(--light-dark-bg);
+    border: 1px solid var(--medium-dark-bg);
+    border-radius: var(--border-radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.testimonial-avatar-placeholder {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: var(--primary-accent-dark);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2em;
+}
+
+.testimonial-avatar-placeholder::before {
+    content: "\f007";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+}
+
+.testimonial-quote {
+    font-style: italic;
+    color: var(--text-medium);
+    margin-bottom: 1rem;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.testimonial-author {
+    font-weight: 700;
+    color: var(--primary-accent);
+    font-size: 0.9em;
+    margin-top: auto;
+}
+
+/* === Contact Section === */
+.contact-section {
+    text-align: center;
+}
+
+.contact-icons a {
+    display: inline-block;
     margin: 0 1rem;
-    color: #009688; /* Teal */
-    cursor: pointer;
+}
+
+.contact-icons i {
+    font-size: 3em;
+    color: var(--primary-accent);
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .contact-icons i:hover {
-    color: #00c7b0; /* Lighter teal */
+    color: var(--primary-accent-dark);
     transform: scale(1.1);
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 1.5rem 1rem;
-    margin-top: 2rem;
-    background-color: #1e1e1e;
-    color: #888;
+/* === Footer === */
+.site-footer {
+    background-color: var(--medium-dark-bg);
+    color: var(--text-dark);
+    padding: 3rem 2rem 1rem 2rem;
     font-size: 0.9em;
 }
 
-/* Dialog Boxes */
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-column h3 {
+    font-size: 1.2em;
+    color: var(--primary-accent);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-column ul li a {
+    color: var(--text-dark);
+}
+
+.footer-column ul li a:hover {
+    color: var(--secondary-accent);
+}
+
+.social-icons a {
+    margin-right: 1rem;
+}
+.social-icons i {
+    font-size: 1.5em;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
+}
+.social-icons i:hover {
+    color: var(--secondary-accent);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--light-dark-bg);
+    font-size: 0.85em;
+}
+
+.footer-bottom .disclaimer {
+    margin-top: 0.5rem;
+    font-size: 0.8em;
+    color: var(--text-dark);
+}
+
+/* === Dialog Boxes (Modals) === */
 .dialog {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1001;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(18, 24, 27, 0.85); /* Darker, more opaque overlay */
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(3px);
 }
 
 .dialog-content {
-    background-color: #2c2c2c; /* Darker grey */
+    background-color: var(--light-dark-bg);
     margin: auto;
-    padding: 30px;
-    border: 1px solid #555;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 8px;
+    padding: 2.5rem;
+    border: none; /* Removed border, rely on shadow */
+    width: 90%;
+    max-width: 550px;
+    border-radius: var(--border-radius-lg);
     position: relative;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--shadow-lg);
 }
 
 .close {
-    color: #aaa;
+    color: var(--text-dark);
     position: absolute;
-    top: 10px;
+    top: 15px;
     right: 20px;
-    font-size: 28px;
+    font-size: 1.8em;
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .close:hover,
 .close:focus {
-    color: #fff;
-    text-decoration: none;
+    color: var(--text-light);
 }
 
 .dialog h3 {
-    color: #009688; /* Teal */
+    color: var(--primary-accent);
     margin-top: 0;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.6em;
 }
 
-.dialog button {
-    background-color: #00796b; /* Darker teal */
+.dialog-input {
+    width: calc(100% - 24px);
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--medium-dark-bg);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    font-size: 1em;
+    font-family: var(--primary-font);
+}
+
+.dialog-input::placeholder {
+    color: var(--text-dark);
+}
+
+.dialog-buttons button,
+.dialog-button-group button,
+.proceed-button {
+    background-color: var(--primary-accent-dark);
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 0.8rem 1.5rem;
     font-size: 1em;
-    border-radius: 5px;
+    font-weight: 500;
+    border-radius: var(--border-radius-sm);
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 5px;
+    margin: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.dialog button:hover {
-    background-color: #009688; /* Lighter teal */
+.dialog-buttons button:hover,
+.dialog-button-group button:hover {
+    background-color: var(--primary-accent);
+}
+
+.primary-dialog-button {
+    background-color: var(--secondary-accent) !important;
+    color: var(--dark-bg) !important;
+}
+
+.primary-dialog-button:hover {
+    background-color: var(--secondary-accent-dark) !important;
+}
+
+.secondary-dialog-button {
+    background-color: var(--medium-dark-bg) !important;
+    color: var(--text-light) !important;
+}
+
+.secondary-dialog-button:hover {
+    background-color: var(--light-dark-bg) !important;
 }
 
 .platform-buttons,
 .poker-app-buttons,
 .payment-method-buttons {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
-}
-
-.imei-input {
-    width: calc(100% - 24px); /* Adjust width considering padding */
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #555;
-    border-radius: 5px;
-    background-color: #333;
-    color: #e0e0e0;
-    font-size: 1em;
+    gap: 1rem;
 }
 
 /* Payment Dialog Specifics */
 .qr-code {
-    max-width: 200px;
+    max-width: 220px;
     height: auto;
-    margin: 1rem auto;
+    margin: 1.5rem auto;
     display: block;
-    background-color: white; /* Ensure QR code background is white */
-    padding: 10px; /* Padding around QR code */
-    border-radius: 5px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
 }
 
 .loading {
-    color: #ffab40; /* Amber */
-    font-size: 1.1em;
-    margin: 1rem 0;
+    color: var(--secondary-accent);
+    font-size: 1.2em;
+    margin: 1.5rem 0;
 }
 
 #payment-details p {
@@ -269,102 +616,94 @@ footer {
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
-    gap: 5px;
+    gap: 0.5rem;
 }
 
 .wallet-address {
     flex-grow: 1;
-    padding: 8px;
-    border: 1px solid #555;
-    border-radius: 5px 0 0 5px;
-    background-color: #333;
-    color: #e0e0e0;
+    padding: 0.6rem;
+    border: 1px solid var(--medium-dark-bg);
+    border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+    background-color: var(--dark-bg);
+    color: var(--text-light);
     font-size: 0.9em;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.copy-button {
-    padding: 8px 12px;
-    border-radius: 0 5px 5px 0;
-    white-space: nowrap;
-}
-
-/* Crypto Ticker */
-#crypto-ticker-container {
-    background-color: #004d40; /* Dark teal */
-    color: #e0e0e0;
-    padding: 5px 0;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-}
-
-#crypto-ticker {
-    display: inline-block;
-    padding-left: 100%; /* Start off-screen */
-    animation: ticker-scroll 30s linear infinite;
-}
-
-#crypto-ticker span {
-    display: inline-block;
-    padding: 0 15px;
-    font-size: 0.9em;
-}
-
-#crypto-ticker .symbol {
-    color: #ffab40; /* Amber */
-    font-weight: bold;
-}
-
-@keyframes ticker-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-}
-
-/* Fixed Toolbox */
-.fixed-toolbox {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1001; /* Above dialog overlay */
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.toolbox-button {
-    background-color: #ffab40; /* Amber */
-    color: #121212;
-    padding: 10px 15px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    font-size: 0.9em;
-}
-
-.toolbox-button:hover {
-    background-color: #ffd54f; /* Lighter amber */
-}
-
-#language-selector select {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #555;
-    background-color: #333;
-    color: #e0e0e0;
+#copy-wallet-button.copy-button {
+    background-color: var(--secondary-accent);
+    color: var(--dark-bg);
+    border: none;
+    padding: 0.6rem 1rem; /* Matched to wallet-address padding for height consistency */
+    font-size: 0.9em; /* Matched to wallet-address font-size */
+    font-weight: 500;
+    border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#copy-wallet-button.copy-button:hover {
+    background-color: var(--secondary-accent-dark);
+}
+
+/* Coupon Section in Payment Dialog */
+.price-container {
+    margin-bottom: 1rem;
+    font-size: 1.2em;
+}
+
+.original-amount {
+    text-decoration: line-through;
+    color: var(--text-dark);
+    font-size: 0.9em;
+    margin-right: 0.8rem;
+}
+
+.coupon-section {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.coupon-input {
+    padding: 0.7rem;
+    font-size: 1em;
+    width: calc(80% - 22px);
+    max-width: 300px;
+}
+
+.coupon-button {
+    padding: 0.7rem 1.2rem;
     font-size: 0.9em;
 }
 
-/* Chatbot Styles */
+.coupon-message {
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    min-height: 1.3em;
+}
+
+.coupon-message.success {
+    color: var(--success-color);
+}
+
+.coupon-message.error {
+    color: var(--error-color);
+}
+
+/* === Chatbot Styles === */
 .chatbot-icon {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background-color: #009688; /* Teal */
+    background-color: var(--primary-accent);
     color: white;
     width: 60px;
     height: 60px;
@@ -372,27 +711,28 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
+    font-size: 1.8em;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
     z-index: 998;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .chatbot-icon:hover {
     transform: scale(1.1);
+    background-color: var(--primary-accent-dark);
 }
 
 .chatbot-window {
     position: fixed;
-    bottom: 30px;
+    bottom: 100px; /* Position above icon */
     right: 30px;
-    width: 350px;
-    max-height: 500px;
-    background-color: #2c2c2c; /* Darker grey */
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    display: none; /* Hidden by default */
+    width: 360px;
+    max-height: 550px;
+    background-color: var(--light-dark-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: none;
     flex-direction: column;
     overflow: hidden;
     z-index: 999;
@@ -403,64 +743,65 @@ footer {
 }
 
 .chatbot-header {
-    background-color: #00796b; /* Darker teal */
+    background-color: var(--primary-accent-dark);
     color: white;
-    padding: 10px 15px;
+    padding: 0.8rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: var(--heading-font);
 }
 
 .chatbot-close {
     background: none;
     border: none;
     color: white;
-    font-size: 20px;
+    font-size: 1.5em;
     cursor: pointer;
 }
 
 .chatbot-messages {
     flex-grow: 1;
-    padding: 15px;
+    padding: 1rem;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.8rem;
 }
 
 .chatbot-message {
-    padding: 8px 12px;
-    border-radius: 15px;
-    max-width: 80%;
+    padding: 0.6rem 1rem;
+    border-radius: var(--border-radius-md);
+    max-width: 85%;
     word-wrap: break-word;
+    line-height: 1.5;
 }
 
 .chatbot-message.bot {
-    background-color: #444; /* Grey for bot */
-    color: #e0e0e0;
+    background-color: var(--medium-dark-bg);
+    color: var(--text-light);
     align-self: flex-start;
-    border-bottom-left-radius: 3px;
+    border-bottom-left-radius: var(--border-radius-sm);
 }
 
 .chatbot-message.user {
-    background-color: #00796b; /* Teal shade for user */
+    background-color: var(--primary-accent);
     color: white;
     align-self: flex-end;
-    border-bottom-right-radius: 3px;
+    border-bottom-right-radius: var(--border-radius-sm);
 }
 
-/* Typing Indicator Styles */
 .chatbot-message.typing-indicator {
-    padding: 10px 12px;
-    display: inline-block; /* Fit content */
+    padding: 0.8rem 1rem;
+    display: inline-block;
 }
 
 .typing-indicator span {
     display: inline-block;
-    width: 6px;
-    height: 6px;
-    background-color: #aaa;
+    width: 7px;
+    height: 7px;
+    background-color: var(--text-dark);
     border-radius: 50%;
     margin: 0 1px;
     animation: typing-blink 1.4s infinite both;
@@ -481,311 +822,272 @@ footer {
 }
 
 .chatbot-buttons {
-    padding: 10px;
+    padding: 0.8rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    border-top: 1px solid #444;
+    gap: 0.5rem;
+    border-top: 1px solid var(--medium-dark-bg);
 }
 
 .chatbot-button {
-    background-color: #009688; /* Teal */
+    background-color: var(--primary-accent);
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 15px;
+    padding: 0.6rem 1rem;
+    border-radius: var(--border-radius-md);
     cursor: pointer;
     font-size: 0.9em;
     transition: background-color 0.3s ease;
 }
 
 .chatbot-button:hover {
-    background-color: #00796b; /* Darker teal */
+    background-color: var(--primary-accent-dark);
 }
 
-/* Responsive Design */
-
-/* Tablets and smaller desktops */
+/* === Responsive Design === */
 @media (max-width: 1024px) {
-    header h1 {
+    .hero-content h1 {
+        font-size: 3em;
+    }
+    .hero-content .tagline {
+        font-size: 1.3em;
+    }
+    section h2 {
         font-size: 2.2em;
     }
-    .tagline {
-        font-size: 1.1em;
+    .main-nav {
+        padding: 1rem;
     }
-    main {
-        padding: 1.5rem 1rem;
-    }
-    section {
-        padding: 1.5rem;
-    }
-    section h2 {
-        font-size: 1.6em;
-    }
-    .video-row {
-        gap: 0.8rem;
+    .nav-links {
+        gap: 1rem;
     }
 }
 
-/* Mobile devices */
 @media (max-width: 768px) {
-    header {
-        padding: 2rem 1rem 1.5rem 1rem;
+    body {
+        font-size: 15px;
     }
-    header h1 {
-        font-size: 1.8em;
+    .main-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.8rem;
     }
-    .tagline {
-        font-size: 1em;
+    .nav-logo {
+        margin-bottom: 0.5rem;
     }
-    main {
-        padding: 1rem 0.5rem;
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+        display: none; /* Simple toggle can be added with JS if needed, for now, keep it simple */
     }
-    section {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
+    .main-nav.active .nav-links { /* Example for JS toggle */
+        display: flex;
     }
-    section h2 {
-        font-size: 1.4em;
-        margin-bottom: 1rem;
+    #language-selector {
+        margin-top: 0.5rem;
+        align-self: flex-start;
     }
-    .video-row {
-        flex-direction: column; /* Stack videos vertically */
-        align-items: center;
+    .hero-section {
+        padding: 8rem 1rem 6rem 1rem;
+        margin-top: 0; /* Adjust if nav becomes static or toggled */
+        min-height: 60vh;
     }
-    .video-container {
-        width: 95%; /* Make videos wider on mobile */
-        max-width: none;
-        flex-basis: auto;
+    .hero-content h1 {
+        font-size: 2.5em;
     }
-    #purchase button {
-        padding: 0.8rem 1.5rem;
+    .hero-content .tagline {
         font-size: 1.1em;
     }
-    .trust-badges span {
-        display: block; /* Stack badges */
-        margin: 0.5rem 0;
+    .content-section {
+        padding: 3rem 1rem;
+    }
+    section h2 {
+        font-size: 2em;
+        margin-bottom: 2rem;
+    }
+    .features-grid, .steps-container, .video-row, .testimonials-container, .footer-content {
+        grid-template-columns: 1fr; /* Stack on mobile */
+        gap: 1.5rem;
     }
     .dialog-content {
-        width: 90%;
-        padding: 20px;
-    }
-    .fixed-toolbox {
-        top: 10px;
-        right: 10px;
-        gap: 5px;
-    }
-    .toolbox-button,
-    #language-selector select {
-        padding: 8px 10px;
-        font-size: 0.8em;
+        width: 95%;
+        padding: 1.5rem;
     }
     .chatbot-window {
-        width: calc(100% - 20px); /* Almost full width */
-        max-height: 70vh; /* Limit height */
+        width: calc(100% - 20px);
+        max-height: 75vh;
         bottom: 10px;
         right: 10px;
-        left: 10px; /* Center horizontally */
+        left: 10px;
+        bottom: 80px; /* Above icon */
     }
     .chatbot-icon {
         bottom: 20px;
         right: 20px;
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
     }
 }
 
-/* Very small mobile devices */
 @media (max-width: 480px) {
-    header h1 {
-        font-size: 1.6em;
+    .hero-content h1 {
+        font-size: 2em;
     }
-    .tagline {
-        font-size: 0.9em;
-    }
-    #purchase button {
+    .hero-content .tagline {
         font-size: 1em;
     }
-    .dialog-content {
-        padding: 15px;
+    section h2 {
+        font-size: 1.8em;
+    }
+    .primary-cta-button, .hero-cta, .get-app-main-button {
+        font-size: 1em;
+        padding: 0.8rem 1.5rem;
     }
     .dialog h3 {
-        font-size: 1.1em;
-        margin-bottom: 1rem;
-    }
-    .dialog button {
-        padding: 10px 15px;
-        font-size: 0.9em;
-    }
-    .chatbot-message {
-        max-width: 90%;
-    }
-}
-
-
-
-/* Testimonials Section */
-#testimonials {
-    background-color: #1e1e1e; /* Slightly lighter dark shade, consistent with other sections */
-    padding: 2rem;
-    margin-top: 2rem; /* Add some space above the footer */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-#testimonials h2 {
-    color: #009688; /* Teal */
-    text-align: center;
-    border-bottom: 2px solid #00796b;
-    padding-bottom: 0.5rem;
-    margin-bottom: 2rem; /* More space after title */
-    font-size: 1.8em;
-}
-
-.testimonials-container {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 1.5rem; /* Space between testimonial cards */
-    justify-content: center;
-}
-
-.testimonial-card {
-    background-color: #2c2c2c; /* Darker grey, similar to dialogs */
-    border: 1px solid #444; /* Subtle border */
-    border-radius: 8px;
-    padding: 1.5rem;
-    flex: 1 1 300px; /* Flex properties for responsiveness */
-    max-width: 350px; /* Max width for each card */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content like avatar and author */
-    text-align: center;
-}
-
-.testimonial-avatar-placeholder {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #00796b; /* Teal accent for avatar */
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5em; /* For potential initials or icon */
-}
-
-/* Optional: Add a generic user icon inside the placeholder */
-.testimonial-avatar-placeholder::before {
-    content: "\f007"; /* Font Awesome user icon */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-}
-
-.testimonial-quote {
-    font-style: italic;
-    color: #c0c0c0; /* Lighter grey for quote text */
-    margin-bottom: 1rem;
-    font-size: 0.95em;
-    line-height: 1.5;
-}
-
-.testimonial-author {
-    font-weight: bold;
-    color: #009688; /* Teal for author name */
-    font-size: 0.9em;
-    margin-top: auto; /* Pushes author to the bottom if card heights vary */
-}
-
-/* Responsive adjustments for testimonials if needed */
-@media (max-width: 768px) {
-    .testimonial-card {
-        flex-basis: 80%; /* Wider cards on mobile */
-        max-width: none;
-    }
-    #testimonials h2 {
-        font-size: 1.6em;
-    }
-}
-
-@media (max-width: 480px) {
-    .testimonial-card {
-        padding: 1rem;
-    }
-    .testimonial-quote {
-        font-size: 0.9em;
-    }
-    .testimonial-author {
-        font-size: 0.85em;
-    }
-    #testimonials h2 {
         font-size: 1.4em;
     }
+    .dialog-buttons button, .dialog-button-group button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9em;
+    }
 }
 
 
 
-/* Coupon Section in Payment Dialog */
-.price-container {
-    margin-bottom: 10px;
+/* === Platform Selection Button Styles === */
+.platform-buttons button {
+    background-color: var(--primary-accent);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
 }
 
-.original-amount {
-    text-decoration: line-through;
-    color: #999; /* Lighter color for strikethrough */
-    font-size: 0.9em;
-    margin-right: 10px;
+.platform-buttons button:hover {
+    background-color: var(--primary-accent-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
-.coupon-section {
+.platform-buttons button:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Optional: Style for a selected platform button if visual feedback for selection is desired via CSS */
+.platform-buttons button.selected {
+    background-color: var(--secondary-accent);
+    color: var(--dark-bg);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.2);
+}
+
+
+
+
+/* --- QR Code Display Styles --- */
+#qr-loading-message {
+    color: #fff;
+    font-size: 1.2em;
+    padding: 30px 0;
+}
+
+#qr-code-display-stage {
+    padding: 20px;
+    background-color: #2c2c2c; /* Slightly lighter than dialog background for contrast */
+    border-radius: 8px;
     margin-top: 15px;
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
 }
 
-.coupon-input {
+#payment-qr-code-image {
+    border: 5px solid #fff;
+    border-radius: 8px;
+    background-color: #fff; /* Ensure QR code background is white if transparent parts */
+}
+
+#qr-code-display-stage p {
+    color: #eee;
+    margin: 8px 0;
+    font-size: 1em;
+}
+
+#qr-code-display-stage p strong {
+    color: #fff;
+}
+
+.wallet-address-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Added gap for spacing */
+    margin-top: 15px;
+}
+
+#payment-wallet-address {
+    flex-grow: 1; /* Allow input to take available space */
+    max-width: 300px; /* Max width for better layout */
     padding: 10px;
     border: 1px solid #555;
-    border-radius: 5px;
     background-color: #333;
-    color: #e0e0e0;
+    color: #fff;
+    border-radius: 4px;
     font-size: 0.9em;
-    width: calc(80% - 22px); /* Adjust width */
-    max-width: 250px;
+    text-align: center;
 }
 
-.coupon-button {
-    background-color: #ffab40; /* Amber */
-    color: #121212;
-    border: none;
+#copy-wallet-button {
     padding: 10px 15px;
     font-size: 0.9em;
+    /* Uses existing .secondary-dialog-button styles, can add specific overrides if needed */
+}
+
+/* Ensure dialog content can accommodate the new QR section */
+.payment-final-dialog .dialog-content {
+    max-width: 500px; /* Adjust if needed */
+}
+
+
+
+/* === Crypto Ticker (Original Style Integration) === */
+#crypto-ticker-container {
+    background-color: #004d40; /* Dark teal - Consider adapting to new theme variables if needed */
+    color: #e0e0e0; /* Light text - Consider adapting to new theme variables */
+    padding: 5px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    /* Ensure it fits well with the new fixed navbar */
+    margin-top: 70px; /* Assuming navbar height is around 70px, adjust as needed */
+    position: relative; /* Or fixed, depending on desired behavior with new nav */
+    z-index: 999; /* Below navbar (1000) but above most content */
+}
+
+#crypto-ticker {
+    display: inline-block;
+    padding-left: 100%; /* Start off-screen */
+    animation: ticker-scroll 30s linear infinite;
+}
+
+#crypto-ticker span {
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 0.9em;
+}
+
+#crypto-ticker .symbol {
+    color: #ffab40; /* Amber - Consider adapting to new theme variables (e.g., var(--secondary-accent)) */
     font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-.coupon-button:hover {
-    background-color: #ffd54f; /* Lighter amber */
+@keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
-
-.coupon-message {
-    font-size: 0.85em;
-    margin-top: 5px;
-    min-height: 1.2em; /* Reserve space for message */
-}
-
-.coupon-message.success {
-    color: #4CAF50; /* Green for success */
-}
-
-.coupon-message.error {
-    color: #F44336; /* Red for error */
-}
+/* === End Crypto Ticker Styles === */
 

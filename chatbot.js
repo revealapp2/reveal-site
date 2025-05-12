@@ -15,6 +15,7 @@ let chatbotWindow = null;
 let chatbotClose = null;
 let messagesContainer = null;
 let buttonsContainer = null;
+let currentLang = localStorage.getItem("language") || "en"; // Added to ensure currentLang is available
 
 function initializeChatbot() {
     // Assign elements after DOM is ready
@@ -85,7 +86,7 @@ function addBotMessageWithButtons(textKey, buttonsToShow, replacements = {}) {
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
     // Calculate random delay (1000ms to 3000ms)
-    const delay = Math.random() * 2000 + 1000;
+    const delay = Math.random() * 1000 + 500; // Shortened delay for better UX
 
     setTimeout(() => {
         // Remove typing indicator if it still exists
@@ -118,7 +119,7 @@ function displayButtons(buttons) {
         button.classList.add("chatbot-button");
         button.dataset.translate = buttonInfo.key; // Store key for language updates
         // Set initial text using the main script's function
-        button.textContent = getTranslatedString(buttonInfo.key) || buttonInfo.text;
+        button.textContent = getTranslatedString(buttonInfo.key) || buttonInfo.text; // Fallback to buttonInfo.text if key not found
         button.onclick = () => handleButtonClick(buttonInfo);
         buttonsContainer.appendChild(button);
     });
@@ -144,7 +145,7 @@ function handleButtonClick(buttonInfo) {
     }
 }
 
-// --- Conversation Flow Logic ---
+// --- Conversation Flow Logic (NEW - from pasted_content.txt) ---
 function displayStep(step) {
     chatbotState.step = step;
     let messageKey = "";
@@ -154,70 +155,99 @@ function displayStep(step) {
         case "start":
             messageKey = "chatbotWelcome";
             buttons = [
-                { key: "chatbotBtnYesAdvantage", text: "Yes, I want an edge!", nextStep: "askGoal" },
-                { key: "chatbotBtnWhatIs", text: "What is the Reveal App?", nextStep: "explainApp" }
+                { key: "chatbotBtnYesAdvantage", text: "Sim! Quero ver as cartas deles 🔥", nextStep: "askGoal" },
+                { key: "chatbotBtnWhatIs", text: "O que é o Reveal Poker?", nextStep: "explainApp" }
             ];
             break;
 
         case "askGoal":
             messageKey = "chatbotAskGoal";
             buttons = [
-                { key: "chatbotBtnHowGet", text: "Yes, how do I get it?", nextStep: "valueProp" },
-                { key: "chatbotBtnWhyNoTrial", text: "Why no free trial?", nextStep: "explainNoTrial" },
-                { key: "chatbotBtnIsSafe", text: "Is it safe?", nextStep: "explainSafety" }
+                { key: "chatbotBtnPlayProfit", text: "Quero lucrar jogando", nextStep: "valueProp" },
+                { key: "chatbotBtnPlayFun", text: "Jogo por diversão, mas quero ganhar", nextStep: "valueProp" },
+                { key: "chatbotBtnWhatItDoes", text: "Mas como o app funciona?", nextStep: "howItWorks" }
             ];
             break;
 
         case "explainApp":
             messageKey = "chatbotExplain";
             buttons = [
-                { key: "chatbotBtnHowGet", text: "Yes, how do I get it?", nextStep: "valueProp" },
-                { key: "chatbotBtnWhyNoTrial", text: "Why no free trial?", nextStep: "explainNoTrial" },
-                { key: "chatbotBtnIsSafe", text: "Is it safe?", nextStep: "explainSafety" }
+                { key: "chatbotBtnHowItWorks", text: "Como ele funciona?", nextStep: "howItWorks" },
+                { key: "chatbotBtnPlayProfit", text: "Me mostra como lucrar com isso!", nextStep: "proofResults" }
+            ];
+            break;
+
+        case "howItWorks":
+            messageKey = "chatbotHowItWorks";
+            buttons = [
+                { key: "chatbotBtnShowMeMore", text: "Me mostre mais", nextStep: "proofResults" },
+                { key: "chatbotBtnCompat", text: "Funciona no meu celular?", nextStep: "deviceCompat" }
+            ];
+            break;
+
+        case "deviceCompat":
+            messageKey = "chatbotDeviceCompat";
+            buttons = [
+                { key: "chatbotBtnHowBuy", text: "Quero ativar agora!", nextStep: "valueProp" },
+                { key: "chatbotBtnStillQuestions", text: "Tenho mais dúvidas", nextStep: "faq" }
+            ];
+            break;
+
+        case "proofResults":
+            messageKey = "chatbotProofResults";
+            buttons = [
+                { key: "chatbotBtnGoToPurchase", text: "Quero ativar o Reveal agora 💸", action: () => scrollToSection("purchase") },
+                { key: "chatbotBtnExplainUpdates", text: "Como funcionam as atualizações?", nextStep: "explainUpdates" }
             ];
             break;
 
         case "valueProp":
             messageKey = "chatbotValueProp";
             buttons = [
-                { key: "chatbotBtnGoToPurchase", text: "Ok, take me to the button", action: () => scrollToSection("purchase") },
-                { key: "chatbotBtnWhyNoTrial", text: "Wait, why no free trial?", nextStep: "explainNoTrial" },
-                { key: "chatbotBtnIsSafe", text: "Is it safe first?", nextStep: "explainSafety" },
-                { key: "chatbotBtnStillQuestions", text: "I still have questions", nextStep: "offerTelegram" }
+                { key: "chatbotBtnGoToPurchase", text: "Ativar agora e começar a ganhar 💰", action: () => scrollToSection("purchase") },
+                { key: "chatbotBtnExplainUpdates", text: "O que está incluso no pagamento?", nextStep: "explainUpdates" },
+                { key: "chatbotBtnStillQuestions", text: "Quero falar com o admin", nextStep: "offerTelegram" }
             ];
             break;
 
-        case "explainNoTrial":
-            messageKey = "chatbotExplainNoTrial";
+        case "explainUpdates":
+            messageKey = "chatbotExplainUpdates";
             buttons = [
-                { key: "chatbotBtnUnderstoodSafe", text: "Understood. Is it safe?", nextStep: "explainSafety" },
-                { key: "chatbotBtnOKHowBuy", text: "Ok. How do I buy?", nextStep: "valueProp" },
-                { key: "chatbotBtnStillQuestions", text: "I still have questions", nextStep: "offerTelegram" }
+                { key: "chatbotBtnHowBuy", text: "Pronto para ativar", nextStep: "valueProp" },
+                { key: "chatbotBtnStillQuestions", text: "Falar com admin", nextStep: "offerTelegram" }
+            ];
+            break;
+
+        case "faq":
+            messageKey = "chatbotFAQ";
+            buttons = [
+                { key: "chatbotBtnIsSafe", text: "É seguro?", nextStep: "explainSafety" },
+                { key: "chatbotBtnCompat", text: "É compatível com meu celular?", nextStep: "deviceCompat" },
+                { key: "chatbotBtnTelegramAdmin", text: "Quero falar com o admin", nextStep: "offerTelegram" }
             ];
             break;
 
         case "explainSafety":
             messageKey = "chatbotExplainSafety";
             buttons = [
-                { key: "chatbotBtnOKHowBuy", text: "Ok. How do I buy?", nextStep: "valueProp" },
-                { key: "chatbotBtnAboutTrial", text: "What about the trial again?", nextStep: "explainNoTrial" },
-                { key: "chatbotBtnStillQuestions", text: "I still have questions", nextStep: "offerTelegram" }
+                { key: "chatbotBtnOKHowBuy", text: "Tranquilo. Quero ativar!", nextStep: "valueProp" },
+                { key: "chatbotBtnBackFAQ", text: "Tenho outra dúvida", nextStep: "faq" }
             ];
             break;
 
         case "offerTelegram":
             messageKey = "chatbotOfferTelegram";
             buttons = [
-                { key: "chatbotBtnTelegramAdmin", text: "Talk to Admin on Telegram", action: () => window.open("https://t.me/bedmalcon_temp", "_blank") },
-                { key: "chatbotBtnBackToBuy", text: "Actually, how do I buy?", nextStep: "valueProp" }
+                { key: "chatbotBtnTelegramAdmin", text: "💬 Falar com admin no Telegram", action: () => window.open("https://t.me/bedmalcon_temp", "_blank") },
+                { key: "chatbotBtnBackToBuy", text: "Voltar para ativar o Reveal", nextStep: "valueProp" }
             ];
             break;
 
         default:
             console.error("Unknown chatbot step:", step);
-            messageKey = "chatbotError"; // Add an error message key if needed
+            messageKey = "chatbotError"; // Ensure this key exists in translations
             buttons = [
-                 { key: "chatbotBtnRestart", text: "Restart Chat", nextStep: "start" } // Optional restart
+                { key: "chatbotBtnRestart", text: "Reiniciar conversa", nextStep: "start" } // Ensure this key exists
             ];
             break;
     }
@@ -240,6 +270,7 @@ function scrollToSection(sectionId) {
 
 // Function to be called by the main script's setLanguage
 function updateChatbotLanguage(lang) {
+    currentLang = lang; // Update currentLang in chatbot.js as well
     if (!chatbotWindow || !buttonsContainer) {
         // Don't try to update if elements aren't ready or chat isn't open
         return;
@@ -266,6 +297,6 @@ function updateChatbotLanguage(lang) {
 // Ensure the chatbot script is loaded after the main script in index.html
 // Example:
 // <script src="translations.js"></script>
-// <script> /* Main site script with getTranslatedString, setLanguage etc. */ </script>
-// <script src="chatbot.js"></script>
+// <script src="script.js"></script> // Main site script with getTranslatedString, setLanguage etc.
+// <script src="chatbot.js" defer></script>
 

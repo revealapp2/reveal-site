@@ -3,70 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate="headerTitle">Reveal App: Dominate PPPOKER, XPoker & ClubGG</title>
+    <!-- SEO Optimized Title -->
+    <title data-translate="headerTitle">Reveal App: See Opponent Cards & Dominate PPPOKER, XPoker, ClubGG | Undetectable Poker Tool</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
-    <meta name="description" content="Unlock the ultimate advantage in online poker with the Reveal App. See opponent cards in PPPOKER, XPoker, and ClubGG. Secure, reliable, and game-changing.">
-    <meta name="keywords" content="poker app, reveal cards, pppoker hack, xpoker hack, clubgg hack, poker strategy, online poker tool">
+    <!-- SEO Optimized Description -->
+    <meta name="description" content="Gain an unbeatable edge with Reveal App, the ultimate tool to see opponents' cards in PPPOKER, XPoker, and ClubGG. Secure, undetectable, and designed for serious poker players. Elevate your strategy and maximize winnings today!">
+    <meta name="keywords" content="reveal app, see opponent cards, pppoker tool, xpoker tool, clubgg tool, poker strategy, online poker advantage, undetectable poker app, win at poker">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://www.example.com/"> <!-- Replace with actual domain -->
+    <link rel="canonical" href="https://www.example.com/"> <!-- TODO: Replace with actual domain when deploying -->
     <script src="translations.js"></script>
     <script src="chatbot.js" defer></script>
 </head>
 <body>
-    <div class="fixed-toolbox">
-        <a href="#purchase" class="toolbox-button" data-translate="toolboxButton">Access the App</a>
+    <nav class="main-nav fixed-toolbox">
+        <div class="nav-logo">
+            <a href="#" data-translate="navLogoText">RevealApp</a> <!-- Simple text logo -->
+        </div>
+        <div class="nav-links">
+            <a href="#features" class="nav-link" data-translate="navLinkFeatures">Features</a>
+            <a href="#how-it-works" class="nav-link" data-translate="navLinkHowItWorks">How It Works</a>
+            <a href="#demo" class="nav-link" data-translate="navLinkDemo">Demo</a>
+            <a href="#testimonials" class="nav-link" data-translate="navLinkTestimonials">Testimonials</a>
+            <a href="#purchase" class="nav-link primary-cta-button" data-translate="navLinkGetApp">Get App</a>
+        </div>
         <div id="language-selector">
             <select onchange="setLanguage(this.value)">
                 <option value="en">English</option>
                 <option value="pt">Português</option>
-                <option value="zh">中文</option>
-                <option value="ru">Русский</option>
-                <option value="it">Italiano</option>
-                <option value="es">Español</option>
             </select>
         </div>
-    </div>
+    </nav>
 
-    <header>
-        <h1 data-translate="headerTitle">Reveal App: Dominate PPPOKER, XPoker & ClubGG</h1>
-        <p class="tagline" data-translate="tagline">The ultimate tool for poker players. Elevate your strategy today!</p>
+    <header id="hero" class="hero-section">
+        <div class="hero-content">
+            <h1 data-translate="mainHeading">Unlock Your Winning Edge with Reveal App</h1>
+           <p class="tagline" data-translate="tagline">e your opponents' cards in PPPOKER, XPoker & ClubGG. Make informed decisions, maximize your winnings.</p>
+            <a href="#purchase" onclick="event.preventDefault(); document.getElementById('purchase').scrollIntoView({ behavior: 'smooth' });" class="primary-cta-button hero-cta" data-translate="heroCTA">Get Reveal App Now & Dominate!</a>
+        </div>
     </header>
 
-    <div id="crypto-ticker-container">
-        <div id="crypto-ticker"></div>
-    </div>
+
 
     <main>
-        <section id="story">
-            <h2 data-translate="storyTitle">Our Story: How We Revolutionized Poker</h2>
-            <p data-translate="storyP1">It all started with a series of unexpected defeats, sparking a quest to uncover hidden vulnerabilities in popular poker apps like PPPOKER and XPoker. Through months of rigorous research, we revealed critical flaws that were being exploited. In November 2023, the <strong>Reveal App</strong> was born, empowering players to level the playing field by revealing opponents' cards.</p>
-            <p class="highlight" data-translate="storyP2Highlight">This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game. <strong>Act now, because every moment without this app is a missed opportunity to dominate!</strong></p>
-        </section>
-
-        <section id="demo">
-            <h2 data-translate="demoTitle">See the App in Action</h2>
-            <p data-translate="demoP">Watch our demo videos to understand how the Reveal App gives you the edge in PPPOKER and XPoker:</p>
-            <div class="video-row">
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/wgzzXJx_TAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <section id="features" class="features-section content-section">
+            <h2 data-translate="featuresTitle">Why Choose Reveal App?</h2>
+            <div class="features-grid">
+                <div class="feature-item card-style">
+                    <i class="fas fa-eye feature-icon"></i>
+                    <h3 data-translate="feature1Title">Unprecedented Insight</h3>
+                    <p data-translate="feature1Desc">Gain a clear view of your opponents' hands. Stop guessing, start winning.</p>
                 </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/JejQNbgaSSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="feature-item card-style">
+                    <i class="fas fa-mobile-alt feature-icon"></i>
+                    <h3 data-translate="feature2Title">Multi-Platform Support</h3>
+                    <p data-translate="feature2Desc">Works seamlessly with PPPOKER, XPoker, and ClubGG on Android & iOS.</p>
                 </div>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/ptQIe4OyJrE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="feature-item card-style">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 data-translate="feature3Title">Secure & Undetectable</h3>
+                    <p data-translate="feature3Desc">Our advanced technology ensures your advantage remains your secret.</p>
                 </div>
             </div>
         </section>
 
-        <section id="purchase">
-            <h2 data-translate="purchaseTitle">Purchase the App</h2>
-            <p class="purchase-text" data-translate="purchaseText">Ready to dominate the game? The Reveal App is your ultimate advantage. With just one click, you can unlock unparalleled insights into your opponents' strategies. <strong>Don’t wait—every second counts!</strong></p>
+        <section id="how-it-works" class="how-it-works-section content-section alt-bg">
+            <h2 data-translate="howItWorksTitle">Simple Steps to Dominate</h2>
+            <div class="steps-container">
+                <div class="step-item card-style">
+                    <div class="step-number">1</div>
+                    <h3 data-translate="step1Title">Choose Your Plan</h3>
+                    <p data-translate="step1Desc">Select the Reveal App access that fits your needs.</p>
+                </div>
+                <div class="step-item card-style">
+                    <div class="step-number">2</div>
+                    <h3 data-translate="step2Title">Provide Device Info</h3>
+                    <p data-translate="step2Desc">Enter your device IMEI for secure activation (stored locally for your convenience).</p>
+                </div>
+                <div class="step-item card-style">
+                    <div class="step-number">3</div>
+                    <h3 data-translate="step3Title">Activate & Play</h3>
+                    <p data-translate="step3Desc">Follow simple instructions to activate and start seeing cards!</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="purchase" class="purchase-section content-section">
+            <h2 data-translate="purchaseTitle">Get Your Reveal App Access</h2>
+            <p class="purchase-text" data-translate="purchaseSectionSubtext">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
             <p class="urgency" data-translate="purchaseUrgency">🔥 Limited spots available! Get your edge before your opponents do! 🔥</p>
-            <button onclick="showPlatformOptions()" data-translate="purchaseButton">Get the App Now</button>
+            <button onclick="startPurchaseFlow()" class="primary-cta-button get-app-main-button" data-translate="getAppMainButton">Start My Winning Journey</button>
             <div class="trust-badges">
                 <span data-translate="trustBadge1"><i class="fas fa-shield-alt"></i> Secure Payment</span>
                 <span data-translate="trustBadge2"><i class="fas fa-lock"></i> Privacy Guaranteed</span>
@@ -74,122 +102,180 @@
             </div>
         </section>
 
-        <section id="contact">
-            <h2 data-translate="contactTitle">Contact Us</h2>
-            <p data-translate="contactP">Have any questions or need support? Contact us directly via:</p>
-            <div class="contact-icons">
-                <a href="https://t.me/yourtelegram" target="_blank"><i class="fab fa-telegram"></i></a>
-                <a href="mailto:support@example.com"><i class="fas fa-envelope"></i></a>
+        <section id="demo" class="demo-section content-section alt-bg">
+            <h2 data-translate="demoTitle">See the App in Action</h2>
+            <p data-translate="demoP">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
+            <div class="video-row">
+                <div class="video-container card-style">
+                    <iframe src="https://www.youtube.com/embed/wgzzXJx_TAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-container card-style">
+                    <iframe src="https://www.youtube.com/embed/JejQNbgaSSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="video-container card-style">
+                    <iframe src="https://www.youtube.com/embed/ptQIe4OyJrE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section id="testimonials">
+        <section id="story" class="story-section content-section">
+            <h2 data-translate="storyTitle">Our Story: How We Revolutionized Poker</h2>
+            <p data-translate="storyP1">It all started with a series of unexpected defeats, sparking a quest to uncover hidden vulnerabilities in popular poker apps like PPPOKER and XPoker. Through months of rigorous research, we revealed critical flaws that were being exploited. In November 2023, the <strong>Reveal App</strong> was born, empowering players to level the playing field by revealing opponents' cards.</p>
+            <p class="highlight" data-translate="storyP2Highlight">This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game. <strong>Act now, because every moment without this app is a missed opportunity to dominate!</strong></p>
+        </section>
+
+        <section id="testimonials" class="testimonials-section content-section alt-bg">
             <h2 data-translate="testimonialsTitle">What Our Users Say</h2>
             <div class="testimonials-container" id="testimonials-container">
                 <!-- Testimonials will be loaded here by script.js -->
             </div>
         </section>
+
+        <section id="contact" class="contact-section content-section">
+            <h2 data-translate="contactTitle">Contact Us</h2>
+            <p data-translate="contactP">Have any questions or need support? Contact us directly via:</p>
+            <div class="contact-icons">
+                <a href="https://t.me/bedmalcon_temp" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="mailto:support@revealpoker.top"><i class="fas fa-envelope"></i></a>
+            </div>
+        </section>
     </main>
 
-    <footer>
-        <p data-translate="footerText">&copy; <span id="current-year">2024</span> Reveal App for Poker. Your success is our mission.</p>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-column footer-about">
+                <h3 data-translate="footerAboutTitle">About Reveal App</h3>
+                <p data-translate="footerAboutText">Reveal App provides a strategic advantage in online poker by allowing you to see opponent cards on PPPOKER, XPoker, and ClubGG. Play smarter, win bigger.</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h3 data-translate="footerLinksTitle">Quick Links</h3>
+                <ul>
+                    <li><a href="#features" data-translate="footerLinkFeatures">Features</a></li>
+                    <li><a href="#how-it-works" data-translate="footerLinkHowItWorks">How It Works</a></li>
+                    <li><a href="#purchase-section" data-translate="footerLinkPricing">Pricing</a></li>
+                    <li><a href="#contact" data-translate="footerLinkContact">Contact Us</a></li>
+                    <!-- TODO: Add links to Privacy Policy / Terms of Service pages if they exist -->
+                </ul>
+            </div>
+            <div class="footer-column footer-social">
+                <h3 data-translate="footerSocialTitle">Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="https://t.me/bedmalcon_temp" target="_blank" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                    <!-- Add other social media links here if available -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-translate="footerCopyright">&copy; <span id="current-year">2024</span> Reveal App. All Rights Reserved. Your success is our mission.</p>
+            <p class="disclaimer" data-translate="footerDisclaimer">Disclaimer: Use responsibly and be aware of the terms of service of the poker platforms you use.</p>
+        </div>
     </footer>
 
-    <!-- Platform Selection Dialog -->
-    <div id="platform-dialog" class="dialog">
+    <!-- Dialogs: These will be styled to feel more integrated or like modal steps -->
+    <div id="platform-dialog" class="dialog step-dialog">
         <div class="dialog-content">
             <span class="close" onclick="closePlatformDialog()">&times;</span>
-            <h3 data-translate="platformDialogTitle">Select Your Platform</h3>
-            <div class="platform-buttons">
-                <button onclick="selectPlatform('android')" data-translate="platformAndroid">Android</button>
-                <button onclick="selectPlatform('ios')" data-translate="platformIOS">iOS</button>
-            </div>
+            <h3 data-translate="platformDialogTitle">Step 1: Select Your Device Platform</h3>
+            <div class="platform-buttons dialog-button"> <button onclick="selectPlatform('android')" data-translate="platformAndroid">Android</button>              <button onclick="selectPlatform('ios')" data-translate="platformIOS">iOS</button>           </div>
         </div>
     </div>
 
-    <!-- IMEI Input Dialog -->
-    <div id="imei-dialog" class="dialog">
+    <div id="imei-dialog" class="dialog step-dialog">
         <div class="dialog-content">
             <span class="close" onclick="closeImeiDialog()">&times;</span>
-            <h3 data-translate="imeiDialogTitle">Enter Your Device IMEI</h3>
-            <input type="text" id="imei-input" class="imei-input" data-translate-placeholder="imeiPlaceholder">
-            <button onclick="submitImei()" data-translate="imeiSubmitButton">Submit IMEI</button>
+            <h3 data-translate="imeiDialogTitle">Step 2: Enter Your Device IMEI</h3>
+            <p id="stored-imei-display" style="display:none; margin-bottom: 10px; color: #ccc;"></p> <!-- For showing stored IMEI -->
+            <input type="text" id="imei-input" class="imei-input dialog-input" data-translate-placeholder="imeiPlaceholder">
+            <div class="dialog-button-group">
+                <button id="change-imei-button" onclick="submitImei()" class="primary-dialog-button" data-translate="imeiSubmitButton">Submit IMEI</button>
+                <button id="clear-imei-button" onclick="clearImeiFromLocalStorage()" class="secondary-dialog-button" data-translate="imeiClearButton" style="display:none;">Clear Stored IMEI</button> <!-- Initially hidden -->
+            </div>
         </div>
     </div>
 
-    <!-- Poker App Selection Dialog -->
-    <div id="poker-app-dialog" class="dialog">
+    <div id="poker-app-dialog" class="dialog step-dialog">
         <div class="dialog-content">
             <span class="close" onclick="closePokerAppDialog()">&times;</span>
-            <h3 data-translate="pokerAppDialogTitle">Select Target Poker App</h3>
-            <div class="poker-app-buttons">
-                <button onclick="selectPokerApp('PPPOKER')" data-translate="pokerAppPPPOKER">PPPOKER</button>
+            <h3 data-translate="pokerAppDialogTitle">Step 3: Select Target Poker App</h3>
+            <div class="poker-app-buttons dialog-buttons">
+            <button onclick="selectPokerApp('PPPOKER')" data-translate="pokerAppPPPOKER">PPPOKER</button>
                 <button onclick="selectPokerApp('XPOKER')" data-translate="pokerAppXPOKER">XPoker</button>
-                <button onclick="selectPokerApp('CLUBGG')" data-translate="pokerAppCLUBGG">ClubGG</button>
-            </div>
+                <button onclick="selectPokerApp('CLUBGG')" data-translate="pokerAppCLUBGG">ClubGG</button>          </div>
         </div>
     </div>
 
-    <!-- Payment Method Selection Dialog -->
-    <div id="payment-method-dialog" class="dialog">
+    <div id="payment-method-dialog" class="dialog step-dialog">
         <div class="dialog-content">
             <span class="close" onclick="closePaymentMethodDialog()">&times;</span>
-            <h3 data-translate="paymentMethodDialogTitle">Select Payment Method</h3>
-            <div class="payment-method-buttons">
-                <button onclick="generateQRCode('usdt')" data-translate="paymentUSDT">USDT</button>
-                <button onclick="generateQRCode('btc')" data-translate="paymentBTC">BTC</button>
-                <button onclick="generateQRCode('eth')" data-translate="paymentETH">ETH</button>
+            <h3 data-translate="paymentMethodDialogTitle">Step 4: Select Payment Method</h3>
+            <div class="payment-method-buttons dialog-buttons">
+                <button onclick="openPaymentDialog('usdt')" data-translate="paymentUSDT">USDT</button>
+                <button onclick="openPaymentDialog('btc')" data-translate="paymentBTC">BTC</button>
+                <button onclick="openPaymentDialog('eth')" data-translate="paymentETH">ETH</button>
             </div>
         </div>
     </div>
 
-    <!-- Payment Dialog with QR Code -->
-    <div id="payment-dialog" class="dialog">
+    <div id="payment-dialog" class="dialog payment-final-dialog">
         <div class="dialog-content">
             <span class="close" onclick="closePaymentDialog()">&times;</span>
             <h3 id="platform-title" data-translate="paymentDialogTitleBase">Pay with {METHOD} for {PLATFORM}</h3>
-            <div id="loading" class="loading" data-translate="loadingText">Generating your QR Code...</div>
-            <img src="" alt="Payment QR Code" class="qr-code" id="qr-code" style="display: none;">
-            <div id="payment-details" style="display: none;">
+            
+            <div id="price-coupon-stage">
                 <div class="price-container">
                     <span id="original-amount" class="original-amount" style="display: none;" data-translate="originalAmountTextBase">Original: {PRICE}</span>
                     <span id="amount" data-translate="amountTextBase">Amount: {PRICE}</span>
                 </div>
                 <div class="coupon-section">
-                    <input type="text" id="coupon-code" class="coupon-input" data-translate-placeholder="couponPlaceholder">
-                    <button onclick="applyCoupon()" class="coupon-button" data-translate="applyCouponButton">Apply Coupon</button>
+                    <input type="text" id="coupon-code" class="coupon-input dialog-input" data-translate-placeholder="couponPlaceholder">
+                    <button onclick="applyCoupon()" class="coupon-button secondary-dialog-button" data-translate="applyCouponButton">Apply Coupon</button>
                     <p id="coupon-message" class="coupon-message"></p>
                 </div>
-                <p id="payment-network" style="font-size: 0.9em; color: #ffab40;" data-translate="networkInfo">Network: {NETWORK}</p>
-                <div class="wallet-container">
-                    <input type="text" id="wallet-address" readonly class="wallet-address">
-                    <button class="copy-button" onclick="copyWalletAddress()" data-translate="copyButton">Copy</button>
+                <button onclick="proceedToFinalPaymentDetails()" class="proceed-button primary-dialog-button" data-translate="proceedToPaymentButton">Proceed to Final Payment</button>
+            </div>
+
+            <div id="qr-loading-message" style="display: none; text-align: center; padding: 20px;">
+                <p data-translate="generatingQRCodeMessage">Generating your QR-CODE...</p>
+            </div>
+
+            <div id="qr-code-display-stage" style="display: none; text-align: center;">
+                <img id="payment-qr-code-image" src="" alt="QR Code" style="max-width: 200px; margin-bottom: 15px;">
+                <p><strong data-translate="paymentAmountLabel">Amount:</strong> <span id="payment-final-amount"></span></p>
+                <p id="payment-crypto-amount-container" style="display: none;"><strong data-translate="cryptoAmountLabel">Crypto Amount:</strong> <span id="payment-crypto-amount"></span></p> <!-- New line for crypto amount -->
+                <p><strong data-translate="paymentNetworkLabel">Network:</strong> <span id="payment-network-name"></span></p>
+                <div class="wallet-address-container" style="margin-top: 10px; display: flex; align-items: center; justify-content: center;">
+                    <input type="text" id="payment-wallet-address" readonly style="width: 70%; margin-right: 5px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                    <button id="copy-wallet-button" onclick="copyWalletAddress()" class="secondary-dialog-button" data-translate="copyAddressButton">Copy</button>
+                </div>
+            </div>
+
+            <div id="qr-wallet-stage" style="display: none;">
+                <div id="loading" class="loading" data-translate="loadingText">Generating your QR Code...</div>
+                <img src="" alt="Payment QR Code" class="qr-code" id="qr-code" style="display: none;">
+                <div id="payment-details" style="display: none;">
+                    <p id="payment-network" style="font-size: 0.9em; color: #ffab40;" data-translate="networkInfo">Network: {NETWORK}</p>
+                    <div class="wallet-container">
+                        <input type="text" id="wallet-address" readonly class="wallet-address dialog-input">
+                        <button class="copy-button secondary-dialog-button" onclick="copyWalletAddress()" data-translate="copyButton">Copy</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Chatbot Icon -->
     <div class="chatbot-icon" id="chatbot-icon">
         <i class="fas fa-comments"></i>
     </div>
 
-    <!-- Chatbot Window -->
     <div class="chatbot-window" id="chatbot-window">
         <div class="chatbot-header">
             <span data-translate="chatbotHeader">Chat Assistant</span>
             <button class="chatbot-close" id="chatbot-close">&times;</button>
         </div>
-        <div class="chatbot-messages" id="chatbot-messages">
-            <!-- Messages will be appended here -->
-        </div>
-        <div class="chatbot-buttons" id="chatbot-buttons">
-            <!-- Quick reply buttons will be appended here -->
-        </div>
+        <div class="chatbot-messages" id="chatbot-messages"></div>
+        <div class="chatbot-buttons" id="chatbot-buttons"></div>
     </div>
 
     <script src="script.js" defer></script>
 </body>
 </html>
-
