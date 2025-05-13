@@ -27,9 +27,9 @@ const coupons = {
 };
 
 const cryptoWalletAddresses = {
-    usdt: "TVwNs33BS7KrqvWAU7vkKRgvRZWPAPdtqC",
-    btc: "bc1qd0l9j7llwxj875e43u8rycnjwvswk6lm4m3p5g",
-    eth: "0x1f930a8BBB1A3F54EEc89cFb87f6789a21fB6484"
+    usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK",
+    btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3",
+    eth: "0x9b5877A847BE203FCbA421194C83E0af6f686cC7"
 };
 
 const cryptoNetworkInfo = {
@@ -288,19 +288,20 @@ function setupPaymentDialogWithCoupon() {
     appliedCouponCodeGlobal = null;
 
     const priceCouponStage = document.getElementById('price-coupon-stage');
-    const paymentDetailsStage = document.getElementById('payment-details-stage');
+    const qrLoadingMessage = document.getElementById('qr-loading-message');
+    const qrCodeDisplayStage = document.getElementById('qr-code-display-stage');
     const couponCodeInput = document.getElementById('coupon-code');
     const couponMessageEl = document.getElementById('coupon-message');
 
-    if (!priceCouponStage || !paymentDetailsStage || !couponCodeInput || !couponMessageEl) {
-        console.error("Critical payment dialog elements not found (price-coupon-stage, payment-details-stage, coupon-code, or coupon-message).");
-        // Optionally, display an error to the user or prevent dialog from showing
-        // For now, we'll log and let it proceed, which might lead to further errors if not handled by subsequent checks.
-        // return; // Or, stop execution here if these are absolutely critical for the dialog's base function.
+    if (!priceCouponStage || !qrLoadingMessage || !qrCodeDisplayStage || !couponCodeInput || !couponMessageEl) {
+        console.error("Critical payment dialog elements not found (price-coupon-stage, qr-loading-message, qr-code-display-stage, coupon-code, or coupon-message).");
+        return; // Stop execution if critical elements are missing
     }
 
     if (priceCouponStage) priceCouponStage.style.display = 'block';
-    if (paymentDetailsStage) paymentDetailsStage.style.display = 'none';
+    if (qrLoadingMessage) qrLoadingMessage.style.display = 'none'; // Explicitly hide
+    if (qrCodeDisplayStage) qrCodeDisplayStage.style.display = 'none'; // Explicitly hide
+
     if (couponCodeInput) couponCodeInput.value = '';
     if (couponMessageEl) {
         couponMessageEl.textContent = '';
@@ -309,7 +310,7 @@ function setupPaymentDialogWithCoupon() {
 
     updatePaymentDialogText();
     updatePriceDisplay();
-    showDialog('payment-dialog'); // This should be called after elements are potentially made visible
+    showDialog('payment-dialog');
 }
 
 function updatePaymentDialogText() {

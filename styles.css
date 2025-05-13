@@ -1091,3 +1091,124 @@ a:hover {
 }
 /* === End Crypto Ticker Styles === */
 
+
+/* === Enhanced Button Styles for Coupon and Copy Address (Removed - To be Re-implemented) === */
+
+
+
+/* === Enhanced Button Styles for Coupon and Copy Address (v2 - Trust & Usability Focus) === */
+
+/* General button enhancements for dialogs if needed, or apply directly */
+
+/* Apply Coupon Button Styling */
+#price-coupon-stage .coupon-button {
+    background-color: var(--primary-accent);
+    color: white;
+    padding: 0.9rem 1.8rem; /* Increased padding for better touch target and visual weight */
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.2s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.2s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.75px; /* Slightly increased letter spacing for clarity */
+    border: 2px solid transparent; /* For a potential focus state or to ensure consistent sizing */
+    cursor: pointer;
+    display: inline-block; /* Ensure it behaves as a block for margin/padding but flows inline */
+}
+
+#price-coupon-stage .coupon-button:hover {
+    background-color: var(--primary-accent-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#price-coupon-stage .coupon-button:active {
+    transform: translateY(0px);
+    box-shadow: var(--shadow-sm);
+    background-color: var(--primary-accent-dark);
+}
+
+#price-coupon-stage .coupon-button:focus-visible {
+    outline: 2px solid var(--secondary-accent);
+    outline-offset: 2px;
+}
+
+
+/* Copy Wallet Address Button Styling */
+#copy-wallet-button.copy-button {
+    background-color: var(--secondary-accent);
+    color: var(--dark-bg); /* Ensure high contrast */
+    padding: 0.9rem 1.5rem; /* Matched vertical padding, adjusted horizontal */
+    font-size: 1em;
+    font-weight: 700; /* Bolder for primary action */
+    border-radius: var(--border-radius-md); /* Consistent rounded corners */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.2s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    border: none;
+    box-shadow: var(--shadow-sm);
+    display: inline-flex; /* For potential icon alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem; /* Space for potential icon */
+}
+
+#copy-wallet-button.copy-button:hover {
+    background-color: var(--secondary-accent-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#copy-wallet-button.copy-button:active {
+    transform: translateY(0px);
+    box-shadow: var(--shadow-sm);
+    background-color: var(--secondary-accent-dark);
+}
+
+#copy-wallet-button.copy-button:focus-visible {
+    outline: 2px solid var(--primary-accent);
+    outline-offset: 2px;
+}
+
+/* Placeholder for icon if FontAwesome is available and user wants to add it */
+/* #copy-wallet-button.copy-button::before {
+    content: "\f0c5"; /* Example: FontAwesome copy icon */
+/*    font-family: "Font Awesome 6 Free"; /* Ensure this matches your FontAwesome setup */
+/*    font-weight: 900; /* For solid icons */
+/*    margin-right: 0.5em; /* Adjust as needed */
+/* } */
+
+/* Ensure the .proceed-button also has good styling if it's distinct */
+#price-coupon-stage .proceed-button {
+    background-color: var(--success-color); /* Using success color for proceed */
+    color: white;
+    padding: 0.9rem 1.8rem;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.2s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.2s ease-in-out;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+    border: none;
+    cursor: pointer;
+}
+
+#price-coupon-stage .proceed-button:hover {
+    background-color: #3e8e41; /* Darker green */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+#price-coupon-stage .proceed-button:active {
+    transform: translateY(0px);
+    box-shadow: var(--shadow-sm);
+}
+
+#price-coupon-stage .proceed-button:focus-visible {
+    outline: 2px solid var(--secondary-accent);
+    outline-offset: 2px;
+}
+
