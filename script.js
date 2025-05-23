@@ -10,6 +10,8 @@ if (typeof translations !== 'undefined') {
 let selectedPlatformGlobal = null;
 let selectedPokerAppGlobal = null;
 let userImeiGlobal = null;
+let userEmailGlobal = null;
+let userNicknameGlobal = null;
 let currentLangGlobal = localStorage.getItem("language") || "en";
 let originalPriceGlobal = 0;
 let currentDiscountPercentGlobal = 0;
@@ -38,6 +40,12 @@ const cryptoNetworkInfo = {
     eth: "Ethereum (ERC20)"
 };
 
+// CoinGecko IDs for API calls
+const cryptoCoinGeckoIds = {
+    btc: "bitcoin",
+    eth: "ethereum"
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     if (typeof translations === 'undefined') {
         console.error("ERROR: 'translations' object is NOT defined within DOMContentLoaded.");
@@ -51,10 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     loadTestimonials();
-    // fetchCryptoPrices(); // Removed as per user request
 
     // Initialize chatbot if chatbot.js is loaded and initializeChatbot function exists
-    if (typeof initializeChatbot === 'function') { // Changed from initChatbot
+    if (typeof initializeChatbot === 'function') {
         initializeChatbot();
     } else {
         console.warn('initializeChatbot function not found. Chatbot may not initialize correctly.');
@@ -71,6 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
+    // Setup email and nickname validation events
+    setupEmailRegistrationValidation();
 });
 
 function getTranslatedString(key, replacements = {}) {
@@ -157,13 +167,171 @@ function closeDialog(dialogId) {
 }
 
 function closeAllDialogs() {
-    ['platform-dialog', 'imei-dialog', 'poker-app-dialog', 'payment-method-dialog', 'payment-dialog'].forEach(closeDialog);
+    ['email-registration-dialog', 'platform-dialog', 'imei-dialog', 'poker-app-dialog', 'payment-method-dialog', 'payment-dialog'].forEach(closeDialog);
 }
+
+// --- Email Registration --- Start ---
+function setupEmailRegistrationValidation() {
+    const emailInput = document.getElementById('email-input');
+    const nicknameInput = document.getElementById('nickname-input');
+    
+    if (emailInput) {
+        emailInput.addEventListener('input', validateEmail);
+        emailInput.addEventListener('blur', validateEmail);
+    }
+    
+    if (nicknameInput) {
+        nicknameInput.addEventListener('input', validateNickname);
+        nicknameInput.addEventListener('blur', validateNickname);
+    }
+    
+    // Check for stored user data
+    checkStoredUserData();
+}
+
+function checkStoredUserData() {
+    try {
+        userEmailGlobal = localStorage.getItem("user_reveal_app_email");
+        userNicknameGlobal = localStorage.getItem("user_reveal_app_nickname");
+    } catch (e) {
+        console.error("Failed to get user data from localStorage:", e);
+    }
+}
+
+function validateEmail() {
+    const emailInput = document.getElementById('email-input');
+    const validationMessage = document.getElementById('email-validation-message');
+    const validIcon = emailInput.parentElement.querySelector('.valid-icon');
+    const invalidIcon = emailInput.parentElement.querySelector('.invalid-icon');
+    
+    if (!emailInput || !validationMessage || !validIcon || !invalidIcon) return;
+    
+    const email = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    // Reset validation state
+    emailInput.classList.remove('input-valid', 'input-invalid');
+    validationMessage.classList.remove('message-valid', 'message-invalid');
+    validIcon.style.display = 'none';
+    invalidIcon.style.display = 'none';
+    validationMessage.textContent = '';
+    
+    if (email === '') return; // Skip validation if empty
+    
+    if (emailRegex.test(email)) {
+        // Valid email
+        emailInput.classList.add('input-valid');
+        validationMessage.classList.add('message-valid');
+        validationMessage.textContent = getTranslatedString('emailValidationSuccess');
+        validIcon.style.display = 'block';
+        validIcon.parentElement.style.display = 'block';
+        return true;
+    } else {
+        // Invalid email
+        emailInput.classList.add('input-invalid');
+        validationMessage.classList.add('message-invalid');
+        validationMessage.textContent = getTranslatedString('emailValidationError');
+        invalidIcon.style.display = 'block';
+        invalidIcon.parentElement.style.display = 'block';
+        return false;
+    }
+}
+
+function validateNickname() {
+    const nicknameInput = document.getElementById('nickname-input');
+    const validationMessage = document.getElementById('nickname-validation-message');
+    const validIcon = nicknameInput.parentElement.querySelector('.valid-icon');
+    const invalidIcon = nicknameInput.parentElement.querySelector('.invalid-icon');
+    
+    if (!nicknameInput || !validationMessage || !validIcon || !invalidIcon) return;
+    
+    const nickname = nicknameInput.value.trim();
+    
+    // Reset validation state
+    nicknameInput.classList.remove('input-valid', 'input-invalid');
+    validationMessage.classList.remove('message-valid', 'message-invalid');
+    validIcon.style.display = 'none';
+    invalidIcon.style.display = 'none';
+    validationMessage.textContent = '';
+    
+    if (nickname === '') return; // Skip validation if empty
+    
+    if (nickname.length >= 3) {
+        // Valid nickname
+        nicknameInput.classList.add('input-valid');
+        validationMessage.classList.add('message-valid');
+        validationMessage.textContent = getTranslatedString('nicknameValidationSuccess');
+        validIcon.style.display = 'block';
+        validIcon.parentElement.style.display = 'block';
+        return true;
+    } else {
+        // Invalid nickname
+        nicknameInput.classList.add('input-invalid');
+        validationMessage.classList.add('message-invalid');
+        validationMessage.textContent = getTranslatedString('nicknameValidationError');
+        invalidIcon.style.display = 'block';
+        invalidIcon.parentElement.style.display = 'block';
+        return false;
+    }
+}
+
+function submitRegistration() {
+    const emailValid = validateEmail();
+    const nicknameValid = validateNickname();
+    
+    if (!emailValid || !nicknameValid) {
+        // Validation failed, focus on the first invalid field
+        if (!emailValid) {
+            document.getElementById('email-input').focus();
+        } else {
+            document.getElementById('nickname-input').focus();
+        }
+        return;
+    }
+    
+    // Save user data
+    userEmailGlobal = document.getElementById('email-input').value.trim();
+    userNicknameGlobal = document.getElementById('nickname-input').value.trim();
+    
+    try {
+        localStorage.setItem("user_reveal_app_email", userEmailGlobal);
+        localStorage.setItem("user_reveal_app_nickname", userNicknameGlobal);
+    } catch (e) {
+        console.error("Failed to save user data to localStorage:", e);
+    }
+    
+    // Show success message briefly before proceeding
+    const continueButton = document.getElementById('continue-registration-button');
+    const originalButtonText = continueButton.innerHTML;
+    continueButton.innerHTML = getTranslatedString('registrationSuccess');
+    continueButton.disabled = true;
+    
+    setTimeout(() => {
+        closeDialog('email-registration-dialog');
+        showDialog('platform-dialog');
+        
+        // Reset button state for next time
+        setTimeout(() => {
+            continueButton.innerHTML = originalButtonText;
+            continueButton.disabled = false;
+        }, 500);
+    }, 1000);
+}
+// --- Email Registration --- End ---
 
 // --- Purchase Flow --- Start ---
 function startPurchaseFlow() {
     closeAllDialogs();
-    showDialog('platform-dialog');
+    
+    // Check if user is already registered
+    if (userEmailGlobal && userNicknameGlobal) {
+        // User already registered, show welcome back message and proceed to platform selection
+        alert(getTranslatedString('welcomeBackMessage', { NICKNAME: userNicknameGlobal }));
+        showDialog('platform-dialog');
+    } else {
+        // New user, show registration dialog
+        showDialog('email-registration-dialog');
+    }
 }
 
 function selectPlatform(platform) {
@@ -216,6 +384,11 @@ function openImeiDialogForChange() {
     }
 }
 
+// Function to validate IMEI (15 digits, numeric)
+function isValidImei(imei) {
+    return /^\d{15}$/.test(imei);
+}
+
 function submitImei() {
     const imeiInput = document.getElementById('imei-input');
     if (!imeiInput) {
@@ -230,10 +403,14 @@ function submitImei() {
         imei = storedImei; // Use stored IMEI if input is hidden
     }
 
-    if (imei === "") {
-        alert(getTranslatedString("alertEnterIMEI"));
-        return;
+    // --- IMEI Validation Added Here ---
+    if (!isValidImei(imei)) {
+        alert(getTranslatedString("alertInvalidIMEI")); // Use the specific invalid IMEI message
+        imeiInput.focus(); // Keep focus on the input field
+        return; // Stop the function if IMEI is invalid
     }
+    // --- End of IMEI Validation ---
+
     userImeiGlobal = imei;
     saveImeiToLocalStorage(imei);
     closeDialog('imei-dialog');
@@ -292,15 +469,17 @@ function setupPaymentDialogWithCoupon() {
     const qrCodeDisplayStage = document.getElementById('qr-code-display-stage');
     const couponCodeInput = document.getElementById('coupon-code');
     const couponMessageEl = document.getElementById('coupon-message');
+    const cryptoAmountContainer = document.getElementById('payment-crypto-amount-container');
 
-    if (!priceCouponStage || !qrLoadingMessage || !qrCodeDisplayStage || !couponCodeInput || !couponMessageEl) {
-        console.error("Critical payment dialog elements not found (price-coupon-stage, qr-loading-message, qr-code-display-stage, coupon-code, or coupon-message).");
+    if (!priceCouponStage || !qrLoadingMessage || !qrCodeDisplayStage || !couponCodeInput || !couponMessageEl || !cryptoAmountContainer) {
+        console.error("Critical payment dialog elements not found (price-coupon-stage, qr-loading-message, qr-code-display-stage, coupon-code, coupon-message, or crypto container).");
         return; // Stop execution if critical elements are missing
     }
 
     if (priceCouponStage) priceCouponStage.style.display = 'block';
     if (qrLoadingMessage) qrLoadingMessage.style.display = 'none'; // Explicitly hide
     if (qrCodeDisplayStage) qrCodeDisplayStage.style.display = 'none'; // Explicitly hide
+    if (cryptoAmountContainer) cryptoAmountContainer.style.display = 'none'; // Hide crypto amount initially
 
     if (couponCodeInput) couponCodeInput.value = '';
     if (couponMessageEl) {
@@ -324,21 +503,21 @@ function updatePaymentDialogText() {
 
     const couponCodeInput = document.getElementById('coupon-code');
     if (couponCodeInput) couponCodeInput.placeholder = getTranslatedString('couponPlaceholder');
-    
+
     const applyCouponBtn = document.querySelector('#price-coupon-stage .coupon-button');
     if (applyCouponBtn) applyCouponBtn.innerHTML = getTranslatedString('applyCouponButton');
-    
+
     const proceedBtn = document.querySelector('#price-coupon-stage .proceed-button');
     if (proceedBtn) proceedBtn.innerHTML = getTranslatedString('proceedToPaymentButton');
-    
+
     const paymentTitleFinal = document.getElementById('payment-title-final-display');
     if (paymentTitleFinal) paymentTitleFinal.innerHTML = getTranslatedString('paymentDialogTitleFinal');
-    
-    const closePaymentBtn = document.querySelector('#payment-details-stage .primary-dialog-button'); // Assuming this is the close button in the final stage
+
+    const closePaymentBtn = document.querySelector('#qr-code-display-stage .primary-dialog-button'); // Target close button in final stage
     if (closePaymentBtn) closePaymentBtn.innerHTML = getTranslatedString('closeButtonText');
-    
+
     const copyWalletBtn = document.getElementById('copy-wallet-button');
-    if (copyWalletBtn) copyWalletBtn.innerHTML = getTranslatedString('copyButton');
+    if (copyWalletBtn) copyWalletBtn.innerHTML = getTranslatedString('copyAddressButton');
 }
 
 function updatePriceDisplay() {
@@ -403,199 +582,176 @@ function applyCoupon() {
     updatePriceDisplay();
 }
 
-function proceedToFinalPaymentDetails() {
+async function proceedToFinalPaymentDetails() { // Make function async
     const priceCouponStage = document.getElementById('price-coupon-stage');
-    const qrLoadingMessage = document.getElementById('qr-loading-message'); // Show loading first
-    const qrCodeDisplayStage = document.getElementById('qr-code-display-stage'); // This is the target
+    const qrLoadingMessage = document.getElementById('qr-loading-message');
+    const qrCodeDisplayStage = document.getElementById('qr-code-display-stage');
 
     if (priceCouponStage) priceCouponStage.style.display = 'none';
-    else console.error("'price-coupon-stage' not found in proceedToFinalPaymentDetails");
+    if (qrLoadingMessage) {
+        qrLoadingMessage.style.display = 'block';
+        qrLoadingMessage.innerHTML = getTranslatedString('loadingText'); // Use generatingQRCodeMessage key
+    }
+    if (qrCodeDisplayStage) qrCodeDisplayStage.style.display = 'none';
 
-    if (qrLoadingMessage) qrLoadingMessage.style.display = 'block'; // Show loading
-    else console.error("'qr-loading-message' not found");
-    
-    if (qrCodeDisplayStage) qrCodeDisplayStage.style.display = 'none'; // Ensure it's hidden initially if loading is shown
-
-    // generateAndDisplayQRCode will handle showing qrCodeDisplayStage after timeout
-    generateAndDisplayQRCode();
+    // Call the async function to generate details
+    await generatePaymentDetails();
 }
 
-async function generateAndDisplayQRCode() { // Made async to use await for crypto price fetching
-    const qrCodeContainer = document.getElementById("payment-qr-code-image");
-    const walletAddressInput = document.getElementById("payment-wallet-address");
-    const networkInfoEl = document.getElementById("payment-network-name");
-    const finalAmountDisplay = document.getElementById("payment-final-amount");
-    const cryptoAmountContainer = document.getElementById("payment-crypto-amount-container"); // Get the container
-    const cryptoAmountDisplay = document.getElementById("payment-crypto-amount"); // Get the span for the value
-    const qrLoadingMessage = document.getElementById("qr-loading-message");
-    const qrCodeDisplayStage = document.getElementById("qr-code-display-stage");
+async function generatePaymentDetails() { // Make function async
+    const qrLoadingMessage = document.getElementById('qr-loading-message');
+    const qrCodeDisplayStage = document.getElementById('qr-code-display-stage');
+    const paymentTitleFinal = document.getElementById('payment-title-final-display');
+    const qrCodeImg = document.getElementById('payment-qr-code-image');
+    const walletAddressDisplay = document.getElementById('payment-wallet-address');
+    const paymentAmountDisplay = document.getElementById('payment-final-amount');
+    const networkInfoDisplay = document.getElementById('payment-network-name');
+    const cryptoAmountContainer = document.getElementById('payment-crypto-amount-container');
+    const cryptoAmountDisplay = document.getElementById('payment-crypto-amount');
 
-    if (!qrCodeContainer || !walletAddressInput || !networkInfoEl || !finalAmountDisplay || !cryptoAmountContainer || !cryptoAmountDisplay || !qrLoadingMessage || !qrCodeDisplayStage) {
-        console.error("One or more elements for QR code display are missing. Check IDs: payment-qr-code-image, payment-wallet-address, payment-network-name, payment-final-amount, payment-crypto-amount-container, payment-crypto-amount, qr-loading-message, qr-code-display-stage.");
-        if(qrLoadingMessage) {
-            qrLoadingMessage.innerHTML = getTranslatedString("qrErrorWalletUnavailable");
-            qrLoadingMessage.style.display = "block";
-        }
-        if(qrCodeDisplayStage) qrCodeDisplayStage.style.display = "none";
+    if (!qrLoadingMessage || !qrCodeDisplayStage || !paymentTitleFinal || !qrCodeImg || !walletAddressDisplay || !paymentAmountDisplay || !networkInfoDisplay || !cryptoAmountContainer || !cryptoAmountDisplay) {
+        console.error("One or more final payment display elements not found.");
+        if (qrLoadingMessage) qrLoadingMessage.innerHTML = getTranslatedString('qrErrorGeneric'); // Use a generic error key
         return;
     }
 
-    const finalPriceUSD = (originalPriceGlobal * (1 - currentDiscountPercentGlobal / 100)).toFixed(2);
-    const paymentMethod = currentPaymentMethodGlobal;
-    const walletAddress = cryptoWalletAddresses[paymentMethod];
-    const networkName = cryptoNetworkInfo[paymentMethod];
+    const walletAddress = cryptoWalletAddresses[currentPaymentMethodGlobal];
+    const network = cryptoNetworkInfo[currentPaymentMethodGlobal];
+    const finalPriceUSD = originalPriceGlobal * (1 - currentDiscountPercentGlobal / 100);
+    const coinGeckoId = cryptoCoinGeckoIds[currentPaymentMethodGlobal];
 
     if (!walletAddress) {
-        qrLoadingMessage.innerHTML = getTranslatedString("qrErrorWalletUnavailable");
-        console.error("Wallet address not found for method:", paymentMethod);
-        if(qrCodeDisplayStage) qrCodeDisplayStage.style.display = "none"; // Hide stage if no wallet
-        if(qrLoadingMessage) qrLoadingMessage.style.display = "block"; // Show error
+        console.error(`Wallet address for ${currentPaymentMethodGlobal} not found.`);
+        qrLoadingMessage.innerHTML = getTranslatedString('qrErrorWalletUnavailable');
+        qrCodeDisplayStage.style.display = 'none';
         return;
     }
 
-    walletAddressInput.value = walletAddress;
-    networkInfoEl.innerHTML = networkName; // Corrected: Direct network name, label is translated via HTML data-translate
-    finalAmountDisplay.innerHTML = `$${finalPriceUSD} USD`;
-    cryptoAmountContainer.style.display = 'none'; // Hide by default, show only if crypto amount is available
+    let cryptoAmount = null;
+    let qrData = '';
 
-    // Show loading message while fetching crypto price and preparing QR
-    if (qrLoadingMessage) qrLoadingMessage.style.display = "block";
-    if (qrCodeDisplayStage) qrCodeDisplayStage.style.display = "none";
+    // Fetch price from CoinGecko only for BTC and ETH
+    if (coinGeckoId) {
+        try {
+            const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${coinGeckoId}&vs_currencies=usd`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            const pricePerCoin = data[coinGeckoId]?.usd;
 
-
-    if (paymentMethod === "btc" || paymentMethod === "eth") {
-        const cryptoId = paymentMethod === "btc" ? "bitcoin" : "ethereum";
-        
-        const cryptoPriceUSD = await fetchCryptoPricesForConversion(cryptoId);
-        
-        if (cryptoPriceUSD) {
-            const cryptoAmount = (parseFloat(finalPriceUSD) / cryptoPriceUSD).toFixed(8);
-            cryptoAmountDisplay.innerHTML = `${cryptoAmount} ${paymentMethod.toUpperCase()}`;
-            cryptoAmountContainer.style.display = 'block'; // Show the crypto amount line
-        } else {
-            cryptoAmountDisplay.innerHTML = getTranslatedString("cryptoPriceErrorText");
-            cryptoAmountContainer.style.display = 'block'; // Show error in the crypto amount line
+            if (pricePerCoin && pricePerCoin > 0) {
+                cryptoAmount = (finalPriceUSD / pricePerCoin).toFixed(8); // Calculate crypto amount with 8 decimals
+                cryptoAmountDisplay.textContent = `${cryptoAmount} ${currentPaymentMethodGlobal.toUpperCase()}`;
+                cryptoAmountContainer.style.display = 'block'; // Show the crypto amount
+                // Update QR data for BTC and ETH to include amount (BIP-21 for BTC, EIP-681 for ETH)
+                if (currentPaymentMethodGlobal === 'btc') {
+                    qrData = `bitcoin:${walletAddress}?amount=${cryptoAmount}`;
+                } else if (currentPaymentMethodGlobal === 'eth') {
+                    // Note: EIP-681 amount is in Wei (1 ETH = 1e18 Wei), QRServer might not handle this conversion automatically.
+                    // For simplicity, we'll stick to address only for ETH QR, or use a library that handles EIP-681.
+                    // Let's keep it simple for now:
+                    qrData = `ethereum:${walletAddress}`; // Basic ETH QR
+                    // If QRServer supported value/amount in ETH directly:
+                    // qrData = `ethereum:${walletAddress}?value=${(cryptoAmount * 1e18).toString()}`; // Requires BigInt handling
+                }
+            } else {
+                console.error('Could not retrieve valid price from CoinGecko.');
+                cryptoAmountContainer.style.display = 'none';
+                qrData = `${network}:${walletAddress}`; // Fallback QR data
+            }
+        } catch (error) {
+            console.error('Error fetching CoinGecko price:', error);
+            qrLoadingMessage.innerHTML = getTranslatedString('qrErrorApiFail'); // Use API error key
+            qrCodeDisplayStage.style.display = 'none';
+            return; // Stop execution on API error
         }
-    } else if (paymentMethod === "usdt") {
-        cryptoAmountDisplay.innerHTML = `${finalPriceUSD} USDT`;
-        cryptoAmountContainer.style.display = 'block'; // Show USDT amount
+    } else if (currentPaymentMethodGlobal === 'usdt') {
+        // For USDT, amount is 1:1 with USD (assuming TRC20 USDT)
+        cryptoAmount = finalPriceUSD.toFixed(2);
+        cryptoAmountDisplay.textContent = `${cryptoAmount} ${currentPaymentMethodGlobal.toUpperCase()}`;
+        cryptoAmountContainer.style.display = 'block';
+        // Tron doesn't have a standard URI scheme like BIP-21/EIP-681 widely supported by wallets for amounts.
+        // We'll generate QR with address only.
+        qrData = `${network}:${walletAddress}`; // Basic USDT QR
+    } else {
+         console.error(`Unsupported payment method for crypto amount calculation: ${currentPaymentMethodGlobal}`);
+         qrData = `${network}:${walletAddress}`; // Fallback QR data
     }
 
-    setTimeout(() => {
-        if (qrLoadingMessage) qrLoadingMessage.style.display = "none";
-        if (qrCodeDisplayStage) qrCodeDisplayStage.style.display = "block";
+    // Hide loading message and show QR stage
+    qrLoadingMessage.style.display = 'none';
+    qrCodeDisplayStage.style.display = 'block';
 
-        if (qrCodeContainer) {
-            let qrImageSrc = "";
-            if (paymentMethod === "btc") qrImageSrc = "btc-qr.png";
-            else if (paymentMethod === "eth") qrImageSrc = "eth-qr.png";
-            else if (paymentMethod === "usdt") qrImageSrc = "usdt-qr.png";
+    // Update common elements
+    paymentTitleFinal.innerHTML = getTranslatedString('paymentDialogTitleFinal');
+    paymentAmountDisplay.textContent = `$${finalPriceUSD.toFixed(2)} USD`;
+    networkInfoDisplay.textContent = network;
+    walletAddressDisplay.value = walletAddress;
 
-            if (qrImageSrc) {
-                qrCodeContainer.src = qrImageSrc;
-                qrCodeContainer.alt = `${paymentMethod.toUpperCase()} QR Code`;
-            } else {
-                qrCodeContainer.alt = getTranslatedString("qrErrorWalletUnavailable");
-                qrCodeContainer.src = "";
-            }
-        }
-        applyTranslations(); // Ensure translations are applied to the newly visible stage
-    }, 500); 
+    // Generate QR Code using QRServer API with potentially updated qrData
+    if (qrData) { // Ensure qrData is set
+        qrCodeImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(qrData)}`;
+        qrCodeImg.alt = `QR Code for ${currentPaymentMethodGlobal} payment to ${walletAddress}`;
+    } else {
+        console.error("QR Data could not be generated.");
+        qrCodeImg.src = ''; // Clear image source on error
+        qrCodeImg.alt = 'Error generating QR Code';
+    }
 }
 
 function copyWalletAddress() {
     const walletAddressInput = document.getElementById('payment-wallet-address');
-    if (walletAddressInput) {
-        walletAddressInput.select();
-        walletAddressInput.setSelectionRange(0, 99999); // For mobile devices
-        try {
-            document.execCommand('copy');
-            alert(getTranslatedString('alertCopied'));
-        } catch (err) {
-            alert(getTranslatedString('alertCopyFailed'));
-            console.error('Failed to copy text: ', err);
-        }
-    } else {
-        console.error("'payment-wallet-address' input not found for copying.");
-    }
+    if (!walletAddressInput) return;
+    const walletAddress = walletAddressInput.value;
+    navigator.clipboard.writeText(walletAddress).then(() => {
+        alert(getTranslatedString('alertCopied'));
+    }).catch(err => {
+        console.error('Failed to copy wallet address: ', err);
+        alert(getTranslatedString('alertCopyFailed'));
+    });
 }
 
-// --- Crypto Ticker --- Start ---
-// async function fetchCryptoPrices() { ... } // Removed as per user request
-// --- Crypto Ticker --- End ---
-
-// --- Crypto Price Fetching --- Start ---
-async function fetchCryptoPricesForConversion(cryptoId) {
-    // cryptoId should be 'bitcoin' or 'ethereum'
-    const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=usd`;
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`CoinGecko API request failed: ${response.status}`);
-        }
-        const data = await response.json();
-        if (data[cryptoId] && data[cryptoId].usd) {
-            return data[cryptoId].usd;
-        }
-        throw new Error(`Price data not found for ${cryptoId} in CoinGecko response`);
-    } catch (error) {
-        console.error("Error fetching crypto price:", error);
-        return null; // Return null or a default/fallback if API fails
-    }
-}
-// --- Crypto Price Fetching --- End ---
-
-// --- Crypto Price Fetching --- Start ---
-async function fetchCryptoPricesForConversion(cryptoId) {
-    // cryptoId should be 'bitcoin' or 'ethereum'
-    const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=usd`;
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`CoinGecko API request failed: ${response.status}`);
-        }
-        const data = await response.json();
-        if (data[cryptoId] && data[cryptoId].usd) {
-            return data[cryptoId].usd;
-        }
-        throw new Error(`Price data not found for ${cryptoId} in CoinGecko response`);
-    } catch (error) {
-        console.error("Error fetching crypto price:", error);
-        return null; // Return null or a default/fallback if API fails
-    }
-}
-// --- Crypto Price Fetching --- End ---
+// --- Purchase Flow --- End ---
 
 // --- Testimonials --- Start ---
 function loadTestimonials() {
     const container = document.getElementById("testimonials-container");
     if (!container) return;
-    container.innerHTML = ""; // Clear existing testimonials
+    container.innerHTML = ''; // Clear existing testimonials
 
-    const testimonials = [
-        { quoteKey: "testimonial1Quote", authorKey: "testimonial1Author" },
-        { quoteKey: "testimonial2Quote", authorKey: "testimonial2Author" },
-        { quoteKey: "testimonial3Quote", authorKey: "testimonial3Author" },
-        { quoteKey: "testimonial4Quote", authorKey: "testimonial4Author" },
-        { quoteKey: "testimonial5Quote", authorKey: "testimonial5Author" }
-    ];
+    const testimonialKeys = ["testimonial1", "testimonial2", "testimonial3", "testimonial4", "testimonial5"];
 
-    testimonials.forEach(testimonial => {
+    testimonialKeys.forEach(keyBase => {
+        const quote = getTranslatedString(`${keyBase}Quote`);
+        const author = getTranslatedString(`${keyBase}Author`);
+
+        // Check if translations are missing (important after fixing translations.js)
+        if (quote.startsWith("MISSING_KEY") || quote.startsWith("KEY_ERROR") || author.startsWith("MISSING_KEY") || author.startsWith("KEY_ERROR")) {
+            console.warn(`Skipping testimonial ${keyBase} due to missing translation.`);
+            return; // Skip if translation is missing
+        }
+
         const card = document.createElement("div");
-        card.className = "testimonial-card card-style";
-        card.innerHTML = 
-            `<p class="quote">${getTranslatedString(testimonial.quoteKey)}</p>` +
-            `<p class="author">${getTranslatedString(testimonial.authorKey)}</p>`;
+        card.className = "testimonial-card card-style"; // Added card-style for consistency
+
+        // Placeholder Avatar
+        const avatar = document.createElement("div");
+        avatar.className = "testimonial-avatar-placeholder";
+
+        const quoteEl = document.createElement("p");
+        quoteEl.className = "testimonial-quote";
+        quoteEl.textContent = quote;
+
+        const authorEl = document.createElement("p");
+        authorEl.className = "testimonial-author";
+        authorEl.textContent = author;
+
+        card.appendChild(avatar);
+        card.appendChild(quoteEl);
+        card.appendChild(authorEl);
         container.appendChild(card);
     });
 }
 // --- Testimonials --- End ---
-
-// Make sure to define close functions for each dialog if they are called directly from HTML onclick
-// These are now handled by the generic closeDialog(id) and the event listener on .dialog backdrop
-// function closePlatformDialog() { closeDialog('platform-dialog'); }
-// function closeImeiDialog() { closeDialog('imei-dialog'); }
-// function closePokerAppDialog() { closeDialog('poker-app-dialog'); }
-// function closePaymentMethodDialog() { closeDialog('payment-method-dialog'); }
-// function closePaymentDialog() { closeDialog('payment-dialog'); }
 

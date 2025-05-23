@@ -1,0 +1,45 @@
+<!-- Email Registration Dialog -->
+<div id="email-registration-dialog" class="dialog step-dialog">
+    <div class="dialog-content">
+        <span class="close" onclick="closeDialog('email-registration-dialog')">&times;</span>
+        <h3 data-translate="emailRegDialogTitle">Create Your Poker Account</h3>
+        
+        <div class="secure-badge">
+            <i class="fas fa-shield-alt"></i> <span data-translate="secureRegistrationText">Secure Registration</span>
+        </div>
+        
+        <div class="form-group">
+            <label for="email-input" data-translate="emailLabel">Email Address</label>
+            <div class="input-with-icon">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="email-input" class="dialog-input" data-translate-placeholder="emailPlaceholder">
+                <div class="validation-icon">
+                    <i class="fas fa-check-circle valid-icon"></i>
+                    <i class="fas fa-times-circle invalid-icon"></i>
+                </div>
+            </div>
+            <p class="validation-message" id="email-validation-message"></p>
+        </div>
+        
+        <div class="form-group">
+            <label for="nickname-input" data-translate="nicknameLabel">Poker Nickname</label>
+            <div class="input-with-icon">
+                <i class="fas fa-user input-icon"></i>
+                <input type="text" id="nickname-input" class="dialog-input" data-translate-placeholder="nicknamePlaceholder">
+                <div class="validation-icon">
+                    <i class="fas fa-check-circle valid-icon"></i>
+                    <i class="fas fa-times-circle invalid-icon"></i>
+                </div>
+            </div>
+            <p class="validation-message" id="nickname-validation-message"></p>
+        </div>
+        
+        <div class="privacy-notice">
+            <i class="fas fa-lock"></i> <span data-translate="privacyNoticeText">Your information is securely stored and never shared with third parties.</span>
+        </div>
+        
+        <div class="dialog-button-group">
+            <button id="continue-registration-button" onclick="submitRegistration()" class="primary-dialog-button" data-translate="continueButton">Continue</button>
+        </div>
+    </div>
+</div>
