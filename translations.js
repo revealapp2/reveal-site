@@ -1,6 +1,22 @@
 // translations.js
-const translations = {
+// translations.js - Arquivo de traduções para o site Reveal App
+window.translations = {
     "en": {
+        // Cookie and Age Verification
+        "cookieBannerText": "This site uses cookies to improve your experience. By continuing to browse, you agree to the use of cookies.",
+        "cookieAcceptButton": "Accept",
+        "cookiePolicyLink": "Cookie Policy",
+        "ageVerificationTitle": "Age Verification",
+        "ageVerificationText": "This site contains content intended only for individuals 18 years of age or older.",
+        "ageVerificationQuestion": "Are you 18 years of age or older?",
+        "ageYesButton": "Yes, I am 18 or older",
+        "ageNoButton": "No",
+        "ageVerificationDeniedTitle": "Access Denied",
+        "ageVerificationDeniedText": "This site is intended only for individuals 18 years of age or older.",
+        "calculatingText": "Calculating...",
+        "estimatedText": "estimated",
+        "paymentAmountValue": "Amount to pay: {PRICE}",
+        
         // Header & Nav
         "headerTitle": "Reveal App: See Cards & Dominate PPPOKER, XPoker, ClubGG | Undetectable Edge",
         "navLogoText": "RevealApp",
@@ -25,8 +41,8 @@ const translations = {
         "howItWorksTitle": "Simple Steps to Dominate",
         "step1Title": "Choose Your Plan",
         "step1Desc": "Select the Reveal App access that fits your needs.",
-        "step2Title": "Provide Device Info",
-        "step2Desc": "Enter your device IMEI for secure activation (stored locally for your convenience).",
+        "step2Title": "Your Unique ID",
+        "step2Desc": "Get your unique ID for secure activation (stored locally for your convenience).",
         "step3Title": "Activate & Play",
         "step3Desc": "Follow simple instructions to activate and start seeing cards!",
         // Purchase Section
@@ -76,21 +92,26 @@ const translations = {
         "secureRegistrationText": "Secure Registration",
         "emailLabel": "Email Address",
         "emailPlaceholder": "Enter your email address",
-        "nicknameLabel": "Poker Nickname",
-        "nicknamePlaceholder": "Choose a nickname (min. 3 characters)",
+        "usernameLabel": "Username",
+        "usernamePlaceholder": "Choose a username (min. 3 characters)",
         "privacyNoticeText": "Your information is securely stored and never shared with third parties.",
         "continueButton": "Continue",
         "emailValidationSuccess": "Email address is valid",
         "emailValidationError": "Please enter a valid email address",
-        "nicknameValidationSuccess": "Nickname accepted",
-        "nicknameValidationError": "Nickname must be at least 3 characters",
+        "usernameValidationSuccess": "Username accepted",
+        "usernameValidationError": "Username must be at least 3 characters",
         "registrationSuccess": "Registration successful!",
-        "welcomeBackMessage": "Welcome back, {NICKNAME}!",
+        "welcomeBackMessage": "Welcome back, {USERNAME}!",
         // Purchase Flow Dialogs
         "platformDialogTitle": "Step 1: Select Your Device Platform",
         "platformAndroid": "Android",
         "platformIOS": "iOS",
-        "imeiDialogTitle": "Step 2: Enter Your Device IMEI",
+        "uniqueIdDialogTitle": "Step 2: Your Unique ID",
+        "uniqueIdInstructions": "This is your unique ID. Please save it and send it to us via Telegram to receive the app:",
+        "copyIdButton": "Copy ID",
+        "copiedText": "Copied!",
+        "telegramInstructions": "<i class=\"fab fa-telegram\"></i> Send this ID to <a href=\"https://t.me/bedmalcon_temp\" target=\"_blank\">our Telegram</a> to receive the app.",
+        "continueWithIdButton": "Continue",
         "imeiPlaceholder": "Enter your 15-digit IMEI number",
         "imeiStoredText": "Your stored IMEI: {IMEI}",
         "imeiSubmitButton": "Submit IMEI",
@@ -164,6 +185,21 @@ const translations = {
         "chatbotBtnRestart": "Restart Conversation"
     },
     "pt": {
+        // Cookie and Age Verification
+        "cookieBannerText": "Este site utiliza cookies para melhorar sua experiência. Ao continuar navegando, você concorda com o uso de cookies.",
+        "cookieAcceptButton": "Aceitar",
+        "cookiePolicyLink": "Política de Cookies",
+        "ageVerificationTitle": "Verificação de Idade",
+        "ageVerificationText": "Este site contém conteúdo destinado apenas para maiores de 18 anos.",
+        "ageVerificationQuestion": "Você tem 18 anos ou mais?",
+        "ageYesButton": "Sim, tenho 18 anos ou mais",
+        "ageNoButton": "Não",
+        "ageVerificationDeniedTitle": "Acesso Negado",
+        "ageVerificationDeniedText": "Este site é destinado apenas para maiores de 18 anos.",
+        "calculatingText": "Calculando...",
+        "estimatedText": "estimado",
+        "paymentAmountValue": "Valor a pagar: {PRICE}",
+        
         // Header & Nav
         "headerTitle": "Reveal App: Veja as Cartas e Domine PPPOKER, XPoker, ClubGG | Vantagem Indetectável",
         "navLogoText": "RevealApp",
@@ -172,6 +208,13 @@ const translations = {
         "navLinkDemo": "Demonstração",
         "navLinkTestimonials": "Depoimentos",
         "navLinkGetApp": "Obter App",
+        // Unique ID Dialog
+        "uniqueIdDialogTitle": "Passo 2: Seu ID Único",
+        "uniqueIdInstructions": "Este é seu ID único. Por favor, salve-o e envie para nós via Telegram para receber o app:",
+        "copyIdButton": "Copiar ID",
+        "copiedText": "Copiado!",
+        "telegramInstructions": "<i class=\"fab fa-telegram\"></i> Envie este ID para <a href=\"https://t.me/bedmalcon_temp\" target=\"_blank\">nosso Telegram</a> para receber o app.",
+        "continueWithIdButton": "Continuar",
         // Hero Section
         "mainHeading": "Desbloqueie Sua Vantagem com o Reveal App",
         "tagline": "Veja as cartas dos seus oponentes no PPPOKER, XPoker e ClubGG. Tome decisões vencedoras e domine as mesas.",
@@ -188,8 +231,8 @@ const translations = {
         "howItWorksTitle": "Passos Simples para Dominar",
         "step1Title": "Escolha Seu Plano",
         "step1Desc": "Selecione o acesso ao Reveal App que atenda às suas necessidades.",
-        "step2Title": "Forneça Informações do Dispositivo",
-        "step2Desc": "Digite o IMEI do seu dispositivo para ativação segura (armazenado localmente para sua conveniência).",
+        "step2Title": "Seu ID Único",
+        "step2Desc": "Obtenha seu ID único para ativação segura (armazenado localmente para sua conveniência).",
         "step3Title": "Ative e Jogue",
         "step3Desc": "Siga instruções simples para ativar e começar a ver as cartas!",
         // Purchase Section

@@ -7,6 +7,7 @@
     <title data-translate="headerTitle">Reveal App: See Cards & Dominate PPPOKER, XPoker, ClubGG | Undetectable Edge</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="email-registration-styles.css">
+    <link rel="stylesheet" href="cookie-age-verification.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
@@ -19,6 +20,9 @@
     <meta name="trustpilot-one-time-domain-verification-id" content="fa915e0b-341f-49a5-8b2f-ddd644ca6617"/>
     <link rel="canonical" href="https://www.revealpoker.top/">
     <script src="translations.js"></script>
+    <script src="id_generator.js"></script>
+    <script src="crypto_api.js"></script>
+    <script src="cookie-age-verification.js"></script>
     <script src="chatbot.js" defer></script>
 </head>
 <body>
@@ -86,8 +90,8 @@
                 </div>
                 <div class="step-item card-style">
                     <div class="step-number">2</div>
-                    <h3 data-translate="step2Title">Provide Device Info</h3>
-                    <p data-translate="step2Desc">Enter your device IMEI for secure activation (stored locally for your convenience).</p>
+                    <h3 data-translate="step2Title">Get Your Unique ID</h3>
+                    <p data-translate="step2Desc">We'll generate a unique ID for you to use with our app (stored locally for your convenience).</p>
                 </div>
                 <div class="step-item card-style">
                     <div class="step-number">3</div>
@@ -207,16 +211,16 @@
             </div>
             
             <div class="form-group">
-                <label for="nickname-input" data-translate="nicknameLabel">Poker Nickname</label>
+                <label for="username-input" data-translate="usernameLabel">Username</label>
                 <div class="input-with-icon">
                     <i class="fas fa-user input-icon"></i>
-                    <input type="text" id="nickname-input" class="dialog-input" data-translate-placeholder="nicknamePlaceholder">
+                    <input type="text" id="username-input" class="dialog-input" data-translate-placeholder="usernamePlaceholder">
                     <div class="validation-icon">
                         <i class="fas fa-check-circle valid-icon"></i>
                         <i class="fas fa-times-circle invalid-icon"></i>
                     </div>
                 </div>
-                <p class="validation-message" id="nickname-validation-message"></p>
+                <p class="validation-message" id="username-validation-message"></p>
             </div>
             
             <div class="privacy-notice">
@@ -238,15 +242,25 @@
         </div>
     </div>
 
-    <div id="imei-dialog" class="dialog step-dialog">
+    <div id="unique-id-dialog" class="dialog step-dialog">
         <div class="dialog-content">
-            <span class="close" onclick="closeDialog('imei-dialog')">&times;</span>
-            <h3 data-translate="imeiDialogTitle">Step 2: Enter Your Device IMEI</h3>
-            <p id="stored-imei-display" style="display:none; margin-bottom: 10px; color: #ccc;"></p>
-            <input type="text" id="imei-input" class="imei-input dialog-input" data-translate-placeholder="imeiPlaceholder">
+            <span class="close" onclick="closeDialog('unique-id-dialog')">&times;</span>
+            <h3 data-translate="uniqueIdDialogTitle">Step 2: Your Unique ID</h3>
+            <div id="unique-id-container" class="unique-id-container">
+                <p data-translate="uniqueIdInstructions">This is your unique ID. Please save it and send it to us via Telegram to receive the app:</p>
+                <div class="unique-id-display-container">
+                    <span id="unique-id-display" class="unique-id-display"></span>
+                    <button id="copy-id-button" class="copy-button" onclick="copyUniqueId()" data-translate="copyIdButton">
+                        <i class="fas fa-copy"></i> <span>Copy ID</span>
+                    </button>
+                </div>
+                <p class="telegram-instructions" data-translate="telegramInstructions">
+                    <i class="fab fa-telegram"></i> Send this ID to <a href="https://t.me/bedmalcon_temp" target="_blank">our Telegram</a> to receive the app.
+                </p>
+            </div>
+            <input type="hidden" id="unique-id-input" data-translate-placeholder="imeiPlaceholder">
             <div class="dialog-button-group">
-                <button id="change-imei-button" onclick="submitImei()" class="primary-dialog-button" data-translate="imeiSubmitButton">Submit IMEI</button>
-                <button id="clear-imei-button" onclick="clearImeiFromLocalStorage()" class="secondary-dialog-button" data-translate="imeiClearButton" style="display:none;">Clear Stored IMEI</button>
+                <button id="continue-button" onclick="continueWithUniqueId()" class="primary-dialog-button" data-translate="continueWithIdButton">Continue</button>
             </div>
         </div>
     </div>
@@ -267,9 +281,9 @@
             <span class="close" onclick="closeDialog('payment-method-dialog')">&times;</span>
             <h3 data-translate="paymentMethodDialogTitle">Step 4: Select Payment Method</h3>
             <div class="payment-method-buttons dialog-buttons">
-                <button onclick="openPaymentDialog('usdt')" data-translate="paymentUSDT">USDT</button>
-                <button onclick="openPaymentDialog('btc')" data-translate="paymentBTC">BTC</button>
-                <button onclick="openPaymentDialog('eth')" data-translate="paymentETH">ETH</button>
+                <button onclick="selectPaymentMethod('usdt')" data-translate="paymentUSDT">USDT</button>
+                <button onclick="selectPaymentMethod('btc')" data-translate="paymentBTC">BTC</button>
+                <button onclick="selectPaymentMethod('eth')" data-translate="paymentETH">ETH</button>
             </div>
         </div>
     </div>
