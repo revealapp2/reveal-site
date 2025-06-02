@@ -489,11 +489,11 @@ function proceedToFinalPaymentDetails() {
         const walletAddress = document.getElementById("payment-wallet-address");
         if (walletAddress) {
             if (method === "usdt") {
-                walletAddress.value = "TRx7NHqjeKQxGPPfzZgTpw8mLiGwPs5XQB";
+                walletAddress.value = "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK";
             } else if (method === "btc") {
-                walletAddress.value = "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh";
+                walletAddress.value = "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3";
             } else if (method === "eth") {
-                walletAddress.value = "0x71C7656EC7ab88b098defB751B7401B5f6d8976F";
+                walletAddress.value = "0x9b5877A847BE203FCbA421194C83E0af6f686cC7";
             }
         }
         
