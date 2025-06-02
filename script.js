@@ -1,687 +1,1093 @@
 // script.js - Main script for Reveal App website
 
-// Ensure translations is loaded before this script, or handle its absence gracefully.
-if (typeof window.translations !== 'undefined') {
-    console.log("SUCCESS: 'translations' object IS defined globally when script.js starts.");
-} else {
-    console.error("ERROR: 'translations' object is NOT defined globally when script.js starts. Ensure translations.js is loaded before script.js.");
-}
-
-let selectedPlatformGlobal = null;
-let selectedPokerAppGlobal = null;
-let userUniqueIdGlobal = null;
-let userEmailGlobal = null;
-let userUsernameGlobal = null;
-let currentLangGlobal = localStorage.getItem("language") || "en";
-let originalPriceGlobal = 0;
-let currentDiscountPercentGlobal = 0;
-let appliedCouponCodeGlobal = null;
-let currentPaymentMethodGlobal = null;
-
-const 가격정책 = {
-    'pppoker': 1500,
-    'xpoker': 1500,
-    'clubgg': 4000
-};
-
-const coupons = {
-    "10OFF": { discount: 10 }
-};
-
-const cryptoWalletAddresses = {
-    usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK",
-    btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3",
-    eth: "0x9b5877A847BE203FCbA421194C83E0af6f686cC7"
-};
-
-const cryptoNetworkInfo = {
-    usdt: "Tron (TRC20)",
-    btc: "Bitcoin",
-    eth: "Ethereum (ERC20)"
-};
-
-// CoinGecko IDs for API calls
-const cryptoCoinGeckoIds = {
-    btc: "bitcoin",
-    eth: "ethereum"
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-    if (typeof window.translations === 'undefined') {
-        console.error("ERROR: 'translations' object is NOT defined within DOMContentLoaded.");
-    }
-    const lang = localStorage.getItem("language") || "en";
-    setLanguage(lang);
-
-    const currentYearEl = document.getElementById("current-year");
-    if (currentYearEl) {
-        currentYearEl.textContent = new Date().getFullYear();
-    }
-
+document.addEventListener("DOMContentLoaded", function() {
+    // Set current year in footer
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+    
+    // Initialize language based on stored preference or browser default
+    initializeLanguage();
+    
+    // Load testimonials
     loadTestimonials();
-
-    // Initialize chatbot if chatbot.js is loaded and initializeChatbot function exists
-    if (typeof initializeChatbot === 'function') {
-        initializeChatbot();
-    } else {
-        console.warn('initializeChatbot function not found. Chatbot may not initialize correctly.');
-    }
-
-    // Close dialogs when clicking outside
-    document.querySelectorAll('.dialog').forEach(dialog => {
-        dialog.addEventListener('click', function(event) {
-            if (event.target === this) { // Clicked on the backdrop
-                const closeButton = this.querySelector('.close');
-                if (closeButton) {
-                    closeButton.click(); // Simulate click on the actual close button
-                }
-            }
-        });
-    });
-
-    // Setup email and username validation events
-    setupEmailRegistrationValidation();
+    
+    // Initialize chatbot
+    initializeChatbot();
+    
+    // Check for stored unique ID
+    checkStoredUniqueId();
+    
+    // Add event listeners for payment confirmation page
+    setupPaymentConfirmationPage();
 });
 
-function getTranslatedString(key, replacements = {}) {
-    if (typeof window.translations === 'undefined') {
-        console.error("Translations object not loaded in getTranslatedString.");
-        return key; // Return the key itself instead of an error message
+// --- Language Handling ---
+function initializeLanguage() {
+    // Get stored language or default to English
+    const storedLang = localStorage.getItem("language") || "en";
+    setLanguage(storedLang);
+    
+    // Set language selector to match stored language
+    const langSelector = document.querySelector("#language-selector select");
+    if (langSelector) {
+        langSelector.value = storedLang;
     }
-    let langTranslations = window.translations[currentLangGlobal];
-    if (!langTranslations) {
-        console.warn(`No translations for language: ${currentLangGlobal}. Falling back to English.`);
-        langTranslations = window.translations['en'] || {}; // Fallback to English or empty object
-    }
-    let text = langTranslations[key];
-    if (text === undefined) {
-        // Fallback to English if key not found in current language
-        text = window.translations['en'] ? window.translations['en'][key] : undefined;
-        if (text === undefined) {
-             console.warn(`Translation key "${key}" not found for lang "${currentLangGlobal}" or English.`);
-             return key; // Return the key itself instead of an error message
-        }
-    }
-    if (typeof text === 'string') {
-        for (const placeholder in replacements) {
-            text = text.replace(new RegExp(`{${placeholder}}`, 'g'), replacements[placeholder]);
-        }
-    }
-    return text;
-}
-
-function applyTranslations() {
-    if (typeof window.translations === 'undefined') {
-        console.error("ERROR: Cannot apply translations because 'translations' object is NOT defined.");
-        return;
-    }
-    document.querySelectorAll("[data-translate]").forEach(element => {
-        const key = element.getAttribute("data-translate");
-        const translatedString = getTranslatedString(key);
-        if (element.tagName === 'INPUT' && (element.type === 'button' || element.type === 'submit' || element.type === 'reset')) {
-            element.value = translatedString;
-        } else if (element.tagName === 'IMG' && element.hasAttribute('alt')) { // Translate alt text for images
-            element.alt = translatedString;
-        } else {
-            element.innerHTML = translatedString; // Use innerHTML for FontAwesome icons and general text
-        }
-    });
-    document.querySelectorAll("[data-translate-placeholder]").forEach(element => {
-        const key = element.getAttribute("data-translate-placeholder");
-        element.placeholder = getTranslatedString(key);
-    });
 }
 
 function setLanguage(lang) {
-    currentLangGlobal = lang;
+    // Store language preference
     localStorage.setItem("language", lang);
-    document.documentElement.lang = lang;
-    const selector = document.querySelector("#language-selector select");
-    if (selector) selector.value = lang;
-    applyTranslations();
-    if (document.getElementById('payment-dialog')?.style.display === 'flex') {
-        // Re-render payment dialog text if open and payment method is selected
-        if (currentPaymentMethodGlobal) {
-            updatePaymentDialogContent();
+    
+    // Update all translatable elements
+    document.querySelectorAll("[data-translate]").forEach(element => {
+        const key = element.getAttribute("data-translate");
+        if (!key) return;
+        
+        const translation = getTranslatedString(key);
+        if (!translation) return;
+        
+        // Check if the translation contains HTML (like icons)
+        if (translation.includes("<") && translation.includes(">")) {
+            element.innerHTML = translation;
+        } else {
+            element.textContent = translation;
+        }
+    });
+    
+    // Update all translatable placeholders
+    document.querySelectorAll("[data-translate-placeholder]").forEach(element => {
+        const key = element.getAttribute("data-translate-placeholder");
+        if (!key) return;
+        
+        const translation = getTranslatedString(key);
+        if (translation) {
+            element.placeholder = translation;
+        }
+    });
+    
+    // Update page title if it has a translation
+    const titleElement = document.querySelector("title[data-translate]");
+    if (titleElement) {
+        const key = titleElement.getAttribute("data-translate");
+        const translation = getTranslatedString(key);
+        if (translation) {
+            document.title = translation;
         }
     }
-    loadTestimonials(); // Reload testimonials in the new language
-    if (typeof updateChatbotLanguage === 'function') {
+    
+    // Update chatbot language if function exists
+    if (typeof updateChatbotLanguage === "function") {
         updateChatbotLanguage(lang);
     }
 }
 
+function getTranslatedString(key, replacements = {}) {
+    if (!key) return "";
+    
+    const lang = localStorage.getItem("language") || "en";
+    
+    // Check if translations exist
+    if (!window.translations || !window.translations[lang]) {
+        console.error(`Translations not found for language: ${lang}`);
+        return key;
+    }
+    
+    // Get translation or fallback to key
+    let translation = window.translations[lang][key];
+    
+    // If not found in current language, try English
+    if (!translation && lang !== "en" && window.translations["en"]) {
+        translation = window.translations["en"][key];
+    }
+    
+    // If still not found, return key
+    if (!translation) {
+        console.warn(`Translation not found for key: ${key}`);
+        return key;
+    }
+    
+    // Replace placeholders if any
+    if (Object.keys(replacements).length > 0) {
+        for (const [placeholder, value] of Object.entries(replacements)) {
+            translation = translation.replace(`{${placeholder}}`, value);
+        }
+    }
+    
+    return translation;
+}
+
+// --- Testimonials Handling ---
+function loadTestimonials() {
+    const container = document.getElementById("testimonials-container");
+    if (!container) return;
+    
+    // Clear container
+    container.innerHTML = "";
+    
+    // Create 5 testimonials
+    for (let i = 1; i <= 5; i++) {
+        const testimonial = createTestimonial(i);
+        container.appendChild(testimonial);
+    }
+}
+
+function createTestimonial(index) {
+    const testimonialItem = document.createElement("div");
+    testimonialItem.className = "testimonial-item card-style";
+    
+    const testimonialContent = document.createElement("div");
+    testimonialContent.className = "testimonial-content";
+    
+    const quoteIcon = document.createElement("div");
+    quoteIcon.className = "testimonial-quote-icon";
+    quoteIcon.innerHTML = '<i class="fas fa-quote-left"></i>';
+    
+    const testimonialText = document.createElement("p");
+    testimonialText.className = "testimonial-text";
+    testimonialText.setAttribute("data-translate", `testimonial${index}Quote`);
+    testimonialText.textContent = getTranslatedString(`testimonial${index}Quote`);
+    
+    const testimonialAuthor = document.createElement("div");
+    testimonialAuthor.className = "testimonial-author";
+    
+    const avatar = document.createElement("div");
+    avatar.className = "testimonial-avatar";
+    avatar.innerHTML = '<i class="fas fa-user"></i>';
+    
+    const authorName = document.createElement("p");
+    authorName.className = "testimonial-name";
+    authorName.setAttribute("data-translate", `testimonial${index}Author`);
+    authorName.textContent = getTranslatedString(`testimonial${index}Author`);
+    
+    testimonialAuthor.appendChild(avatar);
+    testimonialAuthor.appendChild(authorName);
+    
+    testimonialContent.appendChild(quoteIcon);
+    testimonialContent.appendChild(testimonialText);
+    testimonialContent.appendChild(testimonialAuthor);
+    
+    testimonialItem.appendChild(testimonialContent);
+    
+    return testimonialItem;
+}
+
+// --- Purchase Flow Handling ---
+function startPurchaseFlow() {
+    // Check for stored email/username first
+    const storedEmail = localStorage.getItem("userEmail");
+    const storedUsername = localStorage.getItem("username");
+    
+    if (storedEmail && storedUsername) {
+        // User already registered, show welcome back message
+        const welcomeMessage = getTranslatedString("welcomeBackMessage", { USERNAME: storedUsername });
+        alert(welcomeMessage);
+        showPlatformDialog();
+    } else {
+        // Show email registration dialog
+        showDialog("email-registration-dialog");
+    }
+}
+
+function submitRegistration() {
+    const email = document.getElementById("email-input").value;
+    const username = document.getElementById("username-input").value;
+    
+    // Validate email
+    if (!validateEmail(email)) {
+        document.getElementById("email-validation-message").textContent = getTranslatedString("emailValidationError");
+        document.getElementById("email-validation-message").style.color = "var(--error-color)";
+        document.getElementById("email-input").parentElement.classList.add("invalid");
+        document.getElementById("email-input").parentElement.classList.remove("valid");
+        return;
+    }
+    
+    // Validate username
+    if (username.length < 3) {
+        document.getElementById("username-validation-message").textContent = getTranslatedString("usernameValidationError");
+        document.getElementById("username-validation-message").style.color = "var(--error-color)";
+        document.getElementById("username-input").parentElement.classList.add("invalid");
+        document.getElementById("username-input").parentElement.classList.remove("valid");
+        return;
+    }
+    
+    // Store user info
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("username", username);
+    
+    // Show success message
+    alert(getTranslatedString("registrationSuccess"));
+    
+    // Close dialog and proceed to platform selection
+    closeDialog("email-registration-dialog");
+    showPlatformDialog();
+}
+
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// --- Dialog Handling ---
 function showDialog(dialogId) {
     const dialog = document.getElementById(dialogId);
     if (dialog) {
-        dialog.style.display = 'flex';
-    } else {
-        console.error(`Dialog with ID '${dialogId}' not found.`);
+        dialog.style.display = "flex";
+        
+        // If this is the unique ID dialog, generate and display ID
+        if (dialogId === "unique-id-dialog") {
+            displayUniqueId();
+        }
+        
+        // If this is the payment dialog, pre-fill coupon code
+        if (dialogId === "payment-dialog") {
+            const couponInput = document.getElementById("coupon-code");
+            if (couponInput) {
+                couponInput.value = "10OFF";
+            }
+        }
     }
 }
 
 function closeDialog(dialogId) {
     const dialog = document.getElementById(dialogId);
     if (dialog) {
-        dialog.style.display = 'none';
-    } else {
-        console.error(`Dialog with ID '${dialogId}' not found for closing.`);
+        dialog.style.display = "none";
     }
 }
 
-function closeAllDialogs() {
-    ['email-registration-dialog', 'platform-dialog', 'unique-id-dialog', 'poker-app-dialog', 'payment-method-dialog', 'payment-dialog'].forEach(closeDialog);
-}
-
-// --- Email Registration --- Start ---
-function setupEmailRegistrationValidation() {
-    const emailInput = document.getElementById('email-input');
-    const usernameInput = document.getElementById('username-input');
-    
-    if (emailInput) {
-        emailInput.addEventListener('input', validateEmail);
-        emailInput.addEventListener('blur', validateEmail);
-    }
-    
-    if (usernameInput) {
-        usernameInput.addEventListener('input', validateUsername);
-        usernameInput.addEventListener('blur', validateUsername);
-    }
-    
-    // Check for stored user data
-    checkStoredUserData();
-}
-
-function checkStoredUserData() {
-    try {
-        userEmailGlobal = localStorage.getItem("user_reveal_app_email");
-        userUsernameGlobal = localStorage.getItem("user_reveal_app_username");
-        userUniqueIdGlobal = localStorage.getItem("user_reveal_app_unique_id");
-    } catch (e) {
-        console.error("Failed to get user data from localStorage:", e);
-    }
-}
-
-function validateEmail() {
-    const emailInput = document.getElementById('email-input');
-    const validationMessage = document.getElementById('email-validation-message');
-    const validIcon = emailInput.parentElement.querySelector('.valid-icon');
-    const invalidIcon = emailInput.parentElement.querySelector('.invalid-icon');
-    
-    if (!emailInput || !validationMessage || !validIcon || !invalidIcon) return;
-    
-    const email = emailInput.value.trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    // Reset validation state
-    emailInput.classList.remove('input-valid', 'input-invalid');
-    validationMessage.classList.remove('message-valid', 'message-invalid');
-    validIcon.style.display = 'none';
-    invalidIcon.style.display = 'none';
-    validationMessage.textContent = '';
-    
-    if (email === '') return; // Skip validation if empty
-    
-    if (emailRegex.test(email)) {
-        // Valid email
-        emailInput.classList.add('input-valid');
-        validationMessage.classList.add('message-valid');
-        validationMessage.textContent = getTranslatedString('emailValidationSuccess');
-        validIcon.style.display = 'block';
-        validIcon.parentElement.style.display = 'block';
-        return true;
-    } else {
-        // Invalid email
-        emailInput.classList.add('input-invalid');
-        validationMessage.classList.add('message-invalid');
-        validationMessage.textContent = getTranslatedString('emailValidationError');
-        invalidIcon.style.display = 'block';
-        invalidIcon.parentElement.style.display = 'block';
-        return false;
-    }
-}
-
-function validateUsername() {
-    const usernameInput = document.getElementById('username-input');
-    const validationMessage = document.getElementById('username-validation-message');
-    const validIcon = usernameInput.parentElement.querySelector('.valid-icon');
-    const invalidIcon = usernameInput.parentElement.querySelector('.invalid-icon');
-    
-    if (!usernameInput || !validationMessage || !validIcon || !invalidIcon) return;
-    
-    const username = usernameInput.value.trim();
-    
-    // Reset validation state
-    usernameInput.classList.remove('input-valid', 'input-invalid');
-    validationMessage.classList.remove('message-valid', 'message-invalid');
-    validIcon.style.display = 'none';
-    invalidIcon.style.display = 'none';
-    validationMessage.textContent = '';
-    
-    if (username === '') return; // Skip validation if empty
-    
-    if (username.length >= 3) {
-        // Valid username
-        usernameInput.classList.add('input-valid');
-        validationMessage.classList.add('message-valid');
-        validationMessage.textContent = getTranslatedString('usernameValidationSuccess');
-        validIcon.style.display = 'block';
-        validIcon.parentElement.style.display = 'block';
-        return true;
-    } else {
-        // Invalid username
-        usernameInput.classList.add('input-invalid');
-        validationMessage.classList.add('message-invalid');
-        validationMessage.textContent = getTranslatedString('usernameValidationError');
-        invalidIcon.style.display = 'block';
-        invalidIcon.parentElement.style.display = 'block';
-        return false;
-    }
-}
-
-function submitRegistration() {
-    const emailValid = validateEmail();
-    const usernameValid = validateUsername();
-    
-    if (!emailValid || !usernameValid) {
-        // Validation failed, focus on the first invalid field
-        if (!emailValid) {
-            document.getElementById('email-input').focus();
-        } else {
-            document.getElementById('username-input').focus();
-        }
-        return;
-    }
-    
-    // Save user data
-    userEmailGlobal = document.getElementById('email-input').value.trim();
-    userUsernameGlobal = document.getElementById('username-input').value.trim();
-    
-    try {
-        localStorage.setItem("user_reveal_app_email", userEmailGlobal);
-        localStorage.setItem("user_reveal_app_username", userUsernameGlobal);
-    } catch (e) {
-        console.error("Failed to save user data to localStorage:", e);
-    }
-    
-    // Show success message briefly before proceeding
-    const continueButton = document.getElementById('continue-registration-button');
-    const originalButtonText = continueButton.innerHTML;
-    continueButton.innerHTML = getTranslatedString('registrationSuccess');
-    continueButton.disabled = true;
-    
-    setTimeout(() => {
-        closeDialog('email-registration-dialog');
-        showDialog('platform-dialog');
-        
-        // Reset button state for next time
-        setTimeout(() => {
-            continueButton.innerHTML = originalButtonText;
-            continueButton.disabled = false;
-        }, 500);
-    }, 1000);
-}
-// --- Email Registration --- End ---
-
-// --- Purchase Flow --- Start ---
-function startPurchaseFlow() {
-    closeAllDialogs();
-    
-    // Check if user is already registered
-    if (userEmailGlobal && userUsernameGlobal) {
-        // User already registered, show welcome back message and proceed to platform selection
-        alert(getTranslatedString('welcomeBackMessage', { USERNAME: userUsernameGlobal }));
-        showDialog('platform-dialog');
-    } else {
-        // New user, show registration dialog
-        showDialog('email-registration-dialog');
-    }
+// --- Platform Selection ---
+function showPlatformDialog() {
+    showDialog("platform-dialog");
 }
 
 function selectPlatform(platform) {
-    selectedPlatformGlobal = platform;
-    closeDialog('platform-dialog');
+    // Store selected platform
+    localStorage.setItem("selectedPlatform", platform);
     
-    // Generate or retrieve unique ID
-    let uniqueId = getUniqueIdFromLocalStorage();
+    // Close platform dialog
+    closeDialog("platform-dialog");
+    
+    // Show unique ID dialog
+    showDialog("unique-id-dialog");
+}
+
+// --- Unique ID Handling ---
+function displayUniqueId() {
+    // Check for stored ID first
+    let uniqueId = localStorage.getItem("uniqueId");
+    
+    // Generate new ID if none exists
     if (!uniqueId) {
         uniqueId = generateUniqueId();
-        saveUniqueIdToLocalStorage(uniqueId);
+        localStorage.setItem("uniqueId", uniqueId);
     }
-    userUniqueIdGlobal = uniqueId;
     
-    // Display the unique ID
-    const uniqueIdDisplay = document.getElementById('unique-id-display');
+    // Display ID in dialog
+    const uniqueIdElement = document.getElementById("unique-id-value");
+    if (uniqueIdElement) {
+        uniqueIdElement.textContent = uniqueId;
+    }
+}
+
+function checkStoredUniqueId() {
+    // For payment confirmation page
+    const uniqueIdDisplay = document.getElementById("unique-id-display");
     if (uniqueIdDisplay) {
+        const uniqueId = localStorage.getItem("uniqueId") || generateUniqueId();
         uniqueIdDisplay.textContent = uniqueId;
     }
-    
-    showDialog('unique-id-dialog');
 }
 
 function copyUniqueId() {
-    const uniqueIdDisplay = document.getElementById('unique-id-display');
-    const copyButton = document.getElementById('copy-id-button');
+    // Get unique ID
+    const uniqueIdElement = document.getElementById("unique-id-value") || document.getElementById("unique-id-display");
+    if (!uniqueIdElement) return;
     
-    if (uniqueIdDisplay && copyButton) {
-        const uniqueId = uniqueIdDisplay.textContent;
+    const uniqueId = uniqueIdElement.textContent;
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(uniqueId).then(() => {
+        // Show copied message
+        const copyButton = document.getElementById("copy-id-button");
+        if (!copyButton) return;
         
-        copyToClipboard(uniqueId).then(success => {
-            if (success) {
-                // Visual feedback for successful copy
-                copyButton.classList.add('copy-feedback');
-                const originalText = copyButton.innerHTML;
-                copyButton.innerHTML = '<i class="fas fa-check"></i> <span>' + getTranslatedString('copiedText') + '</span>';
-                
-                setTimeout(() => {
-                    copyButton.classList.remove('copy-feedback');
-                    copyButton.innerHTML = originalText;
-                }, 1500);
-                
-                alert(getTranslatedString('alertCopied'));
-            } else {
-                alert(getTranslatedString('alertCopyFailed'));
-            }
-        });
-    }
+        const originalText = copyButton.innerHTML;
+        
+        copyButton.innerHTML = `<i class="fas fa-check"></i> <span data-translate="copiedText">${getTranslatedString("copiedText")}</span>`;
+        
+        setTimeout(() => {
+            copyButton.innerHTML = originalText;
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
 }
 
 function continueWithUniqueId() {
-    closeDialog('unique-id-dialog');
-    showDialog('poker-app-dialog');
+    // Close unique ID dialog
+    closeDialog("unique-id-dialog");
+    
+    // Show poker app selection dialog
+    showDialog("poker-app-dialog");
 }
 
+// --- Poker App Selection ---
 function selectPokerApp(app) {
-    selectedPokerAppGlobal = app.toLowerCase(); // Ensure lowercase for consistency
-    originalPriceGlobal = 가격정책[selectedPokerAppGlobal] || 1500; // Default to 1500 if not found
-    closeDialog('poker-app-dialog');
-    showDialog('payment-method-dialog');
+    // Store selected app
+    localStorage.setItem("selectedPokerApp", app);
+    
+    // Close poker app dialog
+    closeDialog("poker-app-dialog");
+    
+    // Show payment method dialog
+    showDialog("payment-method-dialog");
 }
 
+// --- Payment Method Selection ---
 function selectPaymentMethod(method) {
-    currentPaymentMethodGlobal = method;
-    closeDialog('payment-method-dialog');
+    // Store selected payment method
+    localStorage.setItem("selectedPaymentMethod", method);
     
-    // Reset coupon state
-    appliedCouponCodeGlobal = null;
-    currentDiscountPercentGlobal = 0;
+    // Close payment method dialog
+    closeDialog("payment-method-dialog");
     
-    showPaymentDialog();
+    // Show payment dialog
+    showDialog("payment-dialog");
+    
+    // Load payment details
+    loadPaymentDetails(method);
 }
 
-function showPaymentDialog() {
-    const paymentDialog = document.getElementById('payment-dialog');
-    if (!paymentDialog) {
-        console.error("Payment dialog not found.");
-        return;
+// --- Payment Processing ---
+function loadPaymentDetails(method) {
+    const platform = localStorage.getItem("selectedPlatform") || "android";
+    const app = localStorage.getItem("selectedPokerApp") || "pppoker";
+    
+    // Set payment dialog title
+    const titleBase = getTranslatedString("paymentDialogTitleBase");
+    const title = titleBase.replace("{METHOD}", method.toUpperCase()).replace("{PLATFORM}", platform.toUpperCase());
+    
+    const titleElement = document.querySelector("#payment-dialog h3");
+    if (titleElement) {
+        titleElement.textContent = title;
     }
     
-    // Reset dialog stages
-    const priceCouponStage = document.getElementById('price-coupon-stage');
-    const qrLoadingMessage = document.getElementById('qr-loading-message');
-    const qrCodeDisplayStage = document.getElementById('qr-code-display-stage');
-    
-    if (priceCouponStage) priceCouponStage.style.display = 'block';
-    if (qrLoadingMessage) qrLoadingMessage.style.display = 'none';
-    if (qrCodeDisplayStage) qrCodeDisplayStage.style.display = 'none';
-    
-    // Clear coupon input and message
-    const couponInput = document.getElementById('coupon-code');
-    const couponMessage = document.getElementById('coupon-message');
-    if (couponInput) couponInput.value = '';
-    if (couponMessage) couponMessage.textContent = '';
-    
-    // Update the content based on the selected method
-    updatePaymentDialogContent();
-    
-    paymentDialog.style.display = 'flex';
-}
-
-function updatePaymentDialogContent() {
-    const platformTitleElement = document.getElementById('platform-title');
-    const amountElement = document.getElementById('amount');
-    const originalAmountElement = document.getElementById('original-amount');
-    
-    if (!platformTitleElement || !amountElement || !originalAmountElement) {
-        console.error("One or more elements for initial payment stage not found.");
-        return;
+    // Set payment amount based on app (updated values per user feedback)
+    let basePrice = 0;
+    if (app === "pppoker") {
+        basePrice = 1500;
+    } else if (app === "xpoker") {
+        basePrice = 1500;
+    } else if (app === "clubgg") {
+        basePrice = 4000;
     }
     
-    // Set title based on payment method and platform
-    const methodName = currentPaymentMethodGlobal ? currentPaymentMethodGlobal.toUpperCase() : '';
-    const platformName = selectedPokerAppGlobal ? selectedPokerAppGlobal.toUpperCase() : '';
-    platformTitleElement.textContent = getTranslatedString('paymentDialogTitleBase', {
-        METHOD: methodName,
-        PLATFORM: platformName
-    });
+    // Store base price for coupon calculations
+    localStorage.setItem("basePrice", basePrice);
     
-    // Calculate final price considering discount
-    let finalPrice = originalPriceGlobal;
-    if (currentDiscountPercentGlobal > 0) {
-        finalPrice = originalPriceGlobal * (1 - currentDiscountPercentGlobal / 100);
-    }
+    // Display price
+    updatePaymentAmount(basePrice);
     
-    // Set amount text
-    amountElement.textContent = getTranslatedString('paymentAmountValue', { PRICE: `$${finalPrice.toFixed(2)}` });
-    
-    // Show/hide original amount based on discount
-    if (currentDiscountPercentGlobal > 0) {
-        originalAmountElement.textContent = getTranslatedString('originalAmountTextBase', { PRICE: `$${originalPriceGlobal.toFixed(2)}` });
-        originalAmountElement.style.display = 'block';
-    } else {
-        originalAmountElement.style.display = 'none';
+    // Pre-fill coupon code
+    const couponInput = document.getElementById("coupon-code");
+    if (couponInput) {
+        couponInput.value = "10OFF";
     }
 }
 
-function applyCoupon() {
-    const couponInput = document.getElementById('coupon-code');
-    const couponMessage = document.getElementById('coupon-message');
-    if (!couponInput || !couponMessage) return;
-    
-    const couponCode = couponInput.value.trim().toUpperCase(); // Use uppercase for consistency
-    couponMessage.textContent = ''; // Clear previous message
-    
-    if (!couponCode) {
-        // Clear coupon if input is empty
-        appliedCouponCodeGlobal = null;
-        currentDiscountPercentGlobal = 0;
-        updatePaymentDialogContent(); // Update price display
-        couponMessage.textContent = getTranslatedString('couponCleared');
-        couponMessage.style.color = 'green';
-        return;
+function updatePaymentAmount(amount, originalAmount = null) {
+    const amountElement = document.getElementById("amount");
+    if (amountElement) {
+        const amountText = getTranslatedString("amountTextBase").replace("{PRICE}", `$${amount}`);
+        amountElement.textContent = amountText;
     }
     
-    const coupon = coupons[couponCode];
-    if (coupon) {
-        appliedCouponCodeGlobal = couponCode;
-        currentDiscountPercentGlobal = coupon.discount;
-        updatePaymentDialogContent(); // Update price display
-        couponMessage.textContent = getTranslatedString('couponAppliedSuccess', {
-            COUPON_CODE: couponCode,
-            DISCOUNT: coupon.discount
-        });
-        couponMessage.style.color = 'green';
-    } else {
-        // Reset discount if coupon is invalid
-        appliedCouponCodeGlobal = null;
-        currentDiscountPercentGlobal = 0;
-        updatePaymentDialogContent(); // Update price display
-        couponMessage.textContent = getTranslatedString('couponErrorInvalid', { COUPON_CODE: couponCode });
-        couponMessage.style.color = 'red';
+    // Show original amount if discounted
+    const originalAmountElement = document.getElementById("original-amount");
+    if (originalAmountElement) {
+        if (originalAmount) {
+            const originalAmountText = getTranslatedString("originalAmountTextBase").replace("{PRICE}", `$${originalAmount}`);
+            originalAmountElement.textContent = originalAmountText;
+            originalAmountElement.style.display = "block";
+        } else {
+            originalAmountElement.style.display = "none";
+        }
     }
 }
 
+// Add the missing function that was causing errors
 function proceedToFinalPaymentDetails() {
-    // Hide the price-coupon stage
-    const priceCouponStage = document.getElementById('price-coupon-stage');
+    const couponCode = document.getElementById("coupon-code")?.value.trim().toUpperCase() || "";
+    
+    // Apply coupon if entered but not yet applied
+    if (couponCode && !localStorage.getItem("appliedCoupon")) {
+        applyCoupon();
+    }
+    
+    // Hide price/coupon stage
+    const priceCouponStage = document.getElementById("price-coupon-stage");
     if (priceCouponStage) {
-        priceCouponStage.style.display = 'none';
+        priceCouponStage.style.display = "none";
     }
     
     // Show loading message
-    const loadingMessage = document.getElementById('qr-loading-message');
+    const loadingMessage = document.getElementById("qr-loading-message");
     if (loadingMessage) {
-        loadingMessage.style.display = 'block';
+        loadingMessage.style.display = "block";
     }
     
-    // Simulate loading delay while fetching crypto price and generating QR
+    // Get payment method
+    const method = localStorage.getItem("selectedPaymentMethod") || "usdt";
+    
+    // Simulate loading delay
     setTimeout(() => {
         // Hide loading message
         if (loadingMessage) {
-            loadingMessage.style.display = 'none';
+            loadingMessage.style.display = "none";
         }
         
         // Show QR code stage
-        const qrCodeDisplayStage = document.getElementById('qr-code-display-stage');
-        if (qrCodeDisplayStage) {
-            qrCodeDisplayStage.style.display = 'block';
+        const qrCodeStage = document.getElementById("qr-code-display-stage");
+        if (qrCodeStage) {
+            qrCodeStage.style.display = "block";
         }
         
-        // Update final payment details (this now includes async crypto calculation)
-        updateFinalPaymentDetails();
+        // Set final payment title
+        const finalTitle = document.getElementById("payment-title-final-display");
+        if (finalTitle) {
+            finalTitle.textContent = getTranslatedString("paymentDialogTitleFinal");
+        }
         
-        // Generate QR code image (replace with actual generation if needed)
-        generateQRCodeImage(currentPaymentMethodGlobal);
+        // Set final amount
+        const finalAmount = document.getElementById("payment-final-amount");
+        if (finalAmount) {
+            const basePrice = parseFloat(localStorage.getItem("basePrice") || 0);
+            const discountPercentage = parseFloat(localStorage.getItem("discountPercentage") || 0);
+            const finalPrice = discountPercentage > 0 ? basePrice * (1 - discountPercentage / 100) : basePrice;
+            finalAmount.textContent = `$${finalPrice.toFixed(2)}`;
+            
+            // Update crypto amount if applicable
+            if (method === 'btc' || method === 'eth') {
+                updateCryptoPaymentDetails(method, finalPrice);
+            }
+        }
         
-    }, 1000);
+        // Set network name
+        const networkName = document.getElementById("payment-network-name");
+        if (networkName) {
+            let network = "";
+            if (method === "usdt") {
+                network = "TRC20";
+            } else if (method === "btc") {
+                network = "Bitcoin";
+            } else if (method === "eth") {
+                network = "Ethereum";
+            }
+            networkName.textContent = network;
+        }
+        
+        // Set wallet address
+        const walletAddress = document.getElementById("payment-wallet-address");
+        if (walletAddress) {
+            if (method === "usdt") {
+                walletAddress.value = "TRx7NHqjeKQxGPPfzZgTpw8mLiGwPs5XQB";
+            } else if (method === "btc") {
+                walletAddress.value = "bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh";
+            } else if (method === "eth") {
+                walletAddress.value = "0x71C7656EC7ab88b098defB751B7401B5f6d8976F";
+            }
+        }
+        
+        // Set QR code image
+        const qrImage = document.getElementById("payment-qr-code-image");
+        if (qrImage) {
+            if (method === "usdt") {
+                qrImage.src = "usdt-qr.png";
+            } else if (method === "btc") {
+                qrImage.src = "btc-qr.png";
+            } else if (method === "eth") {
+                qrImage.src = "eth-qr.png";
+            }
+            qrImage.alt = `${method.toUpperCase()} QR Code`;
+        }
+        
+        // Add payment done button to QR code stage if not already present
+        addPaymentDoneButton();
+        
+    }, 1500);
 }
 
-async function updateFinalPaymentDetails() {
-    const finalTitleElement = document.getElementById('payment-title-final-display');
-    const finalAmountElement = document.getElementById('payment-final-amount');
-    const cryptoAmountContainer = document.getElementById('payment-crypto-amount-container');
-    const cryptoAmountElement = document.getElementById('payment-crypto-amount');
-    const networkNameElement = document.getElementById('payment-network-name');
-    const walletAddressInput = document.getElementById('payment-wallet-address');
+function applyCoupon() {
+    const couponInput = document.getElementById("coupon-code");
+    if (!couponInput) return;
     
-    if (!finalTitleElement || !finalAmountElement || !networkNameElement || !walletAddressInput || !cryptoAmountContainer || !cryptoAmountElement) {
-        console.error("One or more final payment elements not found.");
+    const couponCode = couponInput.value.trim().toUpperCase();
+    
+    // Clear previous coupon
+    localStorage.removeItem("appliedCoupon");
+    localStorage.removeItem("discountPercentage");
+    
+    // If empty, reset to base price
+    if (!couponCode) {
+        const basePrice = parseFloat(localStorage.getItem("basePrice") || 0);
+        updatePaymentAmount(basePrice);
+        
+        // Show message
+        const couponMessage = document.getElementById("coupon-message");
+        if (couponMessage) {
+            couponMessage.textContent = getTranslatedString("couponCleared");
+            couponMessage.style.color = "var(--text-light)";
+        }
         return;
     }
     
-    // Set title
-    finalTitleElement.textContent = getTranslatedString('paymentDialogTitleFinal');
-    
-    // Calculate final price
-    let finalPrice = originalPriceGlobal;
-    if (currentDiscountPercentGlobal > 0) {
-        finalPrice = originalPriceGlobal * (1 - currentDiscountPercentGlobal / 100);
-    }
-    finalAmountElement.textContent = `$${finalPrice.toFixed(2)}`;
-    
-    // Set crypto amount using real-time API data
-    // Show loading indicator
-    cryptoAmountElement.textContent = getTranslatedString('calculatingText', { DEFAULT: "Calculando..." });
-    cryptoAmountContainer.style.display = 'block'; // Show container while calculating
+    // Check valid coupons
+    let discountPercentage = 0;
+    if (couponCode === "10OFF") {
+        discountPercentage = 10;
+    } else if (couponCode === "SECRET40") {
+        discountPercentage = 40;
+    } else {
+        // Invalid coupon
+        const errorMessage = getTranslatedString("couponErrorInvalid").replace("{COUPON_CODE}", couponCode);
         
-    try {
-        // Get real-time crypto amount using the API
-        const cryptoResult = await calculateCryptoAmount(finalPrice, currentPaymentMethodGlobal);
-        
-        // Update the display with the calculated amount
-        cryptoAmountElement.textContent = `${cryptoResult.formatted} ${currentPaymentMethodGlobal.toUpperCase()}`;
-        
-    } catch (error) {
-        console.error("Error calculating crypto amount:", error);
-        
-        // Fallback to static calculation if API fails
-        const fallbackPrices = {
-            'btc': 50000,
-            'eth': 3000,
-            'usdt': 1
-        };
-        const price = fallbackPrices[currentPaymentMethodGlobal.toLowerCase()] || 1;
-        const amount = finalPrice / price;
-        let formatted = '';
-        switch (currentPaymentMethodGlobal.toLowerCase()) {
-            case 'btc': formatted = amount.toFixed(8); break;
-            case 'eth': formatted = amount.toFixed(6); break;
-            case 'usdt': formatted = amount.toFixed(2); break;
-            default: formatted = amount.toFixed(4);
+        // Show error message
+        const couponMessage = document.getElementById("coupon-message");
+        if (couponMessage) {
+            couponMessage.textContent = errorMessage;
+            couponMessage.style.color = "var(--error-color)";
         }
-        
-        cryptoAmountElement.textContent = `${formatted} ${currentPaymentMethodGlobal.toUpperCase()} (${getTranslatedString('estimatedText', { DEFAULT: "estimado" })})`;
+        return;
     }
     
-    // Set network name
-    const networkName = cryptoNetworkInfo[currentPaymentMethodGlobal] || '';
-    networkNameElement.textContent = networkName;
+    // Store applied coupon
+    localStorage.setItem("appliedCoupon", couponCode);
+    localStorage.setItem("discountPercentage", discountPercentage);
     
-    // Set wallet address
-    const walletAddress = cryptoWalletAddresses[currentPaymentMethodGlobal] || '';
-    walletAddressInput.value = walletAddress;
+    // Calculate discounted price
+    const basePrice = parseFloat(localStorage.getItem("basePrice") || 0);
+    const discountedPrice = basePrice * (1 - discountPercentage / 100);
+    
+    // Update displayed amount
+    updatePaymentAmount(discountedPrice.toFixed(2), basePrice);
+    
+    // Show success message
+    const successMessage = getTranslatedString("couponAppliedSuccess")
+        .replace("{COUPON_CODE}", couponCode)
+        .replace("{DISCOUNT}", discountPercentage);
+    
+    const couponMessage = document.getElementById("coupon-message");
+    if (couponMessage) {
+        couponMessage.textContent = successMessage;
+        couponMessage.style.color = "var(--success-color)";
+    }
 }
 
 function copyWalletAddress() {
-    const walletAddressInput = document.getElementById('payment-wallet-address');
+    const walletAddressInput = document.getElementById("payment-wallet-address");
     if (!walletAddressInput) return;
     
-    const walletAddress = walletAddressInput.value;
-    if (!walletAddress) {
-        alert(getTranslatedString('qrErrorWalletUnavailable'));
-        return;
-    }
-    
-    copyToClipboard(walletAddress).then(success => {
-        if (success) {
-            alert(getTranslatedString('alertCopied'));
-        } else {
-            alert(getTranslatedString('alertCopyFailed'));
+    // Copy to clipboard
+    navigator.clipboard.writeText(walletAddressInput.value).then(() => {
+        // Show copied message
+        const copyButton = document.getElementById("copy-address-button");
+        if (!copyButton) return;
+        
+        const originalText = copyButton.innerHTML;
+        copyButton.innerHTML = `<i class="fas fa-check"></i> ${getTranslatedString("copiedText")}`;
+        copyButton.classList.add("copy-feedback");
+        
+        setTimeout(() => {
+            copyButton.innerHTML = originalText;
+            copyButton.classList.remove("copy-feedback");
+        }, 2000);
+        
+        // Show alert message
+        const alertMessage = document.getElementById("copy-alert-message");
+        if (alertMessage) {
+            alertMessage.textContent = getTranslatedString("alertCopied");
+            alertMessage.style.display = "block";
+            
+            setTimeout(() => {
+                alertMessage.style.display = "none";
+            }, 3000);
+        }
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        
+        // Show error message
+        const alertMessage = document.getElementById("copy-alert-message");
+        if (alertMessage) {
+            alertMessage.textContent = getTranslatedString("alertCopyFailed");
+            alertMessage.style.display = "block";
+            alertMessage.style.color = "var(--error-color)";
+            
+            setTimeout(() => {
+                alertMessage.style.display = "none";
+            }, 3000);
         }
     });
 }
 
-// Function to generate QR code image (replace with actual generation library if needed)
-function generateQRCodeImage(method) {
-    const qrImageElement = document.getElementById('payment-qr-code-image');
-    if (!qrImageElement) return;
+function proceedToPayment() {
+    // Show payment processing overlay
+    const overlay = document.createElement("div");
+    overlay.className = "payment-processing-overlay";
+    overlay.innerHTML = `
+        <div class="processing-content">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p data-translate="processingPaymentMessage">${getTranslatedString("processingPaymentMessage")}</p>
+        </div>
+    `;
+    document.body.appendChild(overlay);
     
-    const walletAddress = cryptoWalletAddresses[method];
-    if (!walletAddress) {
-        qrImageElement.alt = getTranslatedString('qrErrorWalletUnavailable');
-        qrImageElement.src = ''; // Clear image source
-        return;
-    }
-    
-    // Use a simple QR code generation API (like goqr.me) or a local library
-    // Example using goqr.me API:
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(walletAddress)}`;
-    qrImageElement.src = qrApiUrl;
-    qrImageElement.alt = `${method.toUpperCase()} QR Code`;
+    // Simulate processing delay
+    setTimeout(() => {
+        // Remove overlay
+        document.body.removeChild(overlay);
+        
+        // Close payment dialog
+        closeDialog("payment-dialog");
+        
+        // Redirect to payment confirmation page
+        window.location.href = "payment_confirmation.html";
+    }, 3000);
 }
 
-// --- Purchase Flow --- End ---
+// Add payment done button to QR code screen
+function addPaymentDoneButton() {
+    const qrCodeStage = document.getElementById("qr-code-display-stage");
+    if (!qrCodeStage) return;
+    
+    // Check if button already exists
+    if (document.getElementById("payment-done-qr-button")) return;
+    
+    // Create payment instructions
+    const instructionsContainer = document.createElement("div");
+    instructionsContainer.className = "payment-instructions";
+    instructionsContainer.innerHTML = `
+        <h4 data-translate="paymentInstructionsTitle">${getTranslatedString("paymentInstructionsTitle")}</h4>
+        <p data-translate="paymentInstructionsText">${getTranslatedString("paymentInstructionsText")}</p>
+    `;
+    
+    // Create button container
+    const buttonContainer = document.createElement("div");
+    buttonContainer.style.marginTop = "25px";
+    buttonContainer.style.textAlign = "center";
+    
+    // Create button
+    const paymentDoneButton = document.createElement("button");
+    paymentDoneButton.id = "payment-done-qr-button";
+    paymentDoneButton.className = "payment-done-qr-button";
+    paymentDoneButton.innerHTML = `<i class="fas fa-check-circle"></i> <span data-translate="paymentDoneButton">${getTranslatedString("paymentDoneButton")}</span>`;
+    paymentDoneButton.onclick = proceedToPayment;
+    
+    // Add button to container
+    buttonContainer.appendChild(paymentDoneButton);
+    
+    // Add instructions and button to QR code stage
+    qrCodeStage.appendChild(instructionsContainer);
+    qrCodeStage.appendChild(buttonContainer);
+}
 
-// --- Testimonials --- Start ---
-function loadTestimonials() {
-    const container = document.getElementById('testimonials-container');
-    if (!container) return;
+// --- Payment Confirmation Page ---
+function setupPaymentConfirmationPage() {
+    const paymentDoneButton = document.getElementById("payment-done-button");
+    const paymentConfirmationSection = document.getElementById("payment-confirmation-section");
+    const paymentDetails = document.getElementById("payment-details");
     
-    container.innerHTML = ''; // Clear existing testimonials
-    
-    // Create 5 testimonials
-    for (let i = 1; i <= 5; i++) {
-        const testimonial = document.createElement('div');
-        testimonial.className = 'testimonial-item card-style';
-        
-        const quoteKey = `testimonial${i}Quote`;
-        const authorKey = `testimonial${i}Author`;
-        
-        testimonial.innerHTML = `
-            <div class="testimonial-content">
-                <i class="fas fa-quote-left testimonial-quote-icon"></i>
-                <p class="testimonial-text">${getTranslatedString(quoteKey)}</p>
-                <i class="fas fa-quote-right testimonial-quote-icon"></i>
-            </div>
-            <div class="testimonial-author">
-                <div class="testimonial-avatar">
-                    <i class="fas fa-user-circle"></i>
-                </div>
-                <p class="testimonial-name">${getTranslatedString(authorKey)}</p>
-            </div>
-        `;
-        
-        container.appendChild(testimonial);
+    if (paymentDoneButton && paymentConfirmationSection && paymentDetails) {
+        paymentDoneButton.addEventListener("click", function() {
+            paymentDetails.style.display = "none";
+            paymentConfirmationSection.style.display = "block";
+        });
     }
 }
-// --- Testimonials --- End ---
+
+// --- Chatbot Initialization ---
+function initializeChatbot() {
+    // Check if chatbot container already exists
+    if (document.querySelector(".chatbot-container")) return;
+    
+    // Create chatbot container
+    const chatbotContainer = document.createElement("div");
+    chatbotContainer.className = "chatbot-container";
+    
+    // Create chatbot icon
+    const chatbotIcon = document.createElement("div");
+    chatbotIcon.className = "chatbot-icon";
+    chatbotIcon.id = "chatbot-icon";
+    chatbotIcon.innerHTML = '<i class="fas fa-comment-dots"></i>';
+    
+    // Create chatbot window
+    const chatbotWindow = document.createElement("div");
+    chatbotWindow.className = "chatbot-window";
+    chatbotWindow.id = "chatbot-window";
+    
+    // Create chatbot header
+    const chatbotHeader = document.createElement("div");
+    chatbotHeader.className = "chatbot-header";
+    chatbotHeader.innerHTML = `
+        <span data-translate="chatbotHeader">${getTranslatedString("chatbotHeader")}</span>
+        <div id="chatbot-close" class="chatbot-close"><i class="fas fa-times"></i></div>
+    `;
+    
+    // Create chatbot messages container
+    const chatbotMessages = document.createElement("div");
+    chatbotMessages.className = "chatbot-messages";
+    chatbotMessages.id = "chatbot-messages";
+    
+    // Create chatbot buttons container
+    const chatbotButtons = document.createElement("div");
+    chatbotButtons.className = "chatbot-buttons";
+    chatbotButtons.id = "chatbot-buttons";
+    
+    // Assemble chatbot
+    chatbotWindow.appendChild(chatbotHeader);
+    chatbotWindow.appendChild(chatbotMessages);
+    chatbotWindow.appendChild(chatbotButtons);
+    
+    chatbotContainer.appendChild(chatbotIcon);
+    chatbotContainer.appendChild(chatbotWindow);
+    
+    // Add chatbot to body
+    document.body.appendChild(chatbotContainer);
+    
+    // Initialize chatbot functionality
+    initializeChatbotFunctionality();
+}
+
+// Initialize chatbot functionality
+function initializeChatbotFunctionality() {
+    const chatbotIcon = document.getElementById("chatbot-icon");
+    const chatbotWindow = document.getElementById("chatbot-window");
+    const chatbotClose = document.getElementById("chatbot-close");
+    const chatbotMessages = document.getElementById("chatbot-messages");
+    const chatbotButtons = document.getElementById("chatbot-buttons");
+    
+    if (!chatbotIcon || !chatbotWindow || !chatbotClose || !chatbotMessages || !chatbotButtons) return;
+    
+    // Toggle chatbot window
+    chatbotIcon.addEventListener("click", function() {
+        chatbotWindow.style.display = chatbotWindow.style.display === "flex" ? "none" : "flex";
+        
+        // If opening, show welcome message
+        if (chatbotWindow.style.display === "flex" && chatbotMessages.children.length === 0) {
+            showChatbotWelcome();
+        }
+    });
+    
+    // Close chatbot window
+    chatbotClose.addEventListener("click", function() {
+        chatbotWindow.style.display = "none";
+    });
+    
+    // Show welcome message
+    function showChatbotWelcome() {
+        // Add bot message
+        addChatbotMessage("bot", getTranslatedString("chatbotWelcome"));
+        
+        // Add buttons
+        addChatbotButton(getTranslatedString("chatbotBtnYesAdvantage"), function() {
+            chatbotShowAdvantage();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnWhatIs"), function() {
+            chatbotExplainApp();
+        });
+    }
+    
+    // Add chatbot message
+    function addChatbotMessage(type, text) {
+        const messageElement = document.createElement("div");
+        messageElement.className = `chatbot-message ${type}-message`;
+        messageElement.innerHTML = text;
+        chatbotMessages.appendChild(messageElement);
+        
+        // Scroll to bottom
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    
+    // Add chatbot button
+    function addChatbotButton(text, callback) {
+        const button = document.createElement("button");
+        button.className = "chatbot-button";
+        button.textContent = text;
+        button.addEventListener("click", function() {
+            // Add user message
+            addChatbotMessage("user", text);
+            
+            // Clear buttons
+            chatbotButtons.innerHTML = "";
+            
+            // Call callback
+            callback();
+        });
+        
+        chatbotButtons.appendChild(button);
+    }
+    
+    // Chatbot flow functions
+    function chatbotShowAdvantage() {
+        addChatbotMessage("bot", getTranslatedString("chatbotAskGoal"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnPlayProfit"), function() {
+            chatbotValueProposition();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnPlayFun"), function() {
+            chatbotValueProposition();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnWhatItDoes"), function() {
+            chatbotExplainApp();
+        });
+    }
+    
+    function chatbotExplainApp() {
+        addChatbotMessage("bot", getTranslatedString("chatbotExplain"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnHowItWorks"), function() {
+            chatbotHowItWorks();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnShowMeMore"), function() {
+            chatbotShowProof();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnCompat"), function() {
+            chatbotDeviceCompat();
+        });
+    }
+    
+    function chatbotHowItWorks() {
+        addChatbotMessage("bot", getTranslatedString("chatbotHowItWorks"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnShowMeMore"), function() {
+            chatbotShowProof();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnHowBuy"), function() {
+            chatbotPurchase();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnStillQuestions"), function() {
+            chatbotFAQ();
+        });
+    }
+    
+    function chatbotShowProof() {
+        addChatbotMessage("bot", getTranslatedString("chatbotProofResults"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnGoToPurchase"), function() {
+            chatbotPurchase();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnExplainUpdates"), function() {
+            chatbotExplainUpdates();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnStillQuestions"), function() {
+            chatbotFAQ();
+        });
+    }
+    
+    function chatbotDeviceCompat() {
+        addChatbotMessage("bot", getTranslatedString("chatbotDeviceCompat"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnHowBuy"), function() {
+            chatbotPurchase();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnStillQuestions"), function() {
+            chatbotFAQ();
+        });
+    }
+    
+    function chatbotValueProposition() {
+        addChatbotMessage("bot", getTranslatedString("chatbotValueProp"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnGoToPurchase"), function() {
+            chatbotPurchase();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnStillQuestions"), function() {
+            chatbotFAQ();
+        });
+    }
+    
+    function chatbotExplainUpdates() {
+        addChatbotMessage("bot", getTranslatedString("chatbotExplainUpdates"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnGoToPurchase"), function() {
+            chatbotPurchase();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnStillQuestions"), function() {
+            chatbotFAQ();
+        });
+    }
+    
+    function chatbotFAQ() {
+        addChatbotMessage("bot", getTranslatedString("chatbotFAQ"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnIsSafe"), function() {
+            chatbotExplainSafety();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnTelegramAdmin"), function() {
+            chatbotOfferTelegram();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnGoToPurchase"), function() {
+            chatbotPurchase();
+        });
+    }
+    
+    function chatbotExplainSafety() {
+        addChatbotMessage("bot", getTranslatedString("chatbotExplainSafety"));
+        
+        addChatbotButton(getTranslatedString("chatbotBtnOKHowBuy"), function() {
+            chatbotPurchase();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnBackFAQ"), function() {
+            chatbotFAQ();
+        });
+    }
+    
+    function chatbotOfferTelegram() {
+        addChatbotMessage("bot", getTranslatedString("chatbotOfferTelegram"));
+        
+        // Add Telegram link button
+        const telegramButton = document.createElement("a");
+        telegramButton.className = "chatbot-button telegram-button";
+        telegramButton.href = "https://t.me/bedmalcon_temp";
+        telegramButton.target = "_blank";
+        telegramButton.textContent = getTranslatedString("chatbotBtnTelegramAdmin");
+        chatbotButtons.appendChild(telegramButton);
+        
+        addChatbotButton(getTranslatedString("chatbotBtnBackToBuy"), function() {
+            chatbotPurchase();
+        });
+    }
+    
+    function chatbotPurchase() {
+        addChatbotMessage("bot", getTranslatedString("chatbotValueProp"));
+        
+        // Add purchase button
+        const purchaseButton = document.createElement("button");
+        purchaseButton.className = "chatbot-button purchase-button";
+        purchaseButton.textContent = getTranslatedString("chatbotBtnGoToPurchase");
+        purchaseButton.addEventListener("click", function() {
+            // Close chatbot
+            chatbotWindow.style.display = "none";
+            
+            // Start purchase flow
+            startPurchaseFlow();
+        });
+        chatbotButtons.appendChild(purchaseButton);
+        
+        addChatbotButton(getTranslatedString("chatbotBtnTelegramAdmin"), function() {
+            chatbotOfferTelegram();
+        });
+        
+        addChatbotButton(getTranslatedString("chatbotBtnRestart"), function() {
+            // Clear messages
+            chatbotMessages.innerHTML = "";
+            
+            // Show welcome message
+            showChatbotWelcome();
+        });
+    }
+}
+
+// Update chatbot language
+function updateChatbotLanguage(lang) {
+    // Update chatbot header
+    const chatbotHeader = document.querySelector(".chatbot-header span");
+    if (chatbotHeader) {
+        chatbotHeader.textContent = getTranslatedString("chatbotHeader");
+    }
+    
+    // Clear chatbot messages and buttons
+    const chatbotMessages = document.getElementById("chatbot-messages");
+    const chatbotButtons = document.getElementById("chatbot-buttons");
+    
+    if (chatbotMessages && chatbotButtons) {
+        chatbotMessages.innerHTML = "";
+        chatbotButtons.innerHTML = "";
+        
+        // Show welcome message if chatbot is open
+        const chatbotWindow = document.getElementById("chatbot-window");
+        if (chatbotWindow && chatbotWindow.style.display === "flex") {
+            // Re-initialize chatbot functionality
+            initializeChatbotFunctionality();
+        }
+    }
+}
+
+// Force re-render all translations on page load
+document.addEventListener("DOMContentLoaded", function() {
+    // Wait a bit to ensure all elements are loaded
+    setTimeout(function() {
+        // Get current language
+        const currentLang = localStorage.getItem("language") || "en";
+        
+        // Re-apply language to force update all translations
+        setLanguage(currentLang);
+        
+        // Restore videos in demo section
+        restoreVideos();
+    }, 500);
+});
+
+// Restore videos in demo section
+function restoreVideos() {
+    const videoContainers = document.querySelectorAll(".video-container");
+    
+    if (videoContainers.length === 0) return;
+    
+    // Check if videos are missing
+    let videosMissing = false;
+    videoContainers.forEach(container => {
+        if (!container.querySelector("iframe")) {
+            videosMissing = true;
+        }
+    });
+    
+    if (!videosMissing) return;
+    
+    // Restore videos with correct URLs from revealpoker.top
+    const demoVideos = [
+        {
+            title: "PPPOKER Demo",
+            src: "https://www.youtube.com/embed/wgzzXJx_TAI"
+        },
+        {
+            title: "XPoker Demo",
+            src: "https://www.youtube.com/embed/JejQNbgaSSo"
+        },
+        {
+            title: "ClubGG Demo",
+            src: "https://www.youtube.com/embed/ptQIe4OyJrE"
+        }
+    ];
+    
+    videoContainers.forEach((container, index) => {
+        if (index < demoVideos.length) {
+            const iframe = document.createElement("iframe");
+            iframe.src = demoVideos[index].src;
+            iframe.title = demoVideos[index].title;
+            iframe.setAttribute("frameborder", "0");
+            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+            iframe.setAttribute("allowfullscreen", "");
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.borderRadius = "8px";
+            
+            // Clear container and add iframe
+            container.innerHTML = "";
+            container.appendChild(iframe);
+        }
+    });
+}

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="headerTitle">Reveal App: See Cards & Dominate PPPOKER, XPoker, ClubGG | Undetectable Edge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="logo-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <style>
+        /* Enhanced responsive styles for payment confirmation page */
+        .content-section {
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+        
+        .card-style {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            background-color: var(--background-card);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .payment-done-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent-color), #ff8c00);
+            color: var(--background-darker);
+            font-weight: 700;
+            font-size: 1.2rem;
+            padding: 18px 40px;
+            border-radius: var(--border-radius-md);
+            border: none;
+            cursor: pointer;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 400px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .payment-done-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+        
+        .payment-done-button:hover:before {
+            left: 100%;
+        }
+        
+        .payment-done-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255, 215, 0, 0.4);
+        }
+        
+        .payment-done-button:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .payment-done-button i {
+            font-size: 1.4rem;
+        }
+        
+        .special-coupon-highlight {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.2));
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            margin: 30px auto;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            text-align: center;
+        }
+        
+        .coupon-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--background-darker);
+            font-weight: 700;
+            padding: 5px 15px;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 10px;
+        }
+        
+        .coupon-text {
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+        
+        .urgency {
+            text-align: center;
+            margin: 25px auto;
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .payment-instructions {
+            text-align: center;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+        
+        .payment-instructions h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px auto;
+            flex-wrap: wrap;
+        }
+        
+        .trust-badges span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+        }
+        
+        .trust-badges i {
+            color: var(--primary-color);
+        }
+        
+        .security-reinforcement {
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .payment-confirmation-section {
+            display: none;
+            text-align: center;
+        }
+        
+        .confirmation-icon {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .unique-id-display {
+            background-color: rgba(0, 229, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: var(--border-radius-md);
+            padding: 15px;
+            margin: 20px auto;
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            max-width: 400px;
+            word-break: break-all;
+        }
+        
+        .copy-id-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--primary-color);
+            color: var(--background-darker);
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: var(--border-radius-md);
+            border: none;
+            cursor: pointer;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-id-button:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+        
+        .contact-admin-message {
+            margin: 25px auto;
+            max-width: 600px;
+        }
+        
+        .telegram-instructions {
+            background-color: rgba(0, 114, 255, 0.1);
+            border-radius: var(--border-radius-lg);
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: left;
+        }
+        
+        .step-item {
+            margin-bottom: 20px;
+        }
+        
+        .step-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .telegram-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #0088cc; /* Telegram blue */
+            color: white;
+            font-weight: 600;
+            padding: 15px 30px;
+            border-radius: var(--border-radius-md);
+            margin: 30px auto;
+            max-width: 250px;
+            transition: all 0.3s ease;
+        }
+        
+        .telegram-button:hover {
+            background-color: #0099e6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 136, 204, 0.3);
+            text-decoration: none;
+            color: white;
+        }
+        
+        .back-home-button {
+            display: inline-block;
+            color: var(--text-muted);
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home-button:hover {
+            color: var(--primary-color);
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 30px 15px;
+                margin-top: 70px;
+            }
+            
+            .card-style {
+                padding: 25px 20px;
+            }
+            
+            .payment-done-button {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+            }
+            
+            .telegram-instructions {
+                padding: 20px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .payment-done-button {
+                padding: 14px 20px;
+                font-size: 1rem;
+            }
+            
+            .trust-badges {
+                gap: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .unique-id-display {
+                font-size: 1rem;
+                padding: 12px;
+            }
+        }
+        
+        /* Fixed navigation for mobile */
+        .main-nav {
+            background-color: rgba(10, 14, 26, 0.95);
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-logo img {
+            height: 40px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: var(--border-radius-md);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .main-nav {
+                flex-wrap: wrap;
+            }
+            
+            .nav-links {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-link {
+                font-size: 0.9rem;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-nav fixed-toolbox">
+        <div class="nav-logo">
+            <a href="index.html"><img src="logo.svg" alt="Reveal App Logo" class="site-logo"></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html#features" class="nav-link" data-translate="navLinkFeatures">Features</a>
+            <a href="index.html#how-it-works" class="nav-link" data-translate="navLinkHowItWorks">How It Works</a>
+            <a href="index.html#demo" class="nav-link" data-translate="navLinkDemo">Demo</a>
+            <a href="index.html#testimonials" class="nav-link" data-translate="navLinkTestimonials">Testimonials</a>
+            <a href="index.html#purchase" class="nav-link" data-translate="navLinkGetApp">Get App</a>
+        </div>
+        <div id="language-selector">
+            <select onchange="setLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="card-style">
+            <div id="payment-details">
+                <h2 data-translate="paymentConfirmationTitle">Payment Successful!</h2>
+                <p data-translate="paymentConfirmationMessage">Thank you for your purchase! Your payment has been successfully processed.</p>
+                
+                <div class="special-coupon-highlight">
+                    <div class="coupon-badge" data-translate="specialCouponBadge">SPECIAL OFFER</div>
+                    <p class="coupon-text" data-translate="specialCouponText">Use code <strong>10OFF</strong> for 10% OFF!</p>
+                </div>
+                
+                <div class="urgency">
+                    <span data-translate="purchaseUrgency">🔥 Limited spots available! Get your edge before your opponents do! 🔥</span>
+                </div>
+                
+                <div class="payment-instructions">
+                    <h4 data-translate="paymentInstructionsTitle">Se você fez o pagamento, clique no botão abaixo:</h4>
+                    <p data-translate="paymentInstructionsText">Para completar sua ativação, clique no botão "Eu fiz o pagamento" abaixo.</p>
+                </div>
+                
+                <div class="trust-badges">
+                    <span data-translate="trustBadge1"><i class="fas fa-shield-alt"></i> Secure Payment</span>
+                    <span data-translate="trustBadge2"><i class="fas fa-lock"></i> Privacy Guaranteed</span>
+                    <span data-translate="trustBadge3"><i class="fas fa-check-circle"></i> Instant Access</span>
+                </div>
+                
+                <button id="payment-done-button" class="payment-done-button" onclick="showPaymentConfirmation()">
+                    <i class="fas fa-check-circle"></i> <span data-translate="paymentDoneButton">Eu fiz o pagamento</span>
+                </button>
+                
+                <p class="security-reinforcement" data-translate="secureActivationText">100% secure and private activation process.</p>
+            </div>
+            
+            <div id="payment-confirmation-section" class="payment-confirmation-section">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 data-translate="telegramInstructionsTitle">Send Your ID to Admin via Telegram</h3>
+                
+                <p data-translate="telegramInstructionsText">To complete your activation, please copy your unique ID below and send it to our administrator via Telegram:</p>
+                
+                <div class="unique-id-display" id="unique-id-display">
+                    <!-- Unique ID will be inserted here by JavaScript -->
+                </div>
+                
+                <button id="copy-id-button" class="copy-id-button" onclick="copyUniqueId()">
+                    <i class="fas fa-copy"></i> <span data-translate="copyIdButton">Copy ID</span>
+                </button>
+                
+                <div class="contact-admin-message">
+                    <p data-translate="contactAdminMessage">If you've made the payment, please contact our admin on Telegram with your ID to receive your app access immediately.</p>
+                </div>
+                
+                <div class="telegram-instructions">
+                    <div class="step-item">
+                        <h4 data-translate="telegramStep1Title">1. Copy Your Unique ID</h4>
+                        <p data-translate="telegramStep1Desc">Click the "Copy ID" button above to copy your unique ID to clipboard.</p>
+                    </div>
+                    
+                    <div class="step-item">
+                        <h4 data-translate="telegramStep2Title">2. Open Telegram</h4>
+                        <p data-translate="telegramStep2Desc">Click the "Open Telegram" button below to contact our administrator.</p>
+                    </div>
+                    
+                    <div class="step-item">
+                        <h4 data-translate="telegramStep3Title">3. Send Your ID</h4>
+                        <p data-translate="telegramStep3Desc">Paste and send your unique ID to our administrator to receive activation instructions.</p>
+                    </div>
+                </div>
+                
+                <a href="https://t.me/bedmalcon_temp" target="_blank" class="telegram-button">
+                    <i class="fab fa-telegram-plane"></i> <span data-translate="openTelegramButton">Open Telegram</span>
+                </a>
+                
+                <div style="margin-top: 30px;">
+                    <a href="index.html" class="back-home-button" data-translate="backToHomeLink">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3 data-translate="footerAboutTitle">About Reveal App</h3>
+                <p data-translate="footerAboutText">Reveal App provides a strategic advantage in online poker by allowing you to see opponent cards on PPPOKER, XPoker, and ClubGG. Play smarter, win bigger.</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h3 data-translate="footerLinksTitle">Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#features" data-translate="footerLinkFeatures">Features</a></li>
+                    <li><a href="index.html#how-it-works" data-translate="footerLinkHowItWorks">How It Works</a></li>
+                    <li><a href="index.html#purchase" data-translate="footerLinkPricing">Pricing</a></li>
+                    <li><a href="index.html#contact" data-translate="footerLinkContact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3 data-translate="footerSocialTitle">Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="https://t.me/bedmalcon_temp" target="_blank"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-translate="footerCopyright">&copy; <span id="current-year"></span> Reveal App. All Rights Reserved. Your success is our mission.</p>
+            <p class="disclaimer" data-translate="footerDisclaimer">Disclaimer: Use responsibly and be aware of the terms of service of the poker platforms you use.</p>
+        </div>
+    </div>
+
+    <script src="translations.js"></script>
+    <script src="id_generator.js"></script>
+    <script src="crypto_api.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+        
+        // Check for stored unique ID
+        const uniqueIdDisplay = document.getElementById("unique-id-display");
+        if (uniqueIdDisplay) {
+            const uniqueId = localStorage.getItem("uniqueId") || generateUniqueId();
+            uniqueIdDisplay.textContent = uniqueId;
+            localStorage.setItem("uniqueId", uniqueId);
+        }
+        
+        // Function to show payment confirmation section
+        function showPaymentConfirmation() {
+            document.getElementById("payment-details").style.display = "none";
+            document.getElementById("payment-confirmation-section").style.display = "block";
+            
+            // Scroll to top of confirmation section
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Function to copy unique ID
+        function copyUniqueId() {
+            const uniqueId = document.getElementById("unique-id-display").textContent;
+            
+            // Create temporary textarea element
+            const textarea = document.createElement("textarea");
+            textarea.value = uniqueId;
+            textarea.style.position = "fixed";  // Prevent scrolling to bottom
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            
+            try {
+                // Execute copy command
+                const successful = document.execCommand('copy');
+                
+                // Show success message
+                const copyButton = document.getElementById("copy-id-button");
+                const originalText = copyButton.innerHTML;
+                
+                copyButton.innerHTML = `<i class="fas fa-check"></i> <span data-translate="copiedText">Copied!</span>`;
+                
+                setTimeout(() => {
+                    copyButton.innerHTML = originalText;
+                }, 2000);
+                
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+            
+            // Remove temporary element
+            document.body.removeChild(textarea);
+        }
+        
+        // Initialize language
+        const storedLang = localStorage.getItem("language") || "en";
+        const langSelector = document.querySelector("#language-selector select");
+        if (langSelector) {
+            langSelector.value = storedLang;
+        }
+        
+        // Set language
+        setLanguage(storedLang);
+    </script>
+</body>
+</html>

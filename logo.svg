@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e74c3c" />
+      <stop offset="100%" stop-color="#c0392b" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Card Symbols Background -->
+  <g opacity="0.15" transform="translate(140, 30)">
+    <path d="M-5,0 L5,0 L0,-8 Z" fill="#fff" />
+    <path d="M-5,0 L5,0 L0,8 Z" fill="#fff" />
+  </g>
+  <g opacity="0.15" transform="translate(155, 30)">
+    <circle cx="0" cy="0" r="6" fill="#fff" />
+  </g>
+  <g opacity="0.15" transform="translate(170, 30)">
+    <path d="M0,-6 L6,0 L0,6 L-6,0 Z" fill="#fff" />
+  </g>
+  <g opacity="0.15" transform="translate(185, 30)">
+    <path d="M-5,-5 L5,-5 L5,5 L-5,5 Z" fill="#fff" />
+  </g>
+  
+  <!-- Main Logo Text -->
+  <text x="10" y="38" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="bold" fill="url(#logoGradient)" filter="url(#glow)">Reveal</text>
+  
+  <!-- App Text -->
+  <text x="120" y="38" font-family="'Segoe UI', Arial, sans-serif" font-size="24" font-weight="bold" fill="#3498db">App</text>
+  
+  <!-- Tagline -->
+  <text x="10" y="52" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#ecf0f1">SEE THE CARDS. DOMINATE THE GAME.</text>
+  
+  <!-- Card Icon -->
+  <g transform="translate(180, 25)">
+    <rect x="-10" y="-15" width="20" height="30" rx="2" ry="2" fill="#16213e" stroke="#3498db" stroke-width="1" />
+    <text x="0" y="0" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="bold" fill="#e74c3c" text-anchor="middle">A♠</text>
+  </g>
+</svg>
