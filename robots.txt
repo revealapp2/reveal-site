@@ -1,5 +1,10 @@
 User-agent: *
 Disallow: /private/
 Allow: /
+Allow: /seo-pages/
+
+# Allow all SEO pages
+Allow: /seo-pages/*.html
 
 Sitemap: https://www.revealpoker.top/sitemap.xml
+
