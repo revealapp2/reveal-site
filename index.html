@@ -7,9 +7,8 @@
     <meta name="description" content="Descubra como maximizar lucros no poker online com a nossa ferramenta para PPPOKER, XPoker & ClubGG. Veja as cartas dos adversários e domine o jogo.">
     <meta name="keywords" content="hack poker, hack pppoker, hack clubgg, como ganhar no poker online, ferramenta para poker lucrativo, maximizar lucros poker, software poker online, reveal cards poker, poker advantage, pppoker cheat, xpoker cheat, clubgg cheat, ver cartas pppoker, ver cartas poker, aplicativo para ver cartas no poker">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <!-- New SVG Favicon -->
+    <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%220%25%22><stop offset=%220%25%22 stop-color=%22%2300e5ff%22 /><stop offset=%22100%25%22 stop-color=%22%23ffab00%22 /></linearGradient></defs><path fill=%22%23ffab00%22 d=%22M50 0A50 50 0 1 0 50 100 50 50 0 0 0 50 0zm0 87.5A37.5 37.5 0 1 1 50 12.5a37.5 37.5 0 0 1 0 75z%22/><path fill=%22%2300e5ff%22 d=%22M50 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50zm0 37.5a12.5 12.5 0 1 1 0-25 12.5 12.5 0 0 1 0 25z%22/><circle cx=%2250%22 cy=%2250%22 r=%225%22 fill=%22white%22/></svg>">
 
     <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +70,7 @@
             width: 100%;
             height: 100%;
         }
-         /* Mobile Menu */
+        /* Mobile Menu */
         .mobile-menu {
             transition: transform 0.3s ease-in-out;
         }
@@ -95,19 +94,21 @@
         body {
             top: 0px !important; 
         }
-        #google_translate_element .goog-te-gadget-simple {
+        #google_translate_element .goog-te-gadget-simple,
+        #google_translate_element_mobile .goog-te-gadget-simple {
             background-color: #1f2937 !important;
             border: 1px solid #4b5563 !important;
             border-radius: 8px !important;
             padding: 0.5rem !important;
         }
-        #google_translate_element .goog-te-gadget-simple span {
+        #google_translate_element .goog-te-gadget-simple span,
+        #google_translate_element_mobile .goog-te-gadget-simple span {
             color: #e2e8f0 !important;
         }
         .hero-bg {
             background-image: url('https://images.unsplash.com/photo-1618621933758-c54179458234?q=80&w=2127&auto=format&fit=crop');
         }
-        .feature-card {
+        .feature-card, .testimonial-card, .story-card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -115,12 +116,12 @@
             padding: 1.5rem;
             transition: all 0.3s ease;
         }
-        .feature-card:hover {
+        .feature-card:hover, .testimonial-card:hover, .story-card:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.1);
         }
     </style>
-     <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -144,7 +145,21 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
-                        <img class="h-12 w-auto" src="https://i.imgur.com/Uf6Al3f.png" alt="Reveal App Logo">
+                        <!-- New SVG Logo -->
+                        <svg class="h-12 w-auto" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                          <defs>
+                            <linearGradient id="logoGradientHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" style="stop-color:#00e5ff;" />
+                              <stop offset="100%" style="stop-color:#ffab00;" />
+                            </linearGradient>
+                          </defs>
+                          <g transform="translate(0, 5) scale(0.9)">
+                            <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm0 35c-8.28 0-15-6.72-15-15S11.72 5 20 5s15 6.72 15 15-6.72 15-15 15z" fill="#ffab00"/>
+                            <path d="M20 10c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" fill="#00e5ff"/>
+                            <circle cx="20" cy="20" r="2" fill="white"/>
+                          </g>
+                          <text x="50" y="32" font-family="Inter, sans-serif" font-size="20" font-weight="bold" fill="url(#logoGradientHeader)">Reveal App</text>
+                        </svg>
                     </a>
                 </div>
 
@@ -153,15 +168,16 @@
                     <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
                     <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
                     <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
+                    <a href="#story" class="text-gray-300 hover:text-white transition" data-translate="navStory">Our Story</a>
                     <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
                 </nav>
 
                 <!-- CTA and Language Selector -->
                 <div class="hidden md:flex items-center space-x-4">
                     <a href="#get-app" class="cta-button font-bold py-2 px-5 rounded-lg" data-translate="navGetApp">Get App</a>
-                     <div id="google_translate_element"></div>
+                    <div id="google_translate_element"></div>
                 </div>
-                 <!-- Mobile Menu Button -->
+                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
                         <i class="fas fa-bars text-2xl"></i>
@@ -169,25 +185,26 @@
                 </div>
             </div>
         </div>
-         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden mobile-menu transform -translate-x-full fixed top-0 left-0 h-full w-64 bg-gray-900 z-50 p-6">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden mobile-menu transform -translate-x-full fixed top-0 left-0 h-full w-64 bg-gray-900 z-50 p-6 shadow-2xl">
             <div class="flex justify-between items-center mb-8">
-                 <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
-                     <img class="h-10 w-auto" src="https://i.imgur.com/Uf6Al3f.png" alt="Reveal App Logo">
-                 </a>
-                <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
+               <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
+                    <img class="h-10 w-auto" src="image_7d55d9.png" alt="Reveal App Logo">
+               </a>
+               <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
+                   <i class="fas fa-times text-2xl"></i>
+               </button>
             </div>
             <nav class="flex flex-col space-y-4">
                 <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
                 <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
                 <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
+                <a href="#story" class="text-gray-300 hover:text-white transition" data-translate="navStory">Our Story</a>
                 <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
-                 <a href="#get-app" class="cta-button text-center font-bold py-2 px-5 rounded-lg mt-4" data-translate="navGetApp">Get App</a>
-                 <div class="mt-4 space-y-4">
+                <a href="#get-app" class="cta-button text-center font-bold py-2 px-5 rounded-lg mt-4" data-translate="navGetApp">Get App</a>
+                <div class="mt-4 space-y-4">
                     <div id="google_translate_element_mobile"></div>
-                 </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -196,8 +213,8 @@
         <div id="main-content">
             <!-- Hero Section -->
             <section class="hero relative py-20 md:py-32 text-center text-white overflow-hidden">
-                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg"></div>
-                 <div class="absolute inset-0 bg-black/70"></div>
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg"></div>
+                <div class="absolute inset-0 bg-black/70"></div>
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
                     <h1 class="text-4xl md:text-6xl font-extrabold mb-4" data-translate="heroTitle"></h1>
                     <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8" data-translate="heroTagline"></p>
@@ -274,8 +291,18 @@
                 </div>
             </section>
             
-             <!-- Testimonials Section -->
-            <section id="testimonials" class="py-16 md:py-24 bg-gray-800/50">
+            <!-- Our Story Section -->
+            <section id="story" class="py-16 md:py-24 bg-gray-800/50">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
+                    <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
+                         <!-- Story content injected by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="py-16 md:py-24 bg-gray-900">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="testimonialsTitle">What Our Users Say</h2>
                     <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -285,7 +312,7 @@
             </section>
             
             <!-- Get App Section -->
-            <section id="get-app" class="py-16 md:py-24 text-center bg-gray-900">
+            <section id="get-app" class="py-16 md:py-24 text-center bg-gray-800/50">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
                     <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
@@ -299,7 +326,7 @@
                         <p class="text-xl font-semibold text-red-500 animate-pulse" data-translate="urgencyText">🔥 Limited spots available! Get your edge before your opponents do! 🔥</p>
                     </div>
                     
-                    <button class="main-cta-button text-xl font-bold py-4 px-10 rounded-lg cta-button" onclick="startPurchaseFlow()" data-translate="getAppButton">Yes, I Want to Boost My Winnings!</button>
+                    <button class="main-cta-button text-xl font-bold py-4 px-10 rounded-lg cta-button" id="start-purchase-btn" data-translate="getAppButton">Yes, I Want to Boost My Winnings!</button>
                     
                     <p class="mt-4 text-sm text-gray-500" data-translate="securityNote">100% secure and private activation process.</p>
                     
@@ -318,7 +345,7 @@
             </section>
 
             <!-- Contact Section -->
-            <section class="contact py-16 md:py-24 text-center" id="contact">
+            <section class="contact py-16 md:py-24 text-center bg-gray-900" id="contact">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle">Contact Us</h2>
                     <p class="text-lg text-gray-400 mb-8" data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
@@ -370,7 +397,7 @@
     </footer>
     
     <!-- Dialogs -->
-    <div id="dialog-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <div id="dialog-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden dialog">
         <!-- Dialog content will be injected here -->
     </div>
 
@@ -385,11 +412,15 @@
             navFeatures: "Features",
             navHowItWorks: "How It Works",
             navDemo: "Demo",
+            navStory: "Our Story",
             navTestimonials: "Testimonials",
             navGetApp: "Get App",
             heroTitle: "Discover How Ordinary Players Are Making Big Profits in Online Poker",
             heroTagline: "Our exclusive software lets you see your opponents' cards on PPPOKER, XPoker & ClubGG. Make winning decisions and dominate the tables.",
             heroCta: "Start Profiting Today",
+            counterPlayers: "Players Profiting",
+            counterWinnings: "Won Last Month",
+            counterSatisfaction: "Satisfaction Guarantee",
             featuresTitle: "Why Choose Reveal App?",
             feature1Title: "Unprecedented Insight",
             feature1Text: "Transform uncertainty into profit. See opponents' hands, make confident decisions, avoid traps, and maximize pots.",
@@ -412,16 +443,6 @@
             step3Text: "Follow simple instructions to activate and start seeing cards!",
             step4Title: "Win Consistently",
             step4Text: "Enjoy your newfound advantage and watch your profits grow session after session.",
-            getAppTitle: "Get Your Reveal App Access",
-            getAppText: "Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.",
-            specialOfferText: "SPECIAL OFFER",
-            couponText: "Use code <strong>10OFF</strong> for a discount!",
-            urgencyText: "🔥 Limited spots available! Get your edge before your opponents do! 🔥",
-            getAppButton: "Yes, I Want to Boost My Winnings!",
-            securityNote: "100% secure and private activation process.",
-            securePaymentBadge: "Secure Payment",
-            privacyBadge: "Privacy Guaranteed",
-            instantAccessBadge: "Instant Access",
             demoTitle: "See the App in Action",
             demoText: "Watch our demo videos to understand how the Reveal App gives you the edge:",
             demoPPPOKERTitle: "PPPOKER Demo",
@@ -441,6 +462,16 @@
             testimonial4Author: "Kenji T.",
             testimonial5Quote: "Playing without it feels like playing blind. If you're not using Reveal App, you're leaving money on the table. Simple as that.",
             testimonial5Author: "David L.",
+            getAppTitle: "Get Your Reveal App Access",
+            getAppText: "Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.",
+            specialOfferText: "SPECIAL OFFER",
+            couponText: "Use code <strong>10OFF</strong> for a discount!",
+            urgencyText: "🔥 Limited spots available! Get your edge before your opponents do! 🔥",
+            getAppButton: "Yes, I Want to Boost My Winnings!",
+            securityNote: "100% secure and private activation process.",
+            securePaymentBadge: "Secure Payment",
+            privacyBadge: "Privacy Guaranteed",
+            instantAccessBadge: "Instant Access",
             contactTitle: "Contact Us",
             contactText: "Have questions or need assistance? Our support team is ready to help you get started with Reveal App.",
             contactTelegram: "Contact on Telegram",
@@ -518,20 +549,21 @@
             telegramStep3Title: "3. Send Your ID",
             telegramStep3Desc: "Paste your ID in the chat to receive activation instructions.",
             openTelegramButton: "Open Telegram",
-            counterPlayers: "Players Profiting",
-            counterWinnings: "Won Last Month",
-            counterSatisfaction: "Satisfaction Guarantee",
         },
         pt: {
             pageTitle: "Reveal App: Veja as Cartas e Domine no PPPOKER, XPoker, ClubGG | Vantagem Indetectável",
             navFeatures: "Recursos",
             navHowItWorks: "Como Funciona",
             navDemo: "Demonstração",
+            navStory: "Nossa História",
             navTestimonials: "Depoimentos",
             navGetApp: "Obter App",
             heroTitle: "Descubra como jogadores comuns estão a lucrar alto no poker online",
             heroTagline: "O nosso software exclusivo permite-lhe ver as cartas dos seus oponentes no PPPOKER, XPoker & ClubGG. Tome decisões vencedoras e domine as mesas.",
             heroCta: "Comece a Lucrar Hoje",
+            counterPlayers: "Jogadores a Lucrar",
+            counterWinnings: "Ganhos no Último Mês",
+            counterSatisfaction: "Satisfação Garantida",
             featuresTitle: "Por que Escolher o Reveal App?",
             feature1Title: "Visão Sem Precedentes",
             feature1Text: "Transforme a incerteza em lucro. Veja as mãos dos oponentes, tome decisões confiantes, evite armadilhas e maximize potes.",
@@ -554,16 +586,6 @@
             step3Text: "Siga as instruções simples para ativar e começar a ver as cartas!",
             step4Title: "Vença Consistentemente",
             step4Text: "Aproveite sua nova vantagem e veja seus lucros crescerem sessão após sessão.",
-            getAppTitle: "Obtenha Seu Acesso ao Reveal App",
-            getAppText: "Pare de deixar dinheiro na mesa. É hora de investir no seu sucesso no poker. Escolha seu aplicativo de poker preferido abaixo para começar.",
-            specialOfferText: "OFERTA ESPECIAL",
-            couponText: "Use o código <strong>10OFF</strong> para um desconto!",
-            urgencyText: "🔥 Vagas limitadas! Garanta sua vantagem antes dos seus oponentes! 🔥",
-            getAppButton: "Sim, Quero Aumentar Meus Ganhos!",
-            securityNote: "Processo de ativação 100% seguro e privado.",
-            securePaymentBadge: "Pagamento Seguro",
-            privacyBadge: "Privacidade Garantida",
-            instantAccessBadge: "Acesso Imediato",
             demoTitle: "Veja o App em Ação",
             demoText: "Assista aos nossos vídeos de demonstração para entender como o Reveal App lhe dá a vantagem:",
             demoPPPOKERTitle: "Demonstração PPPOKER",
@@ -583,6 +605,16 @@
             testimonial4Author: "Kenji T.",
             testimonial5Quote: "Jogar sem ele parece jogar às cegas. Se você não está usando o Reveal App, está deixando dinheiro na mesa. Simples assim.",
             testimonial5Author: "David L.",
+            getAppTitle: "Obtenha Seu Acesso ao Reveal App",
+            getAppText: "Pare de deixar dinheiro na mesa. É hora de investir no seu sucesso no poker. Escolha seu aplicativo de poker preferido abaixo para começar.",
+            specialOfferText: "OFERTA ESPECIAL",
+            couponText: "Use o código <strong>10OFF</strong> para um desconto!",
+            urgencyText: "🔥 Vagas limitadas! Garanta sua vantagem antes dos seus oponentes! 🔥",
+            getAppButton: "Sim, Quero Aumentar Meus Ganhos!",
+            securityNote: "Processo de ativação 100% seguro e privado.",
+            securePaymentBadge: "Pagamento Seguro",
+            privacyBadge: "Privacidade Garantida",
+            instantAccessBadge: "Acesso Imediato",
             contactTitle: "Entre em Contato",
             contactText: "Tem dúvidas ou precisa de ajuda? Nossa equipe de suporte está pronta para ajudá-lo a começar com o Reveal App.",
             contactTelegram: "Contato no Telegram",
@@ -660,9 +692,6 @@
             telegramStep3Title: "3. Envie o seu ID",
             telegramStep3Desc: "Cole o seu ID na conversa para receber as instruções de ativação.",
             openTelegramButton: "Abrir Telegram",
-            counterPlayers: "Jogadores a Lucrar",
-            counterWinnings: "Ganhos no Último Mês",
-            counterSatisfaction: "Satisfação Garantida",
         }
     };
 
@@ -673,530 +702,569 @@
 
     // --- Core Application Logic ---
     document.addEventListener('DOMContentLoaded', () => {
-        
-        // --- Initial Setup ---
-        const setupInitialUI = () => {
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            initializeLanguage();
-        };
+        const App = {
+            // --- STATE ---
+            purchaseState: {
+                basePrice: 0,
+                discount: 0,
+                finalPrice: 0,
+                email: null,
+                username: null,
+                platform: null,
+                uniqueId: null,
+                app: null,
+                method: null,
+            },
 
-        // --- Language Handling ---
-        const initializeLanguage = () => {
-            let userLang = localStorage.getItem("language");
+            // --- DOM ELEMENTS ---
+            dom: {
+                currentYear: document.getElementById('current-year'),
+                featuresGrid: document.getElementById('features-grid'),
+                howItWorksGrid: document.getElementById('how-it-works-grid'),
+                storyContainer: document.getElementById('story-container'),
+                testimonialsContainer: document.getElementById('testimonials-container'),
+                mobileMenu: document.getElementById('mobile-menu'),
+                mobileMenuButton: document.getElementById('mobile-menu-button'),
+                mobileMenuClose: document.getElementById('mobile-menu-close'),
+                dialogContainer: document.getElementById('dialog-container'),
+                mainContent: document.getElementById('main-content'),
+                paymentConfirmationContent: document.getElementById('payment-confirmation-content'),
+                startPurchaseBtn: document.getElementById('start-purchase-btn'),
+            },
 
-            if (!userLang) {
-                const browserLang = (navigator.languages && navigator.languages[0]) || navigator.language;
-                const primaryLang = browserLang.split('-')[0];
-                if (translations[primaryLang]) {
-                    userLang = primaryLang;
-                } else {
-                    userLang = 'en'; 
+            // --- METHODS ---
+            
+            // Initialization
+            init() {
+                this.dom.currentYear.textContent = new Date().getFullYear();
+                this.initLanguage();
+                this.initEventListeners();
+                this.populateAllDynamicContent();
+            },
+            
+            initEventListeners() {
+                // Mobile Menu
+                this.dom.mobileMenuButton.addEventListener('click', () => this.dom.mobileMenu.classList.replace('-translate-x-full', 'translate-x-0'));
+                this.dom.mobileMenuClose.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
+                document.querySelectorAll('#mobile-menu a').forEach(link => {
+                    link.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
+                });
+
+                // Dialog
+                this.dom.dialogContainer.addEventListener('click', (e) => {
+                    if (e.target === this.dom.dialogContainer) this.closeDialog();
+                });
+
+                // Purchase Flow
+                this.dom.startPurchaseBtn.addEventListener('click', () => this.startPurchaseFlow());
+            },
+
+            // Language Handling
+            initLanguage() {
+                let userLang = localStorage.getItem("language");
+
+                if (!userLang) {
+                    const browserLang = (navigator.languages && navigator.languages[0]) || navigator.language;
+                    const primaryLang = browserLang.split('-')[0];
+                    userLang = translations[primaryLang] ? primaryLang : 'en';
                 }
-            }
-            
-            document.documentElement.lang = userLang;
-            setLanguage(userLang);
-        };
-
-        window.setLanguage = (lang) => {
-            localStorage.setItem("language", lang);
-            document.documentElement.lang = lang;
-            
-            // Populate dynamic sections first
-            populateFeatures();
-            populateHowItWorks();
-            populateTestimonials();
-
-            document.querySelectorAll("[data-translate], [data-translate-placeholder]").forEach(el => {
-                const key = el.dataset.translate || el.dataset.translatePlaceholder;
-                if (!key) return;
-
-                const translation = getTranslatedString(key);
                 
-                if (el.dataset.translate) {
-                     if (key === 'couponText' || key === 'storyText' || key === 'storyCallToAction') {
-                        el.innerHTML = translation; 
-                    } else {
-                        el.textContent = translation;
+                this.setLanguage(userLang);
+            },
+
+            setLanguage(lang) {
+                localStorage.setItem("language", lang);
+                document.documentElement.lang = lang;
+                
+                this.populateAllDynamicContent();
+
+                document.querySelectorAll("[data-translate], [data-translate-placeholder]").forEach(el => {
+                    const key = el.dataset.translate || el.dataset.translatePlaceholder;
+                    if (!key) return;
+
+                    const translation = this.getTranslatedString(key);
+                    
+                    if (el.dataset.translate) {
+                         if (['couponText', 'storyText', 'storyCallToAction'].includes(key)) {
+                            el.innerHTML = translation; 
+                         } else {
+                            el.textContent = translation;
+                         }
                     }
-                }
-                if (el.dataset.translatePlaceholder) el.placeholder = translation;
-            });
-            document.title = getTranslatedString('pageTitle');
-        };
+                    if (el.dataset.translatePlaceholder) el.placeholder = translation;
+                });
+                document.title = this.getTranslatedString('pageTitle');
+            },
 
-        const getTranslatedString = (key, replacements = {}) => {
-            const lang = localStorage.getItem("language") || "pt";
-            let translation = (translations[lang] && translations[lang][key]) ? translations[lang][key] : (translations['en'][key] || key);
-            Object.entries(replacements).forEach(([placeholder, value]) => {
-                translation = translation.replace(`{${placeholder}}`, value);
-            });
-            return translation;
-        };
+            getTranslatedString(key, replacements = {}) {
+                const lang = localStorage.getItem("language") || "pt";
+                let translation = (translations[lang] && translations[lang][key]) ? translations[lang][key] : (translations['en'][key] || key);
+                Object.entries(replacements).forEach(([placeholder, value]) => {
+                    translation = translation.replace(`{${placeholder}}`, value);
+                });
+                return translation;
+            },
+            
+            // Dynamic Content Population
+            populateAllDynamicContent() {
+                this.populateFeatures();
+                this.populateHowItWorks();
+                this.populateStory();
+                this.populateTestimonials();
+            },
 
-        // --- Dynamic Content Population ---
-        const populateFeatures = () => {
-            const container = document.getElementById('features-grid');
-            if(!container) return;
-            const featureKeys = [
-                { key: 'feature1', icon: 'fa-eye' },
-                { key: 'feature2', icon: 'fa-mobile-alt' },
-                { key: 'feature3', icon: 'fa-shield-alt' },
-                { key: 'feature4', icon: 'fa-chart-line' },
-                { key: 'feature5', icon: 'fa-sync' },
-                { key: 'feature6', icon: 'fa-headset' },
-            ];
-            container.innerHTML = featureKeys.map(({key, icon}) => `
-                <div class="feature-card">
-                    <div class="text-4xl text-yellow-400 mb-4"><i class="fas ${icon}"></i></div>
-                    <h3 class="text-xl font-bold mb-2">${getTranslatedString(`${key}Title`)}</h3>
-                    <p class="text-gray-400">${getTranslatedString(`${key}Text`)}</p>
-                </div>
-            `).join('');
-        };
-        
-        const populateHowItWorks = () => {
-             const container = document.getElementById('how-it-works-grid');
-             if(!container) return;
-             container.innerHTML = [1, 2, 3, 4].map(i => `
-                <div class="text-center">
-                    <div class="relative mb-4">
-                       <div class="w-20 h-20 bg-gray-700 rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-yellow-400">${i}</div>
-                       ${i < 4 ? '<div class="absolute top-1/2 left-3/4 w-1/2 h-0.5 bg-gray-700 hidden md:block" style="transform: translateY(-50%);"></div>' : ''}
+            populateFeatures() {
+                const container = this.dom.featuresGrid;
+                if(!container) return;
+                const featureKeys = [
+                    { key: 'feature1', icon: 'fa-eye' },
+                    { key: 'feature2', icon: 'fa-mobile-alt' },
+                    { key: 'feature3', icon: 'fa-shield-alt' },
+                    { key: 'feature4', icon: 'fa-chart-line' },
+                    { key: 'feature5', icon: 'fa-sync' },
+                    { key: 'feature6', icon: 'fa-headset' },
+                ];
+                container.innerHTML = featureKeys.map(({key, icon}) => `
+                    <div class="feature-card">
+                        <div class="text-4xl text-yellow-400 mb-4"><i class="fas ${icon}"></i></div>
+                        <h3 class="text-xl font-bold mb-2">${this.getTranslatedString(`${key}Title`)}</h3>
+                        <p class="text-gray-400">${this.getTranslatedString(`${key}Text`)}</p>
                     </div>
-                    <h3 class="text-xl font-bold mt-4 mb-2">${getTranslatedString(`step${i}Title`)}</h3>
-                    <p class="text-gray-400">${getTranslatedString(`step${i}Text`)}</p>
-                </div>
-            `).join('');
-        };
-        
-        const populateTestimonials = () => {
-             const container = document.getElementById('testimonials-container');
-              if(!container) return;
-             container.innerHTML = [1, 2, 3, 4, 5].map(i => createTestimonialHTML(
-                getTranslatedString(`testimonial${i}Quote`),
-                getTranslatedString(`testimonial${i}Author`)
-             )).join('');
-        };
-
-        const createTestimonialHTML = (quote, author) => {
-            return `
-                <div class="bg-gray-800/50 p-6 rounded-lg">
-                    <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4"></i>
-                    <p class="text-gray-400 mb-4">${quote}</p>
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user"></i></div>
-                        <p class="font-semibold">${author}</p>
+                `).join('');
+            },
+            
+            populateHowItWorks() {
+                 const container = this.dom.howItWorksGrid;
+                 if(!container) return;
+                 container.innerHTML = [1, 2, 3, 4].map(i => `
+                    <div class="text-center">
+                        <div class="relative mb-4">
+                           <div class="w-20 h-20 bg-gray-700 rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-yellow-400">${i}</div>
+                           ${i < 4 ? '<div class="absolute top-1/2 left-3/4 w-1/2 h-0.5 bg-gray-700 hidden md:block" style="transform: translateY(-50%);"></div>' : ''}
+                        </div>
+                        <h3 class="text-xl font-bold mt-4 mb-2">${this.getTranslatedString(`step${i}Title`)}</h3>
+                        <p class="text-gray-400">${this.getTranslatedString(`step${i}Text`)}</p>
                     </div>
-                </div>`;
-        };
+                `).join('');
+            },
 
-        // --- Mobile Menu ---
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        
-        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.replace('-translate-x-full', 'translate-x-0'));
-        mobileMenuClose.addEventListener('click', () => mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
-        });
-
-        // --- Dialog Management ---
-        const dialogContainer = document.getElementById('dialog-container');
-
-        const showDialog = (content) => {
-            dialogContainer.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg">${content}</div>`;
-            dialogContainer.classList.remove('hidden');
-        };
-
-        const closeDialog = () => {
-            dialogContainer.classList.add('hidden');
-            dialogContainer.innerHTML = '';
-        };
-        
-        dialogContainer.addEventListener('click', (e) => {
-            if (e.target === dialogContainer) {
-                closeDialog();
-            }
-        });
-
-        // --- Purchase Flow & Page Transitions ---
-        let purchaseState = {
-            basePrice: 0,
-            discount: 0,
-            finalPrice: 0
-        };
-
-        window.startPurchaseFlow = () => {
-            const email = localStorage.getItem("userEmail");
-            const username = localStorage.getItem("username");
-            if (email && username) {
-                purchaseState.email = email;
-                purchaseState.username = username;
-                showPlatformDialog();
-            } else {
-                showRegistrationDialog();
-            }
-        };
-
-        const showRegistrationDialog = () => {
-            const content = `
-                <h3 class="text-xl font-bold mb-4 text-center" data-translate="registerTitle">${getTranslatedString('registerTitle')}</h3>
-                <div class="space-y-4">
-                    <div>
-                        <label for="email-input" class="block mb-2 text-sm font-medium" data-translate="emailLabel">${getTranslatedString('emailLabel')}</label>
-                        <input type="email" id="email-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${getTranslatedString('emailPlaceholder')}" required>
-                         <p id="email-validation-message" class="text-red-500 text-sm mt-1"></p>
-                    </div>
-                    <div>
-                        <label for="username-input" class="block mb-2 text-sm font-medium" data-translate="usernameLabel">${getTranslatedString('usernameLabel')}</label>
-                        <input type="text" id="username-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${getTranslatedString('usernamePlaceholder')}" required>
-                        <p id="username-validation-message" class="text-red-500 text-sm mt-1"></p>
-                    </div>
-                    <button id="submit-registration-btn" class="w-full cta-button font-bold py-2.5 px-5 rounded-lg" data-translate="registerButton">${getTranslatedString('registerButton')}</button>
-                </div>
-            `;
-            showDialog(content);
-            document.getElementById('submit-registration-btn').onclick = submitRegistration;
-        };
-        
-        const submitRegistration = () => {
-            const emailInput = document.getElementById("email-input");
-            const usernameInput = document.getElementById("username-input");
-            const emailError = document.getElementById("email-validation-message");
-            const usernameError = document.getElementById("username-validation-message");
+            populateStory() {
+                const container = this.dom.storyContainer;
+                if (!container) return;
+                container.innerHTML = `
+                    <p class="text-lg text-gray-300 mb-6" data-translate="storyText">${this.getTranslatedString('storyText')}</p>
+                    <p class="text-xl text-yellow-400 font-semibold" data-translate="storyCallToAction">${this.getTranslatedString('storyCallToAction')}</p>
+                `;
+            },
             
-            let isValid = true;
-            
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
-                emailError.textContent = getTranslatedString('emailValidationError');
-                isValid = false;
-            } else {
-                emailError.textContent = '';
-            }
-
-            if (usernameInput.value.length < 3) {
-                usernameError.textContent = getTranslatedString('usernameValidationError');
-                isValid = false;
-            } else {
-                usernameError.textContent = '';
-            }
-
-            if(isValid) {
-                localStorage.setItem("userEmail", emailInput.value);
-                localStorage.setItem("username", usernameInput.value);
-                purchaseState.email = emailInput.value;
-                purchaseState.username = usernameInput.value;
-                showPlatformDialog();
-            }
-        };
-
-        const showPlatformDialog = () => {
-             const content = `
-                <h3 class="text-xl font-bold mb-4 text-center" data-translate="platformDialogTitle">${getTranslatedString('platformDialogTitle')}</h3>
-                <p class="text-center text-gray-400 mb-6" data-translate="platformDialogText">${getTranslatedString('platformDialogText')}</p>
-                <div class="flex justify-center space-x-4">
-                    <button onclick="selectPlatform('android')" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-android mr-2"></i><span data-translate="platformAndroid">${getTranslatedString('platformAndroid')}</span></button>
-                    <button onclick="selectPlatform('ios')" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-apple mr-2"></i><span data-translate="platformIOS">${getTranslatedString('platformIOS')}</span></button>
-                </div>
-            `;
-            showDialog(content);
-        };
-        
-        window.selectPlatform = (platform) => {
-            purchaseState.platform = platform;
-            showUniqueIdDialog();
-        };
-
-        const showUniqueIdDialog = () => {
-            let uniqueId = localStorage.getItem("uniqueId");
-            if (!uniqueId) {
-                uniqueId = Date.now().toString().slice(-9);
-                localStorage.setItem("uniqueId", uniqueId);
-            }
-            purchaseState.uniqueId = uniqueId;
-
-            const content = `
-                <h3 class="text-xl font-bold mb-4 text-center" data-translate="uniqueIdDialogTitle">${getTranslatedString('uniqueIdDialogTitle')}</h3>
-                <p class="text-center text-gray-400 mb-4" data-translate="uniqueIdDialogText">${getTranslatedString('uniqueIdDialogText')}</p>
-                <div class="flex items-center bg-gray-800 p-3 rounded-lg">
-                    <span id="unique-id-value" class="flex-grow text-lg font-mono">${uniqueId}</span>
-                    <button onclick="copyToClipboard('${uniqueId}')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4"><i class="fas fa-copy"></i></button>
-                </div>
-                <button onclick="continueToPokerApp()" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg" data-translate="continueButton">${getTranslatedString('continueButton')}</button>
-            `;
-            showDialog(content);
-        };
-        
-        window.continueToPokerApp = () => {
-            showPokerAppDialog();
-        };
-
-        const showPokerAppDialog = () => {
-            const content = `
-                <h3 class="text-xl font-bold mb-4 text-center" data-translate="pokerAppDialogTitle">${getTranslatedString('pokerAppDialogTitle')}</h3>
-                 <p class="text-center text-gray-400 mb-6" data-translate="pokerAppDialogText">${getTranslatedString('pokerAppDialogText')}</p>
-                <div class="space-y-3">
-                    <button onclick="selectPokerApp('pppoker')" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition">PPPOKER</button>
-                    <button onclick="selectPokerApp('xpoker')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition">XPoker</button>
-                    <button onclick="selectPokerApp('clubgg')" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">ClubGG</button>
-                </div>
-            `;
-            showDialog(content);
-        };
-
-        window.selectPokerApp = (app) => {
-            purchaseState.app = app;
-            const prices = { pppoker: 1500, xpoker: 1500, clubgg: 4000 };
-            purchaseState.basePrice = prices[app] || 0;
-            purchaseState.discount = 0; // Reset discount when selecting a new app
-            showCouponDialog();
-        };
-
-        const showCouponDialog = () => {
-            const finalPrice = purchaseState.basePrice * (1 - purchaseState.discount);
-            const content = `
-                <h3 class="text-xl font-bold mb-4 text-center" data-translate="couponDialogTitle">${getTranslatedString('couponDialogTitle')}</h3>
-                <div class="text-center mb-4">
-                     <p id="original-price-container" class="${purchaseState.discount > 0 ? '' : 'hidden'} text-gray-500">
-                        <span data-translate="originalAmountLabel">${getTranslatedString('originalAmountLabel')}</span>:
-                        <s id="original-price-value">$${purchaseState.basePrice.toFixed(2)}</s>
-                    </p>
-                    <p id="final-price-display" class="text-2xl font-bold text-yellow-400">${getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`})}</p>
-                </div>
-                <p class="text-center text-gray-400 mb-4" data-translate="couponDialogText">${getTranslatedString('couponDialogText')}</p>
-                <div class="flex items-center space-x-2">
-                    <input type="text" id="coupon-input" class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg p-2.5" placeholder="${getTranslatedString('couponPlaceholder')}">
-                    <button onclick="applyCoupon()" class="cta-button font-bold py-2.5 px-5 rounded-lg" data-translate="applyCouponButton">${getTranslatedString('applyCouponButton')}</button>
-                </div>
-                <p id="coupon-message" class="text-center h-5 mt-2 text-sm"></p>
-                <button onclick="proceedToPaymentMethod()" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-lg" data-translate="proceedButton">${getTranslatedString('proceedButton')}</button>
-            `;
-            showDialog(content);
-        }
-
-        window.applyCoupon = () => {
-            const couponInput = document.getElementById('coupon-input');
-            const messageEl = document.getElementById('coupon-message');
-            if(!couponInput || !messageEl) return;
-            const code = couponInput.value.trim().toUpperCase();
-            
-            let discount = 0;
-            let isValid = false;
-
-            if (code === '30OFF') {
-                discount = 0.30;
-                isValid = true;
-            } else if (code === '10OFF') {
-                discount = 0.10;
-                isValid = true;
-            }
-            
-            purchaseState.discount = isValid ? discount : 0;
-            
-            if (isValid) {
-                messageEl.textContent = getTranslatedString('couponAppliedSuccess', { COUPON_CODE: code, DISCOUNT: (discount * 100) });
-                messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
-            } else {
-                 messageEl.textContent = getTranslatedString('couponErrorInvalid');
-                 messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
-            }
-
-            const finalPrice = purchaseState.basePrice * (1 - purchaseState.discount);
-            const originalPriceContainer = document.getElementById('original-price-container');
-            const finalPriceDisplay = document.getElementById('final-price-display');
-
-            if (finalPriceDisplay) {
-                 finalPriceDisplay.textContent = getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`});
-            }
-
-            if (originalPriceContainer) {
-                const originalPriceValueEl = originalPriceContainer.querySelector('s');
-                 if (purchaseState.discount > 0) {
-                    if(originalPriceValueEl) originalPriceValueEl.textContent = `$${purchaseState.basePrice.toFixed(2)}`;
-                    originalPriceContainer.classList.remove('hidden');
-                } else {
-                    originalPriceContainer.classList.add('hidden');
-                }
-            }
-        }
-        
-        window.proceedToPaymentMethod = () => {
-            purchaseState.finalPrice = purchaseState.basePrice * (1 - purchaseState.discount);
-            showPaymentMethodDialog();
-        }
-
-        const showPaymentMethodDialog = () => {
-            const content = `
-                <h3 class="text-xl font-bold mb-4 text-center" data-translate="paymentMethodDialogTitle">${getTranslatedString('paymentMethodDialogTitle')}</h3>
-                <p class="text-center text-gray-400 mb-6" data-translate="paymentMethodDialogText">${getTranslatedString('paymentMethodDialogText')}</p>
-                <div class="space-y-3">
-                    <button onclick="selectPaymentMethod('usdt')" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition">USDT (TRC20)</button>
-                    <button onclick="selectPaymentMethod('btc')" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition">BTC</button>
-                    <button onclick="selectPaymentMethod('eth')" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg transition">ETH</button>
-                </div>
-            `;
-            showDialog(content);
-        };
-
-        window.selectPaymentMethod = async (method) => {
-            purchaseState.method = method;
-            await showPaymentDetailsDialog();
-        };
-
-        const getCryptoPrice = async (cryptoId) => {
-            try {
-                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=usd`);
-                if (!response.ok) throw new Error('Network response was not ok.');
-                const data = await response.json();
-                return data[cryptoId].usd;
-            } catch (error) {
-                console.error("Failed to fetch crypto price:", error);
-                return null;
-            }
-        }
-
-        const showPaymentDetailsDialog = async () => {
-            const method = purchaseState.method;
-            const price = purchaseState.finalPrice;
-            
-            const addresses = {
-                usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK",
-                btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3",
-                eth: "0x9b5877A847BE203FCbA421194C83E0af6f686cC7"
-            };
-            const networks = { usdt: "TRC20", btc: "Bitcoin", eth: "Ethereum" };
-            const cryptoIds = { btc: 'bitcoin', eth: 'ethereum' };
-
-            const address = addresses[method];
-            const network = networks[method];
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${address}`;
-            
-            let cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400">$${price.toFixed(2)}</p>`;
-            if (method !== 'usdt') {
-                cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${getTranslatedString('loadingPaymentText')}</span></div>`;
-            }
-
-            const content = `
-                <h3 class="text-xl font-bold mb-2 text-center" data-translate="paymentDialogTitleFinal">${getTranslatedString('paymentDialogTitleFinal')}</h3>
-                <p class="text-center text-gray-400 mb-6" data-translate="paymentInstructionsText">${getTranslatedString('paymentInstructionsText')}</p>
-                
-                <div id="payment-amount-container" class="text-center mb-4">
-                    ${cryptoAmountHTML}
-                </div>
-                
-                <div class="flex justify-center mb-4">
-                    <div class="p-2 bg-white rounded-lg border-4 border-gray-600">
-                        <img src="${qrUrl}" alt="${method.toUpperCase()} QR Code">
-                    </div>
-                </div>
-                
-                <div class="flex items-center bg-gray-800 p-2 rounded-lg">
-                    <input id="wallet-address-input" type="text" class="flex-grow bg-transparent text-sm text-gray-300 border-0 focus:ring-0" value="${address}" readonly>
-                    <button onclick="copyToClipboard('${address}', true)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-2">
-                        <i class="fas fa-copy"></i>
-                    </button>
-                </div>
-                <p id="copy-feedback-dialog" class="text-green-400 text-sm mt-2 h-4 text-center"></p>
-
-                <button onclick="proceedToFinalConfirmation()" class="mt-6 w-full cta-button font-bold py-3 px-5 rounded-lg" data-translate="paymentDoneButton">${getTranslatedString('paymentDoneButton')}</button>
-            `;
-            showDialog(content);
-
-            if (method !== 'usdt') {
-                const cryptoPrice = await getCryptoPrice(cryptoIds[method]);
-                const paymentAmountContainer = document.getElementById('payment-amount-container');
-                if (cryptoPrice) {
-                    const cryptoAmount = (price / cryptoPrice).toFixed(8);
-                    paymentAmountContainer.innerHTML = `
-                        <p class="text-sm text-gray-400" data-translate="amountToSendLabel">${getTranslatedString('amountToSendLabel')} $${price.toFixed(2)}</p>
-                        <p class="text-2xl font-bold text-yellow-400">${cryptoAmount} ${method.toUpperCase()}</p>
-                        <p class="text-sm text-gray-500"><span data-translate="networkLabel">${getTranslatedString('networkLabel')}</span>: ${network}</p>
-                    `;
-                } else {
-                    paymentAmountContainer.innerHTML = `<p class="text-red-400">Could not fetch crypto price. Please try again.</p>`;
-                }
-            }
-        };
-        
-        window.copyToClipboard = (text, isDialog = false) => {
-            navigator.clipboard.writeText(text).then(() => {
-                const feedbackId = isDialog ? 'copy-feedback-dialog' : 'copy-feedback';
-                const feedbackEl = document.getElementById(feedbackId);
-                if(feedbackEl) {
-                    feedbackEl.textContent = getTranslatedString('copiedText');
-                    setTimeout(() => {
-                        feedbackEl.textContent = '';
-                    }, 2000);
-                }
-            });
-        };
-
-        window.proceedToFinalConfirmation = () => {
-            closeDialog();
-            showPaymentConfirmationPage();
-        };
-
-        const showPaymentConfirmationPage = () => {
-            document.getElementById('main-content').classList.add('hidden');
-            const confirmationContainer = document.getElementById('payment-confirmation-content');
-            
-            const uniqueId = purchaseState.uniqueId || localStorage.getItem('uniqueId');
-            
-            confirmationContainer.innerHTML = `
-                <section class="min-h-screen py-16 md:py-24">
-                    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                        <div class="max-w-2xl mx-auto bg-gray-800/50 p-6 md:p-8 rounded-lg shadow-xl text-center">
-                            <div class="text-6xl text-green-400 mb-4">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold mb-4" data-translate="telegramInstructionsTitle">${getTranslatedString('telegramInstructionsTitle')}</h3>
-                            <p class="text-gray-400 mb-6" data-translate="telegramInstructionsText">${getTranslatedString('telegramInstructionsText')}</p>
-                            
-                            <div class="flex items-center bg-gray-900 p-3 rounded-lg max-w-sm mx-auto">
-                                <span id="unique-id-display-confirm" class="flex-grow text-lg font-mono text-yellow-400">${uniqueId}</span>
-                                <button id="copy-id-button-confirm" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            <p id="copy-feedback" class="text-green-400 text-sm mt-2 h-4"></p>
-                            
-                            <div class="mt-8 bg-gray-900/50 p-6 rounded-lg text-left max-w-md mx-auto">
-                                 <div class="space-y-4">
-                                    <div>
-                                        <h4 class="font-semibold" data-translate="telegramStep1Title">${getTranslatedString('telegramStep1Title')}</h4>
-                                        <p class="text-sm text-gray-400" data-translate="telegramStep1Desc">${getTranslatedString('telegramStep1Desc')}</p>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold" data-translate="telegramStep2Title">${getTranslatedString('telegramStep2Title')}</h4>
-                                        <p class="text-sm text-gray-400" data-translate="telegramStep2Desc">${getTranslatedString('telegramStep2Desc')}</p>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold" data-translate="telegramStep3Title">${getTranslatedString('telegramStep3Title')}</h4>
-                                        <p class="text-sm text-gray-400" data-translate="telegramStep3Desc">${getTranslatedString('telegramStep3Desc')}</p>
-                                    </div>
-                                 </div>
-                            </div>
-
-                            <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg">
-                                <i class="fab fa-telegram-plane mr-2"></i>
-                                <span data-translate="openTelegramButton">${getTranslatedString('openTelegramButton')}</span>
-                            </a>
+            populateTestimonials() {
+                 const container = this.dom.testimonialsContainer;
+                  if(!container) return;
+                 container.innerHTML = [1, 2, 3, 4, 5].map(i => `
+                    <div class="testimonial-card p-6">
+                        <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4"></i>
+                        <p class="text-gray-400 mb-4">${this.getTranslatedString(`testimonial${i}Quote`)}</p>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user"></i></div>
+                            <p class="font-semibold">${this.getTranslatedString(`testimonial${i}Author`)}</p>
                         </div>
                     </div>
-                </section>
-            `;
-            
-            confirmationContainer.classList.remove('hidden');
+                 `).join('');
+            },
 
-            document.getElementById('copy-id-button-confirm').onclick = () => copyToClipboard(uniqueId, false);
+            // --- Dialog Management ---
+            showDialog(content) {
+                this.dom.dialogContainer.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg">${content}</div>`;
+                this.dom.dialogContainer.classList.remove('hidden');
+            },
+
+            closeDialog() {
+                this.dom.dialogContainer.classList.add('hidden');
+                this.dom.dialogContainer.innerHTML = '';
+            },
             
-            window.scrollTo(0, 0);
+            // --- Purchase Flow & Page Transitions ---
+            startPurchaseFlow() {
+                const email = localStorage.getItem("userEmail");
+                const username = localStorage.getItem("username");
+                if (email && username) {
+                    this.purchaseState.email = email;
+                    this.purchaseState.username = username;
+                    this.showPlatformDialog();
+                } else {
+                    this.showRegistrationDialog();
+                }
+            },
+
+            showRegistrationDialog() {
+                const content = `
+                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('registerTitle')}</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="email-input" class="block mb-2 text-sm font-medium">${this.getTranslatedString('emailLabel')}</label>
+                            <input type="email" id="email-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${this.getTranslatedString('emailPlaceholder')}" required>
+                             <p id="email-validation-message" class="text-red-500 text-sm mt-1 h-4"></p>
+                        </div>
+                        <div>
+                            <label for="username-input" class="block mb-2 text-sm font-medium">${this.getTranslatedString('usernameLabel')}</label>
+                            <input type="text" id="username-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${this.getTranslatedString('usernamePlaceholder')}" required>
+                            <p id="username-validation-message" class="text-red-500 text-sm mt-1 h-4"></p>
+                        </div>
+                        <button id="submit-registration-btn" class="w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('registerButton')}</button>
+                    </div>
+                `;
+                this.showDialog(content);
+                document.getElementById('submit-registration-btn').onclick = () => this.submitRegistration();
+            },
+            
+            submitRegistration() {
+                const emailInput = document.getElementById("email-input");
+                const usernameInput = document.getElementById("username-input");
+                const emailError = document.getElementById("email-validation-message");
+                const usernameError = document.getElementById("username-validation-message");
+                
+                let isValid = true;
+                
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+                    emailError.textContent = this.getTranslatedString('emailValidationError');
+                    isValid = false;
+                } else {
+                    emailError.textContent = '';
+                }
+
+                if (usernameInput.value.length < 3) {
+                    usernameError.textContent = this.getTranslatedString('usernameValidationError');
+                    isValid = false;
+                } else {
+                    usernameError.textContent = '';
+                }
+
+                if(isValid) {
+                    localStorage.setItem("userEmail", emailInput.value);
+                    localStorage.setItem("username", usernameInput.value);
+                    this.purchaseState.email = emailInput.value;
+                    this.purchaseState.username = usernameInput.value;
+                    this.showPlatformDialog();
+                }
+            },
+
+            showPlatformDialog() {
+                const content = `
+                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('platformDialogTitle')}</h3>
+                    <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('platformDialogText')}</p>
+                    <div class="flex justify-center space-x-4">
+                        <button id="select-android" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-android mr-2"></i><span>${this.getTranslatedString('platformAndroid')}</span></button>
+                        <button id="select-ios" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-apple mr-2"></i><span>${this.getTranslatedString('platformIOS')}</span></button>
+                    </div>
+                `;
+                this.showDialog(content);
+                document.getElementById('select-android').onclick = () => this.selectPlatform('android');
+                document.getElementById('select-ios').onclick = () => this.selectPlatform('ios');
+            },
+            
+            selectPlatform(platform) {
+                this.purchaseState.platform = platform;
+                this.showUniqueIdDialog();
+            },
+
+            showUniqueIdDialog() {
+                let uniqueId = localStorage.getItem("uniqueId");
+                if (!uniqueId) {
+                    uniqueId = Date.now().toString().slice(-9);
+                    localStorage.setItem("uniqueId", uniqueId);
+                }
+                this.purchaseState.uniqueId = uniqueId;
+
+                const content = `
+                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('uniqueIdDialogTitle')}</h3>
+                    <p class="text-center text-gray-400 mb-4">${this.getTranslatedString('uniqueIdDialogText')}</p>
+                    <div class="flex items-center bg-gray-800 p-3 rounded-lg">
+                        <span id="unique-id-value" class="flex-grow text-lg font-mono">${uniqueId}</span>
+                        <button id="copy-id-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4"><i class="fas fa-copy"></i></button>
+                    </div>
+                    <button id="continue-to-poker-app" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('continueButton')}</button>
+                `;
+                this.showDialog(content);
+                document.getElementById('copy-id-btn').onclick = () => this.copyToClipboard(uniqueId, true);
+                document.getElementById('continue-to-poker-app').onclick = () => this.showPokerAppDialog();
+            },
+
+            showPokerAppDialog() {
+                const content = `
+                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('pokerAppDialogTitle')}</h3>
+                     <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('pokerAppDialogText')}</p>
+                    <div class="space-y-3">
+                        <button id="select-pppoker" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition">PPPOKER</button>
+                        <button id="select-xpoker" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition">XPoker</button>
+                        <button id="select-clubgg" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">ClubGG</button>
+                    </div>
+                `;
+                this.showDialog(content);
+                document.getElementById('select-pppoker').onclick = () => this.selectPokerApp('pppoker');
+                document.getElementById('select-xpoker').onclick = () => this.selectPokerApp('xpoker');
+                document.getElementById('select-clubgg').onclick = () => this.selectPokerApp('clubgg');
+            },
+
+            selectPokerApp(app) {
+                this.purchaseState.app = app;
+                const prices = { pppoker: 1500, xpoker: 1500, clubgg: 4000 };
+                this.purchaseState.basePrice = prices[app] || 0;
+                this.purchaseState.discount = 0; // Reset discount
+                this.showCouponDialog();
+            },
+
+            showCouponDialog() {
+                const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
+                const content = `
+                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('couponDialogTitle')}</h3>
+                    <div class="text-center mb-4">
+                         <p id="original-price-container" class="${this.purchaseState.discount > 0 ? '' : 'hidden'} text-gray-500">
+                             <span>${this.getTranslatedString('originalAmountLabel')}</span>:
+                             <s id="original-price-value">$${this.purchaseState.basePrice.toFixed(2)}</s>
+                         </p>
+                        <p id="final-price-display" class="text-2xl font-bold text-yellow-400">${this.getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`})}</p>
+                    </div>
+                    <p class="text-center text-gray-400 mb-4">${this.getTranslatedString('couponDialogText')}</p>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="coupon-input" class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg p-2.5" placeholder="${this.getTranslatedString('couponPlaceholder')}">
+                        <button id="apply-coupon-btn" class="cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('applyCouponButton')}</button>
+                    </div>
+                    <p id="coupon-message" class="text-center h-5 mt-2 text-sm"></p>
+                    <button id="proceed-to-payment-method" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('proceedButton')}</button>
+                `;
+                this.showDialog(content);
+                document.getElementById('apply-coupon-btn').onclick = () => this.applyCoupon();
+                document.getElementById('proceed-to-payment-method').onclick = () => this.proceedToPaymentMethod();
+            },
+
+            applyCoupon() {
+                const couponInput = document.getElementById('coupon-input');
+                const messageEl = document.getElementById('coupon-message');
+                if(!couponInput || !messageEl) return;
+                const code = couponInput.value.trim().toUpperCase();
+                
+                let discount = 0;
+                let isValid = false;
+
+                if (code === '30OFF') {
+                    discount = 0.30;
+                    isValid = true;
+                } else if (code === '10OFF') {
+                    discount = 0.10;
+                    isValid = true;
+                }
+                
+                this.purchaseState.discount = isValid ? discount : 0;
+                
+                if (isValid) {
+                    messageEl.textContent = this.getTranslatedString('couponAppliedSuccess', { COUPON_CODE: code, DISCOUNT: (discount * 100) });
+                    messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
+                } else {
+                     messageEl.textContent = this.getTranslatedString('couponErrorInvalid');
+                      messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
+                }
+
+                const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
+                const originalPriceContainer = document.getElementById('original-price-container');
+                const finalPriceDisplay = document.getElementById('final-price-display');
+
+                if (finalPriceDisplay) {
+                     finalPriceDisplay.textContent = this.getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`});
+                }
+
+                if (originalPriceContainer) {
+                    const originalPriceValueEl = originalPriceContainer.querySelector('s');
+                     if (this.purchaseState.discount > 0) {
+                         if(originalPriceValueEl) originalPriceValueEl.textContent = `$${this.purchaseState.basePrice.toFixed(2)}`;
+                         originalPriceContainer.classList.remove('hidden');
+                     } else {
+                         originalPriceContainer.classList.add('hidden');
+                     }
+                }
+            },
+            
+            proceedToPaymentMethod() {
+                this.purchaseState.finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
+                this.showPaymentMethodDialog();
+            },
+
+            showPaymentMethodDialog() {
+                const content = `
+                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('paymentMethodDialogTitle')}</h3>
+                    <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentMethodDialogText')}</p>
+                    <div class="space-y-3">
+                        <button id="pay-usdt" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition">USDT (TRC20)</button>
+                        <button id="pay-btc" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition">BTC</button>
+                        <button id="pay-eth" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg transition">ETH</button>
+                    </div>
+                `;
+                this.showDialog(content);
+                document.getElementById('pay-usdt').onclick = () => this.selectPaymentMethod('usdt');
+                document.getElementById('pay-btc').onclick = () => this.selectPaymentMethod('btc');
+                document.getElementById('pay-eth').onclick = () => this.selectPaymentMethod('eth');
+            },
+
+            async selectPaymentMethod(method) {
+                this.purchaseState.method = method;
+                await this.showPaymentDetailsDialog();
+            },
+
+            async getCryptoPrice(cryptoId) {
+                try {
+                    const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=usd`);
+                    if (!response.ok) throw new Error('Network response was not ok.');
+                    const data = await response.json();
+                    return data[cryptoId].usd;
+                } catch (error) {
+                    console.error("Failed to fetch crypto price:", error);
+                    return null;
+                }
+            },
+
+            async showPaymentDetailsDialog() {
+                const { method, finalPrice } = this.purchaseState;
+                
+                const addresses = {
+                    usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK",
+                    btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3",
+                    eth: "0x9b5877A847BE203FCbA421194C83E0af6f686cC7"
+                };
+                const networks = { usdt: "TRC20", btc: "Bitcoin", eth: "Ethereum" };
+                const cryptoIds = { btc: 'bitcoin', eth: 'ethereum' };
+
+                const address = addresses[method];
+                const network = networks[method];
+                const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${address}`;
+                
+                let cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400">$${finalPrice.toFixed(2)}</p>`;
+                if (method !== 'usdt') {
+                    cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${this.getTranslatedString('loadingPaymentText')}</span></div>`;
+                }
+
+                const content = `
+                    <h3 class="text-xl font-bold mb-2 text-center">${this.getTranslatedString('paymentDialogTitleFinal')}</h3>
+                    <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentInstructionsText')}</p>
+                    
+                    <div id="payment-amount-container" class="text-center mb-4">
+                        ${cryptoAmountHTML}
+                    </div>
+                    
+                    <div class="flex justify-center mb-4">
+                        <div class="p-2 bg-white rounded-lg border-4 border-gray-600">
+                            <img src="${qrUrl}" alt="${method.toUpperCase()} QR Code">
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center bg-gray-800 p-2 rounded-lg">
+                        <input id="wallet-address-input" type="text" class="flex-grow bg-transparent text-sm text-gray-300 border-0 focus:ring-0" value="${address}" readonly>
+                        <button id="copy-address-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-2">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <p id="copy-feedback-dialog" class="text-green-400 text-sm mt-2 h-4 text-center"></p>
+
+                    <button id="payment-done-btn" class="mt-6 w-full cta-button font-bold py-3 px-5 rounded-lg">${this.getTranslatedString('paymentDoneButton')}</button>
+                `;
+                this.showDialog(content);
+                document.getElementById('copy-address-btn').onclick = () => this.copyToClipboard(address, true);
+                document.getElementById('payment-done-btn').onclick = () => this.proceedToFinalConfirmation();
+
+                if (method !== 'usdt') {
+                    const cryptoPrice = await this.getCryptoPrice(cryptoIds[method]);
+                    const paymentAmountContainer = document.getElementById('payment-amount-container');
+                    if (cryptoPrice) {
+                        const cryptoAmount = (finalPrice / cryptoPrice).toFixed(8);
+                        paymentAmountContainer.innerHTML = `
+                            <p class="text-sm text-gray-400">${this.getTranslatedString('amountToSendLabel')} $${finalPrice.toFixed(2)}</p>
+                            <p class="text-2xl font-bold text-yellow-400">${cryptoAmount} ${method.toUpperCase()}</p>
+                            <p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>
+                        `;
+                    } else {
+                        paymentAmountContainer.innerHTML = `<p class="text-red-400">Could not fetch crypto price. Please try again.</p>`;
+                    }
+                }
+            },
+            
+            copyToClipboard(text, isDialog = false) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const feedbackId = isDialog ? 'copy-feedback-dialog' : 'copy-feedback';
+                    const feedbackEl = document.getElementById(feedbackId);
+                    if(feedbackEl) {
+                        feedbackEl.textContent = this.getTranslatedString('copiedText');
+                        setTimeout(() => { feedbackEl.textContent = ''; }, 2000);
+                    }
+                });
+            },
+
+            proceedToFinalConfirmation() {
+                this.closeDialog();
+                this.showPaymentConfirmationPage();
+            },
+
+            showPaymentConfirmationPage() {
+                this.dom.mainContent.classList.add('hidden');
+                const confirmationContainer = this.dom.paymentConfirmationContent;
+                
+                const uniqueId = this.purchaseState.uniqueId || localStorage.getItem('uniqueId');
+                
+                confirmationContainer.innerHTML = `
+                    <section class="min-h-screen py-16 md:py-24 flex items-center">
+                        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="max-w-2xl mx-auto bg-gray-800/50 p-6 md:p-8 rounded-lg shadow-xl text-center">
+                                <div class="text-6xl text-green-400 mb-4">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('telegramInstructionsTitle')}</h3>
+                                <p class="text-gray-400 mb-6">${this.getTranslatedString('telegramInstructionsText')}</p>
+                                
+                                <div class="flex items-center bg-gray-900 p-3 rounded-lg max-w-sm mx-auto">
+                                    <span class="flex-grow text-lg font-mono text-yellow-400">${uniqueId}</span>
+                                    <button id="copy-id-button-confirm" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <p id="copy-feedback" class="text-green-400 text-sm mt-2 h-4"></p>
+                                
+                                <div class="mt-8 bg-gray-900/50 p-6 rounded-lg text-left max-w-md mx-auto">
+                                     <div class="space-y-4">
+                                         <div>
+                                             <h4 class="font-semibold">${this.getTranslatedString('telegramStep1Title')}</h4>
+                                             <p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep1Desc')}</p>
+                                         </div>
+                                         <div>
+                                             <h4 class="font-semibold">${this.getTranslatedString('telegramStep2Title')}</h4>
+                                             <p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep2Desc')}</p>
+                                         </div>
+                                         <div>
+                                             <h4 class="font-semibold">${this.getTranslatedString('telegramStep3Title')}</h4>
+                                             <p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep3Desc')}</p>
+                                         </div>
+                                      </div>
+                                </div>
+
+                                <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg">
+                                    <i class="fab fa-telegram-plane mr-2"></i>
+                                    <span>${this.getTranslatedString('openTelegramButton')}</span>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+                `;
+                
+                confirmationContainer.classList.remove('hidden');
+
+                document.getElementById('copy-id-button-confirm').onclick = () => this.copyToClipboard(uniqueId, false);
+                
+                window.scrollTo(0, 0);
+            },
         };
 
-        // --- Final Setup ---
-        setupInitialUI();
+        // --- GLOBALIZED METHODS FOR HTML ONCLICK ---
+        // This makes functions available in the global scope for inline event handlers
+        window.setLanguage = App.setLanguage.bind(App);
+
+        // --- INITIALIZE THE APP ---
+        App.init();
     });
     </script>
 </body>
