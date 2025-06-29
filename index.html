@@ -1,395 +1,1199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-6WV95XF58S');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-translate="pageTitle">Reveal App: See Cards & Dominate PPPOKER, XPoker, ClubGG | Undetectable Edge</title>
     <meta name="description" content="Reveal App gives you the ultimate poker advantage. See opponent cards in PPPOKER, XPoker & ClubGG. Secure, undetectable, and easy to use.">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="registration-chatbot-styles.css">
-    <link rel="stylesheet" href="logo-styles.css">
+    <meta name="keywords" content="hack poker, hack pppoker, hack clubgg, reveal cards poker, poker advantage, pppoker cheat, xpoker cheat, clubgg cheat, ver cartas pppoker, ver cartas poker, aplicativo para ver cartas no poker">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.imgur.com/Uf6Al3f.png">
+
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-color: #00e5ff;
+            --secondary-color: #ffab00;
+            --background-dark: #0a0e1a;
+            --background-light: #101827;
+            --text-light: #e2e8f0;
+            --text-dark: #1a202c;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+        }
+        .cta-button {
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(255, 171, 0, 0.4);
+        }
+        .dialog {
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+        }
+        .dialog-content {
+            background-color: var(--background-light);
+            border: 1px solid #2d3748;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 0.5rem;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+         /* Mobile Menu */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        /* Spinner for API Loading */
+        .spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid var(--secondary-color);
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Google Translate Widget Styling */
+        .skiptranslate {
+            display: none !important;
+        }
+        body {
+            top: 0px !important; 
+        }
+        #google_translate_element .goog-te-gadget-simple {
+            background-color: #1f2937 !important;
+            border: 1px solid #4b5563 !important;
+            border-radius: 8px !important;
+            padding: 0.5rem !important;
+        }
+        #google_translate_element .goog-te-gadget-simple span {
+            color: #e2e8f0 !important;
+        }
+    </style>
+     <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6WV95XF58S');
+    </script>
 </head>
-<body>
-    <header>
-        <div class="logo">
-            <a href="#"><img src="logo.svg" alt="Reveal App Logo" class="site-logo"></a>
+<body class="bg-gray-900 text-gray-200">
+    <noscript>
+        <div style="background-color: #ffab00; color: #1a202c; text-align: center; padding: 1rem;">
+            Para a funcionalidade completa deste site é necessário habilitar o JavaScript.
         </div>
-        <nav>
-            <ul>
-                <li><a href="#features" data-translate="navFeatures">Features</a></li>
-                <li><a href="#how-it-works" data-translate="navHowItWorks">How It Works</a></li>
-                <li><a href="#demo" data-translate="navDemo">Demo</a></li>
-                <li><a href="#testimonials" data-translate="navTestimonials">Testimonials</a></li>
-                <li><a href="#get-app" class="cta-button" data-translate="navGetApp">Get App</a></li>
-            </ul>
-        </nav>
-        <div id="language-selector">
-            <select onchange="setLanguage(this.value)">
-                <option value="en">English</option>
-                <option value="pt">Português</option>
-            </select>
+    </noscript>
+
+    <!-- Header -->
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
+                        <svg class="h-8 w-auto text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
+                           <path d="M11.9999 1.5C14.1643 1.5 16.2736 2.21043 18.0039 3.53531C19.7342 4.86019 20.9942 6.72483 21.6192 8.87287C22.2442 11.0209 22.2033 13.3435 21.5039 15.5181C20.8045 17.6927 19.4836 19.6053 17.7278 20.9911C15.972 22.3768 13.8643 23.1698 11.666 23.2472C9.46773 23.3245 7.32168 22.6821 5.51464 21.4111C3.7076 20.1402 2.34244 18.3113 1.63294 16.2163C0.923447 14.1213 0.923447 11.8787 1.63294 9.7837C2.34244 7.68871 3.7076 5.85984 5.51464 4.58888C7.32168 3.31792 9.46773 2.6755 11.666 2.75283" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                           <path d="M12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5 9.51472 14.4853 7.5 12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="text-2xl font-bold text-white">Reveal App</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex md:space-x-8">
+                    <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
+                    <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
+                    <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
+                    <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
+                </nav>
+
+                <!-- CTA and Language Selector -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#get-app" class="cta-button font-bold py-2 px-5 rounded-lg" data-translate="navGetApp">Get App</a>
+                    <div id="language-selector">
+                        <select onchange="setLanguage(this.value)" class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="en">English</option>
+                            <option value="pt">Português</option>
+                        </select>
+                    </div>
+                     <div id="google_translate_element"></div>
+                </div>
+                 <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+         <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden mobile-menu transform -translate-x-full fixed top-0 left-0 h-full w-64 bg-gray-900 z-50 p-6">
+            <div class="flex justify-between items-center mb-8">
+                 <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
+                    <svg class="h-8 w-auto text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
+                       <path d="M11.9999 1.5C14.1643 1.5 16.2736 2.21043 18.0039 3.53531C19.7342 4.86019 20.9942 6.72483 21.6192 8.87287C22.2442 11.0209 22.2033 13.3435 21.5039 15.5181C20.8045 17.6927 19.4836 19.6053 17.7278 20.9911C15.972 22.3768 13.8643 23.1698 11.666 23.2472C9.46773 23.3245 7.32168 22.6821 5.51464 21.4111C3.7076 20.1402 2.34244 18.3113 1.63294 16.2163C0.923447 14.1213 0.923447 11.8787 1.63294 9.7837C2.34244 7.68871 3.7076 5.85984 5.51464 4.58888C7.32168 3.31792 9.46773 2.6755 11.666 2.75283" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                       <path d="M12 16.5C14.4853 16.5 16.5 14.4853 16.5 12C16.5 9.51472 14.4853 7.5 12 7.5C9.51472 7.5 7.5 9.51472 7.5 12C7.5 14.4853 9.51472 16.5 12 16.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="text-xl font-bold text-white">Reveal App</span>
+                 </a>
+                <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col space-y-4">
+                <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
+                <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
+                <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
+                <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
+                 <a href="#get-app" class="cta-button text-center font-bold py-2 px-5 rounded-lg mt-4" data-translate="navGetApp">Get App</a>
+                 <div class="mt-4 space-y-4">
+                     <div id="language-selector-mobile">
+                        <select onchange="setLanguage(this.value)" class="bg-gray-800 border border-gray-700 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <option value="en">English</option>
+                            <option value="pt">Português</option>
+                        </select>
+                    </div>
+                    <div id="google_translate_element_mobile"></div>
+                 </div>
+            </nav>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 data-translate="heroTitle">Unlock Your Winning Edge with Reveal App</h1>
-            <p data-translate="heroTagline">See your opponents' cards in PPPOKER, XPoker & ClubGG. Make winning decisions and dominate the tables.</p>
-            <a href="#get-app" class="cta-button" data-translate="heroCta">Get Reveal App Now & Dominate!</a>
-        </div>
-    </section>
+    <main>
+        <div id="main-content">
+            <!-- Hero Section -->
+            <section class="hero relative py-20 md:py-32 text-center text-white overflow-hidden">
+                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.unsplash.com/photo-1541160361326-6b6c039945bc?q=80&w=2070&auto=format&fit=crop');"></div>
+                 <div class="absolute inset-0 bg-black/70"></div>
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4" data-translate="heroTitle">Unlock Your Winning Edge with Reveal App</h1>
+                    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8" data-translate="heroTagline">See your opponents' cards in PPPOKER, XPoker & ClubGG. Make winning decisions and dominate the tables.</p>
+                    <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="heroCta">Get Reveal App Now & Dominate!</a>
+                </div>
+            </section>
 
-    <section id="features" class="features">
-        <h2 data-translate="featuresTitle">Why Choose Reveal App?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-eye"></i>
+            <!-- Features Section -->
+            <section id="features" class="py-16 md:py-24 bg-gray-900">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="featuresTitle">Why Choose Reveal App?</h2>
+                    <div id="features-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Feature Cards will be injected by JS -->
+                    </div>
                 </div>
-                <h3 data-translate="feature1Title">Unprecedented Insight</h3>
-                <p data-translate="feature1Text">Transform uncertainty into profit. See opponents' hands, make confident decisions, avoid traps, and maximize pots.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3 data-translate="feature2Title">Multi-Platform Support</h3>
-                <p data-translate="feature2Text">Works seamlessly with PPPOKER, XPoker, and ClubGG on Android & iOS.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3 data-translate="feature3Title">Secure & Undetectable</h3>
-                <p data-translate="feature3Text">Play with confidence. Our advanced, external technology ensures your advantage remains secret and your account safe.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3 data-translate="feature4Title">Consistent Results</h3>
-                <p data-translate="feature4Text">Turn every session into a winning one. With perfect information, you'll make optimal decisions every time.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-sync"></i>
-                </div>
-                <h3 data-translate="feature5Title">Regular Updates</h3>
-                <p data-translate="feature5Text">Stay ahead with our continuous updates that adapt to platform changes, ensuring your edge remains uninterrupted.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <h3 data-translate="feature6Title">Premium Support</h3>
-                <p data-translate="feature6Text">Get personalized assistance from our expert team whenever you need it. We're committed to your success.</p>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <section id="how-it-works" class="how-it-works">
-        <h2 data-translate="howItWorksTitle">Simple Steps to Dominate</h2>
-        <div class="steps-container">
-            <div class="step-card">
-                <div class="step-number">1</div>
-                <h3 data-translate="step1Title">Choose Your Plan</h3>
-                <p data-translate="step1Text">Select the Reveal App access that fits your needs.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">2</div>
-                <h3 data-translate="step2Title">Your Unique ID</h3>
-                <p data-translate="step2Text">Get your unique ID for secure activation (stored locally for your convenience).</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">3</div>
-                <h3 data-translate="step3Title">Activate & Play</h3>
-                <p data-translate="step3Text">Follow simple instructions to activate and start seeing cards!</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">4</div>
-                <h3 data-translate="step4Title">Win Consistently</h3>
-                <p data-translate="step4Text">Enjoy your newfound advantage and watch your profits grow session after session.</p>
-            </div>
-        </div>
-    </section>
+            <!-- How It Works Section -->
+            <section id="how-it-works" class="py-16 md:py-24 bg-gray-800/50">
+                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="howItWorksTitle">Simple Steps to Dominate</h2>
+                    <div id="how-it-works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+                        <!-- Steps will be injected by JS -->
+                    </div>
+                </div>
+            </section>
 
-    <section id="get-app" class="get-app">
-        <h2 data-translate="getAppTitle">Get Your Reveal App Access</h2>
-        <p data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
-        
-        <div class="special-offer">
-            <p data-translate="specialOfferText">SPECIAL OFFER</p>
-            <p data-translate="couponText">Use code <strong>10OFF</strong> for 10% OFF!</p>
-        </div>
-        
-        <div class="urgency-message">
-            <p data-translate="urgencyText">🔥 Limited spots available! Get your edge before your opponents do! 🔥</p>
-        </div>
-        
-        <button class="main-cta-button" onclick="startPurchaseFlow()" data-translate="getAppButton">Yes, I Want to Boost My Winnings!</button>
-        
-        <p class="security-note" data-translate="securityNote">100% secure and private activation process.</p>
-        
-        <div class="trust-badges">
-            <div class="trust-badge">
-                <i class="fas fa-shield-alt"></i> <span data-translate="securePaymentBadge">Secure Payment</span>
-            </div>
-            <div class="trust-badge">
-                <i class="fas fa-lock"></i> <span data-translate="privacyBadge">Privacy Guaranteed</span>
-            </div>
-            <div class="trust-badge">
-                <i class="fas fa-check-circle"></i> <span data-translate="instantAccessBadge">Instant Access</span>
-            </div>
-        </div>
-    </section>
+            <!-- Get App Section -->
+            <section id="get-app" class="py-16 md:py-24 text-center">
+                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
+                    
+                    <div class="bg-yellow-500/10 border border-yellow-500 text-yellow-400 px-4 py-3 rounded-lg relative inline-block mb-6">
+                        <p data-translate="specialOfferText">SPECIAL OFFER</p>
+                        <p data-translate="couponText"></p>
+                    </div>
+                    
+                    <div class="my-6">
+                        <p class="text-xl font-semibold text-red-500 animate-pulse" data-translate="urgencyText">🔥 Limited spots available! Get your edge before your opponents do! 🔥</p>
+                    </div>
+                    
+                    <button class="main-cta-button text-xl font-bold py-4 px-10 rounded-lg cta-button" onclick="startPurchaseFlow()" data-translate="getAppButton">Yes, I Want to Boost My Winnings!</button>
+                    
+                    <p class="mt-4 text-sm text-gray-500" data-translate="securityNote">100% secure and private activation process.</p>
+                    
+                    <div class="flex justify-center items-center space-x-6 mt-8 text-gray-400">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-shield-alt"></i> <span data-translate="securePaymentBadge">Secure Payment</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-lock"></i> <span data-translate="privacyBadge">Privacy Guaranteed</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check-circle"></i> <span data-translate="instantAccessBadge">Instant Access</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Demo Section -->
+            <section id="demo" class="py-16 md:py-24 bg-gray-800/50">
+                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-translate="demoTitle">See the App in Action</h2>
+                    <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-12" data-translate="demoText">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="demo-video">
+                            <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoPPPOKERTitle">PPPOKER Demo</h3>
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/wgzzXJx_TAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="demo-video">
+                            <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoXPokerTitle">XPoker Demo</h3>
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/JejQNbgaSSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                        <div class="demo-video">
+                            <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoClubGGTitle">ClubGG Demo</h3>
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/ptQIe4OyJrE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Story Section -->
+            <section class="story py-16 md:py-24">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6" data-translate="storyTitle">Our Story: How We Revolutionized Poker</h2>
+                    <p class="text-gray-400 mb-4" data-translate="storyText">It all started with a series of unexpected defeats, sparking a quest to uncover hidden vulnerabilities in popular poker apps like PPPOKER and XPoker. Through months of rigorous research, we revealed critical flaws that were being exploited. In November 2023, the <strong>Reveal App</strong> was born, empowering players to level the playing field by revealing opponents' cards.</p>
+                    <p class="text-white font-semibold" data-translate="storyCallToAction">This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game. <strong>Act now, because every moment without this app is a missed opportunity to dominate!</strong></p>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="py-16 md:py-24 bg-gray-900">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                     <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="testimonialsTitle">What Our Users Say</h2>
+                    <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Testimonials will be loaded dynamically -->
+                    </div>
+                </div>
+            </section>
 
-    <section id="demo" class="demo">
-        <h2 data-translate="demoTitle">See the App in Action</h2>
-        <p data-translate="demoText">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
-        
-        <div class="demo-videos">
-            <div class="demo-video">
-                <h3 data-translate="demoPPPOKERTitle">PPPOKER Demo</h3>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/wgzzXJx_TAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- Contact Section -->
+            <section class="contact py-16 md:py-24 text-center" id="contact">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle">Contact Us</h2>
+                    <p class="text-lg text-gray-400 mb-8" data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
+                    <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg transition">
+                        <i class="fab fa-telegram-plane mr-2"></i>
+                        <span data-translate="contactTelegram">Contact on Telegram</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <div id="payment-confirmation-content" class="hidden">
+             <!-- This div will be populated by JS for the final confirmation step -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="footerAboutTitle">About Reveal App</h3>
+                    <p class="text-gray-400" data-translate="footerAboutText">Reveal App provides a strategic advantage in online poker by allowing you to see opponent cards on PPPOKER, XPoker, and ClubGG. Play smarter, win bigger.</p>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="footerLinksTitle">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white" data-translate="footerLinkFeatures">Features</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white" data-translate="footerLinkHowItWorks">How It Works</a></li>
+                        <li><a href="#get-app" class="text-gray-400 hover:text-white" data-translate="footerLinkPricing">Pricing</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white" data-translate="footerLinkContact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <!-- Connect -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="footerConnectTitle">Connect With Us</h3>
+                    <a href="https://t.me/bedmalcon_temp" target="_blank" class="text-gray-400 hover:text-white text-2xl">
+                        <i class="fab fa-telegram"></i>
+                    </a>
                 </div>
             </div>
-            <div class="demo-video">
-                <h3 data-translate="demoXPokerTitle">XPoker Demo</h3>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/JejQNbgaSSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
+                <p>&copy; <span id="current-year"></span> Reveal App. <span data-translate="footerRights">All Rights Reserved. Your success is our mission.</span></p>
+                <p class="text-sm mt-2" data-translate="footerDisclaimer">Disclaimer: Use responsibly and be aware of the terms of service of the poker platforms you use.</p>
             </div>
-            <div class="demo-video">
-                <h3 data-translate="demoClubGGTitle">ClubGG Demo</h3>
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/ptQIe4OyJrE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="story">
-        <h2 data-translate="storyTitle">Our Story: How We Revolutionized Poker</h2>
-        <p data-translate="storyText">It all started with a series of unexpected defeats, sparking a quest to uncover hidden vulnerabilities in popular poker apps like PPPOKER and XPoker. Through months of rigorous research, we revealed critical flaws that were being exploited. In November 2023, the <strong>Reveal App</strong> was born, empowering players to level the playing field by revealing opponents' cards.</p>
-        <p data-translate="storyCallToAction">This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game. <strong>Act now, because every moment without this app is a missed opportunity to dominate!</strong></p>
-    </section>
-
-    <section id="testimonials" class="testimonials">
-        <h2 data-translate="testimonialsTitle">What Our Users Say</h2>
-        <div id="testimonials-container" class="testimonials-grid">
-            <!-- Testimonials will be loaded dynamically -->
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <h2 data-translate="contactTitle">Contact Us</h2>
-        <p data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
-        <div class="contact-options">
-            <a href="https://t.me/bedmalcon_temp" target="_blank" class="contact-option">
-                <i class="fab fa-telegram"></i>
-                <span data-translate="contactTelegram">Contact on Telegram</span>
-            </a>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 data-translate="footerAboutTitle">About Reveal App</h3>
-                <p data-translate="footerAboutText">Reveal App provides a strategic advantage in online poker by allowing you to see opponent cards on PPPOKER, XPoker, and ClubGG. Play smarter, win bigger.</p>
-            </div>
-            <div class="footer-section">
-                <h3 data-translate="footerLinksTitle">Quick Links</h3>
-                <ul>
-                    <li><a href="#features" data-translate="footerLinkFeatures">Features</a></li>
-                    <li><a href="#how-it-works" data-translate="footerLinkHowItWorks">How It Works</a></li>
-                    <li><a href="#get-app" data-translate="footerLinkPricing">Pricing</a></li>
-                    <li><a href="#contact" data-translate="footerLinkContact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3 data-translate="footerConnectTitle">Connect With Us</h3>
-                <div class="social-links">
-                    <a href="https://t.me/bedmalcon_temp" target="_blank"><i class="fab fa-telegram"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; <span id="current-year"></span> Reveal App. <span data-translate="footerRights">All Rights Reserved. Your success is our mission.</span></p>
-            <p data-translate="footerDisclaimer">Disclaimer: Use responsibly and be aware of the terms of service of the poker platforms you use.</p>
         </div>
     </footer>
-
+    
     <!-- Dialogs -->
-    <div id="email-registration-dialog" class="dialog">
-        <div class="dialog-content registration-form">
-            <h3 data-translate="registerTitle">Register to Continue</h3>
-            <div class="form-group">
-                <label for="email-input" data-translate="emailLabel">Email Address</label>
-                <input type="email" id="email-input" data-translate-placeholder="emailPlaceholder" placeholder="Enter your email address">
-                <div id="email-validation-message" class="validation-message"></div>
-            </div>
-            <div class="form-group">
-                <label for="username-input" data-translate="usernameLabel">Username</label>
-                <input type="text" id="username-input" data-translate-placeholder="usernamePlaceholder" placeholder="Choose a username (min. 3 characters)">
-                <div id="username-validation-message" class="validation-message"></div>
-            </div>
-            <button class="register-button" onclick="submitRegistration()" data-translate="registerButton">Register & Continue</button>
-        </div>
+    <div id="dialog-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <!-- Dialog content will be injected here -->
     </div>
 
-    <div id="platform-dialog" class="dialog">
-        <div class="dialog-content">
-            <h3 data-translate="platformDialogTitle">Select Your Device</h3>
-            <p data-translate="platformDialogText">Choose the platform you'll be using Reveal App on:</p>
-            <div class="platform-options">
-                <button onclick="selectPlatform('android')" class="platform-button">
-                    <i class="fab fa-android"></i>
-                    <span data-translate="platformAndroid">Android</span>
-                </button>
-                <button onclick="selectPlatform('ios')" class="platform-button">
-                    <i class="fab fa-apple"></i>
-                    <span data-translate="platformIOS">iOS</span>
-                </button>
-            </div>
-        </div>
-    </div>
 
-    <div id="unique-id-dialog" class="dialog">
-        <div class="dialog-content">
-            <h3 data-translate="uniqueIdDialogTitle">Your Unique ID</h3>
-            <p data-translate="uniqueIdDialogText">This is your unique ID. Please save it as you'll need it for activation:</p>
-            <div class="unique-id-container">
-                <div id="unique-id-value" class="unique-id-value"></div>
-                <button id="copy-id-button" onclick="copyUniqueId()" class="copy-button">
-                    <i class="fas fa-copy"></i> <span data-translate="copyIdButton">Copy ID</span>
-                </button>
-            </div>
-            <button onclick="continueWithUniqueId()" class="continue-button" data-translate="continueButton">Continue</button>
-        </div>
-    </div>
-
-    <div id="poker-app-dialog" class="dialog">
-        <div class="dialog-content">
-            <h3 data-translate="pokerAppDialogTitle">Select Poker App</h3>
-            <p data-translate="pokerAppDialogText">Choose the poker app you want to use Reveal App with:</p>
-            <div class="poker-app-options">
-                <button onclick="selectPokerApp('pppoker')" class="poker-app-button pppoker-button">
-                    <span>PPPOKER</span>
-                </button>
-                <button onclick="selectPokerApp('xpoker')" class="poker-app-button xpoker-button">
-                    <span>XPoker</span>
-                </button>
-                <button onclick="selectPokerApp('clubgg')" class="poker-app-button clubgg-button">
-                    <span>ClubGG</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="payment-method-dialog" class="dialog">
-        <div class="dialog-content">
-            <h3 data-translate="paymentMethodDialogTitle">Select Payment Method</h3>
-            <p data-translate="paymentMethodDialogText">Choose your preferred payment method:</p>
-            <div class="payment-method-options">
-                <button onclick="selectPaymentMethod('usdt')" class="payment-method-button usdt-button">
-                    <span>USDT</span>
-                </button>
-                <button onclick="selectPaymentMethod('btc')" class="payment-method-button btc-button">
-                    <span>BTC</span>
-                </button>
-                <button onclick="selectPaymentMethod('eth')" class="payment-method-button eth-button">
-                    <span>ETH</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="payment-dialog" class="dialog">
-        <div class="dialog-content">
-            <h3 id="payment-dialog-title">Payment Details</h3>
+    <!-- Scripts -->
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+    <script>
+    // --- Translations Object ---
+    const translations = {
+        en: {
+            pageTitle: "Reveal App: See Cards & Dominate PPPOKER, XPoker, ClubGG | Undetectable Edge",
+            navFeatures: "Features",
+            navHowItWorks: "How It Works",
+            navDemo: "Demo",
+            navTestimonials: "Testimonials",
+            navGetApp: "Get App",
+            heroTitle: "Unlock Your Winning Edge with Reveal App",
+            heroTagline: "See your opponents' cards in PPPOKER, XPoker & ClubGG. Make winning decisions and dominate the tables.",
+            heroCta: "Get Reveal App Now & Dominate!",
+            featuresTitle: "Why Choose Reveal App?",
+            feature1Title: "Unprecedented Insight",
+            feature1Text: "Transform uncertainty into profit. See opponents' hands, make confident decisions, avoid traps, and maximize pots.",
+            feature2Title: "Multi-Platform Support",
+            feature2Text: "Works seamlessly with PPPOKER, XPoker, and ClubGG on Android & iOS.",
+            feature3Title: "Secure & Undetectable",
+            feature3Text: "Play with confidence. Our advanced, external technology ensures your advantage remains secret and your account safe.",
+            feature4Title: "Consistent Results",
+            feature4Text: "Turn every session into a winning one. With perfect information, you'll make optimal decisions every time.",
+            feature5Title: "Regular Updates",
+            feature5Text: "Stay ahead with our continuous updates that adapt to platform changes, ensuring your edge remains uninterrupted.",
+            feature6Title: "Premium Support",
+            feature6Text: "Get personalized assistance from our expert team whenever you need it. We're committed to your success.",
+            howItWorksTitle: "Simple Steps to Dominate",
+            step1Title: "Choose Your Plan",
+            step1Text: "Select the Reveal App access that fits your needs.",
+            step2Title: "Your Unique ID",
+            step2Text: "Get your unique ID for secure activation (stored locally for your convenience).",
+            step3Title: "Activate & Play",
+            step3Text: "Follow simple instructions to activate and start seeing cards!",
+            step4Title: "Win Consistently",
+            step4Text: "Enjoy your newfound advantage and watch your profits grow session after session.",
+            getAppTitle: "Get Your Reveal App Access",
+            getAppText: "Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.",
+            specialOfferText: "SPECIAL OFFER",
+            couponText: "Use code <strong>10OFF</strong> for a discount!",
+            urgencyText: "🔥 Limited spots available! Get your edge before your opponents do! 🔥",
+            getAppButton: "Yes, I Want to Boost My Winnings!",
+            securityNote: "100% secure and private activation process.",
+            securePaymentBadge: "Secure Payment",
+            privacyBadge: "Privacy Guaranteed",
+            instantAccessBadge: "Instant Access",
+            demoTitle: "See the App in Action",
+            demoText: "Watch our demo videos to understand how the Reveal App gives you the edge:",
+            demoPPPOKERTitle: "PPPOKER Demo",
+            demoXPokerTitle: "XPoker Demo",
+            demoClubGGTitle: "ClubGG Demo",
+            storyTitle: "Our Story: How We Revolutionized Poker",
+            storyText: "It all started with a series of unexpected defeats, sparking a quest to uncover hidden vulnerabilities in popular poker apps like PPPOKER and XPoker. Through months of rigorous research, we revealed critical flaws that were being exploited. In November 2023, the <strong>Reveal App</strong> was born, empowering players to level the playing field by revealing opponents' cards.",
+            storyCallToAction: "This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game. <strong>Act now, because every moment without this app is a missed opportunity to dominate!</strong>",
+            testimonialsTitle: "What Our Users Say",
+            testimonial1Quote: "This app completely changed my game. I went from a break-even player to consistently profitable. Seeing the cards is an unbelievable advantage.",
+            testimonial1Author: "Alex R.",
+            testimonial2Quote: "I was skeptical at first, but Reveal App delivered. It's easy to set up and works flawlessly. My win rate has skyrocketed.",
+            testimonial2Author: "Maria S.",
+            testimonial3Quote: "The best investment I've made in poker. It paid for itself in a single session. Highly recommended for serious players.",
+            testimonial3Author: "John D.",
+            testimonial4Quote: "Finally, a tool that gives a real edge. The support team is also fantastic, very helpful with the setup process.",
+            testimonial4Author: "Kenji T.",
+            testimonial5Quote: "Playing without it feels like playing blind. If you're not using Reveal App, you're leaving money on the table. Simple as that.",
+            testimonial5Author: "David L.",
+            contactTitle: "Contact Us",
+            contactText: "Have questions or need assistance? Our support team is ready to help you get started with Reveal App.",
+            contactTelegram: "Contact on Telegram",
+            footerAboutTitle: "About Reveal App",
+            footerAboutText: "Reveal App provides a strategic advantage in online poker by allowing you to see opponent cards on PPPOKER, XPoker, and ClubGG. Play smarter, win bigger.",
+            footerLinksTitle: "Quick Links",
+            footerLinkFeatures: "Features",
+            footerLinkHowItWorks: "How It Works",
+            footerLinkPricing: "Pricing",
+            footerLinkContact: "Contact Us",
+            footerConnectTitle: "Connect With Us",
+            footerRights: "All Rights Reserved. Your success is our mission.",
+            footerDisclaimer: "Disclaimer: Use responsibly and be aware of the terms of service of the poker platforms you use.",
             
-            <!-- Price & Coupon Stage -->
-            <div id="price-coupon-stage">
-                <div class="price-display">
-                    <p id="original-amount" class="original-amount"></p>
-                    <p id="amount" class="amount">Amount: $0.00</p>
-                </div>
-                
-                <div class="coupon-container">
-                    <div class="coupon-input-group">
-                        <input type="text" id="coupon-code" placeholder="Coupon Code" value="10OFF">
-                        <button onclick="applyCoupon()" class="apply-coupon-button" data-translate="applyCouponButton">Apply Coupon</button>
-                    </div>
-                    <p id="coupon-message" class="coupon-message"></p>
-                </div>
-                
-                <button onclick="proceedToFinalPaymentDetails()" class="proceed-button" data-translate="proceedButton">Proceed to Payment</button>
-            </div>
+            // Dialog translations
+            registerTitle: "Register to Continue",
+            emailLabel: "Email Address",
+            emailPlaceholder: "Enter your email address",
+            usernameLabel: "Username",
+            usernamePlaceholder: "Choose a username (min. 3 characters)",
+            registerButton: "Register & Continue",
+            emailValidationError: "Please enter a valid email address.",
+            usernameValidationError: "Username must be at least 3 characters.",
+            registrationSuccess: "Registration successful!",
+            welcomeBackMessage: "Welcome back, {USERNAME}!",
+            platformDialogTitle: "Select Your Device",
+            platformDialogText: "Choose the platform you'll be using Reveal App on:",
+            platformAndroid: "Android",
+            platformIOS: "iOS",
+            uniqueIdDialogTitle: "Your Unique ID",
+            uniqueIdDialogText: "This is your unique ID. Please save it as you'll need it for activation:",
+            copyIdButton: "Copy ID",
+            copiedText: "Copied!",
+            continueButton: "Continue",
+            pokerAppDialogTitle: "Select Poker App",
+            pokerAppDialogText: "Choose the poker app you want to use Reveal App with:",
+            couponDialogTitle: "Apply Coupon",
+            couponDialogText: "If you have a coupon code, enter it below.",
+            couponPlaceholder: "Enter coupon code",
+            paymentMethodDialogTitle: "Select Payment Method",
+            paymentMethodDialogText: "Choose your preferred payment method:",
+            paymentDialogTitle: "Payment Details",
+            applyCouponButton: "Apply",
+            proceedButton: "Proceed to Payment",
+            loadingPaymentText: "Getting price...",
+            paymentInstructionsTitle: "Payment Instructions",
+            paymentInstructionsText: "Please send the exact amount to the address below or scan the QR code with your wallet app.",
+            amountToSendLabel: "Amount to Send:",
+            cryptoAmountLabel: "In {CRYPTO}:",
+            networkLabel: "Network:",
+            qrCodeScanText: "Scan with your wallet app",
+            copyAddressButton: "Copy Address",
+            alertCopied: "Address copied to clipboard!",
+            alertCopyFailed: "Failed to copy address.",
+            paymentDoneButton: "I have made the payment",
+            couponCleared: "Coupon cleared.",
+            couponErrorInvalid: "Invalid or expired coupon code.",
+            couponAppliedSuccess: "Coupon '{COUPON_CODE}' applied! You get a {DISCOUNT}% discount.",
+            amountTextBase: "Amount: {PRICE}",
+            originalAmountLabel: "Original",
+            paymentDialogTitleBase: "Pay with {METHOD} for {PLATFORM}",
+            paymentDialogTitleFinal: "Complete Your Payment",
+            processingPaymentMessage: "Processing your request... Please wait.",
+
+            // Payment Confirmation Page
+            paymentSuccessfulTitle: "Payment Successful!",
+            paymentSuccessfulMessage: "Thank you! To finalize your activation, please click the button below.",
+            secureActivationText: "100% secure and private activation process.",
+            telegramInstructionsTitle: "Send Your ID to Admin via Telegram",
+            telegramInstructionsText: "To complete your activation, please copy your unique ID below and send it to our administrator via Telegram:",
+            telegramStep1Title: "1. Copy Your Unique ID",
+            telegramStep1Desc: "Click the 'Copy ID' button above.",
+            telegramStep2Title: "2. Open Telegram",
+            telegramStep2Desc: "Click the button below to contact our admin.",
+            telegramStep3Title: "3. Send Your ID",
+            telegramStep3Desc: "Paste your ID in the chat to receive activation instructions.",
+            openTelegramButton: "Open Telegram",
+        },
+        pt: {
+            pageTitle: "Reveal App: Veja as Cartas e Domine no PPPOKER, XPoker, ClubGG | Vantagem Indetectável",
+            navFeatures: "Recursos",
+            navHowItWorks: "Como Funciona",
+            navDemo: "Demonstração",
+            navTestimonials: "Depoimentos",
+            navGetApp: "Obter App",
+            heroTitle: "Desbloqueie Sua Vantagem Vencedora com o Reveal App",
+            heroTagline: "Veja as cartas dos seus oponentes no PPPOKER, XPoker e ClubGG. Tome decisões vencedoras e domine as mesas.",
+            heroCta: "Obtenha o Reveal App Agora e Domine!",
+            featuresTitle: "Por que Escolher o Reveal App?",
+            feature1Title: "Visão Sem Precedentes",
+            feature1Text: "Transforme a incerteza em lucro. Veja as mãos dos oponentes, tome decisões confiantes, evite armadilhas e maximize potes.",
+            feature2Title: "Suporte Multiplataforma",
+            feature2Text: "Funciona perfeitamente com PPPOKER, XPoker e ClubGG em Android e iOS.",
+            feature3Title: "Seguro e Indetectável",
+            feature3Text: "Jogue com confiança. Nossa tecnologia avançada e externa garante que sua vantagem permaneça secreta e sua conta segura.",
+            feature4Title: "Resultados Consistentes",
+            feature4Text: "Transforme cada sessão em uma sessão vitoriosa. Com informações perfeitas, você tomará as melhores decisões sempre.",
+            feature5Title: "Atualizações Regulares",
+            feature5Text: "Fique à frente com nossas atualizações contínuas que se adaptam às mudanças da plataforma, garantindo que sua vantagem permaneça ininterrupta.",
+            feature6Title: "Suporte Premium",
+            feature6Text: "Receba assistência personalizada de nossa equipe de especialistas sempre que precisar. Estamos comprometidos com o seu sucesso.",
+            howItWorksTitle: "Passos Simples para Dominar",
+            step1Title: "Escolha Seu Plano",
+            step1Text: "Selecione o acesso ao Reveal App que melhor se adapta às suas necessidades.",
+            step2Title: "Seu ID Exclusivo",
+            step2Text: "Obtenha seu ID exclusivo para ativação segura (armazenado localmente para sua conveniência).",
+            step3Title: "Ative e Jogue",
+            step3Text: "Siga as instruções simples para ativar e começar a ver as cartas!",
+            step4Title: "Vença Consistentemente",
+            step4Text: "Aproveite sua nova vantagem e veja seus lucros crescerem sessão após sessão.",
+            getAppTitle: "Obtenha Seu Acesso ao Reveal App",
+            getAppText: "Pare de deixar dinheiro na mesa. É hora de investir no seu sucesso no poker. Escolha seu aplicativo de poker preferido abaixo para começar.",
+            specialOfferText: "OFERTA ESPECIAL",
+            couponText: "Use o código <strong>10OFF</strong> para um desconto!",
+            urgencyText: "🔥 Vagas limitadas! Garanta sua vantagem antes dos seus oponentes! 🔥",
+            getAppButton: "Sim, Quero Aumentar Meus Ganhos!",
+            securityNote: "Processo de ativação 100% seguro e privado.",
+            securePaymentBadge: "Pagamento Seguro",
+            privacyBadge: "Privacidade Garantida",
+            instantAccessBadge: "Acesso Imediato",
+            demoTitle: "Veja o App em Ação",
+            demoText: "Assista aos nossos vídeos de demonstração para entender como o Reveal App lhe dá a vantagem:",
+            demoPPPOKERTitle: "Demonstração PPPOKER",
+            demoXPokerTitle: "Demonstração XPoker",
+            demoClubGGTitle: "Demonstração ClubGG",
+            storyTitle: "Nossa História: Como Revolucionamos o Poker",
+            storyText: "Tudo começou com uma série de derrotas inesperadas, o que deu início a uma busca para descobrir vulnerabilidades ocultas em aplicativos de poker populares como PPPOKER e XPoker. Após meses de pesquisa rigorosa, revelamos falhas críticas que estavam sendo exploradas. Em novembro de 2023, nasceu o <strong>Reveal App</strong>, capacitando os jogadores a nivelar o campo de jogo, revelando as cartas dos oponentes.",
+            storyCallToAction: "Isso não é apenas uma ferramenta - é uma revolução. Jogadores de todo o mundo estão ganhando uma vantagem estratégica, e agora é a sua vez de transformar seu jogo. <strong>Aja agora, porque cada momento sem este aplicativo é uma oportunidade perdida de dominar!</strong>",
+            testimonialsTitle: "O Que Nossos Usuários Dizem",
+            testimonial1Quote: "Este aplicativo mudou completamente o meu jogo. De um jogador que empatava, passei a ser consistentemente lucrativo. Ver as cartas é uma vantagem inacreditável.",
+            testimonial1Author: "Alex R.",
+            testimonial2Quote: "Eu estava cético no início, mas o Reveal App cumpriu o que prometeu. É fácil de configurar e funciona perfeitamente. Minha taxa de vitória disparou.",
+            testimonial2Author: "Maria S.",
+            testimonial3Quote: "O melhor investimento que fiz no poker. Pagou-se em uma única sessão. Altamente recomendado para jogadores sérios.",
+            testimonial3Author: "João D.",
+            testimonial4Quote: "Finalmente, uma ferramenta que dá uma vantagem real. A equipe de suporte também é fantástica, muito prestativa no processo de configuração.",
+            testimonial4Author: "Kenji T.",
+            testimonial5Quote: "Jogar sem ele parece jogar às cegas. Se você não está usando o Reveal App, está deixando dinheiro na mesa. Simples assim.",
+            testimonial5Author: "David L.",
+            contactTitle: "Entre em Contato",
+            contactText: "Tem dúvidas ou precisa de ajuda? Nossa equipe de suporte está pronta para ajudá-lo a começar com o Reveal App.",
+            contactTelegram: "Contato no Telegram",
+            footerAboutTitle: "Sobre o Reveal App",
+            footerAboutText: "O Reveal App oferece uma vantagem estratégica no poker online, permitindo que você veja as cartas dos oponentes no PPPOKER, XPoker e ClubGG. Jogue de forma mais inteligente, ganhe mais.",
+            footerLinksTitle: "Links Rápidos",
+            footerLinkFeatures: "Recursos",
+            footerLinkHowItWorks: "Como Funciona",
+            footerLinkPricing: "Preços",
+            footerLinkContact: "Contato",
+            footerConnectTitle: "Conecte-se Conosco",
+            footerRights: "Todos os Direitos Reservados. O seu sucesso é a nossa missão.",
+            footerDisclaimer: "Aviso: Use com responsabilidade e esteja ciente dos termos de serviço das plataformas de poker que você utiliza.",
+
+            // Dialog translations
+            registerTitle: "Registre-se para Continuar",
+            emailLabel: "Endereço de Email",
+            emailPlaceholder: "Digite seu endereço de email",
+            usernameLabel: "Nome de Usuário",
+            usernamePlaceholder: "Escolha um nome de usuário (mín. 3 caracteres)",
+            registerButton: "Registrar e Continuar",
+            emailValidationError: "Por favor, insira um email válido.",
+            usernameValidationError: "O nome de usuário deve ter pelo menos 3 caracteres.",
+            registrationSuccess: "Registro bem-sucedido!",
+            welcomeBackMessage: "Bem-vindo de volta, {USERNAME}!",
+            platformDialogTitle: "Selecione seu Dispositivo",
+            platformDialogText: "Escolha a plataforma em que você usará o Reveal App:",
+            platformAndroid: "Android",
+            platformIOS: "iOS",
+            uniqueIdDialogTitle: "Seu ID Exclusivo",
+            uniqueIdDialogText: "Este é o seu ID exclusivo. Por favor, salve-o, pois você precisará dele para a ativação:",
+            copyIdButton: "Copiar ID",
+            copiedText: "Copiado!",
+            continueButton: "Continuar",
+            pokerAppDialogTitle: "Selecione o App de Poker",
+            pokerAppDialogText: "Escolha o aplicativo de poker com o qual deseja usar o Reveal App:",
+            couponDialogTitle: "Aplicar Cupom",
+            couponDialogText: "Se tiver um código de cupom, insira-o abaixo.",
+            couponPlaceholder: "Insira o código do cupom",
+            paymentMethodDialogTitle: "Selecione o Método de Pagamento",
+            paymentMethodDialogText: "Escolha o seu método de pagamento preferido:",
+            paymentDialogTitle: "Detalhes do Pagamento",
+            applyCouponButton: "Aplicar",
+            proceedButton: "Prosseguir para Pagamento",
+            loadingPaymentText: "A obter cotação...",
+            paymentInstructionsTitle: "Instruções de Pagamento",
+            paymentInstructionsText: "Por favor, envie o valor exato para o endereço abaixo ou escaneie o código QR com o seu aplicativo de carteira.",
+            amountToSendLabel: "Valor a Enviar:",
+            cryptoAmountLabel: "Em {CRYPTO}:",
+            networkLabel: "Rede:",
+            qrCodeScanText: "Escaneie com seu app de carteira",
+            copyAddressButton: "Copiar Endereço",
+            alertCopied: "Endereço copiado para a área de transferência!",
+            alertCopyFailed: "Falha ao copiar o endereço.",
+            paymentDoneButton: "Eu fiz o pagamento",
+            couponCleared: "Cupom removido.",
+            couponErrorInvalid: "Código de cupom inválido ou expirado.",
+            couponAppliedSuccess: "Cupom '{COUPON_CODE}' aplicado! Você recebeu {DISCOUNT}% de desconto.",
+            amountTextBase: "Valor: {PRICE}",
+            originalAmountLabel: "Original",
+            paymentDialogTitleBase: "Pagar com {METHOD} para {PLATFORM}",
+            paymentDialogTitleFinal: "Conclua seu Pagamento",
+            processingPaymentMessage: "Processando sua solicitação... Por favor, aguarde.",
+
+            // Payment Confirmation Page
+            paymentSuccessfulTitle: "Pagamento Realizado com Sucesso!",
+            paymentSuccessfulMessage: "Obrigado! Para finalizar a sua ativação, por favor, clique no botão abaixo.",
+            secureActivationText: "Processo de ativação 100% seguro e privado.",
+            telegramInstructionsTitle: "Envie o seu ID para o Admin via Telegram",
+            telegramInstructionsText: "Para completar a sua ativação, por favor, copie o seu ID exclusivo abaixo e envie para o nosso administrador via Telegram:",
+            telegramStep1Title: "1. Copie o seu ID Exclusivo",
+            telegramStep1Desc: "Clique no botão 'Copiar ID' acima.",
+            telegramStep2Title: "2. Abra o Telegram",
+            telegramStep2Desc: "Clique no botão abaixo para contactar o nosso administrador.",
+            telegramStep3Title: "3. Envie o seu ID",
+            telegramStep3Desc: "Cole o seu ID na conversa para receber as instruções de ativação.",
+            openTelegramButton: "Abrir Telegram",
+        }
+    };
+
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+      new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element_mobile');
+    }
+
+    // --- Core Application Logic ---
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- Initial Setup ---
+        const setupInitialUI = () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            initializeLanguage();
+        };
+
+        // --- Language Handling ---
+        const initializeLanguage = () => {
+            let userLang = localStorage.getItem("language");
+
+            if (!userLang) {
+                const browserLang = (navigator.languages && navigator.languages[0]) || navigator.language;
+                const primaryLang = browserLang.split('-')[0];
+                if (translations[primaryLang]) {
+                    userLang = primaryLang;
+                } else {
+                    userLang = 'en'; 
+                }
+            }
             
-            <!-- QR Code Loading Message -->
-            <div id="qr-loading-message" class="qr-loading-message" style="display: none;">
-                <div class="loading-spinner"></div>
-                <p data-translate="loadingPaymentText">Preparing your payment details...</p>
-            </div>
+            document.documentElement.lang = userLang;
+            const langSelectors = document.querySelectorAll("#language-selector select, #language-selector-mobile select");
+            langSelectors.forEach(selector => selector.value = userLang);
+            setLanguage(userLang);
+        };
+
+        window.setLanguage = (lang) => {
+            localStorage.setItem("language", lang);
+            document.documentElement.lang = lang;
             
-            <!-- QR Code Display Stage -->
-            <div id="qr-code-display-stage" class="qr-code-display-stage" style="display: none;">
-                <h4 id="payment-title-final-display" data-translate="paymentInstructionsTitle">Payment Instructions</h4>
-                <p data-translate="paymentInstructionsText">Please send the exact amount to the address below or scan the QR code with your wallet app.</p>
+            // Populate dynamic sections first
+            populateFeatures();
+            populateHowItWorks();
+            populateTestimonials();
+
+            document.querySelectorAll("[data-translate], [data-translate-placeholder]").forEach(el => {
+                const key = el.dataset.translate || el.dataset.translatePlaceholder;
+                if (!key) return;
+
+                const translation = getTranslatedString(key);
                 
-                <div class="payment-details-container">
-                    <div class="payment-amount-display">
-                        <p data-translate="amountToSendLabel">Amount to Send:</p>
-                        <p id="payment-final-amount" class="payment-final-amount">$0.00</p>
+                if (el.dataset.translate) {
+                     if (key === 'couponText' || key === 'storyText' || key === 'storyCallToAction') {
+                        el.innerHTML = translation; 
+                    } else {
+                        el.textContent = translation;
+                    }
+                }
+                if (el.dataset.translatePlaceholder) el.placeholder = translation;
+            });
+            document.title = getTranslatedString('pageTitle');
+
+            // Change Google Translate language
+            const iframe = document.querySelector('.goog-te-menu-frame');
+            if (iframe) {
+                const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const langLink = innerDoc.querySelector(`.goog-te-menu2-item span.text:contains(${lang.toUpperCase()})`);
+                if(langLink) langLink.click();
+            }
+        };
+
+        const getTranslatedString = (key, replacements = {}) => {
+            const lang = localStorage.getItem("language") || "pt";
+            let translation = (translations[lang] && translations[lang][key]) ? translations[lang][key] : (translations['en'][key] || key);
+            Object.entries(replacements).forEach(([placeholder, value]) => {
+                translation = translation.replace(`{${placeholder}}`, value);
+            });
+            return translation;
+        };
+
+        // --- Dynamic Content Population ---
+        const populateFeatures = () => {
+            const container = document.getElementById('features-grid');
+            if(!container) return;
+            const featureKeys = [
+                { key: 'feature1', icon: 'fa-eye' },
+                { key: 'feature2', icon: 'fa-mobile-alt' },
+                { key: 'feature3', icon: 'fa-shield-alt' },
+                { key: 'feature4', icon: 'fa-chart-line' },
+                { key: 'feature5', icon: 'fa-sync' },
+                { key: 'feature6', icon: 'fa-headset' },
+            ];
+            container.innerHTML = featureKeys.map(({key, icon}) => `
+                <div class="bg-gray-800/50 p-6 rounded-lg text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-4xl text-yellow-400 mb-4"><i class="fas ${icon}"></i></div>
+                    <h3 class="text-xl font-bold mb-2">${getTranslatedString(`${key}Title`)}</h3>
+                    <p class="text-gray-400">${getTranslatedString(`${key}Text`)}</p>
+                </div>
+            `).join('');
+        };
+        
+        const populateHowItWorks = () => {
+             const container = document.getElementById('how-it-works-grid');
+             if(!container) return;
+             container.innerHTML = [1, 2, 3, 4].map(i => `
+                <div class="text-center">
+                    <div class="relative mb-4">
+                       <div class="w-20 h-20 bg-gray-700 rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-yellow-400">${i}</div>
+                       ${i < 4 ? '<div class="absolute top-1/2 left-3/4 w-1/2 h-0.5 bg-gray-700 hidden md:block" style="transform: translateY(-50%);"></div>' : ''}
                     </div>
-                    
-                    <div class="crypto-amount-display">
-                        <p id="crypto-amount-label">Crypto Amount:</p>
-                        <p id="crypto-amount-value">0.00000000</p>
+                    <h3 class="text-xl font-bold mt-4 mb-2">${getTranslatedString(`step${i}Title`)}</h3>
+                    <p class="text-gray-400">${getTranslatedString(`step${i}Text`)}</p>
+                </div>
+            `).join('');
+        };
+        
+        const populateTestimonials = () => {
+             const container = document.getElementById('testimonials-container');
+              if(!container) return;
+             container.innerHTML = [1, 2, 3, 4, 5].map(i => createTestimonialHTML(
+                getTranslatedString(`testimonial${i}Quote`),
+                getTranslatedString(`testimonial${i}Author`)
+             )).join('');
+        };
+
+        const createTestimonialHTML = (quote, author) => {
+            return `
+                <div class="bg-gray-800/50 p-6 rounded-lg">
+                    <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4"></i>
+                    <p class="text-gray-400 mb-4">${quote}</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user"></i></div>
+                        <p class="font-semibold">${author}</p>
                     </div>
-                    
-                    <div class="network-display">
-                        <p data-translate="networkLabel">Network:</p>
-                        <p id="payment-network-name">Network</p>
+                </div>`;
+        };
+
+        // --- Mobile Menu ---
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.replace('-translate-x-full', 'translate-x-0'));
+        mobileMenuClose.addEventListener('click', () => mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
+        });
+
+        // --- Dialog Management ---
+        const dialogContainer = document.getElementById('dialog-container');
+
+        const showDialog = (content) => {
+            dialogContainer.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg">${content}</div>`;
+            dialogContainer.classList.remove('hidden');
+        };
+
+        const closeDialog = () => {
+            dialogContainer.classList.add('hidden');
+            dialogContainer.innerHTML = '';
+        };
+        
+        dialogContainer.addEventListener('click', (e) => {
+            if (e.target === dialogContainer) {
+                closeDialog();
+            }
+        });
+
+        // --- Purchase Flow & Page Transitions ---
+        let purchaseState = {
+            basePrice: 0,
+            discount: 0,
+            finalPrice: 0
+        };
+
+        window.startPurchaseFlow = () => {
+            const email = localStorage.getItem("userEmail");
+            const username = localStorage.getItem("username");
+            if (email && username) {
+                purchaseState.email = email;
+                purchaseState.username = username;
+                showPlatformDialog();
+            } else {
+                showRegistrationDialog();
+            }
+        };
+
+        const showRegistrationDialog = () => {
+            const content = `
+                <h3 class="text-xl font-bold mb-4 text-center" data-translate="registerTitle">${getTranslatedString('registerTitle')}</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="email-input" class="block mb-2 text-sm font-medium" data-translate="emailLabel">${getTranslatedString('emailLabel')}</label>
+                        <input type="email" id="email-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${getTranslatedString('emailPlaceholder')}" required>
+                         <p id="email-validation-message" class="text-red-500 text-sm mt-1"></p>
+                    </div>
+                    <div>
+                        <label for="username-input" class="block mb-2 text-sm font-medium" data-translate="usernameLabel">${getTranslatedString('usernameLabel')}</label>
+                        <input type="text" id="username-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${getTranslatedString('usernamePlaceholder')}" required>
+                        <p id="username-validation-message" class="text-red-500 text-sm mt-1"></p>
+                    </div>
+                    <button id="submit-registration-btn" class="w-full cta-button font-bold py-2.5 px-5 rounded-lg" data-translate="registerButton">${getTranslatedString('registerButton')}</button>
+                </div>
+            `;
+            showDialog(content);
+            document.getElementById('submit-registration-btn').onclick = submitRegistration;
+        };
+        
+        const submitRegistration = () => {
+            const emailInput = document.getElementById("email-input");
+            const usernameInput = document.getElementById("username-input");
+            const emailError = document.getElementById("email-validation-message");
+            const usernameError = document.getElementById("username-validation-message");
+            
+            let isValid = true;
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+                emailError.textContent = getTranslatedString('emailValidationError');
+                isValid = false;
+            } else {
+                emailError.textContent = '';
+            }
+
+            if (usernameInput.value.length < 3) {
+                usernameError.textContent = getTranslatedString('usernameValidationError');
+                isValid = false;
+            } else {
+                usernameError.textContent = '';
+            }
+
+            if(isValid) {
+                localStorage.setItem("userEmail", emailInput.value);
+                localStorage.setItem("username", usernameInput.value);
+                purchaseState.email = emailInput.value;
+                purchaseState.username = usernameInput.value;
+                showPlatformDialog();
+            }
+        };
+
+        const showPlatformDialog = () => {
+             const content = `
+                <h3 class="text-xl font-bold mb-4 text-center" data-translate="platformDialogTitle">${getTranslatedString('platformDialogTitle')}</h3>
+                <p class="text-center text-gray-400 mb-6" data-translate="platformDialogText">${getTranslatedString('platformDialogText')}</p>
+                <div class="flex justify-center space-x-4">
+                    <button onclick="selectPlatform('android')" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-android mr-2"></i><span data-translate="platformAndroid">${getTranslatedString('platformAndroid')}</span></button>
+                    <button onclick="selectPlatform('ios')" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-apple mr-2"></i><span data-translate="platformIOS">${getTranslatedString('platformIOS')}</span></button>
+                </div>
+            `;
+            showDialog(content);
+        };
+        
+        window.selectPlatform = (platform) => {
+            purchaseState.platform = platform;
+            showUniqueIdDialog();
+        };
+
+        const showUniqueIdDialog = () => {
+            let uniqueId = localStorage.getItem("uniqueId");
+            if (!uniqueId) {
+                uniqueId = Date.now().toString().slice(-9);
+                localStorage.setItem("uniqueId", uniqueId);
+            }
+            purchaseState.uniqueId = uniqueId;
+
+            const content = `
+                <h3 class="text-xl font-bold mb-4 text-center" data-translate="uniqueIdDialogTitle">${getTranslatedString('uniqueIdDialogTitle')}</h3>
+                <p class="text-center text-gray-400 mb-4" data-translate="uniqueIdDialogText">${getTranslatedString('uniqueIdDialogText')}</p>
+                <div class="flex items-center bg-gray-800 p-3 rounded-lg">
+                    <span id="unique-id-value" class="flex-grow text-lg font-mono">${uniqueId}</span>
+                    <button onclick="copyToClipboard('${uniqueId}')" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4"><i class="fas fa-copy"></i></button>
+                </div>
+                <button onclick="continueToPokerApp()" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg" data-translate="continueButton">${getTranslatedString('continueButton')}</button>
+            `;
+            showDialog(content);
+        };
+        
+        window.continueToPokerApp = () => {
+            showPokerAppDialog();
+        };
+
+        const showPokerAppDialog = () => {
+            const content = `
+                <h3 class="text-xl font-bold mb-4 text-center" data-translate="pokerAppDialogTitle">${getTranslatedString('pokerAppDialogTitle')}</h3>
+                 <p class="text-center text-gray-400 mb-6" data-translate="pokerAppDialogText">${getTranslatedString('pokerAppDialogText')}</p>
+                <div class="space-y-3">
+                    <button onclick="selectPokerApp('pppoker')" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition">PPPOKER</button>
+                    <button onclick="selectPokerApp('xpoker')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition">XPoker</button>
+                    <button onclick="selectPokerApp('clubgg')" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">ClubGG</button>
+                </div>
+            `;
+            showDialog(content);
+        };
+
+        window.selectPokerApp = (app) => {
+            purchaseState.app = app;
+            const prices = { pppoker: 1500, xpoker: 1500, clubgg: 4000 };
+            purchaseState.basePrice = prices[app] || 0;
+            purchaseState.discount = 0; // Reset discount when selecting a new app
+            showCouponDialog();
+        };
+
+        const showCouponDialog = () => {
+            const finalPrice = purchaseState.basePrice * (1 - purchaseState.discount);
+            const content = `
+                <h3 class="text-xl font-bold mb-4 text-center" data-translate="couponDialogTitle">${getTranslatedString('couponDialogTitle')}</h3>
+                <div class="text-center mb-4">
+                     <p id="original-price-container" class="${purchaseState.discount > 0 ? '' : 'hidden'} text-gray-500">
+                        <span data-translate="originalAmountLabel">${getTranslatedString('originalAmountLabel')}</span>:
+                        <s id="original-price-value">$${purchaseState.basePrice.toFixed(2)}</s>
+                    </p>
+                    <p id="final-price-display" class="text-2xl font-bold text-yellow-400">${getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`})}</p>
+                </div>
+                <p class="text-center text-gray-400 mb-4" data-translate="couponDialogText">${getTranslatedString('couponDialogText')}</p>
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="coupon-input" class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg p-2.5" placeholder="${getTranslatedString('couponPlaceholder')}">
+                    <button onclick="applyCoupon()" class="cta-button font-bold py-2.5 px-5 rounded-lg" data-translate="applyCouponButton">${getTranslatedString('applyCouponButton')}</button>
+                </div>
+                <p id="coupon-message" class="text-center h-5 mt-2 text-sm"></p>
+                <button onclick="proceedToPaymentMethod()" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-lg" data-translate="proceedButton">${getTranslatedString('proceedButton')}</button>
+            `;
+            showDialog(content);
+        }
+
+        window.applyCoupon = () => {
+            const couponInput = document.getElementById('coupon-input');
+            const messageEl = document.getElementById('coupon-message');
+            if(!couponInput || !messageEl) return;
+            const code = couponInput.value.trim().toUpperCase();
+            
+            let discount = 0;
+            let isValid = false;
+
+            if (code === '30OFF') {
+                discount = 0.30;
+                isValid = true;
+            } else if (code === '10OFF') {
+                discount = 0.10;
+                isValid = true;
+            }
+            
+            purchaseState.discount = isValid ? discount : 0;
+            
+            if (isValid) {
+                messageEl.textContent = getTranslatedString('couponAppliedSuccess', { COUPON_CODE: code, DISCOUNT: (discount * 100) });
+                messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
+            } else {
+                 messageEl.textContent = getTranslatedString('couponErrorInvalid');
+                 messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
+            }
+
+            const finalPrice = purchaseState.basePrice * (1 - purchaseState.discount);
+            const originalPriceContainer = document.getElementById('original-price-container');
+            const finalPriceDisplay = document.getElementById('final-price-display');
+
+            if (finalPriceDisplay) {
+                 finalPriceDisplay.textContent = getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`});
+            }
+
+            if (originalPriceContainer) {
+                const originalPriceValueEl = originalPriceContainer.querySelector('s');
+                 if (purchaseState.discount > 0) {
+                    if(originalPriceValueEl) originalPriceValueEl.textContent = `$${purchaseState.basePrice.toFixed(2)}`;
+                    originalPriceContainer.classList.remove('hidden');
+                } else {
+                    originalPriceContainer.classList.add('hidden');
+                }
+            }
+        }
+        
+        window.proceedToPaymentMethod = () => {
+            purchaseState.finalPrice = purchaseState.basePrice * (1 - purchaseState.discount);
+            showPaymentMethodDialog();
+        }
+
+        const showPaymentMethodDialog = () => {
+            const content = `
+                <h3 class="text-xl font-bold mb-4 text-center" data-translate="paymentMethodDialogTitle">${getTranslatedString('paymentMethodDialogTitle')}</h3>
+                <p class="text-center text-gray-400 mb-6" data-translate="paymentMethodDialogText">${getTranslatedString('paymentMethodDialogText')}</p>
+                <div class="space-y-3">
+                    <button onclick="selectPaymentMethod('usdt')" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition">USDT (TRC20)</button>
+                    <button onclick="selectPaymentMethod('btc')" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition">BTC</button>
+                    <button onclick="selectPaymentMethod('eth')" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg transition">ETH</button>
+                </div>
+            `;
+            showDialog(content);
+        };
+
+        window.selectPaymentMethod = async (method) => {
+            purchaseState.method = method;
+            await showPaymentDetailsDialog();
+        };
+
+        const getCryptoPrice = async (cryptoId) => {
+            try {
+                const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${cryptoId}&vs_currencies=usd`);
+                if (!response.ok) throw new Error('Network response was not ok.');
+                const data = await response.json();
+                return data[cryptoId].usd;
+            } catch (error) {
+                console.error("Failed to fetch crypto price:", error);
+                return null;
+            }
+        }
+
+        const showPaymentDetailsDialog = async () => {
+            const method = purchaseState.method;
+            const price = purchaseState.finalPrice;
+            
+            const addresses = {
+                usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK",
+                btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3",
+                eth: "0x9b5877A847BE203FCbA421194C83E0af6f686cC7"
+            };
+            const networks = { usdt: "TRC20", btc: "Bitcoin", eth: "Ethereum" };
+            const cryptoIds = { btc: 'bitcoin', eth: 'ethereum' };
+
+            const address = addresses[method];
+            const network = networks[method];
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${address}`;
+            
+            let cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400">$${price.toFixed(2)}</p>`;
+            if (method !== 'usdt') {
+                cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${getTranslatedString('loadingPaymentText')}</span></div>`;
+            }
+
+            const content = `
+                <h3 class="text-xl font-bold mb-2 text-center" data-translate="paymentDialogTitleFinal">${getTranslatedString('paymentDialogTitleFinal')}</h3>
+                <p class="text-center text-gray-400 mb-6" data-translate="paymentInstructionsText">${getTranslatedString('paymentInstructionsText')}</p>
+                
+                <div id="payment-amount-container" class="text-center mb-4">
+                    ${cryptoAmountHTML}
+                </div>
+                
+                <div class="flex justify-center mb-4">
+                    <div class="p-2 bg-white rounded-lg border-4 border-gray-600">
+                        <img src="${qrUrl}" alt="${method.toUpperCase()} QR Code">
                     </div>
                 </div>
                 
-                <div class="qr-code-container">
-                    <img id="payment-qr-code-image" src="" alt="QR Code" class="qr-code-image">
-                    <p data-translate="qrCodeScanText">Scan with your wallet app</p>
-                </div>
-                
-                <div class="wallet-address-container">
-                    <input type="text" id="payment-wallet-address" readonly>
-                    <button id="copy-address-button" onclick="copyWalletAddress()" class="copy-button">
-                        <i class="fas fa-copy"></i> <span data-translate="copyAddressButton">Copy Address</span>
+                <div class="flex items-center bg-gray-800 p-2 rounded-lg">
+                    <input id="wallet-address-input" type="text" class="flex-grow bg-transparent text-sm text-gray-300 border-0 focus:ring-0" value="${address}" readonly>
+                    <button onclick="copyToClipboard('${address}', true)" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-2">
+                        <i class="fas fa-copy"></i>
                     </button>
                 </div>
-                
-                <p id="copy-alert-message" class="copy-alert-message" style="display: none;"></p>
-                
-                <!-- Payment Done Button will be added dynamically -->
-            </div>
-        </div>
-    </div>
+                <p id="copy-feedback-dialog" class="text-green-400 text-sm mt-2 h-4 text-center"></p>
 
-    <script src="translations.js"></script>
-    <script src="id_generator.js"></script>
-    <script src="crypto_api.js"></script>
-    <script src="script.js"></script>
+                <button onclick="proceedToFinalConfirmation()" class="mt-6 w-full cta-button font-bold py-3 px-5 rounded-lg" data-translate="paymentDoneButton">${getTranslatedString('paymentDoneButton')}</button>
+            `;
+            showDialog(content);
+
+            if (method !== 'usdt') {
+                const cryptoPrice = await getCryptoPrice(cryptoIds[method]);
+                const paymentAmountContainer = document.getElementById('payment-amount-container');
+                if (cryptoPrice) {
+                    const cryptoAmount = (price / cryptoPrice).toFixed(8);
+                    paymentAmountContainer.innerHTML = `
+                        <p class="text-sm text-gray-400" data-translate="amountToSendLabel">${getTranslatedString('amountToSendLabel')} $${price.toFixed(2)}</p>
+                        <p class="text-2xl font-bold text-yellow-400">${cryptoAmount} ${method.toUpperCase()}</p>
+                        <p class="text-sm text-gray-500"><span data-translate="networkLabel">${getTranslatedString('networkLabel')}</span>: ${network}</p>
+                    `;
+                } else {
+                    paymentAmountContainer.innerHTML = `<p class="text-red-400">Could not fetch crypto price. Please try again.</p>`;
+                }
+            }
+        };
+        
+        window.copyToClipboard = (text, isDialog = false) => {
+            navigator.clipboard.writeText(text).then(() => {
+                const feedbackId = isDialog ? 'copy-feedback-dialog' : 'copy-feedback';
+                const feedbackEl = document.getElementById(feedbackId);
+                if(feedbackEl) {
+                    feedbackEl.textContent = getTranslatedString('copiedText');
+                    setTimeout(() => {
+                        feedbackEl.textContent = '';
+                    }, 2000);
+                }
+            });
+        };
+
+        window.proceedToFinalConfirmation = () => {
+            closeDialog();
+            showPaymentConfirmationPage();
+        };
+
+        const showPaymentConfirmationPage = () => {
+            document.getElementById('main-content').classList.add('hidden');
+            const confirmationContainer = document.getElementById('payment-confirmation-content');
+            
+            const uniqueId = purchaseState.uniqueId || localStorage.getItem('uniqueId');
+            
+            confirmationContainer.innerHTML = `
+                <section class="min-h-screen py-16 md:py-24">
+                    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="max-w-2xl mx-auto bg-gray-800/50 p-6 md:p-8 rounded-lg shadow-xl text-center">
+                            <div class="text-6xl text-green-400 mb-4">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4" data-translate="telegramInstructionsTitle">${getTranslatedString('telegramInstructionsTitle')}</h3>
+                            <p class="text-gray-400 mb-6" data-translate="telegramInstructionsText">${getTranslatedString('telegramInstructionsText')}</p>
+                            
+                            <div class="flex items-center bg-gray-900 p-3 rounded-lg max-w-sm mx-auto">
+                                <span id="unique-id-display-confirm" class="flex-grow text-lg font-mono text-yellow-400">${uniqueId}</span>
+                                <button id="copy-id-button-confirm" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <p id="copy-feedback" class="text-green-400 text-sm mt-2 h-4"></p>
+                            
+                            <div class="mt-8 bg-gray-900/50 p-6 rounded-lg text-left max-w-md mx-auto">
+                                 <div class="space-y-4">
+                                    <div>
+                                        <h4 class="font-semibold" data-translate="telegramStep1Title">${getTranslatedString('telegramStep1Title')}</h4>
+                                        <p class="text-sm text-gray-400" data-translate="telegramStep1Desc">${getTranslatedString('telegramStep1Desc')}</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold" data-translate="telegramStep2Title">${getTranslatedString('telegramStep2Title')}</h4>
+                                        <p class="text-sm text-gray-400" data-translate="telegramStep2Desc">${getTranslatedString('telegramStep2Desc')}</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold" data-translate="telegramStep3Title">${getTranslatedString('telegramStep3Title')}</h4>
+                                        <p class="text-sm text-gray-400" data-translate="telegramStep3Desc">${getTranslatedString('telegramStep3Desc')}</p>
+                                    </div>
+                                 </div>
+                            </div>
+
+                            <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg">
+                                <i class="fab fa-telegram-plane mr-2"></i>
+                                <span data-translate="openTelegramButton">${getTranslatedString('openTelegramButton')}</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            `;
+            
+            confirmationContainer.classList.remove('hidden');
+
+            document.getElementById('copy-id-button-confirm').onclick = () => copyToClipboard(uniqueId, false);
+            
+            window.scrollTo(0, 0);
+        };
+
+        // --- Final Setup ---
+        setupInitialUI();
+    });
+    </script>
 </body>
 </html>
