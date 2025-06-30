@@ -189,7 +189,7 @@
         <div id="mobile-menu" class="md:hidden mobile-menu transform -translate-x-full fixed top-0 left-0 h-full w-64 bg-gray-900 z-50 p-6 shadow-2xl">
             <div class="flex justify-between items-center mb-8">
                <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
-                    <img class="h-10 w-auto" src="image_7d55d9.png" alt="Reveal App Logo">
+                    <img class="h-10 w-auto" src="image_7d55d9.png" alt="Reveal App Logo" onerror="this.onerror=null;this.src='https://placehold.co/160x40/0a0e1a/ffffff?text=Reveal+App';">
                </a>
                <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
                    <i class="fas fa-times text-2xl"></i>
@@ -228,14 +228,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                         <div>
                             <p class="text-4xl font-bold text-yellow-400" id="counter-players">+4,500</p>
-                            <p class="text-gray-400" data-translate="counterPlayers">Jogadores a Lucrar</p>
+                            <p class="text-gray-400" data-translate="counterPlayers">Jogadores Lucrando Agora</p>
                         </div>
                          <div>
                             <p class="text-4xl font-bold text-yellow-400" id="counter-winnings">$2.3M+</p>
-                            <p class="text-gray-400" data-translate="counterWinnings">Ganhos no Último Mês</p>
+                            <p class="text-gray-400" data-translate="counterWinnings">Ganhos na Última Semana</p>
                         </div>
                          <div>
-                            <p class="text-4xl font-bold text-yellow-400">98%</p>
+                            <p class="text-4xl font-bold text-yellow-400" id="counter-satisfaction">99.00%</p>
                             <p class="text-gray-400" data-translate="counterSatisfaction">Satisfação Garantida</p>
                         </div>
                     </div>
@@ -284,7 +284,7 @@
                         <div class="demo-video">
                             <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoClubGGTitle">ClubGG Demo</h3>
                             <div class="video-container">
-                                <iframe loading="lazy" src="https://www.youtube.com/embed/ptQIe4OyJrE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -296,7 +296,7 @@
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
                     <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
-                         <!-- Story content injected by JS -->
+                          <!-- Story content injected by JS -->
                     </div>
                 </div>
             </section>
@@ -418,8 +418,8 @@
             heroTitle: "Discover How Ordinary Players Are Making Big Profits in Online Poker",
             heroTagline: "Our exclusive software lets you see your opponents' cards on PPPOKER, XPoker & ClubGG. Make winning decisions and dominate the tables.",
             heroCta: "Start Profiting Today",
-            counterPlayers: "Players Profiting",
-            counterWinnings: "Won Last Month",
+            counterPlayers: "Players Profiting Now",
+            counterWinnings: "Won Last Week",
             counterSatisfaction: "Satisfaction Guarantee",
             featuresTitle: "Why Choose Reveal App?",
             feature1Title: "Unprecedented Insight",
@@ -561,8 +561,8 @@
             heroTitle: "Descubra como jogadores comuns estão a lucrar alto no poker online",
             heroTagline: "O nosso software exclusivo permite-lhe ver as cartas dos seus oponentes no PPPOKER, XPoker & ClubGG. Tome decisões vencedoras e domine as mesas.",
             heroCta: "Comece a Lucrar Hoje",
-            counterPlayers: "Jogadores a Lucrar",
-            counterWinnings: "Ganhos no Último Mês",
+            counterPlayers: "Jogadores Lucrando Agora",
+            counterWinnings: "Ganhos na Última Semana",
             counterSatisfaction: "Satisfação Garantida",
             featuresTitle: "Por que Escolher o Reveal App?",
             feature1Title: "Visão Sem Precedentes",
@@ -730,6 +730,10 @@
                 mainContent: document.getElementById('main-content'),
                 paymentConfirmationContent: document.getElementById('payment-confirmation-content'),
                 startPurchaseBtn: document.getElementById('start-purchase-btn'),
+                // Dynamic counters
+                counterPlayers: document.getElementById('counter-players'),
+                counterWinnings: document.getElementById('counter-winnings'),
+                counterSatisfaction: document.getElementById('counter-satisfaction'),
             },
 
             // --- METHODS ---
@@ -740,6 +744,7 @@
                 this.initLanguage();
                 this.initEventListeners();
                 this.populateAllDynamicContent();
+                this.initCounters(); // Initialize dynamic counters
             },
             
             initEventListeners() {
@@ -757,6 +762,71 @@
 
                 // Purchase Flow
                 this.dom.startPurchaseBtn.addEventListener('click', () => this.startPurchaseFlow());
+            },
+
+            // --- Counter Logic ---
+            ensureNoRepeatingEndDigits(number) {
+                const lastDigit = number % 10;
+                const secondLastDigit = Math.floor((number % 100) / 10);
+                if (lastDigit === secondLastDigit) {
+                    return number + 1;
+                }
+                return number;
+            },
+
+            initCounters() {
+                const today = new Date();
+                // Use UTC date to avoid timezone issues
+                const todayStr = new Date(today.getTime() - (today.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
+                let counters = JSON.parse(localStorage.getItem('revealAppCounters'));
+
+                if (!counters || !counters.lastUpdate) {
+                    // First time initialization
+                    const initialPlayers = Math.floor(Math.random() * (2500 - 1200 + 1)) + 1200;
+                    counters = {
+                        players: this.ensureNoRepeatingEndDigits(initialPlayers),
+                        winnings: 159000,
+                        satisfaction: 99.0, // Initial satisfaction set to 99.0
+                        lastUpdate: todayStr
+                    };
+                } else {
+                    // Update values based on days passed
+                    const lastUpdateDate = new Date(counters.lastUpdate);
+                    const timeDiff = today.getTime() - lastUpdateDate.getTime();
+                    const daysPassed = Math.floor(timeDiff / (1000 * 3600 * 24));
+
+                    if (daysPassed > 0) {
+                        counters.players += (daysPassed * 5);
+                        counters.players = this.ensureNoRepeatingEndDigits(counters.players);
+                        counters.winnings += (daysPassed * 10000);
+                        counters.satisfaction = Math.min(100, counters.satisfaction + (daysPassed * 0.15));
+                        counters.lastUpdate = todayStr;
+                    }
+                }
+
+                localStorage.setItem('revealAppCounters', JSON.stringify(counters));
+
+                // Update DOM
+                if (this.dom.counterPlayers) {
+                    this.dom.counterPlayers.textContent = `+${Math.round(counters.players).toLocaleString()}`;
+                }
+                if (this.dom.counterWinnings) {
+                    this.dom.counterWinnings.textContent = this.formatWinnings(counters.winnings);
+                }
+                if (this.dom.counterSatisfaction) {
+                    // Use toFixed(2) to show decimal points for satisfaction
+                    this.dom.counterSatisfaction.textContent = `${parseFloat(counters.satisfaction).toFixed(2)}%`;
+                }
+            },
+
+            formatWinnings(amount) {
+                if (amount >= 1000000) {
+                    return `$${(amount / 1000000).toFixed(2)}M+`;
+                } else if (amount >= 1000) {
+                    return `$${Math.round(amount / 1000)}K+`;
+                }
+                return `$${amount}`;
             },
 
             // Language Handling
@@ -839,8 +909,8 @@
                  container.innerHTML = [1, 2, 3, 4].map(i => `
                     <div class="text-center">
                         <div class="relative mb-4">
-                           <div class="w-20 h-20 bg-gray-700 rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-yellow-400">${i}</div>
-                           ${i < 4 ? '<div class="absolute top-1/2 left-3/4 w-1/2 h-0.5 bg-gray-700 hidden md:block" style="transform: translateY(-50%);"></div>' : ''}
+                             <div class="w-20 h-20 bg-gray-700 rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-yellow-400">${i}</div>
+                            ${i < 4 ? '<div class="absolute top-1/2 left-3/4 w-1/2 h-0.5 bg-gray-700 hidden md:block" style="transform: translateY(-50%);"></div>' : ''}
                         </div>
                         <h3 class="text-xl font-bold mt-4 mb-2">${this.getTranslatedString(`step${i}Title`)}</h3>
                         <p class="text-gray-400">${this.getTranslatedString(`step${i}Text`)}</p>
@@ -1061,7 +1131,7 @@
                     messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
                 } else {
                      messageEl.textContent = this.getTranslatedString('couponErrorInvalid');
-                      messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
+                       messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
                 }
 
                 const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
@@ -1075,10 +1145,10 @@
                 if (originalPriceContainer) {
                     const originalPriceValueEl = originalPriceContainer.querySelector('s');
                      if (this.purchaseState.discount > 0) {
-                         if(originalPriceValueEl) originalPriceValueEl.textContent = `$${this.purchaseState.basePrice.toFixed(2)}`;
-                         originalPriceContainer.classList.remove('hidden');
+                          if(originalPriceValueEl) originalPriceValueEl.textContent = `$${this.purchaseState.basePrice.toFixed(2)}`;
+                          originalPriceContainer.classList.remove('hidden');
                      } else {
-                         originalPriceContainer.classList.add('hidden');
+                          originalPriceContainer.classList.add('hidden');
                      }
                 }
             },
@@ -1206,6 +1276,13 @@
                 const confirmationContainer = this.dom.paymentConfirmationContent;
                 
                 const uniqueId = this.purchaseState.uniqueId || localStorage.getItem('uniqueId');
+                const platform = this.purchaseState.platform || 'Not specified';
+
+                // Construct the message in English
+                const telegramMessage = `ID: ${uniqueId}\nPlatform: ${platform}`;
+                const encodedTelegramMessage = encodeURIComponent(telegramMessage);
+                const telegramUrl = `https://t.me/bedmalcon_temp?text=${encodedTelegramMessage}`;
+
                 
                 confirmationContainer.innerHTML = `
                     <section class="min-h-screen py-16 md:py-24 flex items-center">
@@ -1239,10 +1316,10 @@
                                              <h4 class="font-semibold">${this.getTranslatedString('telegramStep3Title')}</h4>
                                              <p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep3Desc')}</p>
                                          </div>
-                                      </div>
+                                     </div>
                                 </div>
 
-                                <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg">
+                                <a href="${telegramUrl}" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg">
                                     <i class="fab fa-telegram-plane mr-2"></i>
                                     <span>${this.getTranslatedString('openTelegramButton')}</span>
                                 </a>
