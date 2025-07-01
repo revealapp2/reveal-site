@@ -78,7 +78,6 @@
         /* Mobile Menu */
         .mobile-menu {
             transition: transform 0.3s ease-in-out;
-            background-color: var(--background-dark); /* Solid background for mobile menu */
         }
         .spinner {
             border: 2px solid rgba(255, 255, 255, 0.3);
@@ -167,7 +166,7 @@
     </noscript>
 
     <!-- Header -->
-    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-40">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
@@ -213,29 +212,30 @@
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden mobile-menu transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl">
-            <div class="flex justify-between items-center mb-8">
-               <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
-                    <img class="h-10 w-auto" src="image_7d55d9.png" alt="Reveal App Logo" onerror="this.onerror=null;this.src='https://placehold.co/160x40/0a0e1a/ffffff?text=Reveal+App';">
-               </a>
-               <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
-                   <i class="fas fa-times text-2xl"></i>
-               </button>
-            </div>
-            <nav class="flex flex-col space-y-4">
-                <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
-                <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
-                <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
-                <a href="#story" class="text-gray-300 hover:text-white transition" data-translate="navStory">Our Story</a>
-                <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
-                <a href="#get-app" class="cta-button text-center font-bold py-2 px-5 rounded-lg mt-4" data-translate="navGetApp">Get App</a>
-                <div class="mt-4 space-y-4">
-                    <div id="google_translate_element_mobile"></div>
-                </div>
-            </nav>
-        </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0a0e1a] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl">
+        <div class="flex justify-between items-center mb-8">
+           <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
+                <img class="h-10 w-auto" src="image_7d55d9.png" alt="Reveal App Logo" onerror="this.onerror=null;this.src='https://placehold.co/160x40/0a0e1a/ffffff?text=Reveal+App';">
+           </a>
+           <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
+               <i class="fas fa-times text-2xl"></i>
+           </button>
+        </div>
+        <nav class="flex flex-col space-y-4">
+            <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
+            <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
+            <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
+            <a href="#story" class="text-gray-300 hover:text-white transition" data-translate="navStory">Our Story</a>
+            <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
+            <a href="#get-app" class="cta-button text-center font-bold py-2 px-5 rounded-lg mt-4" data-translate="navGetApp">Get App</a>
+            <div class="mt-4 space-y-4">
+                <div id="google_translate_element_mobile"></div>
+            </div>
+        </nav>
+    </div>
 
     <main>
         <div id="main-content">
@@ -453,7 +453,7 @@
     </footer>
     
     <!-- Dialogs -->
-    <div id="dialog-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden dialog">
+    <div id="dialog-container" class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden dialog">
         <!-- Dialog content will be injected here -->
     </div>
 
@@ -522,7 +522,7 @@
             getAppText: "Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.",
             specialOfferText: "SPECIAL OFFER",
             couponText: "Use code <strong>10OFF</strong> for a discount!",
-            urgencyText: "🔥 Limited spots available! Get your edge before your opponents do! 🔥",
+            urgencyText: "🔥 Limited spots available! Get your edge before your opponents do! �",
             getAppButton: "Yes, I Want to Boost My Winnings!",
             securityNote: "100% secure and private activation process.",
             securePaymentBadge: "Secure Payment",
