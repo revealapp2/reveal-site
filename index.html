@@ -40,10 +40,11 @@
             background: linear-gradient(90deg, #ffab00, #ffc700);
             color: var(--text-dark);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: pulse-cta 2.5s infinite;
         }
         .cta-button:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 24px rgba(255, 171, 0, 0.4);
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 12px 24px rgba(255, 171, 0, 0.5);
         }
         .dialog {
             background-color: rgba(10, 14, 26, 0.8);
@@ -140,12 +141,9 @@
         .hero-cta { animation-delay: 0.6s; }
 
         /* Conversion Styles */
-        @keyframes pulse {
+        @keyframes pulse-cta {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 171, 0, 0.7); }
-            50% { transform: scale(1.05); box-shadow: 0 0 10px 10px rgba(255, 171, 0, 0); }
-        }
-        .pulsing-seal {
-            animation: pulse 2s infinite;
+            50% { transform: scale(1.05); box-shadow: 0 0 15px 10px rgba(255, 171, 0, 0); }
         }
         @keyframes subtle-blink {
             0%, 100% { opacity: 1; }
@@ -273,15 +271,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
                         <div class="animate-on-scroll">
                             <p class="text-4xl font-bold text-yellow-400" id="counter-players">+1,200</p>
-                            <p class="text-gray-400" data-translate="counterPlayers">Jogadores Lucrando Agora</p>
+                            <p class="text-gray-400" data-translate="counterPlayers">Active Players Today</p>
                         </div>
                          <div class="animate-on-scroll" style="transition-delay: 0.2s;">
                             <p class="text-4xl font-bold text-yellow-400" id="counter-winnings">$150K+</p>
-                            <p class="text-gray-400" data-translate="counterWinnings">Ganhos na Última Semana</p>
+                            <p class="text-gray-400" data-translate="counterWinnings">Winnings This Week Alone</p>
                         </div>
                          <div class="animate-on-scroll" style="transition-delay: 0.4s;">
-                            <p class="text-4xl font-bold text-yellow-400" id="counter-satisfaction">99.00%</p>
-                            <p class="text-gray-400" data-translate="counterSatisfaction">Satisfação Garantida</p>
+                            <p class="text-4xl font-bold text-yellow-400" id="counter-satisfaction">98.7%</p>
+                            <p class="text-gray-400" data-translate="counterSatisfaction">Satisfaction Rate</p>
                         </div>
                     </div>
                 </div>
@@ -353,7 +351,7 @@
                     <div class="animate-on-scroll">
                         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
                         <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
-                                <!-- Story content injected by JS -->
+                                 <!-- Story content injected by JS -->
                         </div>
                     </div>
                 </div>
@@ -377,14 +375,14 @@
                     
                     <div class="my-6">
                         <div class="text-xl font-semibold text-red-500 animate-pulse">
-                            <span data-translate="urgencyText"></span> <strong id="slots-left-main">12</strong> <span data-translate="urgencyText2"></span>
+                            <span data-translate="urgencyText"></span> <strong id="slots-left-main" class="text-xl">12</strong> <span data-translate="urgencyText2"></span>
                         </div>
                     </div>
                     
-                    <button class="main-cta-button text-xl font-bold py-4 px-10 rounded-lg cta-button" id="start-purchase-btn" data-translate="getAppButton">Yes, I Want to Boost My Winnings!</button>
+                    <button class="main-cta-button text-xl font-bold py-4 px-10 rounded-lg cta-button" id="start-purchase-btn" data-translate="getAppButton">Activate Your Secret Advantage</button>
                     
                     <div class="flex justify-center items-center flex-wrap gap-x-4 gap-y-4 md:gap-x-8 mt-8 text-gray-400">
-                        <div class="flex flex-col items-center space-y-2 pulsing-seal">
+                        <div class="flex flex-col items-center space-y-2">
                             <i class="fas fa-shield-alt text-3xl text-green-400"></i>
                             <span class="text-xs font-bold" data-translate="secureBadge"></span>
                         </div>
@@ -499,50 +497,50 @@
     // --- Translations Object ---
     const translations = {
         en: {
-            pageTitle: "Reveal App: Poker Hack for PPPOKER, XPoker, ClubGG | See All Cards",
+            pageTitle: "Reveal App: The Ultimate Advantage for PPPOKER, XPoker, & ClubGG",
             navFeatures: "Features",
             navHowItWorks: "How It Works",
             navDemo: "Demo",
             navStory: "Our Story",
             navTestimonials: "Testimonials",
-            navGetApp: "Get App",
-            heroTitle: "Discover How Ordinary Players Are Making Big Profits in Online Poker",
-            heroTagline: "Our exclusive software lets you see your opponents' cards on PPPOKER, XPoker & ClubGG. Make winning decisions and dominate the tables.",
-            heroCta: "Start Profiting Today",
-            counterPlayers: "Players Profiting Now",
-            counterWinnings: "Won Last Week",
-            counterSatisfaction: "Satisfaction Guarantee",
-            featuresTitle: "Why Choose Reveal App?",
-            feature1Title: "Unprecedented Insight",
-            feature1Text: "Transform uncertainty into profit. See opponents' hands, make confident decisions, avoid traps, and maximize pots.",
-            feature2Title: "Multi-Platform Support",
-            feature2Text: "Works seamlessly with PPPOKER, XPoker, and ClubGG on Android & iOS.",
-            feature3Title: "Secure & Undetectable",
-            feature3Text: "Play with confidence. Our advanced, external technology ensures your advantage remains secret and your account safe.",
-            feature4Title: "Consistent Results",
-            feature4Text: "Turn every session into a winning one. With perfect information, you'll make optimal decisions every time.",
-            feature5Title: "Regular Updates",
-            feature5Text: "Stay ahead with our continuous updates that adapt to platform changes, ensuring your edge remains uninterrupted.",
-            feature6Title: "Premium Support",
-            feature6Text: "Get personalized assistance from our expert team whenever you need it. We're committed to your success.",
+            navGetApp: "Get Your Edge",
+            heroTitle: "Stop Playing in the Dark. See Their Cards & Multiply Your Winnings.",
+            heroTagline: "While others rely on luck, you'll play with perfect information. Over 1,200 players are profiting right now on PPPOKER, XPoker & ClubGG. Why not you?",
+            heroCta: "Activate Your Secret Advantage",
+            counterPlayers: "Active Players Today",
+            counterWinnings: "Winnings This Week Alone",
+            counterSatisfaction: "Satisfaction Rate",
+            featuresTitle: "Why is Reveal App Your Unfair Advantage?",
+            feature1Title: "See Every Hand",
+            feature1Text: "Without Reveal App: Win 20% of hands. With Reveal App: Win 80%. Transform uncertainty into profit and make confident, winning decisions.",
+            feature2Title: "Multi-Platform Domination",
+            feature2Text: "Works seamlessly with PPPOKER, XPoker, and ClubGG on both Android & iOS.",
+            feature3Title: "100% Undetectable",
+            feature3Text: "Play with zero risk. Our external technology ensures your advantage remains a complete secret and your account is always safe.",
+            feature4Title: "Consistent Profits",
+            feature4Text: "Turn every session into a winning one. With perfect information, you'll make the optimal decision, every single time.",
+            feature5Title: "Always Ahead",
+            feature5Text: "Stay ahead of the game with continuous updates that adapt to platform changes, ensuring your edge remains sharp and uninterrupted.",
+            feature6Title: "VIP Support",
+            feature6Text: "Get personalized, priority assistance from our expert team. We're committed to your success and profits.",
             howItWorksTitle: "Simple Steps to Dominate",
             step1Title: "Choose Your Plan",
             step1Text: "Select the Reveal App access that fits your needs.",
-            step2Title: "Your Unique ID",
-            step2Text: "Get your unique ID for secure activation (stored locally for your convenience).",
+            step2Title: "Get Your Unique ID",
+            step2Text: "Receive your private ID for secure activation.",
             step3Title: "Activate & Play",
-            step3Text: "Follow simple instructions to activate and start seeing cards!",
+            step3Text: "Follow simple instructions to activate and start seeing cards instantly!",
             step4Title: "Win Consistently",
             step4Text: "Enjoy your newfound advantage and watch your profits grow session after session.",
             demoTitle: "See the App in Action",
-            demoText: "Watch our demo videos to understand how the Reveal App gives you the edge:",
+            demoText: "Watch how Reveal App gives you the ultimate edge. This is what winning looks like:",
             demoPPPOKERTitle: "PPPOKER Demo",
             demoXPokerTitle: "XPoker Demo",
             demoClubGGTitle: "ClubGG Demo",
-            storyTitle: "Our Story: How We Revolutionized Poker",
+            storyTitle: "Our Story: How We Cracked the Code",
             storyText: "It all started with a series of unexpected defeats, sparking a quest to uncover hidden vulnerabilities in popular poker apps like PPPOKER and XPoker. Through months of rigorous research, we revealed critical flaws that were being exploited. In November 2023, the <strong>Reveal App</strong> was born, empowering players to level the playing field by revealing opponents' cards.",
-            storyCallToAction: "This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game. <strong>Act now, because every moment without this app is a missed opportunity to dominate!</strong>",
-            testimonialsTitle: "What Our Users Say",
+            storyCallToAction: "This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game. <strong>Act now, because every hand without this app is money lost!</strong>",
+            testimonialsTitle: "Proof from the Winners' Circle",
             testimonial1Quote: "This app completely changed my game. I went from a break-even player to consistently profitable. Seeing the cards is an unbelievable advantage.",
             testimonial1Author: "Alex R.",
             testimonial2Quote: "I was skeptical at first, but Reveal App delivered. It's easy to set up and works flawlessly. My win rate has skyrocketed.",
@@ -553,11 +551,11 @@
             testimonial4Author: "Kenji T.",
             testimonial5Quote: "Playing without it feels like playing blind. If you're not using Reveal App, you're leaving money on the table. Simple as that.",
             testimonial5Author: "David L.",
-            getAppTitle: "Get Your Reveal App Access",
-            getAppText: "Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.",
-            urgencyText: "🔥 Only",
-            urgencyText2: "licenses left at this price!",
-            getAppButton: "Yes, I Want to Boost My Winnings!",
+            getAppTitle: "Activate Your Unfair Advantage Now",
+            getAppText: "Every hand you play without Reveal App is a missed opportunity. It's time to invest in your success.",
+            urgencyText: "⚠️ Only",
+            urgencyText2: "licenses left for today. After this, sales close until the next batch.",
+            getAppButton: "See First, Win Later",
             secureBadge: "100% Secure & Undetectable",
             satisfactionGuaranteeBadge: "Satisfaction Guarantee",
             dataPrivacyBadge: "Data Privacy",
@@ -575,24 +573,28 @@
             footerRights: "All Rights Reserved. Your success is our mission.",
             footerDisclaimer: "Disclaimer: Use responsibly and be aware of the terms of service of the poker platforms you use.",
             
-            // New Translations
+            // New/Improved Translations
             stickyBarTextActive: "🔥 Special Offer <strong>10OFF</strong> Expires In:",
             stickyBarTextExpired: "Main offer expired! Get <strong>5% OFF</strong> now!",
             scarcityPopupTitle: "⚠️ Only {SLOTS} licenses available for today!",
             scarcityPopupText: "Secure yours now to unlock the Reveal App before they run out.",
             scarcityPopupButton: "Guarantee My License",
-            exitIntentTitle: "Wait! Before you go...",
-            exitIntentText: "Use coupon <strong>10OFF</strong> to get 10% OFF right now.",
+            timedPopupTitle: "🎯 Extra Slots Just Released!",
+            timedPopupText: "For a limited time, we've opened a few extra slots. Secure your advantage before they're gone again!",
+            timedPopupButton: "Claim My Slot Now",
+            exitIntentTitle: "Wait! Before You Go...",
+            exitIntentText: "This is your only chance. Use coupon <strong>10OFF</strong> to get 10% OFF your advantage right now.",
             exitIntentButton: "Apply Discount & Continue",
-            socialProofAcquired: "🎉 {NAME} from {LOCATION} just acquired Reveal App for {APP}!",
-            socialProofGenerated: "🎟️ {NAME} from {LOCATION} generated a payment code for {APP}!",
+            socialProofAcquired: "🎉 {NAME} from {LOCATION} just activated Reveal App for {APP}!",
+            socialProofGenerated: "🎟️ {NAME} from {LOCATION} just generated a QR code for {APP}!",
+            socialProofSeeing: "👀 {NAME} from {LOCATION} is now seeing all cards on {APP}!",
             midCtaTitle: "Ready to Dominate the Tables?",
             midCtaButton: "Yes, Claim My Advantage Now!",
             licensesLeftText: "Only",
             personalizationText: "Perfect! We have slots left today for <strong>{APP} on {PLATFORM}</strong>. Click below to complete.",
             offerExpired: "Expired",
-            offerExpiredTitle: "Offer Expired!",
-            offerExpiredText: "You missed the main offer, but here is a special 5% discount for you! Use code <strong>5OFF</strong>.",
+            offerExpiredTitle: "🔥 You Missed the Main Offer!",
+            offerExpiredText: "But you're in luck. For a short time, you can still get a 5% discount. Use code <strong>5OFF</strong> before this also expires.",
             offerExpiredButton: "Apply 5% Discount",
 
             // Dialog translations
@@ -624,8 +626,8 @@
             applyCouponButton: "Apply",
             proceedButton: "Proceed to Payment",
             loadingPaymentText: "Getting price...",
-            paymentInstructionsTitle: "Payment Instructions",
-            paymentInstructionsText: "Please send the exact amount to the address below or scan the QR code with your wallet app.",
+            paymentInstructionsTitle: "Complete Your Secure Payment",
+            paymentInstructionsText: "Your order is reserved for <strong id='payment-timer' class='text-yellow-400'>30:00</strong>. Send the exact amount to the address below. No banks, no traces—you are in control.",
             amountToSendLabel: "Amount to Send:",
             cryptoAmountLabel: "In {CRYPTO}:",
             networkLabel: "Network:",
@@ -652,50 +654,50 @@
             openTelegramButton: "Open Telegram",
         },
         pt: {
-            pageTitle: "Reveal App: Poker Hack para PPPOKER, XPoker, ClubGG | Veja Todas as Cartas",
+            pageTitle: "Reveal App: A Vantagem Definitiva para PPPOKER, XPoker e ClubGG",
             navFeatures: "Recursos",
             navHowItWorks: "Como Funciona",
-            navDemo: "Demonstração",
+            navDemo: "Demo",
             navStory: "Nossa História",
             navTestimonials: "Depoimentos",
-            navGetApp: "Obter App",
-            heroTitle: "Descubra como jogadores comuns estão a lucrar alto no poker online",
-            heroTagline: "O nosso software exclusivo permite-lhe ver as cartas dos seus oponentes no PPPOKER, XPoker & ClubGG. Tome decisões vencedoras e domine as mesas.",
-            heroCta: "Comece a Lucrar Hoje",
-            counterPlayers: "Jogadores Lucrando Agora",
-            counterWinnings: "Ganhos na Última Semana",
-            counterSatisfaction: "Satisfação Garantida",
-            featuresTitle: "Por que Escolher o Reveal App?",
-            feature1Title: "Visão Sem Precedentes",
-            feature1Text: "Transforme a incerteza em lucro. Veja as mãos dos oponentes, tome decisões confiantes, evite armadilhas e maximize potes.",
-            feature2Title: "Suporte Multiplataforma",
+            navGetApp: "Obtenha Sua Vantagem",
+            heroTitle: "Pare de Jogar no Escuro. Veja as Cartas e Multiplique Seus Ganhos.",
+            heroTagline: "Enquanto outros confiam na sorte, você joga com informação perfeita. Mais de 1.200 jogadores estão lucrando agora no PPPOKER, XPoker & ClubGG. Por que não você?",
+            heroCta: "Ative Sua Vantagem Secreta",
+            counterPlayers: "Jogadores Ativos Hoje",
+            counterWinnings: "Ganhos Apenas Nesta Semana",
+            counterSatisfaction: "Taxa de Satisfação",
+            featuresTitle: "Por Que o Reveal App é a Sua Vantagem Injusta?",
+            feature1Title: "Veja Todas as Mãos",
+            feature1Text: "Sem o Reveal App: ganha 20% das mãos. Com o Reveal App: 80%. Transforme a incerteza em lucro e tome decisões confiantes e vencedoras.",
+            feature2Title: "Domínio Multiplataforma",
             feature2Text: "Funciona perfeitamente com PPPOKER, XPoker e ClubGG em Android e iOS.",
-            feature3Title: "Seguro e Indetectável",
-            feature3Text: "Jogue com confiança. Nossa tecnologia avançada e externa garante que sua vantagem permaneça secreta e sua conta segura.",
-            feature4Title: "Resultados Consistentes",
-            feature4Text: "Transforme cada sessão em uma sessão vitoriosa. Com informações perfeitas, você tomará as melhores decisões sempre.",
-            feature5Title: "Atualizações Regulares",
-            feature5Text: "Fique à frente com nossas atualizações contínuas que se adaptam às mudanças da plataforma, garantindo que sua vantagem permaneça ininterrupta.",
-            feature6Title: "Suporte Premium",
-            feature6Text: "Receba assistência personalizada de nossa equipe de especialistas sempre que precisar. Estamos comprometidos com o seu sucesso.",
+            feature3Title: "100% Indetectável",
+            feature3Text: "Jogue com risco zero. Nossa tecnologia externa garante que sua vantagem permaneça um segredo completo e sua conta sempre segura.",
+            feature4Title: "Lucros Consistentes",
+            feature4Text: "Transforme cada sessão em uma sessão vitoriosa. Com informações perfeitas, você tomará a decisão ideal, sempre.",
+            feature5Title: "Sempre à Frente",
+            feature5Text: "Fique à frente do jogo com atualizações contínuas que se adaptam às mudanças da plataforma, garantindo que sua vantagem permaneça afiada e ininterrupta.",
+            feature6Title: "Suporte VIP",
+            feature6Text: "Receba assistência personalizada e prioritária de nossa equipe de especialistas. Estamos comprometidos com o seu sucesso e lucros.",
             howItWorksTitle: "Passos Simples para Dominar",
             step1Title: "Escolha Seu Plano",
             step1Text: "Selecione o acesso ao Reveal App que melhor se adapta às suas necessidades.",
-            step2Title: "Seu ID Exclusivo",
-            step2Text: "Obtenha seu ID exclusivo para ativação segura (armazenado localmente para sua conveniência).",
+            step2Title: "Obtenha Seu ID Exclusivo",
+            step2Text: "Receba seu ID privado para ativação segura.",
             step3Title: "Ative e Jogue",
-            step3Text: "Siga as instruções simples para ativar e começar a ver as cartas!",
+            step3Text: "Siga as instruções simples para ativar e começar a ver as cartas instantaneamente!",
             step4Title: "Vença Consistentemente",
             step4Text: "Aproveite sua nova vantagem e veja seus lucros crescerem sessão após sessão.",
             demoTitle: "Veja o App em Ação",
-            demoText: "Assista aos nossos vídeos de demonstração para entender como o Reveal App lhe dá a vantagem:",
+            demoText: "Assista como o Reveal App lhe dá a vantagem suprema. É assim que se parece a vitória:",
             demoPPPOKERTitle: "Demonstração PPPOKER",
             demoXPokerTitle: "Demonstração XPoker",
             demoClubGGTitle: "Demonstração ClubGG",
-            storyTitle: "Nossa História: Como Revolucionamos o Poker",
+            storyTitle: "Nossa História: Como Quebramos o Código",
             storyText: "Tudo começou com uma série de derrotas inesperadas, o que deu início a uma busca para descobrir vulnerabilidades ocultas em aplicativos de poker populares como PPPOKER e XPoker. Após meses de pesquisa rigorosa, revelamos falhas críticas que estavam sendo exploradas. Em novembro de 2023, nasceu o <strong>Reveal App</strong>, capacitando os jogadores a nivelar o campo de jogo, revelando as cartas dos oponentes.",
-            storyCallToAction: "Isso não é apenas uma ferramenta - é uma revolução. Jogadores de todo o mundo estão ganhando uma vantagem estratégica, e agora é a sua vez de transformar seu jogo. <strong>Aja agora, porque cada momento sem este aplicativo é uma oportunidade perdida de dominar!</strong>",
-            testimonialsTitle: "O Que Nossos Usuários Dizem",
+            storyCallToAction: "Isso não é apenas uma ferramenta - é uma revolução. Jogadores de todo o mundo estão ganhando uma vantagem estratégica, e agora é a sua vez de transformar seu jogo. <strong>Aja agora, porque cada mão sem este aplicativo é dinheiro perdido!</strong>",
+            testimonialsTitle: "Prova do Círculo dos Vencedores",
             testimonial1Quote: "Este aplicativo mudou completamente o meu jogo. De um jogador que empatava, passei a ser consistentemente lucrativo. Ver as cartas é uma vantagem inacreditável.",
             testimonial1Author: "Alex R.",
             testimonial2Quote: "Eu estava cético no início, mas o Reveal App cumpriu o que prometeu. É fácil de configurar e funciona perfeitamente. Minha taxa de vitória disparou.",
@@ -706,12 +708,12 @@
             testimonial4Author: "Kenji T.",
             testimonial5Quote: "Jogar sem ele parece jogar às cegas. Se você não está usando o Reveal App, está deixando dinheiro na mesa. Simples assim.",
             testimonial5Author: "David L.",
-            getAppTitle: "Obtenha Seu Acesso ao Reveal App",
-            getAppText: "Pare de deixar dinheiro na mesa. É hora de investir no seu sucesso no poker. Escolha seu aplicativo de poker preferido abaixo para começar.",
-            urgencyText: "🔥 Restam apenas",
-            urgencyText2: "licenças a este preço!",
-            getAppButton: "Sim, Quero Aumentar Meus Ganhos!",
-            secureBadge: "✅ 100% Seguro & Indetectável",
+            getAppTitle: "Ative Sua Vantagem Injusta Agora",
+            getAppText: "Cada mão que você joga sem o Reveal App é uma oportunidade perdida. É hora de investir no seu sucesso.",
+            urgencyText: "⚠️ Restam apenas",
+            urgencyText2: "licenças para hoje. Depois disso, as vendas fecham até o próximo lote.",
+            getAppButton: "Veja Antes, Ganhe Depois",
+            secureBadge: "100% Seguro & Indetectável",
             satisfactionGuaranteeBadge: "Satisfação Garantida",
             dataPrivacyBadge: "Privacidade de Dados",
             contactTitle: "Entre em Contato",
@@ -728,24 +730,28 @@
             footerRights: "Todos os Direitos Reservados. O seu sucesso é a nossa missão.",
             footerDisclaimer: "Aviso: Use com responsabilidade e esteja ciente dos termos de serviço das plataformas de poker que você utiliza.",
 
-            // New Translations
+            // New/Improved Translations
             stickyBarTextActive: "🔥 Oferta Especial <strong>10OFF</strong> Expira Em:",
             stickyBarTextExpired: "Oferta principal expirou! Garanta <strong>5% OFF</strong> agora!",
             scarcityPopupTitle: "⚠️ Apenas {SLOTS} licenças disponíveis para hoje!",
             scarcityPopupText: "Garanta a sua agora para desbloquear o Reveal App antes que acabem.",
             scarcityPopupButton: "Garantir Minha Licença",
-            exitIntentTitle: "Espere! Antes de sair...",
-            exitIntentText: "Use o cupom <strong>10OFF</strong> para garantir 10% de desconto agora.",
+            timedPopupTitle: "🎯 Vagas Extras Liberadas!",
+            timedPopupText: "Por tempo limitado, abrimos algumas vagas extras. Garanta sua vantagem antes que desapareçam novamente!",
+            timedPopupButton: "Garantir Minha Vaga Agora",
+            exitIntentTitle: "Espere! Antes de Sair...",
+            exitIntentText: "Esta é sua única chance. Use o cupom <strong>10OFF</strong> para obter 10% de desconto em sua vantagem agora mesmo.",
             exitIntentButton: "Aplicar Desconto e Continuar",
-            socialProofAcquired: "🎉 {NAME} de {LOCATION} acabou de adquirir o Reveal App para {APP}!",
-            socialProofGenerated: "🎟️ {NAME} de {LOCATION} gerou um código de pagamento para o Reveal App para {APP}!",
+            socialProofAcquired: "🎉 {NAME} de {LOCATION} acabou de ativar o Reveal App para {APP}!",
+            socialProofGenerated: "🎟️ {NAME} de {LOCATION} acabou de gerar um QR code para {APP}!",
+            socialProofSeeing: "👀 {NAME} de {LOCATION} agora está vendo todas as cartas no {APP}!",
             midCtaTitle: "Pronto para Dominar as Mesas?",
             midCtaButton: "Sim, Quero a Minha Vantagem Agora!",
-            licensesLeftText: "Restam apenas",
+            licensesLeftText: "Apenas",
             personalizationText: "Perfeito! Temos vagas restantes hoje para <strong>{APP} no {PLATFORM}</strong>. Clique abaixo para concluir.",
             offerExpired: "Expirada",
-            offerExpiredTitle: "Oferta Expirada!",
-            offerExpiredText: "Você perdeu a oferta principal, mas aqui está um desconto especial de 5% para você! Use o código <strong>5OFF</strong>.",
+            offerExpiredTitle: "🔥 Você Perdeu a Oferta Principal!",
+            offerExpiredText: "Mas você está com sorte. Por um curto período, ainda pode obter um desconto de 5%. Use o código <strong>5OFF</strong> antes que este também expire.",
             offerExpiredButton: "Aplicar Desconto de 5%",
 
             // Dialog translations
@@ -777,8 +783,8 @@
             applyCouponButton: "Aplicar",
             proceedButton: "Prosseguir para Pagamento",
             loadingPaymentText: "A obter cotação...",
-            paymentInstructionsTitle: "Instruções de Pagamento",
-            paymentInstructionsText: "Por favor, envie o valor exato para o endereço abaixo ou escaneie o código QR com o seu aplicativo de carteira.",
+            paymentInstructionsTitle: "Conclua Seu Pagamento Seguro",
+            paymentInstructionsText: "Seu pedido está reservado por <strong id='payment-timer' class='text-yellow-400'>30:00</strong>. Envie o valor exato para o endereço abaixo. Sem bancos, sem rastros — você no controle.",
             amountToSendLabel: "Valor a Enviar:",
             cryptoAmountLabel: "Em {CRYPTO}:",
             networkLabel: "Rede:",
@@ -805,6 +811,16 @@
             openTelegramButton: "Abrir Telegram",
         }
     };
+    
+    // --- Localized Social Proof Data ---
+    const socialProofData = {
+      "de": { names: ["Klaus","Hans","Müller"], cities:["Berlin","Hamburg"], flag: "🇩🇪" },
+      "it": { names: ["Giovanni","Marco","Luca"], cities:["Roma","Milano"], flag: "🇮🇹" },
+      "us": { names: ["James","John","Michael"], cities:["New York","Miami"], flag: "🇺🇸" },
+      "ru": { names: ["Dmitri","Ivan","Sergey"], cities:["Moscow","St. Petersburg"], flag: "🇷🇺" },
+      "br": { names: ["Paulo","Thiago","Lucas"], cities:["São Paulo","Rio de Janeiro"], flag: "🇧🇷" },
+      "ph": { names: ["Juan", "Antonio", "Jose"], cities:["Manila", "Cebu"], flag: "🇵🇭"}
+    };
 
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,pt,zh-CN,vi,ru,tl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
@@ -830,9 +846,8 @@
             // --- URGENCY & SCARCITY STATE ---
             urgencyState: {
                 slotsLeft: 12,
-                dailyScarcitySlots: 0,
                 countdownInterval: null,
-                slotsInterval: null,
+                paymentCountdownInterval: null,
                 socialProofTimeout: null,
                 exitIntentTriggered: false,
                 isOfferExpired: false,
@@ -894,7 +909,6 @@
 
                 // Purchase Flow
                 this.dom.startPurchaseBtn.addEventListener('click', () => this.startPurchaseFlow());
-                // Also hook up new CTAs
                 document.querySelectorAll('a[href="#get-app"]').forEach(el => {
                     el.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -917,10 +931,10 @@
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
                             if (entry.target.classList.contains('hero')) {
-                                this.dom.stickyBar.classList.toggle('hidden', entry.isIntersecting);
-                                this.dom.mainHeader.style.top = entry.isIntersecting ? '0' : `${this.dom.stickyBar.offsetHeight}px`;
+                                this.dom.stickyBar.classList.add('hidden');
+                                this.dom.mainHeader.style.top = '0';
                             }
-                            if(!entry.target.classList.contains('hero')) {
+                             if(!entry.target.classList.contains('hero')) {
                                 observer.unobserve(entry.target);
                             }
                         } else {
@@ -930,7 +944,7 @@
                             }
                         }
                     });
-                }, { threshold: 0 });
+                }, { threshold: 0.1 });
 
                 document.querySelectorAll('.animate-on-scroll, .hero').forEach(el => {
                     observer.observe(el);
@@ -939,13 +953,9 @@
 
             // --- Urgency & Scarcity Features ---
             initUrgencyFeatures() {
-                const daySeed = parseInt(new Date().toISOString().split('T')[0].replace(/-/g, ''));
-                this.urgencyState.dailyScarcitySlots = Math.floor(this.seededRandom(daySeed) * (15 - 7 + 1)) + 7;
-
-                setTimeout(() => this.showScarcityPopup(), 12000);
+                this.initializeDailySlots();
+                setTimeout(() => this.showTimedPopup(), 45000); // 45s timed popup
                 this.initializeCountdown();
-                this.updateSlotsCounter();
-                this.urgencyState.slotsInterval = setInterval(() => this.updateSlotsCounter(), 25000);
                 this.scheduleSocialProof();
             },
 
@@ -953,33 +963,40 @@
                 let offerEndTime = localStorage.getItem('offerEndTime');
                 const now = new Date().getTime();
 
-                if (!offerEndTime || offerEndTime < now) {
-                    offerEndTime = now + (4 * 3600 * 1000) + (23 * 60 * 1000) + (19 * 1000);
+                // If no timer exists in localStorage (first visit), create one.
+                if (!offerEndTime) {
+                    offerEndTime = now + (4 * 3600 * 1000) + (23 * 60 * 1000) + (19 * 1000); // Set a 4h 23m 19s timer
                     localStorage.setItem('offerEndTime', offerEndTime);
                 }
 
-                const durationInSeconds = Math.round((offerEndTime - now) / 1000);
+                // Calculate the remaining duration based on the stored (or newly created) end time.
+                const durationInSeconds = Math.round((parseInt(offerEndTime, 10) - now) / 1000);
 
+                // Decide what to display based on the remaining duration.
                 if (durationInSeconds > 0) {
+                    // Offer is still active.
                     this.urgencyState.isOfferExpired = false;
                     if (this.dom.stickyBarTextContainer) {
                         this.dom.stickyBarTextContainer.innerHTML = this.getTranslatedString('stickyBarTextActive');
                     }
-                    this.startCountdown(durationInSeconds);
+                    this.startCountdown(durationInSeconds, this.dom.countdownTimer, () => {
+                        this.urgencyState.isOfferExpired = true;
+                        this.handleExpiredOffer();
+                        this.showOfferExpiredPopup();
+                    });
                 } else {
+                    // Offer has expired and will remain expired for this user.
                     this.urgencyState.isOfferExpired = true;
                     this.handleExpiredOffer();
                 }
             },
 
-            startCountdown(duration) {
+            startCountdown(duration, displayElement, onEndCallback) {
                 let timer = duration;
-                this.urgencyState.countdownInterval = setInterval(() => {
+                const intervalId = setInterval(() => {
                     if (timer <= 0) {
-                        clearInterval(this.urgencyState.countdownInterval);
-                        this.urgencyState.isOfferExpired = true;
-                        this.handleExpiredOffer();
-                        this.showOfferExpiredPopup();
+                        clearInterval(intervalId);
+                        if(onEndCallback) onEndCallback();
                         return;
                     }
 
@@ -993,11 +1010,13 @@
                     minutes = minutes < 10 ? "0" + minutes : minutes;
                     seconds = seconds < 10 ? "0" + seconds : seconds;
                     
-                    if (this.dom.countdownTimer) {
-                        this.dom.countdownTimer.textContent = hours + ":" + minutes + ":" + seconds;
+                    if (displayElement) {
+                        displayElement.textContent = hours + ":" + minutes + ":" + seconds;
                     }
 
                 }, 1000);
+                
+                return intervalId;
             },
 
             handleExpiredOffer() {
@@ -1032,32 +1051,72 @@
                 };
             },
 
-            updateSlotsCounter() {
-                if (this.urgencyState.slotsLeft > 2) {
-                    this.urgencyState.slotsLeft--;
+            initializeDailySlots() {
+                const todayStr = new Date().toISOString().split('T')[0];
+                let slotData = JSON.parse(localStorage.getItem('slotData'));
+
+                if (!slotData || slotData.date !== todayStr) {
+                    // New day or first visit
+                    const daySeed = parseInt(todayStr.replace(/-/g, ''));
+                    const initialSlots = Math.floor(this.seededRandom(daySeed) * (15 - 7 + 1)) + 7;
+                    slotData = {
+                        date: todayStr,
+                        currentSlots: initialSlots,
+                        lastHourlyCheck: new Date().getTime(),
+                        extraSlotsAwarded: false
+                    };
+                } else {
+                    // Same day, check for hourly reduction
+                    const now = new Date().getTime();
+                    const hoursPassed = Math.floor((now - slotData.lastHourlyCheck) / (1000 * 60 * 60));
+                    if (hoursPassed > 0) {
+                        slotData.currentSlots = Math.max(2, slotData.currentSlots - hoursPassed); // Don't go below 2
+                        slotData.lastHourlyCheck = now;
+                    }
                 }
-                if (this.dom.slotsLeftMain) {
-                    this.dom.slotsLeftMain.textContent = this.urgencyState.slotsLeft;
-                }
-                if (this.dom.slotsLeftMid) {
-                    this.dom.slotsLeftMid.textContent = this.urgencyState.slotsLeft;
-                }
+                
+                localStorage.setItem('slotData', JSON.stringify(slotData));
+                this.updateSlotsUI(slotData.currentSlots);
             },
 
-            showScarcityPopup() {
-                const content = `
-                    <div class="text-center">
-                        <div class="text-5xl mb-4">⚠️</div>
-                        <h3 class="text-2xl font-bold mb-2 text-yellow-400">${this.getTranslatedString('scarcityPopupTitle', {SLOTS: this.urgencyState.dailyScarcitySlots})}</h3>
-                        <p class="text-gray-300 mb-6">${this.getTranslatedString('scarcityPopupText')}</p>
-                        <a href="#get-app" id="scarcity-popup-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('scarcityPopupButton')}</a>
-                    </div>
-                `;
-                this.showDialog(content);
-                document.getElementById('scarcity-popup-cta').addEventListener('click', () => {
-                    this.closeDialog();
-                    document.querySelector('#get-app').scrollIntoView({ behavior: 'smooth' });
+            updateSlotsUI(slots) {
+                const slotsElements = [this.dom.slotsLeftMain, this.dom.slotsLeftMid];
+                slotsElements.forEach(el => {
+                    if (el) {
+                        el.textContent = slots;
+                        if (slots < 5) {
+                            el.parentElement.classList.remove('text-red-500');
+                            el.parentElement.classList.add('text-red-600');
+                        } else {
+                             el.parentElement.classList.add('text-red-500');
+                             el.parentElement.classList.remove('text-red-600');
+                        }
+                    }
                 });
+            },
+            
+            showTimedPopup() {
+                let slotData = JSON.parse(localStorage.getItem('slotData'));
+                if (slotData && !slotData.extraSlotsAwarded) {
+                    slotData.currentSlots += 2;
+                    slotData.extraSlotsAwarded = true;
+                    localStorage.setItem('slotData', JSON.stringify(slotData));
+                    this.updateSlotsUI(slotData.currentSlots);
+
+                    const content = `
+                        <div class="text-center">
+                            <div class="text-5xl mb-4">🎯</div>
+                            <h3 class="text-2xl font-bold mb-2 text-yellow-400">${this.getTranslatedString('timedPopupTitle')}</h3>
+                            <p class="text-gray-300 mb-6">${this.getTranslatedString('timedPopupText')}</p>
+                            <a href="#get-app" id="timed-popup-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('timedPopupButton')}</a>
+                        </div>
+                    `;
+                    this.showDialog(content);
+                    document.getElementById('timed-popup-cta').addEventListener('click', () => {
+                        this.closeDialog();
+                        document.querySelector('#get-app').scrollIntoView({ behavior: 'smooth' });
+                    });
+                }
             },
 
             showExitIntentPopup() {
@@ -1069,21 +1128,21 @@
                     </div>
                 `;
                 this.showDialog(content);
-                document.getElementById('exit-intent-cta').addEventListener('click', () => {
+                document.getElementById('exit-intent-cta').onclick = () => {
                     this.closeDialog();
                     this.startPurchaseFlow();
                     setTimeout(() => {
                         const couponInput = document.getElementById('coupon-input');
-                        if (couponInput) {
+                        if (couponInput && !this.urgencyState.isOfferExpired) {
                             couponInput.value = '10OFF';
                             this.applyCoupon();
                         }
                     }, 500);
-                });
+                };
             },
             
             scheduleSocialProof() {
-                const delay = Math.random() * (45000 - 20000) + 20000;
+                const delay = Math.random() * (40000 - 20000) + 20000; // 20-40 seconds
                 this.urgencyState.socialProofTimeout = setTimeout(() => {
                     this.showSocialProofNotification();
                     this.scheduleSocialProof();
@@ -1091,22 +1150,21 @@
             },
 
             showSocialProofNotification() {
-                const names = ['Klaus', 'Dimitri', 'Kenji', 'Hans', 'Svetlana', 'Yuto', 'Müller', 'Ivanova', 'Chen', 'Santos'];
-                const locations = ['Berlin', 'Moscow', 'Tokyo', 'Manila', 'Hamburg', 'St. Petersburg', 'Osaka', 'Cebu', 'Shanghai', 'Quezon City'];
-                const apps = ['PPPOKER', 'XPoker', 'ClubGG'];
-                const actions = ['acquired', 'generated'];
+                const langKeys = Object.keys(socialProofData);
+                const randomLangKey = langKeys[Math.floor(Math.random() * langKeys.length)];
+                const data = socialProofData[randomLangKey];
 
-                const action = actions[Math.floor(Math.random() * actions.length)];
-                const name = names[Math.floor(Math.random() * names.length)];
-                const location = locations[Math.floor(Math.random() * locations.length)];
-                const app = apps[Math.floor(Math.random() * apps.length)];
+                const name = data.names[Math.floor(Math.random() * data.names.length)];
+                const location = data.cities[Math.floor(Math.random() * data.cities.length)];
+                const app = ['PPPOKER', 'XPoker', 'ClubGG'][Math.floor(Math.random() * 3)];
+                const actions = ['socialProofAcquired', 'socialProofGenerated', 'socialProofSeeing'];
+                const actionKey = actions[Math.floor(Math.random() * actions.length)];
 
-                const translationKey = action === 'acquired' ? 'socialProofAcquired' : 'socialProofGenerated';
-                const text = this.getTranslatedString(translationKey, {NAME: name, LOCATION: location, APP: app});
+                const text = this.getTranslatedString(actionKey, {NAME: name, LOCATION: location, APP: app});
 
                 const notification = document.createElement('div');
                 notification.className = 'social-proof-notification bg-gray-800/90 backdrop-blur-sm border border-gray-700 rounded-lg p-4 shadow-lg flex items-center space-x-3 mb-3';
-                notification.innerHTML = `<div>${text}</div>`;
+                notification.innerHTML = `<div>${data.flag} ${text}</div>`;
 
                 this.dom.socialProofContainer.appendChild(notification);
                 
@@ -1141,12 +1199,12 @@
                 const today = new Date();
                 const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
 
-                const satisfaction = 99.00 + this.seededRandom(daySeed) * 0.99;
+                const satisfaction = 98.50 + this.seededRandom(daySeed) * 0.5;
                 if (this.dom.counterSatisfaction) {
-                    this.dom.counterSatisfaction.textContent = `${satisfaction.toFixed(2)}%`;
+                    this.dom.counterSatisfaction.textContent = `${satisfaction.toFixed(1)}%`;
                 }
 
-                const weeklyWinnings = 120000 + this.seededRandom(daySeed) * 110000;
+                const weeklyWinnings = 148000 + this.seededRandom(daySeed) * 25000;
                 if (this.dom.counterWinnings) {
                     this.dom.counterWinnings.textContent = this.formatWinnings(weeklyWinnings);
                 }
@@ -1158,8 +1216,8 @@
                 const startOfDay = new Date(today.toISOString().split('T')[0]);
                 const timePassed = today.getTime() - startOfDay.getTime();
 
-                const MIN_PLAYERS = 1220;
-                const MAX_PLAYERS = 1500;
+                const MIN_PLAYERS = 1276;
+                const MAX_PLAYERS = 1550;
                 const twoMinuteIntervals = Math.floor(timePassed / (2 * 60 * 1000));
                 const intervalSeed = daySeed + twoMinuteIntervals;
                 let playerCount = MIN_PLAYERS + this.seededRandom(intervalSeed) * (MAX_PLAYERS - MIN_PLAYERS);
@@ -1194,7 +1252,7 @@
                 if (!userLang) {
                     const browserLang = (navigator.languages && navigator.languages[0]) || navigator.language;
                     const primaryLang = browserLang.split('-')[0];
-                    userLang = translations[primaryLang] ? primaryLang : 'en';
+                    userLang = translations[primaryLang] ? primaryLang : 'pt';
                 }
                 
                 this.setLanguage(userLang);
@@ -1285,16 +1343,26 @@
             populateTestimonials() {
                  const container = this.dom.testimonialsContainer;
                  if(!container) return;
-                 container.innerHTML = [1, 2, 3, 4, 5].map((i, index) => `
+                 const testimonialsData = [
+                    { key: 1, flag: "🇺🇸" },
+                    { key: 2, flag: "🇧🇷" },
+                    { key: 3, flag: "�🇪" },
+                    { key: 4, flag: "🇯🇵" },
+                    { key: 5, flag: "🇷🇺" },
+                 ];
+                 container.innerHTML = testimonialsData.map(({key, flag}, index) => `
                     <div class="testimonial-card animate-on-scroll" style="transition-delay: ${index * 100}ms;">
                         <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4"></i>
-                        <p class="text-gray-400 mb-4">${this.getTranslatedString(`testimonial${i}Quote`)}</p>
+                        <p class="text-gray-400 mb-4">${this.getTranslatedString(`testimonial${key}Quote`)}</p>
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center mr-4"><i class="fas fa-user"></i></div>
-                            <p class="font-semibold">${this.getTranslatedString(`testimonial${i}Author`)}</p>
+                            <img src="https://placehold.co/40x40/1f2937/ffffff?text=${this.getTranslatedString(`testimonial${key}Author`)[0]}" class="w-10 h-10 rounded-full mr-4" alt="User photo">
+                            <div>
+                                <p class="font-semibold">${this.getTranslatedString(`testimonial${key}Author`)}</p>
+                                <p class="text-sm text-gray-400">${flag}</p>
+                            </div>
                         </div>
                     </div>
-                 `).join('');
+                  `).join('');
             },
 
             // --- Dialog Management ---
@@ -1497,7 +1565,7 @@
                     messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
                 } else {
                      messageEl.textContent = this.getTranslatedString('couponErrorInvalid');
-                           messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
+                             messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
                 }
 
                 const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
@@ -1605,6 +1673,14 @@
                 document.getElementById('copy-address-btn').onclick = () => this.copyToClipboard(address, true);
                 document.getElementById('payment-done-btn').onclick = () => this.proceedToFinalConfirmation();
 
+                // Start payment timer
+                if(this.urgencyState.paymentCountdownInterval) clearInterval(this.urgencyState.paymentCountdownInterval);
+                const paymentTimerEl = document.getElementById('payment-timer');
+                this.urgencyState.paymentCountdownInterval = this.startCountdown(30 * 60, paymentTimerEl, () => {
+                    if(paymentTimerEl) paymentTimerEl.textContent = "Expired";
+                    this.closeDialog();
+                });
+
                 if (method !== 'usdt') {
                     const cryptoPrice = await this.getCryptoPrice(cryptoIds[method]);
                     const paymentAmountContainer = document.getElementById('payment-amount-container');
@@ -1643,9 +1719,10 @@
                 
                 const uniqueId = this.purchaseState.uniqueId || localStorage.getItem('uniqueId');
                 const platform = this.purchaseState.platform || 'Not specified';
+                const app = this.purchaseState.app || 'Not specified';
 
                 // Construct the message in English
-                const telegramMessage = `ID: ${uniqueId}\nPlatform: ${platform}`;
+                const telegramMessage = `ID: ${uniqueId}\nPlatform: ${platform}\nApp: ${app}`;
                 const encodedTelegramMessage = encodeURIComponent(telegramMessage);
                 const telegramUrl = `https://t.me/bedmalcon_temp?text=${encodedTelegramMessage}`;
 
@@ -1710,15 +1787,15 @@
     });
     </script>
     
-    <!-- Script de Proteção de Código -->
+    <!-- Code Protection Script -->
     <script>
-        // Este script tenta impedir que os utilizadores abram as ferramentas de desenvolvimento.
-        // Nota: Este não é um método infalível, mas pode desencorajar a inspeção casual.
+        // This script attempts to deter users from opening developer tools.
+        // Note: This is not a foolproof method, but can discourage casual inspection.
 
-        // 1. Desativar o menu de contexto do clique direito
+        // 1. Disable right-click context menu
         document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // 2. Desativar atalhos de teclado comuns das Ferramentas de Desenvolvimento
+        // 2. Disable common DevTools keyboard shortcuts
         document.addEventListener('keydown', event => {
             // F12
             if (event.keyCode === 123) {
@@ -1740,3 +1817,4 @@
     </script>
 </body>
 </html>
+�
