@@ -7,7 +7,7 @@
     <meta name="description" content="Get the ultimate edge in online poker. Reveal App is a poker hack that lets you see opponent's cards on PPPOKER, XPoker, and ClubGG. Undetectable, safe, and easy to use. Start winning more today.">
     <meta name="keywords" content="poker hack, pppoker hack, xpoker hack, clubgg hack, kkpoker hack, online poker cheat, see cards poker, poker cheat engine, poker tool, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
     
-    <!-- New SVG Favicon -->
+    <!-- SVG Favicon -->
     <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%220%25%22><stop offset=%220%25%22 stop-color=%22%2300e5ff%22 /><stop offset=%22100%25%22 stop-color=%22%23ffab00%22 /></linearGradient></defs><path fill=%22%23ffab00%22 d=%22M50 0A50 50 0 1 0 50 100 50 50 0 0 0 50 0zm0 87.5A37.5 37.5 0 1 1 50 12.5a37.5 37.5 0 0 1 0 75z%22/><path fill=%22%2300e5ff%22 d=%22M50 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50zm0 37.5a12.5 12.5 0 1 1 0-25 12.5 12.5 0 0 1 0 25z%22/><circle cx=%2250%22 cy=%2250%22 r=%225%22 fill=%22white%22/></svg>">
 
     <!-- Google Fonts & Icons -->
@@ -75,7 +75,6 @@
             width: 100%;
             height: 100%;
         }
-        /* Mobile Menu */
         .mobile-menu {
             transition: transform 0.3s ease-in-out;
         }
@@ -118,7 +117,7 @@
         .feature-card:hover, .testimonial-card:hover, .story-card:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(var(--primary-color-rgb, 0, 229, 255), 0.2);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
         }
         
         /* Animation on Scroll */
@@ -132,21 +131,37 @@
             transform: translateY(0);
         }
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translate3d(0, 40px, 0);
-            }
-            to {
-                opacity: 1;
-                transform: translate3d(0, 0, 0);
-            }
+            from { opacity: 0; transform: translate3d(0, 40px, 0); }
+            to { opacity: 1; transform: translate3d(0, 0, 0); }
         }
-        .fade-in-up {
-            animation: fadeInUp 1s ease-out forwards;
-        }
+        .fade-in-up { animation: fadeInUp 1s ease-out forwards; }
         .hero-title { animation-delay: 0.2s; }
         .hero-tagline { animation-delay: 0.4s; }
         .hero-cta { animation-delay: 0.6s; }
+
+        /* Conversion Styles */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 171, 0, 0.7); }
+            50% { transform: scale(1.05); box-shadow: 0 0 10px 10px rgba(255, 171, 0, 0); }
+        }
+        .pulsing-seal {
+            animation: pulse 2s infinite;
+        }
+        @keyframes subtle-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .blinking-badge {
+            animation: subtle-blink 2.5s infinite ease-in-out;
+        }
+        .social-proof-notification {
+            transition: opacity 0.5s, transform 0.5s;
+            transform: translateX(-120%);
+        }
+        .social-proof-notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
@@ -154,7 +169,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-6WV95XF58S');
     </script>
 </head>
@@ -165,27 +179,32 @@
         </div>
     </noscript>
 
+    <!-- Sticky Top Bar -->
+    <div id="sticky-bar" class="fixed top-0 left-0 w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-2 text-center text-sm md:text-base font-bold z-50 shadow-lg hidden">
+        <span data-translate="stickyBarOfferExpires"></span>: <span id="countdown-timer">04:23:19</span> | 
+        <span class="ml-2 animate-pulse"><i class="fas fa-eye"></i> <span id="viewers-count">7</span> <span data-translate="stickyBarViewers"></span></span>
+    </div>
+
     <!-- Header -->
-    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-40">
+    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-40 transition-all duration-300" id="main-header">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
-                        <!-- New SVG Logo -->
                         <svg class="h-12 w-auto" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
-                          <defs>
-                            <linearGradient id="logoGradientHeader" x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" style="stop-color:#00e5ff;" />
-                              <stop offset="100%" style="stop-color:#ffab00;" />
-                            </linearGradient>
-                          </defs>
-                          <g transform="translate(0, 5) scale(0.9)">
-                            <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm0 35c-8.28 0-15-6.72-15-15S11.72 5 20 5s15 6.72 15 15-6.72 15-15 15z" fill="#ffab00"/>
-                            <path d="M20 10c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" fill="#00e5ff"/>
-                            <circle cx="20" cy="20" r="2" fill="white"/>
-                          </g>
-                          <text x="50" y="32" font-family="Inter, sans-serif" font-size="20" font-weight="bold" fill="url(#logoGradientHeader)">Reveal App</text>
+                            <defs>
+                                <linearGradient id="logoGradientHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#00e5ff;" />
+                                    <stop offset="100%" style="stop-color:#ffab00;" />
+                                </linearGradient>
+                            </defs>
+                            <g transform="translate(0, 5) scale(0.9)">
+                                <path d="M20 0C8.95 0 0 8.95 0 20s8.95 20 20 20 20-8.95 20-20S31.05 0 20 0zm0 35c-8.28 0-15-6.72-15-15S11.72 5 20 5s15 6.72 15 15-6.72 15-15 15z" fill="#ffab00"/>
+                                <path d="M20 10c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z" fill="#00e5ff"/>
+                                <circle cx="20" cy="20" r="2" fill="white"/>
+                            </g>
+                            <text x="50" y="32" font-family="Inter, sans-serif" font-size="20" font-weight="bold" fill="url(#logoGradientHeader)">Reveal App</text>
                         </svg>
                     </a>
                 </div>
@@ -195,7 +214,6 @@
                     <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
                     <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
                     <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
-                    <a href="#story" class="text-gray-300 hover:text-white transition" data-translate="navStory">Our Story</a>
                     <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
                 </nav>
 
@@ -217,12 +235,12 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0a0e1a] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl">
         <div class="flex justify-between items-center mb-8">
-           <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
+            <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
                 <img class="h-10 w-auto" src="image_7d55d9.png" alt="Reveal App Logo" onerror="this.onerror=null;this.src='https://placehold.co/160x40/0a0e1a/ffffff?text=Reveal+App';">
-           </a>
-           <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
-               <i class="fas fa-times text-2xl"></i>
-           </button>
+            </a>
+            <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
         </div>
         <nav class="flex flex-col space-y-4">
             <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
@@ -290,8 +308,19 @@
                 </div>
             </section>
             
+            <!-- Mid-page CTA -->
+            <section class="py-16 bg-gray-900 text-center">
+                <div class="container mx-auto px-4 animate-on-scroll">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6" data-translate="midCtaTitle"></h3>
+                    <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="midCtaButton"></a>
+                    <p class="mt-4 text-yellow-400 font-semibold">
+                        <span data-translate="licensesLeftText"></span> <strong id="slots-left-mid" class="text-xl">12</strong>.
+                    </p>
+                </div>
+            </section>
+
             <!-- Demo Section -->
-            <section id="demo" class="py-16 md:py-24 bg-gray-900">
+            <section id="demo" class="py-16 md:py-24 bg-gray-800/50">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-on-scroll" data-translate="demoTitle">See the App in Action</h2>
                     <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-12 animate-on-scroll" data-translate="demoText">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
@@ -320,24 +349,35 @@
             </section>
             
             <!-- Our Story Section -->
-            <section id="story" class="py-16 md:py-24 bg-gray-800/50">
+            <section id="story" class="py-16 md:py-24 bg-gray-900">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="animate-on-scroll">
                         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
                         <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
-                              <!-- Story content injected by JS -->
+                                <!-- Story content injected by JS -->
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Testimonials Section -->
-            <section id="testimonials" class="py-16 md:py-24 bg-gray-900">
+            <section id="testimonials" class="py-16 md:py-24 bg-gray-800/50">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="testimonialsTitle">What Our Users Say</h2>
                     <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Testimonials will be loaded dynamically -->
                     </div>
+                </div>
+            </section>
+
+             <!-- Post-Testimonials CTA -->
+            <section class="py-16 bg-gray-900 text-center">
+                <div class="container mx-auto px-4 animate-on-scroll">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6" data-translate="postTestimonialCtaTitle"></h3>
+                    <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="postTestimonialCtaButton"></a>
+                    <p class="mt-4 text-yellow-400 font-semibold">
+                        <span data-translate="licensesLeftText"></span> <strong id="slots-left-post" class="text-xl">12</strong>.
+                    </p>
                 </div>
             </section>
             
@@ -347,29 +387,26 @@
                     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
                     <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
                     
-                    <div class="bg-yellow-500/10 border border-yellow-500 text-yellow-400 px-4 py-3 rounded-lg relative inline-block mb-6">
-                        <p data-translate="specialOfferText"></p>
-                        <p data-translate="couponText"></p>
-                    </div>
-                    
                     <div class="my-6">
-                        <p class="text-xl font-semibold text-red-500 animate-pulse" data-translate="urgencyText">🔥 Limited spots available! Get your edge before your opponents do! 🔥</p>
+                        <div class="text-xl font-semibold text-red-500 animate-pulse">
+                            <span data-translate="urgencyText"></span> <strong id="slots-left-main">12</strong> <span data-translate="urgencyText2"></span>
+                        </div>
                     </div>
                     
                     <button class="main-cta-button text-xl font-bold py-4 px-10 rounded-lg cta-button" id="start-purchase-btn" data-translate="getAppButton">Yes, I Want to Boost My Winnings!</button>
-                                          
-                    <div class="flex justify-center items-center space-x-4 md:space-x-8 mt-8 text-gray-400">
-                        <div class="flex flex-col items-center space-y-2">
+                    
+                    <div class="flex justify-center items-center flex-wrap gap-x-4 gap-y-4 md:gap-x-8 mt-8 text-gray-400">
+                        <div class="flex flex-col items-center space-y-2 pulsing-seal">
                             <i class="fas fa-shield-alt text-3xl text-green-400"></i>
-                            <span class="text-xs" data-translate="securePaymentBadge">Secure Payment</span>
+                            <span class="text-xs font-bold" data-translate="secureBadge"></span>
                         </div>
-                        <div class="flex flex-col items-center space-y-2">
+                        <div class="flex flex-col items-center space-y-2 blinking-badge">
                             <i class="fas fa-thumbs-up text-3xl text-green-400"></i>
-                            <span class="text-xs" data-translate="satisfactionGuaranteeBadge">Satisfaction Guarantee</span>
+                            <span class="text-xs" data-translate="satisfactionGuaranteeBadge"></span>
                         </div>
                         <div class="flex flex-col items-center space-y-2">
                             <i class="fas fa-lock text-3xl text-green-400"></i>
-                            <span class="text-xs" data-translate="dataPrivacyBadge">Data Privacy</span>
+                            <span class="text-xs" data-translate="dataPrivacyBadge"></span>
                         </div>
                     </div>
                 </div>
@@ -389,12 +426,12 @@
                          <!-- Secondary contacts -->
                         <div class="flex items-center justify-center gap-6 text-gray-400 mt-4">
                              <a href="mailto:support@revealpoker.top" class="hover:text-white transition flex items-center gap-2">
-                                <i class="fas fa-envelope"></i>
-                                <span>support@revealpoker.top</span>
+                                 <i class="fas fa-envelope"></i>
+                                 <span>support@revealpoker.top</span>
                              </a>
                              <a href="https://www.instagram.com/hackpoker_updated" target="_blank" class="hover:text-white transition flex items-center gap-2">
-                                <i class="fab fa-instagram"></i>
-                                <span>@hackpoker_updated</span>
+                                 <i class="fab fa-instagram"></i>
+                                 <span>@hackpoker_updated</span>
                              </a>
                         </div>
                     </div>
@@ -452,7 +489,17 @@
         </div>
     </footer>
     
-    <!-- Dialogs -->
+    <!-- Floating Chat Widget -->
+    <a href="https://t.me/bedmalcon_temp" target="_blank" class="fixed bottom-5 right-5 bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg z-40 transform hover:scale-110 transition-transform">
+        <i class="fab fa-telegram-plane text-3xl"></i>
+    </a>
+
+    <!-- Social Proof Notification -->
+    <div id="social-proof-container" class="fixed bottom-5 left-5 z-50 overflow-hidden">
+        <!-- Notifications will be injected here -->
+    </div>
+
+    <!-- Dialogs / Modals -->
     <div id="dialog-container" class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden dialog">
         <!-- Dialog content will be injected here -->
     </div>
@@ -464,6 +511,7 @@
     // --- Translations Object ---
     const translations = {
         en: {
+            // Existing translations...
             pageTitle: "Reveal App: Poker Hack for PPPOKER, XPoker, ClubGG | See All Cards",
             navFeatures: "Features",
             navHowItWorks: "How It Works",
@@ -520,21 +568,15 @@
             testimonial5Author: "David L.",
             getAppTitle: "Get Your Reveal App Access",
             getAppText: "Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.",
-            specialOfferText: "SPECIAL OFFER",
-            couponText: "Use code <strong>10OFF</strong> for a discount!",
-            urgencyText: "🔥 Limited spots available! Get your edge before your opponents do! �",
+            urgencyText: "🔥 Only",
+            urgencyText2: "licenses left at this price!",
             getAppButton: "Yes, I Want to Boost My Winnings!",
-            securityNote: "100% secure and private activation process.",
-            securePaymentBadge: "Secure Payment",
+            secureBadge: "100% Secure & Undetectable",
             satisfactionGuaranteeBadge: "Satisfaction Guarantee",
             dataPrivacyBadge: "Data Privacy",
-            privacyBadge: "Privacy Guaranteed",
-            instantAccessBadge: "Instant Access",
             contactTitle: "Contact Us",
             contactText: "Have questions or need assistance? Our support team is ready to help you get started with Reveal App.",
             contactTelegram: "Contact on Telegram",
-            contactEmail: "Contact by Email",
-            contactInstagram: "Follow on Instagram",
             footerAboutTitle: "About Reveal App",
             footerAboutText: "Reveal App provides a strategic advantage in online poker by allowing you to see opponent cards on PPPOKER, XPoker, and ClubGG. Play smarter, win bigger.",
             footerLinksTitle: "Quick Links",
@@ -546,6 +588,24 @@
             footerRights: "All Rights Reserved. Your success is our mission.",
             footerDisclaimer: "Disclaimer: Use responsibly and be aware of the terms of service of the poker platforms you use.",
             
+            // New Translations
+            stickyBarOfferExpires: "Offer expires in",
+            stickyBarViewers: "users viewing this offer now",
+            scarcityPopupTitle: "⚠️ Only 3 licenses left today!",
+            scarcityPopupText: "Secure yours now to unlock the Reveal App before they run out.",
+            scarcityPopupButton: "Guarantee My License",
+            exitIntentTitle: "Wait! Before you go...",
+            exitIntentText: "Use coupon <strong>10OFF</strong> to get 10% OFF right now.",
+            exitIntentButton: "Apply Discount & Continue",
+            socialProofAcquired: "🎉 {NAME} from {LOCATION} just acquired Reveal App for {APP}!",
+            socialProofGenerated: "🎟️ {NAME} from {LOCATION} generated a payment code for {APP}!",
+            midCtaTitle: "Ready to Dominate the Tables?",
+            midCtaButton: "Yes, Claim My Advantage Now!",
+            postTestimonialCtaTitle: "Don't Get Left Behind!",
+            postTestimonialCtaButton: "Dominate Poker Now — Get Reveal App!",
+            licensesLeftText: "Only",
+            personalizationText: "Perfect! We have slots left today for <strong>{APP} on {PLATFORM}</strong>. Click below to complete.",
+
             // Dialog translations
             registerTitle: "Register to Continue",
             emailLabel: "Email Address",
@@ -555,8 +615,6 @@
             registerButton: "Register & Continue",
             emailValidationError: "Please enter a valid email address.",
             usernameValidationError: "Username must be at least 3 characters.",
-            registrationSuccess: "Registration successful!",
-            welcomeBackMessage: "Welcome back, {USERNAME}!",
             platformDialogTitle: "Select Your Device",
             platformDialogText: "Choose the platform you'll be using Reveal App on:",
             platformAndroid: "Android",
@@ -587,19 +645,13 @@
             alertCopied: "Address copied to clipboard!",
             alertCopyFailed: "Failed to copy address.",
             paymentDoneButton: "I have made the payment",
-            couponCleared: "Coupon cleared.",
             couponErrorInvalid: "Invalid or expired coupon code.",
             couponAppliedSuccess: "Coupon '{COUPON_CODE}' applied! You get a {DISCOUNT}% discount.",
             amountTextBase: "Amount: {PRICE}",
             originalAmountLabel: "Original",
-            paymentDialogTitleBase: "Pay with {METHOD} for {PLATFORM}",
             paymentDialogTitleFinal: "Complete Your Payment",
-            processingPaymentMessage: "Processing your request... Please wait.",
-
+            
             // Payment Confirmation Page
-            paymentSuccessfulTitle: "Payment Successful!",
-            paymentSuccessfulMessage: "Thank you! To finalize your activation, please click the button below.",
-            secureActivationText: "100% secure and private activation process.",
             telegramInstructionsTitle: "Send Your ID to Admin via Telegram",
             telegramInstructionsText: "To complete your activation, please copy your unique ID below and send it to our administrator via Telegram:",
             telegramStep1Title: "1. Copy Your Unique ID",
@@ -611,6 +663,7 @@
             openTelegramButton: "Open Telegram",
         },
         pt: {
+            // Existing translations...
             pageTitle: "Reveal App: Poker Hack para PPPOKER, XPoker, ClubGG | Veja Todas as Cartas",
             navFeatures: "Recursos",
             navHowItWorks: "Como Funciona",
@@ -667,21 +720,15 @@
             testimonial5Author: "David L.",
             getAppTitle: "Obtenha Seu Acesso ao Reveal App",
             getAppText: "Pare de deixar dinheiro na mesa. É hora de investir no seu sucesso no poker. Escolha seu aplicativo de poker preferido abaixo para começar.",
-            specialOfferText: "OFERTA ESPECIAL",
-            couponText: "Use o código <strong>10OFF</strong> para um desconto!",
-            urgencyText: "🔥 Vagas limitadas! Garanta sua vantagem antes dos seus oponentes! 🔥",
+            urgencyText: "🔥 Restam apenas",
+            urgencyText2: "licenças a este preço!",
             getAppButton: "Sim, Quero Aumentar Meus Ganhos!",
-            securityNote: "Processo de ativação 100% seguro e privado.",
-            securePaymentBadge: "Pagamento Seguro",
-            satisfactionGuaranteeBadge: "Garantia de Satisfação",
+            secureBadge: "✅ 100% Seguro & Indetectável",
+            satisfactionGuaranteeBadge: "Satisfação Garantida",
             dataPrivacyBadge: "Privacidade de Dados",
-            privacyBadge: "Privacidade Garantida",
-            instantAccessBadge: "Acesso Imediato",
             contactTitle: "Entre em Contato",
             contactText: "Tem dúvidas ou precisa de ajuda? Nossa equipe de suporte está pronta para ajudá-lo a começar com o Reveal App.",
             contactTelegram: "Contato no Telegram",
-            contactEmail: "Contato por Email",
-            contactInstagram: "Siga no Instagram",
             footerAboutTitle: "Sobre o Reveal App",
             footerAboutText: "O Reveal App oferece uma vantagem estratégica no poker online, permitindo que você veja as cartas dos oponentes no PPPOKER, XPoker e ClubGG. Jogue de forma mais inteligente, ganhe mais.",
             footerLinksTitle: "Links Rápidos",
@@ -693,6 +740,24 @@
             footerRights: "Todos os Direitos Reservados. O seu sucesso é a nossa missão.",
             footerDisclaimer: "Aviso: Use com responsabilidade e esteja ciente dos termos de serviço das plataformas de poker que você utiliza.",
 
+            // New Translations
+            stickyBarOfferExpires: "A oferta expira em",
+            stickyBarViewers: "usuários a ver esta oferta agora",
+            scarcityPopupTitle: "⚠️ Apenas 3 licenças restantes hoje!",
+            scarcityPopupText: "Garanta a sua agora para desbloquear o Reveal App antes que acabem.",
+            scarcityPopupButton: "Garantir Minha Licença",
+            exitIntentTitle: "Espere! Antes de sair...",
+            exitIntentText: "Use o cupom <strong>10OFF</strong> para garantir 10% de desconto agora.",
+            exitIntentButton: "Aplicar Desconto e Continuar",
+            socialProofAcquired: "🎉 {NAME} de {LOCATION} acabou de adquirir o Reveal App para {APP}!",
+            socialProofGenerated: "🎟️ {NAME} de {LOCATION} gerou um código de pagamento para o Reveal App para {APP}!",
+            midCtaTitle: "Pronto para Dominar as Mesas?",
+            midCtaButton: "Sim, Quero a Minha Vantagem Agora!",
+            postTestimonialCtaTitle: "Não Fique para Trás!",
+            postTestimonialCtaButton: "Domine o poker agora — garanta o Reveal App!",
+            licensesLeftText: "Restam apenas",
+            personalizationText: "Perfeito! Temos vagas restantes hoje para <strong>{APP} no {PLATFORM}</strong>. Clique abaixo para concluir.",
+
             // Dialog translations
             registerTitle: "Registre-se para Continuar",
             emailLabel: "Endereço de Email",
@@ -702,8 +767,6 @@
             registerButton: "Registrar e Continuar",
             emailValidationError: "Por favor, insira um email válido.",
             usernameValidationError: "O nome de usuário deve ter pelo menos 3 caracteres.",
-            registrationSuccess: "Registro bem-sucedido!",
-            welcomeBackMessage: "Bem-vindo de volta, {USERNAME}!",
             platformDialogTitle: "Selecione seu Dispositivo",
             platformDialogText: "Escolha a plataforma em que você usará o Reveal App:",
             platformAndroid: "Android",
@@ -734,19 +797,13 @@
             alertCopied: "Endereço copiado para a área de transferência!",
             alertCopyFailed: "Falha ao copiar o endereço.",
             paymentDoneButton: "Eu fiz o pagamento",
-            couponCleared: "Cupom removido.",
             couponErrorInvalid: "Código de cupom inválido ou expirado.",
             couponAppliedSuccess: "Cupom '{COUPON_CODE}' aplicado! Você recebeu {DISCOUNT}% de desconto.",
             amountTextBase: "Valor: {PRICE}",
             originalAmountLabel: "Original",
-            paymentDialogTitleBase: "Pagar com {METHOD} para {PLATFORM}",
             paymentDialogTitleFinal: "Conclua seu Pagamento",
-            processingPaymentMessage: "Processando sua solicitação... Por favor, aguarde.",
 
             // Payment Confirmation Page
-            paymentSuccessfulTitle: "Pagamento Realizado com Sucesso!",
-            paymentSuccessfulMessage: "Obrigado! Para finalizar a sua ativação, por favor, clique no botão abaixo.",
-            secureActivationText: "Processo de ativação 100% seguro e privado.",
             telegramInstructionsTitle: "Envie o seu ID para o Admin via Telegram",
             telegramInstructionsText: "Para completar a sua ativação, por favor, copie o seu ID exclusivo abaixo e envie para o nosso administrador via Telegram:",
             telegramStep1Title: "1. Copie o seu ID Exclusivo",
@@ -779,6 +836,16 @@
                 app: null,
                 method: null,
             },
+            
+            // --- URGENCY & SCARCITY STATE ---
+            urgencyState: {
+                slotsLeft: 12,
+                countdownInterval: null,
+                slotsInterval: null,
+                viewersInterval: null,
+                socialProofTimeout: null,
+                exitIntentTriggered: false,
+            },
 
             // --- DOM ELEMENTS ---
             dom: {
@@ -794,10 +861,18 @@
                 mainContent: document.getElementById('main-content'),
                 paymentConfirmationContent: document.getElementById('payment-confirmation-content'),
                 startPurchaseBtn: document.getElementById('start-purchase-btn'),
-                // Dynamic counters
                 counterPlayers: document.getElementById('counter-players'),
                 counterWinnings: document.getElementById('counter-winnings'),
                 counterSatisfaction: document.getElementById('counter-satisfaction'),
+                // New Conversion Elements
+                stickyBar: document.getElementById('sticky-bar'),
+                mainHeader: document.getElementById('main-header'),
+                countdownTimer: document.getElementById('countdown-timer'),
+                viewersCount: document.getElementById('viewers-count'),
+                slotsLeftMain: document.getElementById('slots-left-main'),
+                slotsLeftMid: document.getElementById('slots-left-mid'),
+                slotsLeftPost: document.getElementById('slots-left-post'),
+                socialProofContainer: document.getElementById('social-proof-container'),
             },
 
             // --- METHODS ---
@@ -810,7 +885,8 @@
                 this.initStaticCounters();
                 this.updateLiveCounters();
                 this.initScrollAnimations();
-                setInterval(() => this.updateLiveCounters(), 10000); // Update frequently for a "live" feel
+                this.initUrgencyFeatures(); // Initialize all new features
+                setInterval(() => this.updateLiveCounters(), 10000);
             },
             
             initEventListeners() {
@@ -828,6 +904,21 @@
 
                 // Purchase Flow
                 this.dom.startPurchaseBtn.addEventListener('click', () => this.startPurchaseFlow());
+                // Also hook up new CTAs
+                document.querySelectorAll('a[href="#get-app"]').forEach(el => {
+                    el.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.querySelector('#get-app').scrollIntoView({ behavior: 'smooth' });
+                    });
+                });
+
+                // Exit Intent
+                document.documentElement.addEventListener('mouseleave', (e) => {
+                    if (e.clientY < 10 && !this.urgencyState.exitIntentTriggered) {
+                        this.urgencyState.exitIntentTriggered = true;
+                        this.showExitIntentPopup();
+                    }
+                });
             },
 
             initScrollAnimations() {
@@ -835,15 +926,162 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
-                            observer.unobserve(entry.target);
+                            // Show sticky bar when hero is scrolled past
+                            if (entry.target.classList.contains('hero')) {
+                                this.dom.stickyBar.classList.toggle('hidden', entry.isIntersecting);
+                                this.dom.mainHeader.style.top = entry.isIntersecting ? '0' : `${this.dom.stickyBar.offsetHeight}px`;
+                            }
+                            if(!entry.target.classList.contains('hero')) {
+                                observer.unobserve(entry.target);
+                            }
+                        } else {
+                             if (entry.target.classList.contains('hero')) {
+                                this.dom.stickyBar.classList.remove('hidden');
+                                this.dom.mainHeader.style.top = `${this.dom.stickyBar.offsetHeight}px`;
+                            }
                         }
                     });
-                }, { threshold: 0.1 });
+                }, { threshold: 0 });
 
-                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                document.querySelectorAll('.animate-on-scroll, .hero').forEach(el => {
                     observer.observe(el);
                 });
             },
+
+            // --- Urgency & Scarcity Features ---
+            initUrgencyFeatures() {
+                // 1. Scarcity Popup after 12 seconds
+                setTimeout(() => this.showScarcityPopup(), 12000);
+
+                // 2. Countdown Timer
+                this.startCountdown(4 * 3600 + 23 * 60 + 19); // 4h 23m 19s
+
+                // 3. Slots Counter
+                this.updateSlotsCounter();
+                this.urgencyState.slotsInterval = setInterval(() => this.updateSlotsCounter(), 25000); // Decrease every 25s
+
+                // 4. Viewers Counter
+                this.urgencyState.viewersInterval = setInterval(() => this.updateStickyBar(), 4000); // Change every 4s
+
+                // 5. Social Proof Notifications
+                this.scheduleSocialProof();
+            },
+
+            startCountdown(duration) {
+                let timer = duration, hours, minutes, seconds;
+                this.urgencyState.countdownInterval = setInterval(() => {
+                    hours = parseInt(timer / 3600, 10);
+                    minutes = parseInt((timer % 3600) / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+
+                    hours = hours < 10 ? "0" + hours : hours;
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    this.dom.countdownTimer.textContent = hours + ":" + minutes + ":" + seconds;
+
+                    if (--timer < 0) {
+                        timer = duration; // Reset timer
+                    }
+                }, 1000);
+            },
+
+            updateSlotsCounter() {
+                if (this.urgencyState.slotsLeft > 2) {
+                    this.urgencyState.slotsLeft--;
+                }
+                this.dom.slotsLeftMain.textContent = this.urgencyState.slotsLeft;
+                this.dom.slotsLeftMid.textContent = this.urgencyState.slotsLeft;
+                this.dom.slotsLeftPost.textContent = this.urgencyState.slotsLeft;
+            },
+
+            updateStickyBar() {
+                let currentViewers = parseInt(this.dom.viewersCount.textContent);
+                const change = Math.random() < 0.5 ? 1 : -1;
+                let newViewers = currentViewers + change;
+                if (newViewers < 5) newViewers = 5;
+                if (newViewers > 15) newViewers = 15;
+                this.dom.viewersCount.textContent = newViewers;
+            },
+
+            showScarcityPopup() {
+                const content = `
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">⚠️</div>
+                        <h3 class="text-2xl font-bold mb-2 text-yellow-400">${this.getTranslatedString('scarcityPopupTitle')}</h3>
+                        <p class="text-gray-300 mb-6">${this.getTranslatedString('scarcityPopupText')}</p>
+                        <a href="#get-app" id="scarcity-popup-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('scarcityPopupButton')}</a>
+                    </div>
+                `;
+                this.showDialog(content);
+                document.getElementById('scarcity-popup-cta').addEventListener('click', () => {
+                    this.closeDialog();
+                    document.querySelector('#get-app').scrollIntoView({ behavior: 'smooth' });
+                });
+            },
+
+            showExitIntentPopup() {
+                const content = `
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('exitIntentTitle')}</h3>
+                        <p class="text-gray-300 mb-6 text-lg">${this.getTranslatedString('exitIntentText')}</p>
+                        <button id="exit-intent-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('exitIntentButton')}</button>
+                    </div>
+                `;
+                this.showDialog(content);
+                document.getElementById('exit-intent-cta').addEventListener('click', () => {
+                    this.closeDialog();
+                    this.startPurchaseFlow();
+                    // Auto-apply coupon in the next step
+                    setTimeout(() => {
+                        const couponInput = document.getElementById('coupon-input');
+                        if (couponInput) {
+                            couponInput.value = '10OFF';
+                            this.applyCoupon();
+                        }
+                    }, 500);
+                });
+            },
+            
+            scheduleSocialProof() {
+                // Random delay between 20s (20000ms) and 45s (45000ms)
+                const delay = Math.random() * (45000 - 20000) + 20000;
+                this.urgencyState.socialProofTimeout = setTimeout(() => {
+                    this.showSocialProofNotification();
+                    this.scheduleSocialProof(); // Reschedule the next one
+                }, delay);
+            },
+
+            showSocialProofNotification() {
+                const names = ['Klaus', 'Dimitri', 'Kenji', 'Hans', 'Svetlana', 'Yuto', 'Müller', 'Ivanova', 'Chen', 'Santos'];
+                const locations = ['Berlin', 'Moscow', 'Tokyo', 'Manila', 'Hamburg', 'St. Petersburg', 'Osaka', 'Cebu', 'Shanghai', 'Quezon City'];
+                const apps = ['PPPOKER', 'XPoker', 'ClubGG'];
+                const actions = ['acquired', 'generated'];
+
+                const action = actions[Math.floor(Math.random() * actions.length)];
+                const name = names[Math.floor(Math.random() * names.length)];
+                const location = locations[Math.floor(Math.random() * locations.length)];
+                const app = apps[Math.floor(Math.random() * apps.length)];
+
+                const translationKey = action === 'acquired' ? 'socialProofAcquired' : 'socialProofGenerated';
+                const text = this.getTranslatedString(translationKey, {NAME: name, LOCATION: location, APP: app});
+
+                const notification = document.createElement('div');
+                notification.className = 'social-proof-notification bg-gray-800/90 backdrop-blur-sm border border-gray-700 rounded-lg p-4 shadow-lg flex items-center space-x-3 mb-3';
+                notification.innerHTML = `<div>${text}</div>`;
+
+                this.dom.socialProofContainer.appendChild(notification);
+                
+                // Trigger show animation
+                setTimeout(() => notification.classList.add('show'), 100);
+
+                // Hide and remove after 5 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => notification.remove(), 500);
+                }, 5000);
+            },
+
 
             // --- Counter Logic ---
             seededRandom(seed) {
@@ -867,15 +1105,12 @@
                 const today = new Date();
                 const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
 
-                // --- Satisfaction Counter (Fixed at 99.xx%) ---
                 const satisfaction = 99.00 + this.seededRandom(daySeed) * 0.99;
                 if (this.dom.counterSatisfaction) {
                     this.dom.counterSatisfaction.textContent = `${satisfaction.toFixed(2)}%`;
                 }
 
-                // --- Weekly Winnings Counter (Value changes daily, but is consistent for all users) ---
-                // The seed is based on the day, so the value is the same for everyone on the same day.
-                const weeklyWinnings = 120000 + this.seededRandom(daySeed) * 110000; // Range: 120k to 230k
+                const weeklyWinnings = 120000 + this.seededRandom(daySeed) * 110000;
                 if (this.dom.counterWinnings) {
                     this.dom.counterWinnings.textContent = this.formatWinnings(weeklyWinnings);
                 }
@@ -887,32 +1122,18 @@
                 const startOfDay = new Date(today.toISOString().split('T')[0]);
                 const timePassed = today.getTime() - startOfDay.getTime();
 
-                // --- Player Counter (Live, deterministic) ---
-                // This logic ensures the value is the same for all users at any given time.
-
                 const MIN_PLAYERS = 1220;
                 const MAX_PLAYERS = 1500;
-
-                // Determine the current 2-minute interval of the day
                 const twoMinuteIntervals = Math.floor(timePassed / (2 * 60 * 1000));
                 const intervalSeed = daySeed + twoMinuteIntervals;
-
-                // Determine the base player count for this 2-minute interval.
-                // This creates a pseudo-random but deterministic starting point for the interval.
                 let playerCount = MIN_PLAYERS + this.seededRandom(intervalSeed) * (MAX_PLAYERS - MIN_PLAYERS);
-
-                // Determine how many seconds have passed within the current 2-minute interval (0-119)
                 const secondsIntoInterval = Math.floor((timePassed / 1000) % 120);
 
-                // In the second minute of the interval (seconds 60-119), apply a single, deterministic fluctuation.
                 if (secondsIntoInterval >= 60) {
-                    // Use the interval's seed to decide the fluctuation direction (+20 or -27)
-                    const fluctuationSeed = intervalSeed * 3; // Use a different but related seed
+                    const fluctuationSeed = intervalSeed * 3;
                     const change = this.seededRandom(fluctuationSeed) < 0.5 ? 20 : -27;
                     playerCount += change;
                 }
-
-                // Ensure the final count is within the specified bounds and format it.
                 playerCount = Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, playerCount));
                 playerCount = this.ensureNoRepeatingEndDigits(playerCount);
 
@@ -949,20 +1170,17 @@
                 
                 this.populateAllDynamicContent();
 
-                document.querySelectorAll("[data-translate], [data-translate-placeholder]").forEach(el => {
-                    const key = el.dataset.translate || el.dataset.translatePlaceholder;
+                document.querySelectorAll("[data-translate]").forEach(el => {
+                    const key = el.dataset.translate;
                     if (!key) return;
 
                     const translation = this.getTranslatedString(key);
                     
-                    if (el.dataset.translate) {
-                         if (['couponText', 'storyText', 'storyCallToAction'].includes(key)) {
-                             el.innerHTML = translation; 
-                         } else {
-                             el.textContent = translation;
-                         }
+                    if (['storyText', 'storyCallToAction', 'exitIntentText'].includes(key)) {
+                         el.innerHTML = translation; 
+                    } else {
+                         el.textContent = translation;
                     }
-                    if (el.dataset.translatePlaceholder) el.placeholder = translation;
                 });
                 document.title = this.getTranslatedString('pageTitle');
             },
@@ -971,7 +1189,7 @@
                 const lang = localStorage.getItem("language") || "pt";
                 let translation = (translations[lang] && translations[lang][key]) ? translations[lang][key] : (translations['en'][key] || key);
                 Object.entries(replacements).forEach(([placeholder, value]) => {
-                    translation = translation.replace(`{${placeholder}}`, value);
+                    translation = translation.replace(`{${placeholder.toUpperCase()}}`, value);
                 });
                 return translation;
             },
@@ -1023,8 +1241,8 @@
                 const container = this.dom.storyContainer;
                 if (!container) return;
                 container.innerHTML = `
-                    <p class="text-lg text-gray-300 mb-6" data-translate="storyText">${this.getTranslatedString('storyText')}</p>
-                    <p class="text-xl text-yellow-400 font-semibold" data-translate="storyCallToAction">${this.getTranslatedString('storyCallToAction')}</p>
+                    <p class="text-lg text-gray-300 mb-6">${this.getTranslatedString('storyText')}</p>
+                    <p class="text-xl text-yellow-400 font-semibold">${this.getTranslatedString('storyCallToAction')}</p>
                 `;
             },
             
@@ -1129,8 +1347,8 @@
                     </div>
                 `;
                 this.showDialog(content);
-                document.getElementById('select-android').onclick = () => this.selectPlatform('android');
-                document.getElementById('select-ios').onclick = () => this.selectPlatform('ios');
+                document.getElementById('select-android').onclick = () => this.selectPlatform('Android');
+                document.getElementById('select-ios').onclick = () => this.selectPlatform('iOS');
             },
             
             selectPlatform(platform) {
@@ -1161,9 +1379,13 @@
             },
 
             showPokerAppDialog() {
+                // Personalization message added here
+                const personalizationHTML = `<p class="text-center text-green-400 mb-6 font-semibold">${this.getTranslatedString('personalizationText', {APP: '...', PLATFORM: this.purchaseState.platform})}</p>`;
+
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('pokerAppDialogTitle')}</h3>
                      <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('pokerAppDialogText')}</p>
+                     <div id="personalization-message" class="hidden text-center text-green-400 mb-6 font-semibold"></div>
                     <div class="space-y-3">
                         <button id="select-pppoker" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition">PPPOKER</button>
                         <button id="select-xpoker" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition">XPoker</button>
@@ -1171,14 +1393,14 @@
                     </div>
                 `;
                 this.showDialog(content);
-                document.getElementById('select-pppoker').onclick = () => this.selectPokerApp('pppoker');
-                document.getElementById('select-xpoker').onclick = () => this.selectPokerApp('xpoker');
-                document.getElementById('select-clubgg').onclick = () => this.selectPokerApp('clubgg');
+                document.getElementById('select-pppoker').onclick = () => this.selectPokerApp('PPPOKER');
+                document.getElementById('select-xpoker').onclick = () => this.selectPokerApp('XPoker');
+                document.getElementById('select-clubgg').onclick = () => this.selectPokerApp('ClubGG');
             },
 
             selectPokerApp(app) {
                 this.purchaseState.app = app;
-                const prices = { pppoker: 1500, xpoker: 1500, clubgg: 4000 };
+                const prices = { PPPOKER: 1500, XPoker: 1500, ClubGG: 4000 };
                 this.purchaseState.basePrice = prices[app] || 0;
                 this.purchaseState.discount = 0; // Reset discount
                 this.showCouponDialog();
@@ -1186,8 +1408,11 @@
 
             showCouponDialog() {
                 const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
+                const personalizationMessage = this.getTranslatedString('personalizationText', {APP: this.purchaseState.app, PLATFORM: this.purchaseState.platform});
+
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('couponDialogTitle')}</h3>
+                    <p class="text-center text-green-400 mb-4 font-semibold">${personalizationMessage}</p>
                     <div class="text-center mb-4">
                          <p id="original-price-container" class="${this.purchaseState.discount > 0 ? '' : 'hidden'} text-gray-500">
                              <span>${this.getTranslatedString('originalAmountLabel')}</span>:
@@ -1232,7 +1457,7 @@
                     messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
                 } else {
                      messageEl.textContent = this.getTranslatedString('couponErrorInvalid');
-                         messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
+                           messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
                 }
 
                 const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
@@ -1438,12 +1663,52 @@
         };
 
         // --- GLOBALIZED METHODS FOR HTML ONCLICK ---
-        // This makes functions available in the global scope for inline event handlers
         window.setLanguage = App.setLanguage.bind(App);
 
         // --- INITIALIZE THE APP ---
         App.init();
     });
+    </script>
+    
+    <!-- Script de Proteção de Código -->
+    <script>
+        // Este script tenta impedir que os utilizadores abram as ferramentas de desenvolvimento.
+        // Nota: Este não é um método infalível, mas pode desencorajar a inspeção casual.
+
+        // 1. Desativar o menu de contexto do clique direito
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 2. Desativar atalhos de teclado comuns das Ferramentas de Desenvolvimento
+        document.addEventListener('keydown', event => {
+            // F12
+            if (event.keyCode === 123) {
+                event.preventDefault();
+            }
+            // Ctrl+Shift+I
+            if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+                event.preventDefault();
+            }
+            // Ctrl+Shift+J
+            if (event.ctrlKey && event.shiftKey && event.key === 'J') {
+                event.preventDefault();
+            }
+            // Ctrl+U
+            if (event.ctrlKey && event.key === 'U') {
+                event.preventDefault();
+            }
+        });
+
+        // 3. Armadilha de Depurador (Debugger Trap)
+        // Isto abrirá repetidamente o depurador, tornando a consola difícil de usar.
+        (function() {
+            setInterval(() => {
+                try {
+                    debugger;
+                } catch (err) {
+                    // O utilizador pode ter desativado as declarações do depurador, mas o loop continua.
+                }
+            }, 50);
+        })();
     </script>
 </body>
 </html>
