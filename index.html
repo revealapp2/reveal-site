@@ -327,7 +327,7 @@
                     </div>
                     
                     <button class="main-cta-button text-xl font-bold py-4 px-10 rounded-lg cta-button" id="start-purchase-btn" data-translate="getAppButton">Yes, I Want to Boost My Winnings!</button>
-                                        
+                                          
                     <div class="flex justify-center items-center space-x-4 md:space-x-8 mt-8 text-gray-400">
                         <div class="flex flex-col items-center space-y-2">
                             <i class="fas fa-shield-alt text-3xl text-green-400"></i>
@@ -750,7 +750,7 @@
                 this.initEventListeners();
                 this.initStaticCounters();
                 this.updateLiveCounters();
-                setInterval(() => this.updateLiveCounters(), 10000); // Update every 10 seconds
+                setInterval(() => this.updateLiveCounters(), 10000); // Update frequently for a "live" feel
             },
             
             initEventListeners() {
@@ -771,14 +771,6 @@
             },
 
             // --- Counter Logic ---
-            getWeekNumber(d) {
-                d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
-                var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-                var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-                return weekNo;
-            },
-
             seededRandom(seed) {
                 var m = 0x80000000; // 2**31
                 var a = 1103515245;
@@ -798,19 +790,17 @@
             
             initStaticCounters() {
                 const today = new Date();
+                const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
 
                 // --- Satisfaction Counter (Fixed at 99.xx%) ---
-                const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
                 const satisfaction = 99.00 + this.seededRandom(daySeed) * 0.99;
                 if (this.dom.counterSatisfaction) {
                     this.dom.counterSatisfaction.textContent = `${satisfaction.toFixed(2)}%`;
                 }
 
-                // --- Weekly Winnings Counter ---
-                const year = today.getFullYear();
-                const week = this.getWeekNumber(today);
-                const weekSeed = year * 100 + week;
-                const weeklyWinnings = 150000 + this.seededRandom(weekSeed) * 50000;
+                // --- Weekly Winnings Counter (Value changes daily, but is consistent for all users) ---
+                // The seed is based on the day, so the value is the same for everyone on the same day.
+                const weeklyWinnings = 120000 + this.seededRandom(daySeed) * 110000; // Range: 120k to 230k
                 if (this.dom.counterWinnings) {
                     this.dom.counterWinnings.textContent = this.formatWinnings(weeklyWinnings);
                 }
@@ -818,24 +808,37 @@
 
             updateLiveCounters() {
                 const today = new Date();
-                
-                // --- Player Counter (Live, deterministic) ---
                 const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
-                let playerCount = 1200 + this.seededRandom(daySeed) * 500; // Base for the day (1200-1700)
-
                 const startOfDay = new Date(today.toISOString().split('T')[0]);
                 const timePassed = today.getTime() - startOfDay.getTime();
-                const fiveMinuteIntervals = Math.floor(timePassed / (5 * 60 * 1000));
 
-                // Apply fluctuations for each 5-minute interval passed today
-                for (let i = 0; i < fiveMinuteIntervals; i++) {
-                    const intervalSeed = daySeed + i;
-                    const changePercent = 0.05 + this.seededRandom(intervalSeed) * 0.05; // 5-10%
-                    const changeDirection = this.seededRandom(intervalSeed * 2) < 0.5 ? -1 : 1;
-                    playerCount += (playerCount * changePercent * changeDirection);
+                // --- Player Counter (Live, deterministic) ---
+                // This logic ensures the value is the same for all users at any given time.
+
+                const MIN_PLAYERS = 1220;
+                const MAX_PLAYERS = 1500;
+
+                // Determine the current 2-minute interval of the day
+                const twoMinuteIntervals = Math.floor(timePassed / (2 * 60 * 1000));
+                const intervalSeed = daySeed + twoMinuteIntervals;
+
+                // Determine the base player count for this 2-minute interval.
+                // This creates a pseudo-random but deterministic starting point for the interval.
+                let playerCount = MIN_PLAYERS + this.seededRandom(intervalSeed) * (MAX_PLAYERS - MIN_PLAYERS);
+
+                // Determine how many seconds have passed within the current 2-minute interval (0-119)
+                const secondsIntoInterval = Math.floor((timePassed / 1000) % 120);
+
+                // In the second minute of the interval (seconds 60-119), apply a single, deterministic fluctuation.
+                if (secondsIntoInterval >= 60) {
+                    // Use the interval's seed to decide the fluctuation direction (+20 or -27)
+                    const fluctuationSeed = intervalSeed * 3; // Use a different but related seed
+                    const change = this.seededRandom(fluctuationSeed) < 0.5 ? 20 : -27;
+                    playerCount += change;
                 }
-                
-                playerCount = Math.max(1200, Math.min(1900, playerCount)); // Cap it to prevent wild swings
+
+                // Ensure the final count is within the specified bounds and format it.
+                playerCount = Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, playerCount));
                 playerCount = this.ensureNoRepeatingEndDigits(playerCount);
 
                 if (this.dom.counterPlayers) {
@@ -879,9 +882,9 @@
                     
                     if (el.dataset.translate) {
                          if (['couponText', 'storyText', 'storyCallToAction'].includes(key)) {
-                            el.innerHTML = translation; 
+                             el.innerHTML = translation; 
                          } else {
-                            el.textContent = translation;
+                             el.textContent = translation;
                          }
                     }
                     if (el.dataset.translatePlaceholder) el.placeholder = translation;
@@ -952,7 +955,7 @@
             
             populateTestimonials() {
                  const container = this.dom.testimonialsContainer;
-                  if(!container) return;
+                 if(!container) return;
                  container.innerHTML = [1, 2, 3, 4, 5].map(i => `
                     <div class="testimonial-card p-6">
                         <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4"></i>
@@ -1154,7 +1157,7 @@
                     messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
                 } else {
                      messageEl.textContent = this.getTranslatedString('couponErrorInvalid');
-                       messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
+                         messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
                 }
 
                 const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
@@ -1168,10 +1171,10 @@
                 if (originalPriceContainer) {
                     const originalPriceValueEl = originalPriceContainer.querySelector('s');
                      if (this.purchaseState.discount > 0) {
-                          if(originalPriceValueEl) originalPriceValueEl.textContent = `$${this.purchaseState.basePrice.toFixed(2)}`;
-                          originalPriceContainer.classList.remove('hidden');
+                         if(originalPriceValueEl) originalPriceValueEl.textContent = `$${this.purchaseState.basePrice.toFixed(2)}`;
+                         originalPriceContainer.classList.remove('hidden');
                      } else {
-                          originalPriceContainer.classList.add('hidden');
+                         originalPriceContainer.classList.add('hidden');
                      }
                 }
             },
