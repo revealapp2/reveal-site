@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal App: Poker Hack for PPPOKER, XPoker, ClubGG | See All Cards</title>
     <meta name="description" content="Get the ultimate edge in online poker. Reveal App is a poker hack that lets you see opponent's cards on PPPOKER, XPoker, and ClubGG. Undetectable, safe, and easy to use. Start winning more today.">
-    <meta name="keywords" content="poker hack, pppoker hack, xpoker hack, cheat poker, pokerr2 hack, clubgg hack, kkpoker hack, online poker cheat, see cards poker, poker cheat engine, poker tool, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
+    <meta name="keywords" content="poker hack, pppoker hack, xpoker hack, clubgg hack, kkpoker hack, online poker cheat, see cards poker, poker cheat engine, poker tool, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
     
     <!-- New SVG Favicon -->
     <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%220%25%22><stop offset=%220%25%22 stop-color=%22%2300e5ff%22 /><stop offset=%22100%25%22 stop-color=%22%23ffab00%22 /></linearGradient></defs><path fill=%22%23ffab00%22 d=%22M50 0A50 50 0 1 0 50 100 50 50 0 0 0 50 0zm0 87.5A37.5 37.5 0 1 1 50 12.5a37.5 37.5 0 0 1 0 75z%22/><path fill=%22%2300e5ff%22 d=%22M50 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50zm0 37.5a12.5 12.5 0 1 1 0-25 12.5 12.5 0 0 1 0 25z%22/><circle cx=%2250%22 cy=%2250%22 r=%225%22 fill=%22white%22/></svg>">
@@ -39,19 +39,20 @@
         .cta-button {
             background: linear-gradient(90deg, #ffab00, #ffc700);
             color: var(--text-dark);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .cta-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(255, 171, 0, 0.4);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(255, 171, 0, 0.4);
         }
         .dialog {
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(8px);
+            background-color: rgba(10, 14, 26, 0.8);
+            backdrop-filter: blur(10px);
         }
         .dialog-content {
             background-color: var(--background-light);
             border: 1px solid #2d3748;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
         .video-container {
             position: relative;
@@ -60,8 +61,12 @@
             overflow: hidden;
             max-width: 100%;
             background: #000;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        .video-container:hover {
+            transform: scale(1.03);
         }
         .video-container iframe {
             position: absolute;
@@ -70,11 +75,9 @@
             width: 100%;
             height: 100%;
         }
-        /* Mobile Menu */
         .mobile-menu {
             transition: transform 0.3s ease-in-out;
         }
-        /* Spinner for API Loading */
         .spinner {
             border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
@@ -87,13 +90,8 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* Google Translate Widget Styling */
-        .skiptranslate {
-            display: none !important;
-        }
-        body {
-            top: 0px !important; 
-        }
+        .skiptranslate { display: none !important; }
+        body { top: 0px !important; }
         #google_translate_element .goog-te-gadget-simple,
         #google_translate_element_mobile .goog-te-gadget-simple {
             background-color: #1f2937 !important;
@@ -119,7 +117,35 @@
         .feature-card:hover, .testimonial-card:hover, .story-card:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(var(--primary-color-rgb, 0, 229, 255), 0.2);
         }
+        
+        /* Animation on Scroll */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+        }
+        .hero-title { animation-delay: 0.2s; }
+        .hero-tagline { animation-delay: 0.4s; }
+        .hero-cta { animation-delay: 0.6s; }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
@@ -214,11 +240,11 @@
             <!-- Hero Section -->
             <section class="hero relative py-20 md:py-32 text-center text-white overflow-hidden">
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg"></div>
-                <div class="absolute inset-0 bg-black/70"></div>
+                <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4" data-translate="heroTitle"></h1>
-                    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8" data-translate="heroTagline"></p>
-                    <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="heroCta"></a>
+                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4 fade-in-up hero-title" data-translate="heroTitle"></h1>
+                    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 fade-in-up hero-tagline" data-translate="heroTagline"></p>
+                    <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg fade-in-up hero-cta" data-translate="heroCta"></a>
                 </div>
             </section>
             
@@ -226,15 +252,15 @@
             <section class="bg-gray-800/50 py-8">
                 <div class="container mx-auto px-4">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <div>
+                        <div class="animate-on-scroll">
                             <p class="text-4xl font-bold text-yellow-400" id="counter-players">+1,200</p>
                             <p class="text-gray-400" data-translate="counterPlayers">Jogadores Lucrando Agora</p>
                         </div>
-                         <div>
+                         <div class="animate-on-scroll" style="transition-delay: 0.2s;">
                             <p class="text-4xl font-bold text-yellow-400" id="counter-winnings">$150K+</p>
                             <p class="text-gray-400" data-translate="counterWinnings">Ganhos na Última Semana</p>
                         </div>
-                         <div>
+                         <div class="animate-on-scroll" style="transition-delay: 0.4s;">
                             <p class="text-4xl font-bold text-yellow-400" id="counter-satisfaction">99.00%</p>
                             <p class="text-gray-400" data-translate="counterSatisfaction">Satisfação Garantida</p>
                         </div>
@@ -245,7 +271,7 @@
             <!-- Features Section -->
             <section id="features" class="py-16 md:py-24 bg-gray-900">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="featuresTitle">Why Choose Reveal App?</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="featuresTitle">Why Choose Reveal App?</h2>
                     <div id="features-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Feature Cards will be injected by JS -->
                     </div>
@@ -255,8 +281,8 @@
             <!-- How It Works Section -->
             <section id="how-it-works" class="py-16 md:py-24 bg-gray-800/50">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="howItWorksTitle">Simple Steps to Dominate</h2>
-                    <div id="how-it-works-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="howItWorksTitle">Simple Steps to Dominate</h2>
+                    <div id="how-it-works-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
                         <!-- Steps will be injected by JS -->
                     </div>
                 </div>
@@ -265,23 +291,23 @@
             <!-- Demo Section -->
             <section id="demo" class="py-16 md:py-24 bg-gray-900">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-translate="demoTitle">See the App in Action</h2>
-                    <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-12" data-translate="demoText">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-on-scroll" data-translate="demoTitle">See the App in Action</h2>
+                    <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-12 animate-on-scroll" data-translate="demoText">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
                     
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="demo-video">
+                        <div class="demo-video animate-on-scroll">
                             <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoPPPOKERTitle">PPPOKER Demo</h3>
                             <div class="video-container">
                                 <iframe loading="lazy" src="https://www.youtube.com/embed/wgzzXJx_TAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
-                        <div class="demo-video">
+                        <div class="demo-video animate-on-scroll" style="transition-delay: 0.2s;">
                             <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoXPokerTitle">XPoker Demo</h3>
                             <div class="video-container">
                                 <iframe loading="lazy" src="https://www.youtube.com/embed/JejQNbgaSSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
-                        <div class="demo-video">
+                        <div class="demo-video animate-on-scroll" style="transition-delay: 0.4s;">
                             <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoClubGGTitle">ClubGG Demo</h3>
                             <div class="video-container">
                                 <iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -294,9 +320,11 @@
             <!-- Our Story Section -->
             <section id="story" class="py-16 md:py-24 bg-gray-800/50">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
-                    <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
-                          <!-- Story content injected by JS -->
+                    <div class="animate-on-scroll">
+                        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
+                        <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
+                              <!-- Story content injected by JS -->
+                        </div>
                     </div>
                 </div>
             </section>
@@ -304,7 +332,7 @@
             <!-- Testimonials Section -->
             <section id="testimonials" class="py-16 md:py-24 bg-gray-900">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                     <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="testimonialsTitle">What Our Users Say</h2>
+                     <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="testimonialsTitle">What Our Users Say</h2>
                     <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Testimonials will be loaded dynamically -->
                     </div>
@@ -313,7 +341,7 @@
             
             <!-- Get App Section -->
             <section id="get-app" class="py-16 md:py-24 text-center bg-gray-800/50">
-                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
                     <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
                     
@@ -347,17 +375,17 @@
 
             <!-- Contact Section -->
             <section class="contact py-16 md:py-24 text-center bg-gray-900" id="contact">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl animate-on-scroll">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle">Contact Us</h2>
                     <p class="text-lg text-gray-400 mb-8" data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
                     <div class="flex flex-col items-center justify-center gap-6">
                         <!-- Main CTA for Telegram -->
-                        <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg transition">
+                        <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
                             <i class="fab fa-telegram-plane mr-2"></i>
                             <span data-translate="contactTelegram">Contact on Telegram</span>
                         </a>
                          <!-- Secondary contacts -->
-                        <div class="flex items-center justify-center gap-6 text-gray-400">
+                        <div class="flex items-center justify-center gap-6 text-gray-400 mt-4">
                              <a href="mailto:support@revealpoker.top" class="hover:text-white transition flex items-center gap-2">
                                 <i class="fas fa-envelope"></i>
                                 <span>support@revealpoker.top</span>
@@ -380,7 +408,7 @@
     <!-- Footer -->
     <footer class="bg-gray-900 border-t border-gray-800">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
                 <!-- About -->
                 <div>
                     <h3 class="text-lg font-semibold mb-4" data-translate="footerAboutTitle">About Reveal App</h3>
@@ -400,15 +428,15 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4" data-translate="footerConnectTitle">Connect With Us</h3>
                     <div class="space-y-3">
-                        <a href="https://t.me/bedmalcon_temp" target="_blank" class="flex items-center text-gray-400 hover:text-white transition">
+                        <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
                             <i class="fab fa-telegram w-6 text-center"></i>
                             <span class="ml-2">Telegram</span>
                         </a>
-                        <a href="https://www.instagram.com/hackpoker_updated" target="_blank" class="flex items-center text-gray-400 hover:text-white transition">
+                        <a href="https://www.instagram.com/hackpoker_updated" target="_blank" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
                             <i class="fab fa-instagram w-6 text-center"></i>
                             <span class="ml-2">@hackpoker_updated</span>
                         </a>
-                        <a href="mailto:support@revealpoker.top" class="flex items-center text-gray-400 hover:text-white transition">
+                        <a href="mailto:support@revealpoker.top" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
                             <i class="fas fa-envelope w-6 text-center"></i>
                             <span class="ml-2">support@revealpoker.top</span>
                         </a>
@@ -779,6 +807,7 @@
                 this.initEventListeners();
                 this.initStaticCounters();
                 this.updateLiveCounters();
+                this.initScrollAnimations();
                 setInterval(() => this.updateLiveCounters(), 10000); // Update frequently for a "live" feel
             },
             
@@ -797,6 +826,21 @@
 
                 // Purchase Flow
                 this.dom.startPurchaseBtn.addEventListener('click', () => this.startPurchaseFlow());
+            },
+
+            initScrollAnimations() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    observer.observe(el);
+                });
             },
 
             // --- Counter Logic ---
@@ -949,8 +993,8 @@
                     { key: 'feature5', icon: 'fa-sync' },
                     { key: 'feature6', icon: 'fa-headset' },
                 ];
-                container.innerHTML = featureKeys.map(({key, icon}) => `
-                    <div class="feature-card">
+                container.innerHTML = featureKeys.map(({key, icon}, index) => `
+                    <div class="feature-card animate-on-scroll" style="transition-delay: ${index * 100}ms;">
                         <div class="text-4xl text-yellow-400 mb-4"><i class="fas ${icon}"></i></div>
                         <h3 class="text-xl font-bold mb-2">${this.getTranslatedString(`${key}Title`)}</h3>
                         <p class="text-gray-400">${this.getTranslatedString(`${key}Text`)}</p>
@@ -961,11 +1005,11 @@
             populateHowItWorks() {
                  const container = this.dom.howItWorksGrid;
                  if(!container) return;
-                 container.innerHTML = [1, 2, 3, 4].map(i => `
-                    <div class="text-center">
+                 container.innerHTML = [1, 2, 3, 4].map((i, index) => `
+                    <div class="text-center animate-on-scroll" style="transition-delay: ${index * 150}ms;">
                         <div class="relative mb-4">
-                             <div class="w-20 h-20 bg-gray-700 rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-yellow-400">${i}</div>
-                            ${i < 4 ? '<div class="absolute top-1/2 left-3/4 w-1/2 h-0.5 bg-gray-700 hidden md:block" style="transform: translateY(-50%);"></div>' : ''}
+                             <div class="w-20 h-20 bg-gray-700 rounded-full mx-auto flex items-center justify-center text-3xl font-bold text-yellow-400 border-2 border-gray-600">${i}</div>
+                            ${i < 4 ? '<div class="absolute top-1/2 left-full w-full h-0.5 bg-gray-700 hidden md:block" style="transform: translateY(-50%);"></div>' : ''}
                         </div>
                         <h3 class="text-xl font-bold mt-4 mb-2">${this.getTranslatedString(`step${i}Title`)}</h3>
                         <p class="text-gray-400">${this.getTranslatedString(`step${i}Text`)}</p>
@@ -985,8 +1029,8 @@
             populateTestimonials() {
                  const container = this.dom.testimonialsContainer;
                  if(!container) return;
-                 container.innerHTML = [1, 2, 3, 4, 5].map(i => `
-                    <div class="testimonial-card p-6">
+                 container.innerHTML = [1, 2, 3, 4, 5].map((i, index) => `
+                    <div class="testimonial-card animate-on-scroll" style="transition-delay: ${index * 100}ms;">
                         <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4"></i>
                         <p class="text-gray-400 mb-4">${this.getTranslatedString(`testimonial${i}Quote`)}</p>
                         <div class="flex items-center">
@@ -999,7 +1043,7 @@
 
             // --- Dialog Management ---
             showDialog(content) {
-                this.dom.dialogContainer.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg">${content}</div>`;
+                this.dom.dialogContainer.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg animate-on-scroll is-visible">${content}</div>`;
                 this.dom.dialogContainer.classList.remove('hidden');
             },
 
