@@ -181,8 +181,7 @@
 
     <!-- Sticky Top Bar -->
     <div id="sticky-bar" class="fixed top-0 left-0 w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-2 text-center text-sm md:text-base font-bold z-50 shadow-lg hidden">
-        <span data-translate="stickyBarOfferExpires"></span>: <span id="countdown-timer">04:23:19</span> | 
-        <span class="ml-2 animate-pulse"><i class="fas fa-eye"></i> <span id="viewers-count">7</span> <span data-translate="stickyBarViewers"></span></span>
+        <span id="sticky-bar-text-container"></span> <span id="countdown-timer"></span>
     </div>
 
     <!-- Header -->
@@ -369,20 +368,9 @@
                     </div>
                 </div>
             </section>
-
-             <!-- Post-Testimonials CTA -->
-            <section class="py-16 bg-gray-900 text-center">
-                <div class="container mx-auto px-4 animate-on-scroll">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-6" data-translate="postTestimonialCtaTitle"></h3>
-                    <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="postTestimonialCtaButton"></a>
-                    <p class="mt-4 text-yellow-400 font-semibold">
-                        <span data-translate="licensesLeftText"></span> <strong id="slots-left-post" class="text-xl">12</strong>.
-                    </p>
-                </div>
-            </section>
             
             <!-- Get App Section -->
-            <section id="get-app" class="py-16 md:py-24 text-center bg-gray-800/50">
+            <section id="get-app" class="py-16 md:py-24 text-center bg-gray-900">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
                     <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
@@ -413,7 +401,7 @@
             </section>
 
             <!-- Contact Section -->
-            <section class="contact py-16 md:py-24 text-center bg-gray-900" id="contact">
+            <section class="contact py-16 md:py-24 text-center bg-gray-800/50" id="contact">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl animate-on-scroll">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle">Contact Us</h2>
                     <p class="text-lg text-gray-400 mb-8" data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
@@ -424,7 +412,7 @@
                             <span data-translate="contactTelegram">Contact on Telegram</span>
                         </a>
                          <!-- Secondary contacts -->
-                        <div class="flex items-center justify-center gap-6 text-gray-400 mt-4">
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-gray-400 mt-4">
                              <a href="mailto:support@revealpoker.top" class="hover:text-white transition flex items-center gap-2">
                                  <i class="fas fa-envelope"></i>
                                  <span>support@revealpoker.top</span>
@@ -511,7 +499,6 @@
     // --- Translations Object ---
     const translations = {
         en: {
-            // Existing translations...
             pageTitle: "Reveal App: Poker Hack for PPPOKER, XPoker, ClubGG | See All Cards",
             navFeatures: "Features",
             navHowItWorks: "How It Works",
@@ -589,9 +576,9 @@
             footerDisclaimer: "Disclaimer: Use responsibly and be aware of the terms of service of the poker platforms you use.",
             
             // New Translations
-            stickyBarOfferExpires: "Offer expires in",
-            stickyBarViewers: "users viewing this offer now",
-            scarcityPopupTitle: "⚠️ Only 3 licenses left today!",
+            stickyBarTextActive: "🔥 Special Offer <strong>10OFF</strong> Expires In:",
+            stickyBarTextExpired: "Main offer expired! Get <strong>5% OFF</strong> now!",
+            scarcityPopupTitle: "⚠️ Only {SLOTS} licenses available for today!",
             scarcityPopupText: "Secure yours now to unlock the Reveal App before they run out.",
             scarcityPopupButton: "Guarantee My License",
             exitIntentTitle: "Wait! Before you go...",
@@ -601,10 +588,12 @@
             socialProofGenerated: "🎟️ {NAME} from {LOCATION} generated a payment code for {APP}!",
             midCtaTitle: "Ready to Dominate the Tables?",
             midCtaButton: "Yes, Claim My Advantage Now!",
-            postTestimonialCtaTitle: "Don't Get Left Behind!",
-            postTestimonialCtaButton: "Dominate Poker Now — Get Reveal App!",
             licensesLeftText: "Only",
             personalizationText: "Perfect! We have slots left today for <strong>{APP} on {PLATFORM}</strong>. Click below to complete.",
+            offerExpired: "Expired",
+            offerExpiredTitle: "Offer Expired!",
+            offerExpiredText: "You missed the main offer, but here is a special 5% discount for you! Use code <strong>5OFF</strong>.",
+            offerExpiredButton: "Apply 5% Discount",
 
             // Dialog translations
             registerTitle: "Register to Continue",
@@ -663,7 +652,6 @@
             openTelegramButton: "Open Telegram",
         },
         pt: {
-            // Existing translations...
             pageTitle: "Reveal App: Poker Hack para PPPOKER, XPoker, ClubGG | Veja Todas as Cartas",
             navFeatures: "Recursos",
             navHowItWorks: "Como Funciona",
@@ -741,9 +729,9 @@
             footerDisclaimer: "Aviso: Use com responsabilidade e esteja ciente dos termos de serviço das plataformas de poker que você utiliza.",
 
             // New Translations
-            stickyBarOfferExpires: "A oferta expira em",
-            stickyBarViewers: "usuários a ver esta oferta agora",
-            scarcityPopupTitle: "⚠️ Apenas 3 licenças restantes hoje!",
+            stickyBarTextActive: "🔥 Oferta Especial <strong>10OFF</strong> Expira Em:",
+            stickyBarTextExpired: "Oferta principal expirou! Garanta <strong>5% OFF</strong> agora!",
+            scarcityPopupTitle: "⚠️ Apenas {SLOTS} licenças disponíveis para hoje!",
             scarcityPopupText: "Garanta a sua agora para desbloquear o Reveal App antes que acabem.",
             scarcityPopupButton: "Garantir Minha Licença",
             exitIntentTitle: "Espere! Antes de sair...",
@@ -753,10 +741,12 @@
             socialProofGenerated: "🎟️ {NAME} de {LOCATION} gerou um código de pagamento para o Reveal App para {APP}!",
             midCtaTitle: "Pronto para Dominar as Mesas?",
             midCtaButton: "Sim, Quero a Minha Vantagem Agora!",
-            postTestimonialCtaTitle: "Não Fique para Trás!",
-            postTestimonialCtaButton: "Domine o poker agora — garanta o Reveal App!",
             licensesLeftText: "Restam apenas",
             personalizationText: "Perfeito! Temos vagas restantes hoje para <strong>{APP} no {PLATFORM}</strong>. Clique abaixo para concluir.",
+            offerExpired: "Expirada",
+            offerExpiredTitle: "Oferta Expirada!",
+            offerExpiredText: "Você perdeu a oferta principal, mas aqui está um desconto especial de 5% para você! Use o código <strong>5OFF</strong>.",
+            offerExpiredButton: "Aplicar Desconto de 5%",
 
             // Dialog translations
             registerTitle: "Registre-se para Continuar",
@@ -840,11 +830,12 @@
             // --- URGENCY & SCARCITY STATE ---
             urgencyState: {
                 slotsLeft: 12,
+                dailyScarcitySlots: 0,
                 countdownInterval: null,
                 slotsInterval: null,
-                viewersInterval: null,
                 socialProofTimeout: null,
                 exitIntentTriggered: false,
+                isOfferExpired: false,
             },
 
             // --- DOM ELEMENTS ---
@@ -866,12 +857,11 @@
                 counterSatisfaction: document.getElementById('counter-satisfaction'),
                 // New Conversion Elements
                 stickyBar: document.getElementById('sticky-bar'),
+                stickyBarTextContainer: document.getElementById('sticky-bar-text-container'),
                 mainHeader: document.getElementById('main-header'),
                 countdownTimer: document.getElementById('countdown-timer'),
-                viewersCount: document.getElementById('viewers-count'),
                 slotsLeftMain: document.getElementById('slots-left-main'),
                 slotsLeftMid: document.getElementById('slots-left-mid'),
-                slotsLeftPost: document.getElementById('slots-left-post'),
                 socialProofContainer: document.getElementById('social-proof-container'),
             },
 
@@ -926,7 +916,6 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
-                            // Show sticky bar when hero is scrolled past
                             if (entry.target.classList.contains('hero')) {
                                 this.dom.stickyBar.classList.toggle('hidden', entry.isIntersecting);
                                 this.dom.mainHeader.style.top = entry.isIntersecting ? '0' : `${this.dom.stickyBar.offsetHeight}px`;
@@ -950,65 +939,116 @@
 
             // --- Urgency & Scarcity Features ---
             initUrgencyFeatures() {
-                // 1. Scarcity Popup after 12 seconds
+                const daySeed = parseInt(new Date().toISOString().split('T')[0].replace(/-/g, ''));
+                this.urgencyState.dailyScarcitySlots = Math.floor(this.seededRandom(daySeed) * (15 - 7 + 1)) + 7;
+
                 setTimeout(() => this.showScarcityPopup(), 12000);
-
-                // 2. Countdown Timer
-                this.startCountdown(4 * 3600 + 23 * 60 + 19); // 4h 23m 19s
-
-                // 3. Slots Counter
+                this.initializeCountdown();
                 this.updateSlotsCounter();
-                this.urgencyState.slotsInterval = setInterval(() => this.updateSlotsCounter(), 25000); // Decrease every 25s
-
-                // 4. Viewers Counter
-                this.urgencyState.viewersInterval = setInterval(() => this.updateStickyBar(), 4000); // Change every 4s
-
-                // 5. Social Proof Notifications
+                this.urgencyState.slotsInterval = setInterval(() => this.updateSlotsCounter(), 25000);
                 this.scheduleSocialProof();
             },
 
+            initializeCountdown() {
+                let offerEndTime = localStorage.getItem('offerEndTime');
+                const now = new Date().getTime();
+
+                if (!offerEndTime || offerEndTime < now) {
+                    offerEndTime = now + (4 * 3600 * 1000) + (23 * 60 * 1000) + (19 * 1000);
+                    localStorage.setItem('offerEndTime', offerEndTime);
+                }
+
+                const durationInSeconds = Math.round((offerEndTime - now) / 1000);
+
+                if (durationInSeconds > 0) {
+                    this.urgencyState.isOfferExpired = false;
+                    if (this.dom.stickyBarTextContainer) {
+                        this.dom.stickyBarTextContainer.innerHTML = this.getTranslatedString('stickyBarTextActive');
+                    }
+                    this.startCountdown(durationInSeconds);
+                } else {
+                    this.urgencyState.isOfferExpired = true;
+                    this.handleExpiredOffer();
+                }
+            },
+
             startCountdown(duration) {
-                let timer = duration, hours, minutes, seconds;
+                let timer = duration;
                 this.urgencyState.countdownInterval = setInterval(() => {
-                    hours = parseInt(timer / 3600, 10);
-                    minutes = parseInt((timer % 3600) / 60, 10);
-                    seconds = parseInt(timer % 60, 10);
+                    if (timer <= 0) {
+                        clearInterval(this.urgencyState.countdownInterval);
+                        this.urgencyState.isOfferExpired = true;
+                        this.handleExpiredOffer();
+                        this.showOfferExpiredPopup();
+                        return;
+                    }
+
+                    timer--;
+
+                    let hours = parseInt(timer / 3600, 10);
+                    let minutes = parseInt((timer % 3600) / 60, 10);
+                    let seconds = parseInt(timer % 60, 10);
 
                     hours = hours < 10 ? "0" + hours : hours;
                     minutes = minutes < 10 ? "0" + minutes : minutes;
                     seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                    this.dom.countdownTimer.textContent = hours + ":" + minutes + ":" + seconds;
-
-                    if (--timer < 0) {
-                        timer = duration; // Reset timer
+                    
+                    if (this.dom.countdownTimer) {
+                        this.dom.countdownTimer.textContent = hours + ":" + minutes + ":" + seconds;
                     }
+
                 }, 1000);
+            },
+
+            handleExpiredOffer() {
+                if (this.dom.stickyBarTextContainer) {
+                    this.dom.stickyBarTextContainer.innerHTML = this.getTranslatedString('stickyBarTextExpired');
+                }
+                if (this.dom.countdownTimer) {
+                    this.dom.countdownTimer.textContent = "";
+                }
+            },
+
+            showOfferExpiredPopup() {
+                const content = `
+                    <div class="text-center">
+                        <div class="text-5xl mb-4">⏳</div>
+                        <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('offerExpiredTitle')}</h3>
+                        <p class="text-gray-300 mb-6 text-lg">${this.getTranslatedString('offerExpiredText')}</p>
+                        <button id="expired-offer-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('offerExpiredButton')}</button>
+                    </div>
+                `;
+                this.showDialog(content);
+                document.getElementById('expired-offer-cta').onclick = () => {
+                    this.closeDialog();
+                    this.startPurchaseFlow();
+                    setTimeout(() => {
+                        const couponInput = document.getElementById('coupon-input');
+                        if (couponInput) {
+                            couponInput.value = '5OFF';
+                            this.applyCoupon();
+                        }
+                    }, 500);
+                };
             },
 
             updateSlotsCounter() {
                 if (this.urgencyState.slotsLeft > 2) {
                     this.urgencyState.slotsLeft--;
                 }
-                this.dom.slotsLeftMain.textContent = this.urgencyState.slotsLeft;
-                this.dom.slotsLeftMid.textContent = this.urgencyState.slotsLeft;
-                this.dom.slotsLeftPost.textContent = this.urgencyState.slotsLeft;
-            },
-
-            updateStickyBar() {
-                let currentViewers = parseInt(this.dom.viewersCount.textContent);
-                const change = Math.random() < 0.5 ? 1 : -1;
-                let newViewers = currentViewers + change;
-                if (newViewers < 5) newViewers = 5;
-                if (newViewers > 15) newViewers = 15;
-                this.dom.viewersCount.textContent = newViewers;
+                if (this.dom.slotsLeftMain) {
+                    this.dom.slotsLeftMain.textContent = this.urgencyState.slotsLeft;
+                }
+                if (this.dom.slotsLeftMid) {
+                    this.dom.slotsLeftMid.textContent = this.urgencyState.slotsLeft;
+                }
             },
 
             showScarcityPopup() {
                 const content = `
                     <div class="text-center">
                         <div class="text-5xl mb-4">⚠️</div>
-                        <h3 class="text-2xl font-bold mb-2 text-yellow-400">${this.getTranslatedString('scarcityPopupTitle')}</h3>
+                        <h3 class="text-2xl font-bold mb-2 text-yellow-400">${this.getTranslatedString('scarcityPopupTitle', {SLOTS: this.urgencyState.dailyScarcitySlots})}</h3>
                         <p class="text-gray-300 mb-6">${this.getTranslatedString('scarcityPopupText')}</p>
                         <a href="#get-app" id="scarcity-popup-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('scarcityPopupButton')}</a>
                     </div>
@@ -1032,7 +1072,6 @@
                 document.getElementById('exit-intent-cta').addEventListener('click', () => {
                     this.closeDialog();
                     this.startPurchaseFlow();
-                    // Auto-apply coupon in the next step
                     setTimeout(() => {
                         const couponInput = document.getElementById('coupon-input');
                         if (couponInput) {
@@ -1044,11 +1083,10 @@
             },
             
             scheduleSocialProof() {
-                // Random delay between 20s (20000ms) and 45s (45000ms)
                 const delay = Math.random() * (45000 - 20000) + 20000;
                 this.urgencyState.socialProofTimeout = setTimeout(() => {
                     this.showSocialProofNotification();
-                    this.scheduleSocialProof(); // Reschedule the next one
+                    this.scheduleSocialProof();
                 }, delay);
             },
 
@@ -1072,10 +1110,8 @@
 
                 this.dom.socialProofContainer.appendChild(notification);
                 
-                // Trigger show animation
                 setTimeout(() => notification.classList.add('show'), 100);
 
-                // Hide and remove after 5 seconds
                 setTimeout(() => {
                     notification.classList.remove('show');
                     setTimeout(() => notification.remove(), 500);
@@ -1085,7 +1121,7 @@
 
             // --- Counter Logic ---
             seededRandom(seed) {
-                var m = 0x80000000; // 2**31
+                var m = 0x80000000;
                 var a = 1103515245;
                 var c = 12345;
                 var state = seed;
@@ -1176,7 +1212,7 @@
 
                     const translation = this.getTranslatedString(key);
                     
-                    if (['storyText', 'storyCallToAction', 'exitIntentText'].includes(key)) {
+                    if (['storyText', 'storyCallToAction', 'exitIntentText', 'offerExpiredText', 'stickyBarTextActive', 'stickyBarTextExpired'].includes(key)) {
                          el.innerHTML = translation; 
                     } else {
                          el.textContent = translation;
@@ -1379,9 +1415,6 @@
             },
 
             showPokerAppDialog() {
-                // Personalization message added here
-                const personalizationHTML = `<p class="text-center text-green-400 mb-6 font-semibold">${this.getTranslatedString('personalizationText', {APP: '...', PLATFORM: this.purchaseState.platform})}</p>`;
-
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('pokerAppDialogTitle')}</h3>
                      <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('pokerAppDialogText')}</p>
@@ -1442,11 +1475,18 @@
                 let discount = 0;
                 let isValid = false;
 
-                if (code === '30OFF') {
+                if (code === 'QWERTY') {
                     discount = 0.30;
                     isValid = true;
                 } else if (code === '10OFF') {
-                    discount = 0.10;
+                    if (this.urgencyState.isOfferExpired) {
+                        isValid = false;
+                    } else {
+                        discount = 0.10;
+                        isValid = true;
+                    }
+                } else if (code === '5OFF') {
+                    discount = 0.05;
                     isValid = true;
                 }
                 
@@ -1697,18 +1737,6 @@
                 event.preventDefault();
             }
         });
-
-        // 3. Armadilha de Depurador (Debugger Trap)
-        // Isto abrirá repetidamente o depurador, tornando a consola difícil de usar.
-        (function() {
-            setInterval(() => {
-                try {
-                    debugger;
-                } catch (err) {
-                    // O utilizador pode ter desativado as declarações do depurador, mas o loop continua.
-                }
-            }, 50);
-        })();
     </script>
 </body>
 </html>
