@@ -178,6 +178,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+
       gtag('config', 'G-6WV95XF58S');
     </script>
 </head>
@@ -851,7 +852,7 @@
     
     // --- Localized Social Proof Data ---
     const socialProofData = {
-      "de": { names: ["Klaus","Hans","Müller"], cities:["Berlin","Hamburg"], flag: "🇩�", country: "Germany" },
+      "de": { names: ["Klaus","Hans","Müller"], cities:["Berlin","Hamburg"], flag: "🇩🇪", country: "Germany" },
       "it": { names: ["Giovanni","Marco","Luca"], cities:["Roma","Milano"], flag: "🇮🇹", country: "Italy" },
       "us": { names: ["James","John","Michael"], cities:["New York","Miami"], flag: "🇺🇸", country: "the USA" },
       "ru": { names: ["Dmitri","Ivan","Sergey"], cities:["Moscow","St. Petersburg"], flag: "🇷🇺", country: "Russia" },
@@ -992,7 +993,7 @@
                                 this.dom.mainHeader.style.top = '0';
                             }
                              if(!entry.target.classList.contains('hero')) {
-                                observer.unobserve(entry.target);
+                                 observer.unobserve(entry.target);
                              }
                         } else {
                              if (entry.target.classList.contains('hero')) {
@@ -1579,7 +1580,7 @@
 
             selectPokerApp(app) {
                 this.purchaseState.app = app;
-                const prices = { PPPOKER: 1500, XPoker: 1500, ClubGG: 4000 };
+                const prices = { PPPOKER: 1500, XPoker: 1500, ClubGG: 2000 };
                 this.purchaseState.basePrice = prices[app] || 0;
                 this.purchaseState.discount = 0; // Reset discount
                 this.showCouponDialog();
@@ -1589,15 +1590,49 @@
                 const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
                 const personalizationMessage = this.getTranslatedString('personalizationText', {APP: this.purchaseState.app, PLATFORM: this.purchaseState.platform});
 
+                let priceHTML = '';
+                const isClubGG = this.purchaseState.app === 'ClubGG';
+                const hasDiscount = this.purchaseState.discount > 0;
+
+                if (isClubGG) {
+                    const originalClubGGPrice = 4000;
+                    const currentBasePrice = this.purchaseState.basePrice; 
+
+                    if (hasDiscount) {
+                        priceHTML = `
+                            <p class="text-gray-500 text-lg">
+                                <span>Original Price</span>:
+                                <s id="original-price-value">$${originalClubGGPrice.toFixed(2)}</s>
+                            </p>
+                             <p class="text-xl font-semibold text-green-400">Promo Price: $${currentBasePrice.toFixed(2)}</p>
+                            <p id="final-price-display" class="text-3xl font-bold text-yellow-400 mt-2">
+                                Final Price: $${finalPrice.toFixed(2)}
+                            </p>
+                        `;
+                    } else {
+                        priceHTML = `
+                            <p class="text-gray-500 text-lg">
+                                <span>Original Price</span>:
+                                <s id="original-price-value">$${originalClubGGPrice.toFixed(2)}</s>
+                            </p>
+                            <p id="final-price-display" class="text-3xl font-bold text-yellow-400 mt-2">${this.getTranslatedString('amountTextBase', { PRICE: `$${currentBasePrice.toFixed(2)}`})}</p>
+                        `;
+                    }
+                } else {
+                     priceHTML = `
+                        <p id="original-price-container" class="${hasDiscount ? '' : 'hidden'} text-gray-500">
+                            <span>${this.getTranslatedString('originalAmountLabel')}</span>:
+                            <s id="original-price-value">$${this.purchaseState.basePrice.toFixed(2)}</s>
+                        </p>
+                        <p id="final-price-display" class="text-2xl font-bold text-yellow-400">${this.getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`})}</p>
+                     `;
+                }
+
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('couponDialogTitle')}</h3>
                     <p class="text-center text-green-400 mb-4 font-semibold">${personalizationMessage}</p>
-                    <div class="text-center mb-4">
-                         <p id="original-price-container" class="${this.purchaseState.discount > 0 ? '' : 'hidden'} text-gray-500">
-                             <span>${this.getTranslatedString('originalAmountLabel')}</span>:
-                             <s id="original-price-value">$${this.purchaseState.basePrice.toFixed(2)}</s>
-                         </p>
-                        <p id="final-price-display" class="text-2xl font-bold text-yellow-400">${this.getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`})}</p>
+                    <div class="text-center mb-4 space-y-1">
+                        ${priceHTML}
                     </div>
                     <p class="text-center text-gray-400 mb-4">${this.getTranslatedString('couponDialogText')}</p>
                     <div class="flex items-center space-x-2">
@@ -1614,8 +1649,6 @@
 
             applyCoupon() {
                 const couponInput = document.getElementById('coupon-input');
-                const messageEl = document.getElementById('coupon-message');
-                if(!couponInput || !messageEl) return;
                 const code = couponInput.value.trim().toUpperCase();
                 
                 let discount = 0;
@@ -1638,31 +1671,23 @@
                 
                 this.purchaseState.discount = isValid ? discount : 0;
                 
-                if (isValid) {
-                    messageEl.textContent = this.getTranslatedString('couponAppliedSuccess', { COUPON_CODE: code, DISCOUNT: (discount * 100) });
-                    messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
-                } else {
-                     messageEl.textContent = this.getTranslatedString('couponErrorInvalid');
-                                   messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
-                }
+                this.showCouponDialog();
 
-                const finalPrice = this.purchaseState.basePrice * (1 - this.purchaseState.discount);
-                const originalPriceContainer = document.getElementById('original-price-container');
-                const finalPriceDisplay = document.getElementById('final-price-display');
+                setTimeout(() => {
+                    const newCouponInput = document.getElementById('coupon-input');
+                    if (newCouponInput) newCouponInput.value = code;
 
-                if (finalPriceDisplay) {
-                     finalPriceDisplay.textContent = this.getTranslatedString('amountTextBase', { PRICE: `$${finalPrice.toFixed(2)}`});
-                }
-
-                if (originalPriceContainer) {
-                    const originalPriceValueEl = originalPriceContainer.querySelector('s');
-                     if (this.purchaseState.discount > 0) {
-                         if(originalPriceValueEl) originalPriceValueEl.textContent = `$${this.purchaseState.basePrice.toFixed(2)}`;
-                         originalPriceContainer.classList.remove('hidden');
-                     } else {
-                         originalPriceContainer.classList.add('hidden');
-                     }
-                }
+                    const messageEl = document.getElementById('coupon-message');
+                    if (messageEl) {
+                        if (isValid) {
+                            messageEl.textContent = this.getTranslatedString('couponAppliedSuccess', { COUPON_CODE: code, DISCOUNT: (discount * 100) });
+                            messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
+                        } else {
+                            messageEl.textContent = this.getTranslatedString('couponErrorInvalid');
+                            messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
+                        }
+                    }
+                }, 0);
             },
             
             proceedToPaymentMethod() {
@@ -1897,4 +1922,3 @@
     </script>
 </body>
 </html>
-�
