@@ -643,9 +643,12 @@
             emailPlaceholder: "Enter your email address",
             usernameLabel: "Username",
             usernamePlaceholder: "Choose a username (min. 3 characters)",
+            countryLabel: "Country",
+            countrySelectPlaceholder: "Select your country",
             registerButton: "Register & Continue",
             emailValidationError: "Please enter a valid email address.",
             usernameValidationError: "Username must be at least 3 characters.",
+            countryValidationError: "Please select your country.",
             platformDialogTitle: "Select Your Device",
             platformDialogText: "Choose the platform you'll be using Reveal App on:",
             platformAndroid: "Android",
@@ -802,9 +805,12 @@
             emailPlaceholder: "Digite seu endereço de email",
             usernameLabel: "Nome de Usuário",
             usernamePlaceholder: "Escolha um nome de usuário (mín. 3 caracteres)",
+            countryLabel: "País",
+            countrySelectPlaceholder: "Selecione o seu país",
             registerButton: "Registrar e Continuar",
             emailValidationError: "Por favor, insira um email válido.",
             usernameValidationError: "O nome de usuário deve ter pelo menos 3 caracteres.",
+            countryValidationError: "Por favor, selecione o seu país.",
             platformDialogTitle: "Selecione seu Dispositivo",
             platformDialogText: "Escolha a plataforma em que você usará o Reveal App:",
             platformAndroid: "Android",
@@ -862,7 +868,7 @@
         "it": { names: ["Giovanni","Marco","Luca"], cities:["Roma","Milano"], flag: "🇮🇹", country: "Italy" },
         "us": { names: ["James","John","Michael"], cities:["New York","Miami"], flag: "🇺🇸", country: "the USA" },
         "ru": { names: ["Dmitri","Ivan","Sergey"], cities:["Moscow","St. Petersburg"], flag: "🇷🇺", country: "Russia" },
-        "br": { names: ["Paulo","Thiago","Lucas"], cities:["São Paulo","Rio de Janeiro"], flag: "�🇷", country: "Brasil" },
+        "br": { names: ["Paulo","Thiago","Lucas"], cities:["São Paulo","Rio de Janeiro"], flag: "🇧🇷", country: "Brasil" },
         "ph": { names: ["Juan", "Antonio", "Jose"], cities:["Manila", "Cebu"], flag: "🇵🇭", country: "the Philippines"}
     };
 
@@ -991,7 +997,7 @@
                 userCountryCode: null,
                 userCurrency: 'USD',
                 userCountryName: 'your country',
-                userCountryFlag: '🌍',
+                userCountryFlag: '�',
                 exchangeRates: null,
             },
             purchaseState: {
@@ -1064,54 +1070,53 @@
             },
 
             async fetchInitialData() {
-                try {
-                    // Fetch user location data from IP
-                    const geoResponse = await fetch('https://ipapi.co/json/');
-                    if (!geoResponse.ok) throw new Error('Geolocation fetch failed');
-                    const geoData = await geoResponse.json();
-                    this.state.userCountryCode = geoData.country_code;
-                    this.state.userCurrency = geoData.currency;
-                    this.state.userCountryName = geoData.country_name;
-                    
-                    // Simple flag generation
-                    const flag = geoData.country_code.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-                    this.state.userCountryFlag = flag;
+                const savedCountryCode = localStorage.getItem('userCountryCode');
 
-                } catch (error) {
-                    console.warn("Could not fetch geolocation data, falling back to defaults.", error);
-                    // Fallback to US defaults if IP lookup fails
-                    this.state.userCountryCode = 'US';
-                    this.state.userCurrency = 'USD';
-                    this.state.userCountryName = 'the United States';
-                    this.state.userCountryFlag = '🇺🇸';
+                if (savedCountryCode) {
+                    this.updateUserStateFromCountry(savedCountryCode);
+                } else {
+                    try {
+                        const geoResponse = await fetch('https://ipapi.co/json/');
+                        if (!geoResponse.ok) throw new Error('Geolocation fetch failed');
+                        const geoData = await geoResponse.json();
+                        
+                        this.state.userCountryCode = geoData.country_code;
+                        this.state.userCurrency = geoData.currency;
+                        this.state.userCountryName = geoData.country_name;
+                        const flag = geoData.country_code.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
+                        this.state.userCountryFlag = flag;
+
+                    } catch (error) {
+                        console.warn("Could not fetch geolocation data, falling back to defaults.", error);
+                        this.state.userCountryCode = 'US';
+                        this.state.userCurrency = 'USD';
+                        this.state.userCountryName = 'the United States';
+                        this.state.userCountryFlag = '🇺🇸';
+                    }
                 }
 
                 try {
-                    // Fetch latest currency exchange rates
                     const ratesResponse = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
                     if (!ratesResponse.ok) throw new Error('Exchange rate fetch failed');
                     const ratesData = await ratesResponse.json();
                     this.state.exchangeRates = ratesData.rates;
                 } catch (error) {
                     console.error("Could not fetch exchange rates. Prices will be shown in USD only.", error);
-                    this.state.exchangeRates = { 'USD': 1.0 }; // Fallback
+                    this.state.exchangeRates = { 'USD': 1.0 };
                 }
             },
             
             initEventListeners() {
-                // Mobile Menu
                 this.dom.mobileMenuButton.addEventListener('click', () => this.dom.mobileMenu.classList.replace('-translate-x-full', 'translate-x-0'));
                 this.dom.mobileMenuClose.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
                 document.querySelectorAll('#mobile-menu a').forEach(link => {
                     link.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
                 });
 
-                // Dialog
                 this.dom.dialogContainer.addEventListener('click', (e) => {
                     if (e.target === this.dom.dialogContainer) this.closeDialog();
                 });
 
-                // Purchase Flow
                 this.dom.startPurchaseBtn.addEventListener('click', () => this.startPurchaseFlow());
                 document.querySelectorAll('a[href="#get-app"]').forEach(el => {
                     el.addEventListener('click', (e) => {
@@ -1120,7 +1125,6 @@
                     });
                 });
 
-                // Exit Intent
                 document.documentElement.addEventListener('mouseleave', (e) => {
                     if (e.clientY < 10 && !this.urgencyState.exitIntentTriggered) {
                         this.urgencyState.exitIntentTriggered = true;
@@ -1134,18 +1138,14 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
-                            if (entry.target.id === 'counter-satisfaction') {
-                                this.animateSatisfactionBar();
-                            }
+                            if (entry.target.id === 'counter-satisfaction') this.animateSatisfactionBar();
                             if (entry.target.classList.contains('hero')) {
                                 this.dom.stickyBar.classList.add('hidden');
                                 this.dom.mainHeader.style.top = '0';
                             }
-                             if(!entry.target.classList.contains('hero')) {
-                                 observer.unobserve(entry.target);
-                             }
+                            if(!entry.target.classList.contains('hero')) observer.unobserve(entry.target);
                         } else {
-                             if (entry.target.classList.contains('hero')) {
+                            if (entry.target.classList.contains('hero')) {
                                 this.dom.stickyBar.classList.remove('hidden');
                                 this.dom.mainHeader.style.top = `${this.dom.stickyBar.offsetHeight}px`;
                             }
@@ -1153,30 +1153,25 @@
                     });
                 }, { threshold: 0.1 });
 
-                document.querySelectorAll('.animate-on-scroll, .hero').forEach(el => {
-                    observer.observe(el);
-                });
+                document.querySelectorAll('.animate-on-scroll, .hero').forEach(el => observer.observe(el));
             },
 
-            // --- Urgency & Scarcity Features ---
             initUrgencyFeatures() {
                 this.initializeDailySlots();
-                setTimeout(() => this.showTimedPopup(), 45000); // 45s timed popup
+                setTimeout(() => this.showTimedPopup(), 45000);
                 this.initializeCountdown();
                 this.scheduleSocialProof();
             },
 
             initializeCountdown() {
-                if (this.urgencyState.countdownInterval) {
-                    clearInterval(this.urgencyState.countdownInterval);
-                }
+                if (this.urgencyState.countdownInterval) clearInterval(this.urgencyState.countdownInterval);
                 
                 const now = new Date().getTime();
                 let offerEndTimeStr = localStorage.getItem('offerEndTime');
                 let offerEndTime = offerEndTimeStr ? parseInt(offerEndTimeStr, 10) : 0;
 
                 if (!offerEndTime || isNaN(offerEndTime)) {
-                    offerEndTime = now + (4 * 3600 * 1000) + (23 * 60 * 1000) + (19 * 1000); // 4h 23m 19s
+                    offerEndTime = now + (4 * 3600 * 1000) + (23 * 60 * 1000) + (19 * 1000);
                     localStorage.setItem('offerEndTime', offerEndTime.toString());
                 }
 
@@ -1184,9 +1179,7 @@
 
                 if (durationInSeconds > 0) {
                     this.urgencyState.isOfferExpired = false;
-                    if (this.dom.stickyBarTextContainer) {
-                        this.dom.stickyBarTextContainer.innerHTML = this.getTranslatedString('stickyBarTextActive');
-                    }
+                    if (this.dom.stickyBarTextContainer) this.dom.stickyBarTextContainer.innerHTML = this.getTranslatedString('stickyBarTextActive');
                     this.urgencyState.countdownInterval = this.startCountdown(durationInSeconds, this.dom.countdownTimer, () => {
                         this.urgencyState.isOfferExpired = true;
                         this.handleExpiredOffer();
@@ -1206,33 +1199,21 @@
                         if(onEndCallback) onEndCallback();
                         return;
                     }
-
                     timer--;
-
                     let hours = parseInt(timer / 3600, 10);
                     let minutes = parseInt((timer % 3600) / 60, 10);
                     let seconds = parseInt(timer % 60, 10);
-
                     hours = hours < 10 ? "0" + hours : hours;
                     minutes = minutes < 10 ? "0" + minutes : minutes;
                     seconds = seconds < 10 ? "0" + seconds : seconds;
-                    
-                    if (displayElement) {
-                        displayElement.textContent = hours + ":" + minutes + ":" + seconds;
-                    }
-
+                    if (displayElement) displayElement.textContent = `${hours}:${minutes}:${seconds}`;
                 }, 1000);
-                
                 return intervalId;
             },
 
             handleExpiredOffer() {
-                if (this.dom.stickyBarTextContainer) {
-                    this.dom.stickyBarTextContainer.innerHTML = this.getTranslatedString('stickyBarTextExpired');
-                }
-                if (this.dom.countdownTimer) {
-                    this.dom.countdownTimer.textContent = "";
-                }
+                if (this.dom.stickyBarTextContainer) this.dom.stickyBarTextContainer.innerHTML = this.getTranslatedString('stickyBarTextExpired');
+                if (this.dom.countdownTimer) this.dom.countdownTimer.textContent = "";
             },
 
             showOfferExpiredPopup() {
@@ -1242,8 +1223,7 @@
                         <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('offerExpiredTitle')}</h3>
                         <p class="text-gray-300 mb-6 text-lg">${this.getTranslatedString('offerExpiredText')}</p>
                         <button id="expired-offer-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('offerExpiredButton')}</button>
-                    </div>
-                `;
+                    </div>`;
                 this.showDialog(content);
                 document.getElementById('expired-offer-cta').onclick = () => {
                     this.closeDialog();
@@ -1261,44 +1241,32 @@
             initializeDailySlots() {
                 const todayStr = new Date().toISOString().split('T')[0];
                 let slotData = JSON.parse(localStorage.getItem('slotData'));
-
                 if (!slotData || slotData.date !== todayStr) {
                     const daySeed = parseInt(todayStr.replace(/-/g, ''));
                     const initialSlots = Math.floor(this.seededRandom(daySeed) * (15 - 7 + 1)) + 7;
-                    slotData = {
-                        date: todayStr,
-                        currentSlots: initialSlots,
-                        lastHourlyCheck: new Date().getTime(),
-                        extraSlotsAwarded: false
-                    };
+                    slotData = { date: todayStr, currentSlots: initialSlots, lastHourlyCheck: new Date().getTime(), extraSlotsAwarded: false };
                 } else {
                     const now = new Date().getTime();
                     const hoursPassed = Math.floor((now - slotData.lastHourlyCheck) / (1000 * 60 * 60));
                     if (hoursPassed > 0) {
-                        slotData.currentSlots = Math.max(2, slotData.currentSlots - hoursPassed); // Don't go below 2
+                        slotData.currentSlots = Math.max(2, slotData.currentSlots - hoursPassed);
                         slotData.lastHourlyCheck = now;
                     }
                 }
-                
                 localStorage.setItem('slotData', JSON.stringify(slotData));
                 this.updateSlotsUI(slotData.currentSlots);
             },
 
             updateSlotsUI(slots) {
-                const slotsElements = [this.dom.slotsLeftHero, this.dom.slotsLeftMid, this.dom.slotsLeftMain];
-                slotsElements.forEach(el => {
+                [this.dom.slotsLeftHero, this.dom.slotsLeftMid, this.dom.slotsLeftMain].forEach(el => {
                     if (el) {
                         el.textContent = slots;
-                          const container = this.dom.urgencyTextContainer;
-                          if (container) {
-                            if (slots < 5) {
-                                container.classList.add('text-red-600', 'animate-ping');
-                                container.classList.remove('text-red-500');
-                            } else {
-                                 container.classList.remove('text-red-600', 'animate-ping');
-                                 container.classList.add('text-red-500');
-                            }
-                          }
+                        const container = this.dom.urgencyTextContainer;
+                        if (container) {
+                            container.classList.toggle('text-red-600', slots < 5);
+                            container.classList.toggle('animate-ping', slots < 5);
+                            container.classList.toggle('text-red-500', slots >= 5);
+                        }
                     }
                 });
             },
@@ -1310,15 +1278,13 @@
                     slotData.extraSlotsAwarded = true;
                     localStorage.setItem('slotData', JSON.stringify(slotData));
                     this.updateSlotsUI(slotData.currentSlots);
-
                     const content = `
                         <div class="text-center">
                             <div class="text-5xl mb-4">🎯</div>
                             <h3 class="text-2xl font-bold mb-2 text-yellow-400">${this.getTranslatedString('timedPopupTitle')}</h3>
                             <p class="text-gray-300 mb-6">${this.getTranslatedString('timedPopupText')}</p>
                             <a href="#get-app" id="timed-popup-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('timedPopupButton')}</a>
-                        </div>
-                    `;
+                        </div>`;
                     this.showDialog(content);
                     document.getElementById('timed-popup-cta').addEventListener('click', () => {
                         this.closeDialog();
@@ -1333,8 +1299,7 @@
                         <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('exitIntentTitle')}</h3>
                         <p class="text-gray-300 mb-6 text-lg">${this.getTranslatedString('exitIntentText')}</p>
                         <button id="exit-intent-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('exitIntentButton')}</button>
-                    </div>
-                `;
+                    </div>`;
                 this.showDialog(content);
                 document.getElementById('exit-intent-cta').onclick = () => {
                     this.closeDialog();
@@ -1350,7 +1315,7 @@
             },
             
             scheduleSocialProof() {
-                const delay = Math.random() * (40000 - 20000) + 20000; // 20-40 seconds
+                const delay = Math.random() * (40000 - 20000) + 20000;
                 this.urgencyState.socialProofTimeout = setTimeout(() => {
                     this.showSocialProofNotification();
                     this.scheduleSocialProof();
@@ -1361,35 +1326,25 @@
                 const langKeys = Object.keys(socialProofData);
                 const randomLangKey = langKeys[Math.floor(Math.random() * langKeys.length)];
                 const data = socialProofData[randomLangKey];
-
                 const name = data.names[Math.floor(Math.random() * data.names.length)];
                 const location = data.cities[Math.floor(Math.random() * data.cities.length)];
                 const app = ['PPPOKER', 'XPoker', 'ClubGG'][Math.floor(Math.random() * 3)];
                 const actions = ['socialProofAcquired', 'socialProofGenerated', 'socialProofSeeing'];
                 const actionKey = actions[Math.floor(Math.random() * actions.length)];
-
                 const text = this.getTranslatedString(actionKey, {NAME: name, LOCATION: location, APP: app});
-
                 const notification = document.createElement('div');
                 notification.className = 'social-proof-notification bg-gray-800/90 backdrop-blur-sm border border-gray-700 rounded-lg p-4 shadow-lg flex items-center space-x-3 mb-3';
                 notification.innerHTML = `<div>${data.flag} ${text}</div>`;
-
                 this.dom.socialProofContainer.appendChild(notification);
-                
                 setTimeout(() => notification.classList.add('show'), 100);
-
                 setTimeout(() => {
                     notification.classList.remove('show');
                     setTimeout(() => notification.remove(), 500);
                 }, 5000);
             },
 
-
-            // --- Counter Logic ---
             seededRandom(seed) {
-                var m = 0x80000000;
-                var a = 1103515245;
-                var c = 12345;
+                var m = 0x80000000, a = 1103515245, c = 12345;
                 var state = seed;
                 state = (a * state + c) % m;
                 return state / (m - 1);
@@ -1397,26 +1352,20 @@
 
             ensureNoRepeatingEndDigits(number) {
                 const numStr = String(Math.round(number));
-                if (numStr.length > 1 && numStr[numStr.length - 1] === numStr[numStr.length - 2]) {
-                    return Math.round(number) + 1;
-                }
+                if (numStr.length > 1 && numStr[numStr.length - 1] === numStr[numStr.length - 2]) return Math.round(number) + 1;
                 return Math.round(number);
             },
             
             initStaticCounters() {
                 const today = new Date();
                 const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
-
                 const satisfaction = 98.50 + this.seededRandom(daySeed) * 0.5;
                 if (this.dom.counterSatisfaction) {
                     this.dom.counterSatisfaction.textContent = `${satisfaction.toFixed(1)}%`;
                     this.dom.satisfactionBar.dataset.percent = satisfaction.toFixed(1);
                 }
-
                 const weeklyWinnings = 148000 + this.seededRandom(daySeed) * 25000;
-                if (this.dom.counterWinnings) {
-                    this.dom.counterWinnings.textContent = this.formatWinnings(weeklyWinnings);
-                }
+                if (this.dom.counterWinnings) this.dom.counterWinnings.textContent = this.formatWinnings(weeklyWinnings);
             },
 
             animateSatisfactionBar() {
@@ -1429,67 +1378,47 @@
             updateLiveCounters() {
                 const today = new Date();
                 const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
-                const startOfDay = new Date(today.toISOString().split('T')[0]);
-                const timePassed = today.getTime() - startOfDay.getTime();
-
-                const MIN_PLAYERS = 1276;
-                const MAX_PLAYERS = 1550;
-                const twoMinuteIntervals = Math.floor(timePassed / (2 * 60 * 1000));
+                const timePassed = today.getTime() - new Date(today.toISOString().split('T')[0]).getTime();
+                const MIN_PLAYERS = 1276, MAX_PLAYERS = 1550;
+                const twoMinuteIntervals = Math.floor(timePassed / 120000);
                 const intervalSeed = daySeed + twoMinuteIntervals;
                 let playerCount = MIN_PLAYERS + this.seededRandom(intervalSeed) * (MAX_PLAYERS - MIN_PLAYERS);
-                const secondsIntoInterval = Math.floor((timePassed / 1000) % 120);
-
-                if (secondsIntoInterval >= 60) {
+                if (Math.floor((timePassed / 1000) % 120) >= 60) {
                     const fluctuationSeed = intervalSeed * 3;
-                    const change = this.seededRandom(fluctuationSeed) < 0.5 ? 20 : -27;
-                    playerCount += change;
+                    playerCount += this.seededRandom(fluctuationSeed) < 0.5 ? 20 : -27;
                 }
-                playerCount = Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, playerCount));
-                playerCount = this.ensureNoRepeatingEndDigits(playerCount);
-
-                if (this.dom.counterPlayers) {
-                    this.dom.counterPlayers.textContent = `+${playerCount.toLocaleString()}`;
-                }
+                playerCount = this.ensureNoRepeatingEndDigits(Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, playerCount)));
+                if (this.dom.counterPlayers) this.dom.counterPlayers.textContent = `+${playerCount.toLocaleString()}`;
             },
 
             formatWinnings(amount) {
-                if (amount >= 1000000) {
-                    return `$${(amount / 1000000).toFixed(2)}M+`;
-                } else if (amount >= 1000) {
-                    return `$${Math.round(amount / 1000)}K+`;
-                }
+                if (amount >= 1000000) return `$${(amount / 1000000).toFixed(2)}M+`;
+                if (amount >= 1000) return `$${Math.round(amount / 1000)}K+`;
                 return `$${amount}`;
             },
 
-            // Language Handling
             initLanguage() {
                 let userLang = localStorage.getItem("language");
-
                 if (!userLang) {
                     const countryData = countrySalaryData[this.state.userCountryCode];
                     userLang = countryData && translations[countryData.lang] ? countryData.lang : 'pt';
                 }
-                
                 this.setLanguage(userLang);
             },
 
             setLanguage(lang) {
                 localStorage.setItem("language", lang);
                 document.documentElement.lang = lang;
-                
                 this.populateAllDynamicContent();
                 this.showPersonalizationBanner();
-
                 document.querySelectorAll("[data-translate]").forEach(el => {
                     const key = el.dataset.translate;
                     if (!key) return;
-
                     const translation = this.getTranslatedString(key);
-                    
                     if (['storyText', 'storyCallToAction', 'exitIntentText', 'offerExpiredText', 'stickyBarTextActive', 'stickyBarTextExpired'].includes(key)) {
-                         el.innerHTML = translation; 
+                        el.innerHTML = translation; 
                     } else {
-                         el.textContent = translation;
+                        el.textContent = translation;
                     }
                 });
                 document.title = this.getTranslatedString('pageTitle');
@@ -1504,13 +1433,10 @@
             getTranslatedString(key, replacements = {}) {
                 const lang = localStorage.getItem("language") || "pt";
                 let translation = (translations[lang] && translations[lang][key]) ? translations[lang][key] : (translations['en'][key] || key);
-                Object.entries(replacements).forEach(([placeholder, value]) => {
-                    translation = translation.replace(`{${placeholder.toUpperCase()}}`, value);
-                });
+                Object.entries(replacements).forEach(([p, v]) => { translation = translation.replace(`{${p.toUpperCase()}}`, v); });
                 return translation;
             },
             
-            // Dynamic Content Population
             populateAllDynamicContent() {
                 this.populateFeatures();
                 this.populateHowItWorks();
@@ -1521,21 +1447,13 @@
             populateFeatures() {
                 const container = this.dom.featuresGrid;
                 if(!container) return;
-                const featureKeys = [
-                    { key: 'feature1', icon: 'fa-eye' },
-                    { key: 'feature2', icon: 'fa-mobile-alt' },
-                    { key: 'feature3', icon: 'fa-shield-alt' },
-                    { key: 'feature4', icon: 'fa-chart-line' },
-                    { key: 'feature5', icon: 'fa-sync' },
-                    { key: 'feature6', icon: 'fa-headset' },
-                ];
-                container.innerHTML = featureKeys.map(({key, icon}, index) => `
-                    <div class="feature-card animate-on-scroll" style="transition-delay: ${index * 100}ms;">
+                const featureKeys = [ { key: 'feature1', icon: 'fa-eye' }, { key: 'feature2', icon: 'fa-mobile-alt' }, { key: 'feature3', icon: 'fa-shield-alt' }, { key: 'feature4', icon: 'fa-chart-line' }, { key: 'feature5', icon: 'fa-sync' }, { key: 'feature6', icon: 'fa-headset' } ];
+                container.innerHTML = featureKeys.map(({key, icon}, i) => `
+                    <div class="feature-card animate-on-scroll" style="transition-delay: ${i * 100}ms;">
                         <div class="text-4xl text-yellow-400 mb-4"><i class="fas ${icon}"></i></div>
                         <h3 class="text-xl font-bold mb-2">${this.getTranslatedString(`${key}Title`)}</h3>
                         <p class="text-gray-400">${this.getTranslatedString(`${key}Text`)}</p>
-                    </div>
-                `).join('');
+                    </div>`).join('');
             },
             
             populateHowItWorks() {
@@ -1549,31 +1467,21 @@
                         </div>
                         <h3 class="text-xl font-bold mt-4 mb-2">${this.getTranslatedString(`step${i}Title`)}</h3>
                         <p class="text-gray-400">${this.getTranslatedString(`step${i}Text`)}</p>
-                    </div>
-                `).join('');
+                    </div>`).join('');
             },
 
             populateStory() {
                 const container = this.dom.storyContainer;
                 if (!container) return;
-                container.innerHTML = `
-                    <p class="text-lg text-gray-300 mb-6">${this.getTranslatedString('storyText')}</p>
-                    <p class="text-xl text-yellow-400 font-semibold">${this.getTranslatedString('storyCallToAction')}</p>
-                `;
+                container.innerHTML = `<p class="text-lg text-gray-300 mb-6">${this.getTranslatedString('storyText')}</p><p class="text-xl text-yellow-400 font-semibold">${this.getTranslatedString('storyCallToAction')}</p>`;
             },
             
             populateTestimonials() {
                  const container = this.dom.testimonialsContainer;
                  if(!container) return;
-                 const testimonialsData = [
-                    { key: 1, flag: "🇺🇸" },
-                    { key: 2, flag: "🇧🇷" },
-                    { key: 3, flag: "🇪🇺" },
-                    { key: 4, flag: "🇯🇵" },
-                    { key: 5, flag: "🇷🇺" },
-                 ];
-                 container.innerHTML = testimonialsData.map(({key, flag}, index) => `
-                    <div class="testimonial-card animate-on-scroll" style="transition-delay: ${index * 100}ms;">
+                 const testimonialsData = [ { key: 1, flag: "🇺🇸" }, { key: 2, flag: "🇧🇷" }, { key: 3, flag: "🇪🇺" }, { key: 4, flag: "🇯🇵" }, { key: 5, flag: "🇷🇺" } ];
+                 container.innerHTML = testimonialsData.map(({key, flag}, i) => `
+                    <div class="testimonial-card animate-on-scroll" style="transition-delay: ${i * 100}ms;">
                         <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4"></i>
                         <p class="text-gray-400 mb-4">${this.getTranslatedString(`testimonial${key}Quote`)}</p>
                         <div class="flex items-center">
@@ -1583,11 +1491,9 @@
                                 <p class="text-sm text-gray-400">${flag}</p>
                             </div>
                         </div>
-                    </div>
-                  `).join('');
+                    </div>`).join('');
             },
 
-            // --- Dialog Management ---
             showDialog(content) {
                 this.dom.dialogContainer.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg animate-on-scroll is-visible">${content}</div>`;
                 this.dom.dialogContainer.classList.remove('hidden');
@@ -1598,13 +1504,15 @@
                 this.dom.dialogContainer.innerHTML = '';
             },
             
-            // --- Purchase Flow & Page Transitions ---
             startPurchaseFlow() {
                 const email = localStorage.getItem("userEmail");
                 const username = localStorage.getItem("username");
-                if (email && username) {
+                const country = localStorage.getItem("userCountryCode");
+
+                if (email && username && country) {
                     this.purchaseState.email = email;
                     this.purchaseState.username = username;
+                    this.updateUserStateFromCountry(country);
                     this.showPlatformDialog();
                 } else {
                     this.showRegistrationDialog();
@@ -1612,6 +1520,11 @@
             },
 
             showRegistrationDialog() {
+                const countryOptions = Object.keys(countrySalaryData).map(code => {
+                    const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(code);
+                    return `<option value="${code}">${countryName}</option>`;
+                }).sort().join('');
+
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('registerTitle')}</h3>
                     <div class="space-y-4">
@@ -1625,18 +1538,30 @@
                             <input type="text" id="username-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${this.getTranslatedString('usernamePlaceholder')}" required>
                             <p id="username-validation-message" class="text-red-500 text-sm mt-1 h-4"></p>
                         </div>
+                        <div>
+                            <label for="country-input" class="block mb-2 text-sm font-medium">${this.getTranslatedString('countryLabel')}</label>
+                            <select id="country-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <option value="">${this.getTranslatedString('countrySelectPlaceholder')}</option>
+                                ${countryOptions}
+                            </select>
+                            <p id="country-validation-message" class="text-red-500 text-sm mt-1 h-4"></p>
+                        </div>
                         <button id="submit-registration-btn" class="w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('registerButton')}</button>
-                    </div>
-                `;
+                    </div>`;
                 this.showDialog(content);
+                if (this.state.userCountryCode) {
+                    document.getElementById('country-input').value = this.state.userCountryCode;
+                }
                 document.getElementById('submit-registration-btn').onclick = () => this.submitRegistration();
             },
             
             submitRegistration() {
                 const emailInput = document.getElementById("email-input");
                 const usernameInput = document.getElementById("username-input");
+                const countryInput = document.getElementById("country-input");
                 const emailError = document.getElementById("email-validation-message");
                 const usernameError = document.getElementById("username-validation-message");
+                const countryError = document.getElementById("country-validation-message");
                 
                 let isValid = true;
                 
@@ -1654,12 +1579,40 @@
                     usernameError.textContent = '';
                 }
 
+                if (countryInput.value === "") {
+                    countryError.textContent = this.getTranslatedString('countryValidationError');
+                    isValid = false;
+                } else {
+                    countryError.textContent = '';
+                }
+
                 if(isValid) {
                     localStorage.setItem("userEmail", emailInput.value);
                     localStorage.setItem("username", usernameInput.value);
+                    localStorage.setItem("userCountryCode", countryInput.value);
+
                     this.purchaseState.email = emailInput.value;
                     this.purchaseState.username = usernameInput.value;
+                    this.updateUserStateFromCountry(countryInput.value);
+                    
                     this.showPlatformDialog();
+                }
+            },
+
+            updateUserStateFromCountry(countryCode) {
+                const countryData = countrySalaryData[countryCode];
+                if (countryData) {
+                    this.state.userCountryCode = countryCode;
+                    this.state.userCurrency = countryData.currency;
+                    this.state.userCountryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(countryCode);
+                    this.state.userCountryFlag = countryCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
+                    
+                    const lang = countryData.lang;
+                    if (translations[lang]) {
+                        this.setLanguage(lang);
+                    } else {
+                        this.setLanguage(localStorage.getItem('language') || 'pt');
+                    }
                 }
             },
 
@@ -1670,8 +1623,7 @@
                     <div class="flex justify-center space-x-4">
                         <button id="select-android" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-android mr-2"></i><span>${this.getTranslatedString('platformAndroid')}</span></button>
                         <button id="select-ios" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-apple mr-2"></i><span>${this.getTranslatedString('platformIOS')}</span></button>
-                    </div>
-                `;
+                    </div>`;
                 this.showDialog(content);
                 document.getElementById('select-android').onclick = () => this.selectPlatform('Android');
                 document.getElementById('select-ios').onclick = () => this.selectPlatform('iOS');
@@ -1689,7 +1641,6 @@
                     localStorage.setItem("uniqueId", uniqueId);
                 }
                 this.purchaseState.uniqueId = uniqueId;
-
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('uniqueIdDialogTitle')}</h3>
                     <p class="text-center text-gray-400 mb-4">${this.getTranslatedString('uniqueIdDialogText')}</p>
@@ -1697,8 +1648,7 @@
                         <span id="unique-id-value" class="flex-grow text-lg font-mono">${uniqueId}</span>
                         <button id="copy-id-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4"><i class="fas fa-copy"></i></button>
                     </div>
-                    <button id="continue-to-poker-app" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('continueButton')}</button>
-                `;
+                    <button id="continue-to-poker-app" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('continueButton')}</button>`;
                 this.showDialog(content);
                 document.getElementById('copy-id-btn').onclick = () => this.copyToClipboard(uniqueId, true);
                 document.getElementById('continue-to-poker-app').onclick = () => this.showPokerAppDialog();
@@ -1713,8 +1663,7 @@
                         <button id="select-pppoker" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition">PPPOKER</button>
                         <button id="select-xpoker" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition">XPoker</button>
                         <button id="select-clubgg" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">ClubGG</button>
-                    </div>
-                `;
+                    </div>`;
                 this.showDialog(content);
                 document.getElementById('select-pppoker').onclick = () => this.selectPokerApp('PPPOKER');
                 document.getElementById('select-xpoker').onclick = () => this.selectPokerApp('XPoker');
@@ -1723,32 +1672,22 @@
 
             selectPokerApp(app) {
                 this.purchaseState.app = app;
-                
-                // --- DYNAMIC PRICING LOGIC ---
-                const countryData = countrySalaryData[this.state.userCountryCode] || countrySalaryData['US']; // Fallback to US
+                const countryData = countrySalaryData[this.state.userCountryCode] || countrySalaryData['US'];
                 const salary = countryData.salary;
-                
                 let calculatedPrice = salary * 1.1;
-
-                // Apply caps
                 const maxPrice = app === 'ClubGG' ? 2500 : 1600;
                 this.purchaseState.basePriceUSD = Math.min(calculatedPrice, maxPrice);
-                
-                this.purchaseState.discount = 0; // Reset discount
+                this.purchaseState.discount = 0;
                 this.showCouponDialog();
             },
 
             showCouponDialog() {
                 this.purchaseState.finalPriceUSD = this.purchaseState.basePriceUSD * (1 - this.purchaseState.discount);
-                
                 const rate = this.state.exchangeRates[this.state.userCurrency] || 1;
                 const localPrice = this.purchaseState.finalPriceUSD * rate;
-                
                 const localPriceFormatted = new Intl.NumberFormat(undefined, { style: 'currency', currency: this.state.userCurrency }).format(localPrice);
                 const usdPriceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.purchaseState.finalPriceUSD);
-
                 const priceText = this.getTranslatedString('amountTextBase', { LOCAL_PRICE: localPriceFormatted, USD_PRICE: usdPriceFormatted });
-
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('couponDialogTitle')}</h3>
                     <div class="text-center mb-4 space-y-1">
@@ -1760,8 +1699,7 @@
                         <button id="apply-coupon-btn" class="cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('applyCouponButton')}</button>
                     </div>
                     <p id="coupon-message" class="text-center h-5 mt-2 text-sm"></p>
-                    <button id="proceed-to-payment-method" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('proceedButton')}</button>
-                `;
+                    <button id="proceed-to-payment-method" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('proceedButton')}</button>`;
                 this.showDialog(content);
                 document.getElementById('apply-coupon-btn').onclick = () => this.applyCoupon();
                 document.getElementById('proceed-to-payment-method').onclick = () => this.showPaymentMethodDialog();
@@ -1770,29 +1708,15 @@
             applyCoupon() {
                 const couponInput = document.getElementById('coupon-input');
                 const code = couponInput.value.trim().toUpperCase();
-                
-                let discount = 0;
-                let isValid = false;
-
-                if (code === 'QWERTY') {
-                    discount = 0.30;
-                    isValid = true;
-                } else if (code === '10OFF' && !this.urgencyState.isOfferExpired) {
-                    discount = 0.10;
-                    isValid = true;
-                } else if (code === '5OFF') {
-                    discount = 0.05;
-                    isValid = true;
-                }
-                
+                let discount = 0, isValid = false;
+                if (code === 'QWERTY') { discount = 0.30; isValid = true; }
+                else if (code === '10OFF' && !this.urgencyState.isOfferExpired) { discount = 0.10; isValid = true; }
+                else if (code === '5OFF') { discount = 0.05; isValid = true; }
                 this.purchaseState.discount = isValid ? discount : 0;
-                
-                this.showCouponDialog(); // Re-render the dialog with the new price
-
+                this.showCouponDialog();
                 setTimeout(() => {
                     const newCouponInput = document.getElementById('coupon-input');
                     if (newCouponInput) newCouponInput.value = code;
-
                     const messageEl = document.getElementById('coupon-message');
                     if (messageEl) {
                         if (isValid) {
@@ -1814,8 +1738,7 @@
                         <button id="pay-usdt" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition">USDT (TRC20)</button>
                         <button id="pay-btc" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition">BTC</button>
                         <button id="pay-eth" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg transition">ETH</button>
-                    </div>
-                `;
+                    </div>`;
                 this.showDialog(content);
                 document.getElementById('pay-usdt').onclick = () => this.selectPaymentMethod('usdt');
                 document.getElementById('pay-btc').onclick = () => this.selectPaymentMethod('btc');
@@ -1841,72 +1764,41 @@
 
             async showPaymentDetailsDialog() {
                 const { method, finalPriceUSD } = this.purchaseState;
-                
-                const addresses = {
-                    usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK",
-                    btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3",
-                    eth: "0x9b5877A847BE203FCbA421194C83E0af6f686cC7"
-                };
+                const addresses = { usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK", btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3", eth: "0x9b5877A847BE203FCbA421194C83E0af6f686cC7" };
                 const networks = { usdt: "TRC20", btc: "Bitcoin", eth: "Ethereum" };
                 const cryptoIds = { btc: 'bitcoin', eth: 'ethereum' };
-
                 const address = addresses[method];
                 const network = networks[method];
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${address}`;
-                
                 let cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400">$${finalPriceUSD.toFixed(2)}</p>`;
-                if (method !== 'usdt') {
-                    cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${this.getTranslatedString('loadingPaymentText')}</span></div>`;
-                }
-
+                if (method !== 'usdt') cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${this.getTranslatedString('loadingPaymentText')}</span></div>`;
                 const content = `
                     <h3 class="text-xl font-bold mb-2 text-center">${this.getTranslatedString('paymentDialogTitleFinal')}</h3>
                     <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentInstructionsText')}</p>
-                    
-                    <div id="payment-amount-container" class="text-center mb-4">
-                        ${cryptoAmountHTML}
-                    </div>
-                    
-                    <div class="flex justify-center mb-4">
-                        <div class="p-2 bg-white rounded-lg border-4 border-gray-600">
-                            <img src="${qrUrl}" alt="${method.toUpperCase()} QR Code">
-                        </div>
-                    </div>
-                    
+                    <div id="payment-amount-container" class="text-center mb-4">${cryptoAmountHTML}</div>
+                    <div class="flex justify-center mb-4"><div class="p-2 bg-white rounded-lg border-4 border-gray-600"><img src="${qrUrl}" alt="${method.toUpperCase()} QR Code"></div></div>
                     <div class="flex items-center bg-gray-800 p-2 rounded-lg">
                         <input id="wallet-address-input" type="text" class="flex-grow bg-transparent text-sm text-gray-300 border-0 focus:ring-0" value="${address}" readonly>
-                        <button id="copy-address-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-2">
-                            <i class="fas fa-copy"></i>
-                        </button>
+                        <button id="copy-address-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-2"><i class="fas fa-copy"></i></button>
                     </div>
                     <p id="copy-feedback-dialog" class="text-green-400 text-sm mt-2 h-4 text-center"></p>
-
                     <p class="text-xs text-gray-500 text-center mt-4">${this.getTranslatedString('paymentInstructionsSecurity')}</p>
-
-                    <button id="payment-done-btn" class="mt-6 w-full cta-button font-bold py-3 px-5 rounded-lg">${this.getTranslatedString('paymentDoneButton')}</button>
-                `;
+                    <button id="payment-done-btn" class="mt-6 w-full cta-button font-bold py-3 px-5 rounded-lg">${this.getTranslatedString('paymentDoneButton')}</button>`;
                 this.showDialog(content);
                 document.getElementById('copy-address-btn').onclick = () => this.copyToClipboard(address, true);
                 document.getElementById('payment-done-btn').onclick = () => this.proceedToFinalConfirmation();
-
-                // Start payment timer
                 if(this.urgencyState.paymentCountdownInterval) clearInterval(this.urgencyState.paymentCountdownInterval);
                 const paymentTimerEl = document.getElementById('payment-timer');
                 this.urgencyState.paymentCountdownInterval = this.startCountdown(30 * 60, paymentTimerEl, () => {
                     if(paymentTimerEl) paymentTimerEl.textContent = "Expired";
                     this.closeDialog();
                 });
-
                 if (method !== 'usdt') {
                     const cryptoPrice = await this.getCryptoPrice(cryptoIds[method]);
                     const paymentAmountContainer = document.getElementById('payment-amount-container');
                     if (cryptoPrice) {
                         const cryptoAmount = (finalPriceUSD / cryptoPrice).toFixed(8);
-                        paymentAmountContainer.innerHTML = `
-                            <p class="text-sm text-gray-400">${this.getTranslatedString('amountToSendLabel')} $${finalPriceUSD.toFixed(2)} USD</p>
-                            <p class="text-2xl font-bold text-yellow-400">${cryptoAmount} ${method.toUpperCase()}</p>
-                            <p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>
-                        `;
+                        paymentAmountContainer.innerHTML = `<p class="text-sm text-gray-400">${this.getTranslatedString('amountToSendLabel')} $${finalPriceUSD.toFixed(2)} USD</p><p class="text-2xl font-bold text-yellow-400">${cryptoAmount} ${method.toUpperCase()}</p><p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>`;
                     } else {
                         paymentAmountContainer.innerHTML = `<p class="text-red-400">Could not fetch crypto price. Please try again.</p>`;
                     }
@@ -1915,8 +1807,7 @@
             
             copyToClipboard(text, isDialog = false) {
                 navigator.clipboard.writeText(text).then(() => {
-                    const feedbackId = isDialog ? 'copy-feedback-dialog' : 'copy-feedback';
-                    const feedbackEl = document.getElementById(feedbackId);
+                    const feedbackEl = document.getElementById(isDialog ? 'copy-feedback-dialog' : 'copy-feedback');
                     if(feedbackEl) {
                         feedbackEl.textContent = this.getTranslatedString('copiedText');
                         setTimeout(() => { feedbackEl.textContent = ''; }, 2000);
@@ -1932,105 +1823,54 @@
             showPaymentConfirmationPage() {
                 this.dom.mainContent.classList.add('hidden');
                 const confirmationContainer = this.dom.paymentConfirmationContent;
-                
                 const uniqueId = this.purchaseState.uniqueId || localStorage.getItem('uniqueId');
                 const platform = this.purchaseState.platform || 'Not specified';
                 const app = this.purchaseState.app || 'Not specified';
-
-                // Construct the message in English
                 const telegramMessage = `ID: ${uniqueId}\nPlatform: ${platform}\nApp: ${app}`;
                 const encodedTelegramMessage = encodeURIComponent(telegramMessage);
                 const telegramUrl = `https://t.me/bedmalcon_temp?text=${encodedTelegramMessage}`;
-
-                
                 confirmationContainer.innerHTML = `
                     <section class="min-h-screen py-16 md:py-24 flex items-center">
                         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                             <div class="max-w-2xl mx-auto bg-gray-800/50 p-6 md:p-8 rounded-lg shadow-xl text-center">
-                                <div class="text-6xl text-green-400 mb-4">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
+                                <div class="text-6xl text-green-400 mb-4"><i class="fas fa-check-circle"></i></div>
                                 <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('telegramInstructionsTitle')}</h3>
                                 <p class="text-gray-400 mb-6">${this.getTranslatedString('telegramInstructionsText')}</p>
-                                
                                 <div class="flex items-center bg-gray-900 p-3 rounded-lg max-w-sm mx-auto">
                                     <span class="flex-grow text-lg font-mono text-yellow-400">${uniqueId}</span>
-                                    <button id="copy-id-button-confirm" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
+                                    <button id="copy-id-button-confirm" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4"><i class="fas fa-copy"></i></button>
                                 </div>
                                 <p id="copy-feedback" class="text-green-400 text-sm mt-2 h-4"></p>
-                                
                                 <div class="mt-8 bg-gray-900/50 p-6 rounded-lg text-left max-w-md mx-auto">
                                      <div class="space-y-4">
-                                         <div>
-                                             <h4 class="font-semibold">${this.getTranslatedString('telegramStep1Title')}</h4>
-                                             <p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep1Desc')}</p>
-                                         </div>
-                                         <div>
-                                             <h4 class="font-semibold">${this.getTranslatedString('telegramStep2Title')}</h4>
-                                             <p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep2Desc')}</p>
-                                         </div>
-                                         <div>
-                                             <h4 class="font-semibold">${this.getTranslatedString('telegramStep3Title')}</h4>
-                                             <p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep3Desc')}</p>
-                                         </div>
+                                         <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep1Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep1Desc')}</p></div>
+                                         <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep2Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep2Desc')}</p></div>
+                                         <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep3Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep3Desc')}</p></div>
                                      </div>
                                 </div>
-
-                                <a href="${telegramUrl}" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg">
-                                    <i class="fab fa-telegram-plane mr-2"></i>
-                                    <span>${this.getTranslatedString('openTelegramButton')}</span>
-                                </a>
+                                <a href="${telegramUrl}" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg"><i class="fab fa-telegram-plane mr-2"></i><span>${this.getTranslatedString('openTelegramButton')}</span></a>
                             </div>
                         </div>
-                    </section>
-                `;
-                
+                    </section>`;
                 confirmationContainer.classList.remove('hidden');
-
                 document.getElementById('copy-id-button-confirm').onclick = () => this.copyToClipboard(uniqueId, false);
-                
                 window.scrollTo(0, 0);
             },
         };
 
-        // --- GLOBALIZED METHODS FOR HTML ONCLICK ---
         window.setLanguage = App.setLanguage.bind(App);
-
-        // --- INITIALIZE THE APP ---
         App.init();
     });
     </script>
     
     <!-- Code Protection Script -->
     <script>
-        // This script attempts to deter users from opening developer tools.
-        // Note: This is not a foolproof method, but can discourage casual inspection.
-
-        // 1. Disable right-click context menu
         document.addEventListener('contextmenu', event => event.preventDefault());
-
-        // 2. Disable common DevTools keyboard shortcuts
         document.addEventListener('keydown', event => {
-            // F12
-            if (event.keyCode === 123) {
-                event.preventDefault();
-            }
-            // Ctrl+Shift+I
-            if (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) {
-                event.preventDefault();
-            }
-            // Ctrl+Shift+J
-            if (event.ctrlKey && event.shiftKey && (event.key === 'J' || event.key === 'j')) {
-                event.preventDefault();
-            }
-            // Ctrl+U
-            if (event.ctrlKey && (event.key === 'U' || event.key === 'u')) {
+            if (event.keyCode === 123 || (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) || (event.ctrlKey && event.shiftKey && (event.key === 'J' || event.key === 'j')) || (event.ctrlKey && (event.key === 'U' || event.key === 'u'))) {
                 event.preventDefault();
             }
         });
     </script>
 </body>
 </html>
-�
