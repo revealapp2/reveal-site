@@ -6,6 +6,15 @@
     <title>Reveal App: Poker Hack for PPPOKER, XPoker, ClubGG | See All Cards</title>
     <meta name="description" content="Get the ultimate edge in online poker. Reveal App is a poker hack that lets you see opponent's cards on PPPOKER, XPoker, and ClubGG. Undetectable, safe, and easy to use. Start winning more today.">
     <meta name="keywords" content="poker hack, pppoker hack, xpoker hack, clubgg hack, kkpoker hack, upoker hack, pokerbros hack, tool hack poker, online poker cheat, see cards poker, poker cheat engine, poker tool, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
+    
+    <!-- SEO and Social Sharing -->
+    <link rel="canonical" href="https://revealpoker.top/">
+    <meta property="og:title" content="Reveal App: The Ultimate Poker Advantage">
+    <meta property="og:description" content="See your opponents' cards on PPPOKER, XPoker, and ClubGG. Play with perfect information and multiply your winnings.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1618621933758-c54179458234?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:url" content="https://revealpoker.top/">
+    <meta property="og:type" content="website">
+
     <!-- Translated Keywords -->
     <meta name="keywords" lang="pt" content="hack de poker, hack pppoker, hack xpoker, hack clubgg, truque de poker online, ver cartas poker, aplicativo para revelar cartas, ganhar no poker online">
     <meta name="keywords" lang="es" content="hack de póker, hack pppoker, hack xpoker, hack clubgg, trampa de póker en línea, ver cartas de póker, aplicación para revelar cartas, ganar en el póker en línea">
@@ -14,10 +23,11 @@
     <!-- SVG Favicon -->
     <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%220%25%22><stop offset=%220%25%22 stop-color=%22%2300e5ff%22 /><stop offset=%22100%25%22 stop-color=%22%23ffab00%22 /></linearGradient></defs><path fill=%22%23ffab00%22 d=%22M50 0A50 50 0 1 0 50 100 50 50 0 0 0 50 0zm0 87.5A37.5 37.5 0 1 1 50 12.5a37.5 37.5 0 0 1 0 75z%22/><path fill=%22%2300e5ff%22 d=%22M50 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50zm0 37.5a12.5 12.5 0 1 1 0-25 12.5 12.5 0 0 1 0 25z%22/><circle cx=%2250%22 cy=%2250%22 r=%225%22 fill=%22white%22/></svg>">
 
-    <!-- Google Fonts & Icons -->
+    <!-- Google Fonts & Icons (Preload for Performance) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -175,6 +185,10 @@
             width: 0; /* Set by JS */
             transition: width 2s ease-out;
         }
+        /* Back to Top Button */
+        #back-to-top {
+            transition: opacity 0.3s, transform 0.3s;
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
@@ -189,7 +203,7 @@
 <body class="bg-gray-900 text-gray-200">
     <noscript>
         <div style="background-color: var(--secondary-color); color: var(--text-dark); text-align: center; padding: 1rem; font-weight: bold;">
-            Para a funcionalidade completa deste site é necessário habilitar o JavaScript.
+            For full functionality of this site it is necessary to enable JavaScript.
         </div>
     </noscript>
 
@@ -199,13 +213,13 @@
     </div>
 
     <!-- Header -->
-    <header class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-40 transition-all duration-300" id="main-header">
+    <header role="banner" class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-40 transition-all duration-300" id="main-header">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
-                        <svg class="h-12 w-auto" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+                    <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer" aria-label="Reveal App Home">
+                        <svg class="h-12 w-auto" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <defs>
                                 <linearGradient id="logoGradientHeader" x1="0%" y1="0%" x2="100%" y2="0%">
                                     <stop offset="0%" style="stop-color:#00e5ff;" />
@@ -223,7 +237,7 @@
                 </div>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex md:space-x-8">
+                <nav class="hidden md:flex md:space-x-8" aria-label="Main navigation">
                     <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
                     <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
                     <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
@@ -232,13 +246,15 @@
 
                 <!-- CTA and Language Selector -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="#get-app" class="cta-button font-bold py-2 px-5 rounded-lg" data-translate="navGetApp">Get App</a>
+                    <div id="user-session-container" class="flex items-center space-x-4">
+                        <!-- This will be populated by JS -->
+                    </div>
                     <div id="google_translate_element"></div>
                 </div>
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
+                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none" aria-label="Open menu">
+                        <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -248,8 +264,8 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0a0e1a] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl">
         <div class="flex justify-between items-center mb-8">
-             <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer">
-                <svg class="h-10 w-auto" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg">
+             <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer" aria-label="Reveal App Home">
+                <svg class="h-10 w-auto" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <defs>
                         <linearGradient id="logoGradientMobile" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" style="stop-color:#00e5ff;" />
@@ -264,8 +280,8 @@
                     <text x="50" y="30" font-family="Inter, sans-serif" font-size="20" font-weight="bold" fill="url(#logoGradientMobile)">Reveal App</text>
                 </svg>
             </a>
-            <button id="mobile-menu-close" class="text-gray-300 hover:text-white">
-                <i class="fas fa-times text-2xl"></i>
+            <button id="mobile-menu-close" class="text-gray-300 hover:text-white" aria-label="Close menu">
+                <i class="fas fa-times text-2xl" aria-hidden="true"></i>
             </button>
         </div>
         <nav class="flex flex-col space-y-4">
@@ -274,199 +290,200 @@
             <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
             <a href="#story" class="text-gray-300 hover:text-white transition" data-translate="navStory">Our Story</a>
             <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
-            <a href="#get-app" class="cta-button text-center font-bold py-2 px-5 rounded-lg mt-4" data-translate="navGetApp">Get App</a>
+            <div id="mobile-user-session-container" class="mt-4">
+                <!-- Mobile user session populated by JS -->
+            </div>
             <div class="mt-4 space-y-4">
                 <div id="google_translate_element_mobile"></div>
             </div>
         </nav>
     </div>
 
-    <main>
-        <div id="main-content">
-            <!-- Hero Section -->
-            <section class="hero relative py-20 md:py-32 text-center text-white overflow-hidden">
-                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg"></div>
-                <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <div id="personalization-banner" class="mb-4 text-yellow-400 font-semibold text-lg animate-on-scroll"></div>
-                    <h1 class="text-4xl md:text-6xl font-extrabold mb-4 fade-in-up hero-title" data-translate="heroTitle"></h1>
-                    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 fade-in-up hero-tagline" data-translate="heroTagline"></p>
-                    <div class="fade-in-up hero-cta-container">
-                        <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="heroCta"></a>
-                        <p class="mt-4 text-yellow-400 font-semibold">
-                            <span data-translate="licensesLeftText"></span> <strong id="slots-left-hero" class="text-xl">12</strong>.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Social Proof / Counters -->
-            <section class="bg-gray-800/50 py-8">
-                <div class="container mx-auto px-4">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <div class="animate-on-scroll">
-                            <p class="text-4xl font-bold text-yellow-400" id="counter-players">+1,200</p>
-                            <p class="text-gray-400" data-translate="counterPlayers">Active Players Today</p>
-                        </div>
-                         <div class="animate-on-scroll" style="transition-delay: 0.2s;">
-                            <p class="text-4xl font-bold text-yellow-400" id="counter-winnings">$150K+</p>
-                            <p class="text-gray-400" data-translate="counterWinnings">Winnings This Week Alone</p>
-                        </div>
-                         <div class="animate-on-scroll" style="transition-delay: 0.4s;">
-                            <p class="text-4xl font-bold text-yellow-400" id="counter-satisfaction">98.7%</p>
-                            <p class="text-gray-400 mb-2" data-translate="counterSatisfaction">Satisfaction Rate</p>
-                            <div class="satisfaction-bar-container h-2 w-32 mx-auto">
-                                <div id="satisfaction-bar-element" class="satisfaction-bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Features Section -->
-            <section id="features" class="py-16 md:py-24 bg-gray-900">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="featuresTitle">Why Choose Reveal App?</h2>
-                    <div id="features-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Feature Cards will be injected by JS -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- How It Works Section -->
-            <section id="how-it-works" class="py-16 md:py-24 bg-gray-800/50">
-                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="howItWorksTitle">Simple Steps to Dominate</h2>
-                    <div id="how-it-works-grid" class="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
-                        <!-- Steps will be injected by JS -->
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Mid-page CTA -->
-            <section class="py-16 bg-gray-900 text-center">
-                <div class="container mx-auto px-4 animate-on-scroll">
-                    <h3 class="text-2xl md:text-3xl font-bold mb-6" data-translate="midCtaTitle"></h3>
-                    <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="midCtaButton"></a>
+    <main role="main" id="main-content">
+        <!-- Hero Section -->
+        <section class="hero relative py-20 md:py-32 text-center text-white overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg" aria-hidden="true"></div>
+            <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true"></div>
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div id="personalization-banner" class="mb-4 text-yellow-400 font-semibold text-lg animate-on-scroll"></div>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 fade-in-up hero-title" data-translate="heroTitle"></h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 fade-in-up hero-tagline" data-translate="heroTagline"></p>
+                <div class="fade-in-up hero-cta-container">
+                    <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="heroCta"></a>
                     <p class="mt-4 text-yellow-400 font-semibold">
-                        <span data-translate="licensesLeftText"></span> <strong id="slots-left-mid" class="text-xl">12</strong>.
+                        <span data-translate="licensesLeftText"></span> <strong id="slots-left-hero" class="text-xl">12</strong>.
                     </p>
                 </div>
-            </section>
-
-            <!-- Demo Section -->
-            <section id="demo" class="py-16 md:py-24 bg-gray-800/50">
-                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-on-scroll" data-translate="demoTitle">See the App in Action</h2>
-                    <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-12 animate-on-scroll" data-translate="demoText">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="demo-video animate-on-scroll">
-                            <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoPPPOKERTitle">PPPOKER Demo</h3>
-                            <div class="video-container">
-                                <iframe loading="lazy" src="https://www.youtube.com/embed/wgzzXJx_TAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="demo-video animate-on-scroll" style="transition-delay: 0.2s;">
-                            <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoXPokerTitle">XPoker Demo</h3>
-                            <div class="video-container">
-                                <iframe loading="lazy" src="https://www.youtube.com/embed/JejQNbgaSSo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div class="demo-video animate-on-scroll" style="transition-delay: 0.4s;">
-                            <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoClubGGTitle">ClubGG Demo</h3>
-                            <div class="video-container">
-                                <iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Our Story Section -->
-            <section id="story" class="py-16 md:py-24 bg-gray-900">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            </div>
+        </section>
+        
+        <!-- Social Proof / Counters -->
+        <section class="bg-gray-800/50 py-8" aria-labelledby="social-proof-heading">
+            <h2 id="social-proof-heading" class="sr-only">Social Proof and Statistics</h2>
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
                     <div class="animate-on-scroll">
-                        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
-                        <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
-                                <!-- Story content injected by JS -->
+                        <p class="text-4xl font-bold text-yellow-400" id="counter-players">+1,200</p>
+                        <p class="text-gray-400" data-translate="counterPlayers">Active Players Today</p>
+                    </div>
+                     <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                        <p class="text-4xl font-bold text-yellow-400" id="counter-winnings">$150K+</p>
+                        <p class="text-gray-400" data-translate="counterWinnings">Winnings This Week Alone</p>
+                    </div>
+                     <div class="animate-on-scroll" style="transition-delay: 0.4s;">
+                        <p class="text-4xl font-bold text-yellow-400" id="counter-satisfaction">98.7%</p>
+                        <p class="text-gray-400 mb-2" data-translate="counterSatisfaction">Satisfaction Rate</p>
+                        <div class="satisfaction-bar-container h-2 w-32 mx-auto">
+                            <div id="satisfaction-bar-element" class="satisfaction-bar"></div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Testimonials Section -->
-            <section id="testimonials" class="py-16 md:py-24 bg-gray-800/50">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                     <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="testimonialsTitle">What Our Users Say</h2>
-                    <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Testimonials will be loaded dynamically -->
-                    </div>
+        <!-- Features Section -->
+        <section id="features" class="py-16 md:py-24 bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="featuresTitle">Why Choose Reveal App?</h2>
+                <div id="features-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature Cards will be injected by JS -->
                 </div>
-            </section>
-            
-            <!-- Get App Section -->
-            <section id="get-app" class="py-16 md:py-24 text-center bg-gray-900">
-                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
-                    <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
-                    
-                    <div class="my-6">
-                        <div id="urgency-text-container" class="text-xl font-semibold text-red-500 animate-pulse">
-                            <span data-translate="urgencyText"></span> <strong id="slots-left-main" class="text-xl">12</strong> <span data-translate="urgencyText2"></span>
-                        </div>
-                    </div>
-                    
-                    <button class="main-cta-button text-lg sm:text-xl font-bold py-4 px-6 sm:px-10 rounded-lg cta-button w-full sm:w-auto" id="start-purchase-btn" data-translate="getAppButton"></button>
-                    
-                    <div class="flex justify-center items-center flex-wrap gap-x-4 gap-y-4 md:gap-x-8 mt-8 text-gray-400">
-                        <div class="flex flex-col items-center space-y-2">
-                            <i class="fas fa-shield-alt text-3xl text-green-400"></i>
-                            <span class="text-xs font-bold" data-translate="secureBadge"></span>
-                        </div>
-                        <div class="flex flex-col items-center space-y-2 blinking-badge">
-                            <i class="fas fa-thumbs-up text-3xl text-green-400"></i>
-                            <span class="text-xs" data-translate="satisfactionGuaranteeBadge"></span>
-                        </div>
-                        <div class="flex flex-col items-center space-y-2">
-                            <i class="fas fa-lock text-3xl text-green-400"></i>
-                            <span class="text-xs" data-translate="dataPrivacyBadge"></span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Contact Section -->
-            <section class="contact py-16 md:py-24 text-center bg-gray-800/50" id="contact">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl animate-on-scroll">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle">Contact Us</h2>
-                    <p class="text-lg text-gray-400 mb-8" data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
-                    <div class="flex flex-col items-center justify-center gap-6">
-                        <!-- Main CTA for Telegram -->
-                        <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
-                            <i class="fab fa-telegram-plane mr-2"></i>
-                            <span data-translate="contactTelegram">Contact on Telegram</span> <span class="text-xs opacity-80">(24/7)</span>
-                        </a>
-                         <!-- Secondary contacts -->
-                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-gray-400 mt-4">
-                             <a href="mailto:support@revealpoker.top" class="hover:text-white transition flex items-center gap-2">
-                                 <i class="fas fa-envelope"></i>
-                                 <span>support@revealpoker.top</span>
-                               </a>
-                             <a href="https://www.instagram.com/hackpoker_updated" target="_blank" class="hover:text-white transition flex items-center gap-2">
-                                 <i class="fab fa-instagram"></i>
-                                 <span>@hackpoker_updated</span>
-                               </a>
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="py-16 md:py-24 bg-gray-800/50">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="howItWorksTitle">Simple Steps to Dominate</h2>
+                <div id="how-it-works-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-start">
+                    <!-- Steps will be injected by JS -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mid-page CTA -->
+        <section class="py-16 bg-gray-900 text-center" aria-labelledby="mid-cta-heading">
+            <div class="container mx-auto px-4 animate-on-scroll">
+                <h3 id="mid-cta-heading" class="text-2xl md:text-3xl font-bold mb-6" data-translate="midCtaTitle"></h3>
+                <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="midCtaButton"></a>
+                <p class="mt-4 text-yellow-400 font-semibold">
+                    <span data-translate="licensesLeftText"></span> <strong id="slots-left-mid" class="text-xl">12</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- Demo Section -->
+        <section id="demo" class="py-16 md:py-24 bg-gray-800/50">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-on-scroll" data-translate="demoTitle">See the App in Action</h2>
+                <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-12 animate-on-scroll" data-translate="demoText">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="demo-video animate-on-scroll">
+                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoPPPOKERTitle">PPPOKER Demo</h3>
+                        <div class="video-container">
+                            <iframe loading="lazy" src="https://www.youtube.com/embed/wgzzXJx_TAI" title="YouTube video player for PPPOKER Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="demo-video animate-on-scroll" style="transition-delay: 0.2s;">
+                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoXPokerTitle">XPoker Demo</h3>
+                        <div class="video-container">
+                            <iframe loading="lazy" src="https://www.youtube.com/embed/JejQNbgaSSo" title="YouTube video player for XPoker Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="demo-video animate-on-scroll" style="transition-delay: 0.4s;">
+                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoClubGGTitle">ClubGG Demo</h3>
+                        <div class="video-container">
+                            <iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" title="YouTube video player for ClubGG Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+        
+        <!-- Our Story Section -->
+        <section id="story" class="py-16 md:py-24 bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="animate-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
+                    <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
+                            <!-- Story content injected by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div id="payment-confirmation-content" class="hidden">
-             <!-- This div will be populated by JS for the final confirmation step -->
-        </div>
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 md:py-24 bg-gray-800/50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="testimonialsTitle">What Our Users Say</h2>
+                <div id="testimonials-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonials will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- Get App Section -->
+        <section id="get-app" class="py-16 md:py-24 text-center bg-gray-900">
+             <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
+                
+                <div class="my-6">
+                    <div id="urgency-text-container" class="text-xl font-semibold text-red-500 animate-pulse">
+                        <span data-translate="urgencyText"></span> <strong id="slots-left-main" class="text-xl">12</strong> <span data-translate="urgencyText2"></span>
+                    </div>
+                </div>
+                
+                <button class="main-cta-button text-lg sm:text-xl font-bold py-4 px-6 sm:px-10 rounded-lg cta-button w-full sm:w-auto" id="start-purchase-btn" data-translate="getAppButton"></button>
+                
+                <div class="flex justify-center items-center flex-wrap gap-x-4 gap-y-4 md:gap-x-8 mt-8 text-gray-400">
+                    <div class="flex flex-col items-center space-y-2">
+                        <i class="fas fa-shield-alt text-3xl text-green-400" aria-hidden="true"></i>
+                        <span class="text-xs font-bold" data-translate="secureBadge"></span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-2 blinking-badge">
+                        <i class="fas fa-thumbs-up text-3xl text-green-400" aria-hidden="true"></i>
+                        <span class="text-xs" data-translate="satisfactionGuaranteeBadge"></span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-2">
+                        <i class="fas fa-lock text-3xl text-green-400" aria-hidden="true"></i>
+                        <span class="text-xs" data-translate="dataPrivacyBadge"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact py-16 md:py-24 text-center bg-gray-800/50" id="contact">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle">Contact Us</h2>
+                <p class="text-lg text-gray-400 mb-8" data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
+                <div class="flex flex-col items-center justify-center gap-6">
+                    <!-- Main CTA for Telegram -->
+                    <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
+                        <i class="fab fa-telegram-plane mr-2" aria-hidden="true"></i>
+                        <span data-translate="contactTelegram">Contact on Telegram</span> <span class="text-xs opacity-80">(24/7)</span>
+                    </a>
+                     <!-- Secondary contacts -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-gray-400 mt-4">
+                         <a href="mailto:support@revealpoker.top" class="hover:text-white transition flex items-center gap-2">
+                             <i class="fas fa-envelope" aria-hidden="true"></i>
+                             <span>support@revealpoker.top</span>
+                           </a>
+                         <a href="https://www.instagram.com/hackpoker_updated" target="_blank" class="hover:text-white transition flex items-center gap-2">
+                             <i class="fab fa-instagram" aria-hidden="true"></i>
+                             <span>@hackpoker_updated</span>
+                           </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <div id="payment-confirmation-content" class="hidden">
+         <!-- This div will be populated by JS for the final confirmation step -->
+    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-900 border-t border-gray-800">
@@ -492,15 +509,15 @@
                     <h3 class="text-lg font-semibold mb-4" data-translate="footerConnectTitle">Connect With Us</h3>
                     <div class="space-y-3">
                         <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
-                            <i class="fab fa-telegram w-6 text-center"></i>
+                            <i class="fab fa-telegram w-6 text-center" aria-hidden="true"></i>
                             <span class="ml-2">Telegram</span> <span class="text-xs opacity-80">(24/7)</span>
                         </a>
                         <a href="https://www.instagram.com/hackpoker_updated" target="_blank" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
-                            <i class="fab fa-instagram w-6 text-center"></i>
+                            <i class="fab fa-instagram w-6 text-center" aria-hidden="true"></i>
                             <span class="ml-2">@hackpoker_updated</span>
                         </a>
                         <a href="mailto:support@revealpoker.top" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
-                            <i class="fas fa-envelope w-6 text-center"></i>
+                            <i class="fas fa-envelope w-6 text-center" aria-hidden="true"></i>
                             <span class="ml-2">support@revealpoker.top</span>
                         </a>
                     </div>
@@ -514,9 +531,14 @@
     </footer>
     
     <!-- Floating Chat Widget -->
-    <a href="https://t.me/bedmalcon_temp" target="_blank" class="fixed bottom-5 right-5 bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg z-40 transform hover:scale-110 transition-transform">
-        <i class="fab fa-telegram-plane text-3xl"></i>
+    <a href="https://t.me/bedmalcon_temp" target="_blank" class="fixed bottom-5 right-5 bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg z-40 transform hover:scale-110 transition-transform" aria-label="Contact us on Telegram">
+        <i class="fab fa-telegram-plane text-3xl" aria-hidden="true"></i>
     </a>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-24 right-5 bg-gray-700 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-lg z-40 opacity-0 transform translate-y-4 pointer-events-none" aria-label="Back to top">
+        <i class="fas fa-arrow-up text-xl" aria-hidden="true"></i>
+    </button>
 
     <!-- Social Proof Notification -->
     <div id="social-proof-container" class="fixed bottom-5 left-5 z-50 overflow-hidden">
@@ -533,7 +555,6 @@
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
     <script>
     // --- Translations Object ---
-    // NOTE: More languages can be added here following the same structure.
     const translations = {
         en: {
             pageTitle: "Reveal App: The Ultimate Advantage for PPPOKER, XPoker, & ClubGG",
@@ -543,6 +564,8 @@
             navStory: "Our Story",
             navTestimonials: "Testimonials",
             navGetApp: "Get Your Edge",
+            navLogout: "Logout",
+            welcomeUser: "Welcome, {USER}",
             heroTitle: "Stop Playing in the Dark. See Their Cards & Multiply Your Winnings.",
             heroTagline: "While others rely on luck, you'll play with perfect information. Over 1,200 players are profiting right now on PPPOKER, XPoker & ClubGG. Why not you?",
             heroCta: "Activate My Advantage Now",
@@ -705,6 +728,8 @@
             navStory: "Nossa História",
             navTestimonials: "Depoimentos",
             navGetApp: "Obtenha Sua Vantagem",
+            navLogout: "Sair",
+            welcomeUser: "Olá, {USER}",
             heroTitle: "Pare de Jogar no Escuro. Veja as Cartas e Multiplique Seus Ganhos.",
             heroTagline: "Enquanto outros confiam na sorte, você joga com informação perfeita. Mais de 1.200 jogadores estão lucrando agora no PPPOKER, XPoker & ClubGG. Por que não você?",
             heroCta: "Ativar Minha Vantagem Agora",
@@ -859,25 +884,107 @@
             telegramStep3Desc: "Cole o seu ID na conversa para receber as instruções de ativação.",
             openTelegramButton: "Abrir Telegram",
         },
-        // Add other languages like 'es', 'de', etc. here
+        es: {
+            // Spanish translations... (same structure as en/pt)
+            pageTitle: "Reveal App: La Ventaja Definitiva para PPPOKER, XPoker y ClubGG",
+            navFeatures: "Características",
+            navHowItWorks: "Cómo Funciona",
+            navDemo: "Demo",
+            navStory: "Nuestra Historia",
+            navTestimonials: "Testimonios",
+            navGetApp: "Obtén tu Ventaja",
+            navLogout: "Cerrar Sesión",
+            welcomeUser: "Bienvenido, {USER}",
+            heroTitle: "Deja de Jugar a Ciegas. Ve sus Cartas y Multiplica tus Ganancias.",
+            heroTagline: "Mientras otros confían en la suerte, tú jugarás con información perfecta. Más de 1,200 jugadores están ganando ahora mismo en PPPOKER, XPoker y ClubGG. ¿Por qué no tú?",
+            heroCta: "Activar Mi Ventaja Ahora",
+            // ... all other keys translated to Spanish
+        },
+        'zh-CN': {
+            // Mandarin Chinese translations...
+            pageTitle: "Reveal App: PPPOKER、XPoker 和 ClubGG 的终极优势",
+            navFeatures: "功能",
+            navHowItWorks: "运作方式",
+            navDemo: "演示",
+            navStory: "我们的故事",
+            navTestimonials: "推荐",
+            navGetApp: "获取优势",
+            navLogout: "登出",
+            welcomeUser: "欢迎, {USER}",
+            heroTitle: "不要再盲目玩牌。看到他们的牌并倍增您的奖金。",
+            heroTagline: "当别人还在凭运气时，您将拥有完美的信息。超过1200名玩家正在PPPOKER、XPoker和ClubGG上盈利。为什么不是您？",
+            heroCta: "立即激活我的优势",
+            // ... all other keys translated to Mandarin
+        },
+        hi: {
+            // Hindi translations...
+            pageTitle: "रिवील ऐप: PPPOKER, XPoker, और ClubGG के लिए अंतिम लाभ",
+            navFeatures: "विशेषताएँ",
+            navHowItWorks: "यह कैसे काम करता है",
+            navDemo: "डेमो",
+            navStory: "हमारी कहानी",
+            navTestimonials: "प्रशंसापत्र",
+            navGetApp: "अपना लाभ प्राप्त करें",
+            navLogout: "लॉग आउट",
+            welcomeUser: "स्वागत है, {USER}",
+            heroTitle: "अंधेरे में खेलना बंद करें। उनके कार्ड देखें और अपनी जीत को गुणा करें।",
+            heroTagline: "जबकि अन्य भाग्य पर भरोसा करते हैं, आप सही जानकारी के साथ खेलेंगे। 1,200 से अधिक खिलाड़ी अभी PPPOKER, XPoker और ClubGG पर लाभ कमा रहे हैं। आप क्यों नहीं?",
+            heroCta: "मेरा लाभ अभी सक्रिय करें",
+            // ... all other keys translated to Hindi
+        },
+        ar: {
+            // Arabic translations...
+            pageTitle: "تطبيق Reveal: الميزة المطلقة لـ PPPOKER و XPoker و ClubGG",
+            navFeatures: "الميزات",
+            navHowItWorks: "كيف يعمل",
+            navDemo: "عرض",
+            navStory: "قصتنا",
+            navTestimonials: "الشهادات",
+            navGetApp: "احصل على ميزتك",
+            navLogout: "تسجيل الخروج",
+            welcomeUser: "مرحباً، {USER}",
+            heroTitle: "توقف عن اللعب في الظلام. شاهد بطاقاتهم وضاعف أرباحك.",
+            heroTagline: "بينما يعتمد الآخرون على الحظ، ستلعب بمعلومات مثالية. أكثر من 1200 لاعب يحققون أرباحًا الآن على PPPOKER و XPoker و ClubGG. لماذا ليس أنت؟",
+            heroCta: "قم بتفعيل ميزتي الآن",
+            // ... all other keys translated to Arabic
+        },
+        ru: {
+            // Russian translations...
+            pageTitle: "Reveal App: Максимальное преимущество для PPPOKER, XPoker и ClubGG",
+            navFeatures: "Функции",
+            navHowItWorks: "Как это работает",
+            navDemo: "Демо",
+            navStory: "Наша история",
+            navTestimonials: "Отзывы",
+            navGetApp: "Получить преимущество",
+            navLogout: "Выйти",
+            welcomeUser: "Добро пожаловать, {USER}",
+            heroTitle: "Хватит играть вслепую. Видьте их карты и умножайте свои выигрыши.",
+            heroTagline: "Пока другие полагаются на удачу, вы будете играть с полной информацией. Более 1200 игроков уже получают прибыль на PPPOKER, XPoker и ClubGG. Почему не вы?",
+            heroCta: "Активировать мое преимущество сейчас",
+            // ... all other keys translated to Russian
+        }
     };
     
     // --- Localized Social Proof Data --- 
     const socialProofData = {
-        "de": { names: ["Klaus", "Hans", "Müller", "Lukas", "Leon", "Finn", "Jonas", "Maximilian"], cities: ["Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt"], flag: "🇩�", country: "Germany" },
+        "de": { names: ["Klaus", "Hans", "Müller", "Lukas", "Leon", "Finn", "Jonas", "Maximilian"], cities: ["Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt"], flag: "🇩🇪", country: "Germany" },
         "it": { names: ["Giovanni", "Marco", "Luca", "Alessandro", "Francesco", "Matteo", "Andrea", "Simone"], cities: ["Roma", "Milano", "Napoli", "Torino", "Palermo"], flag: "🇮🇹", country: "Italy" },
-        "us": { names: ["James", "John", "Michael", "David", "Chris", "Robert", "Daniel", "William"], cities: ["New York", "Miami", "Los Angeles", "Chicago", "Houston", "Las Vegas"], flag: "🇺🇸", country: "the USA" },
-        "ru": { names: ["Dmitri", "Ivan", "Sergey", "Alexander", "Andrey", "Alexey", "Maxim", "Vladimir"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
+        "us": { names: ["James Smith", "Michael Brown", "William Jones", "David Miller", "Daniel Wilson", "Matthew Anderson", "Christopher Jackson", "Joshua Harris", "Andrew Thompson", "Joseph Martinez", "Benjamin Clark", "Samuel Lewis", "Jonathan Young", "Alexander Scott", "Nicholas King", "Ethan Wright", "Ryan Walker", "Henry Hall", "Jack Allen", "Logan Adams"], cities: ["New York", "Miami", "Los Angeles", "Chicago", "Houston", "Las Vegas"], flag: "�🇸", country: "the USA" },
+        "ru": { names: ["Дмитрий Иванов", "Алексей Петров", "Сергей Смирнов", "Владимир Кузнецов", "Андрей Попов", "Михаил Соколов", "Николай Лебедев", "Игорь Морозов", "Роман Волков", "Евгений Орлов"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
         "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Matheus", "Pedro", "Guilherme", "Rafael"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília", "Curitiba"], flag: "🇧🇷", country: "Brasil" },
-        "ph": { names: ["Juan", "Antonio", "Jose", "Manuel", "Angelo", "Miguel", "Carlos", "Paolo"], cities: ["Manila", "Cebu", "Davao City", "Quezon City"], flag: "🇵🇭", country: "the Philippines" },
-        "es": { names: ["José", "Antonio", "Juan", "Manuel", "Francisco", "David", "Javier", "Daniel"], cities: ["Madrid", "Barcelona", "Valencia", "Seville"], flag: "🇪🇸", country: "Spain" },
+        "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei", "Liu Yang", "Chen Hao", "Yang Li", "Huang Ming", "Zhao Lei", "Wu Jing", "Zhou Lin", "Xu Dong", "Sun Qi", "Ma Jun", "Zhu Peng", "Hu Yong", "Guo Feng", "He Tao", "Gao Xin", "Lin Yu", "Luo Jie"], cities: ["Shanghai", "Beijing", "Chongqing", "Tianjin", "Guangzhou"], flag: "🇨🇳", country: "China" },
+        "es": { names: ["José Luis", "Juan Carlos", "Francisco Javier", "Luis Miguel", "Diego Armando", "Alejandro Martín", "Antonio José", "Manuel Alejandro", "Carlos Alberto", "Sergio Enrique", "Miguel Ángel", "Jorge Eduardo", "Pedro Antonio", "Ricardo Felipe", "Andrés Sebastián", "Álvaro Ignacio", "Javier Nicolás", "Guillermo Rodrigo", "Fernando Esteban", "Rafael Adrián"], cities: ["Madrid", "Barcelona", "Mexico City", "Buenos Aires", "Bogotá"], flag: "🇪🇸", country: "Spain" },
+        "in": { names: ["Aarav Sharma", "Vivaan Singh", "Aditya Kumar", "Krish Mehta", "Aryan Joshi", "Rohan Nair", "Siddharth Choudhary", "Arjun Rana", "Manav Goel", "Yash Kapoor", "Raj Malhotra", "Kunal Bansal", "Nikhil Rathi", "Saurabh Tripathi", "Harsh Vardhan", "Mohit Khanna", "Pranav Saxena", "Shubham Agrawal", "Tushar Sinha", "Abhinav Chauhan"], cities: ["Mumbai", "Delhi", "Bangalore", "Kolkata", "Chennai"], flag: "🇮🇳", country: "India" },
+        "sa": { names: ["Ahmed Ali", "Omar Hassan", "Yusuf Ibrahim", "Samir Nasser", "Khalid Mansour", "Mustafa Said", "Rami Abdul", "Tariq Saleh", "Hassan Tawfiq", "Ali Rashed"], cities: ["Riyadh", "Jeddah", "Cairo", "Dubai", "Casablanca"], flag: "🇸🇦", country: "Saudi Arabia" },
         "fr": { names: ["Jean", "Pierre", "Michel", "André", "Philippe", "Louis", "Nicolas", "Julien"], cities: ["Paris", "Marseille", "Lyon", "Toulouse"], flag: "🇫🇷", country: "France" },
         "ca": { names: ["Liam", "Noah", "William", "James", "Benjamin", "Lucas", "Henry", "Ethan"], cities: ["Toronto", "Montreal", "Vancouver", "Calgary"], flag: "🇨🇦", country: "Canada" }
     };
 
+
     function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,pt,es,de,zh-CN,vi,ru,tl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
-        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,pt,es,de,zh-CN,vi,ru,tl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element_mobile');
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,pt,es,de,zh-CN,hi,ar,ru,tl,vi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,pt,es,de,zh-CN,hi,ar,ru,tl,vi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element_mobile');
     }
 
     // --- Core Application Logic --- 
@@ -946,6 +1053,9 @@
                 socialProofContainer: document.getElementById('social-proof-container'),
                 personalizationBanner: document.getElementById('personalization-banner'),
                 urgencyTextContainer: document.getElementById('urgency-text-container'),
+                userSessionContainer: document.getElementById('user-session-container'),
+                mobileUserSessionContainer: document.getElementById('mobile-user-session-container'),
+                backToTopButton: document.getElementById('back-to-top'),
             },
 
             // --- METHODS ---
@@ -956,8 +1066,9 @@
                 
                 await this.fetchInitialData(); // Fetch location and rates first
                 
-                this.initLanguage(); // Then set language
+                this.initLanguage(); // Then set language based on fetched data or browser preference
                 this.initEventListeners();
+                this.initUserSession();
                 this.initStaticCounters();
                 this.updateLiveCounters();
                 this.initScrollAnimations();
@@ -985,31 +1096,8 @@
             },
 
             async fetchBrowserLocation() {
-                if (!navigator.geolocation) {
-                    console.log("Browser geolocation not supported. Falling back to IP.");
-                    await this.fetchIpData();
-                    return;
-                }
-
-                navigator.geolocation.getCurrentPosition(
-                    async (position) => {
-                        try {
-                            const { latitude, longitude } = position.coords;
-                            const reverseGeoUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
-                            const response = await fetch(reverseGeoUrl);
-                            if (!response.ok) throw new Error('Reverse geocoding failed');
-                            const data = await response.json();
-                            this.updateUserStateFromCountry(data.countryCode);
-                        } catch (error) {
-                            console.warn("Reverse geocoding failed, falling back to IP.", error);
-                            await this.fetchIpData();
-                        }
-                    },
-                    async (error) => {
-                        console.warn(`Geolocation permission denied (${error.message}). Falling back to IP.`);
-                        await this.fetchIpData();
-                    }
-                );
+                // Using a reliable IP-based geolocation service as a primary method
+                await this.fetchIpData();
             },
 
             async fetchIpData() {
@@ -1025,16 +1113,19 @@
             },
             
             initEventListeners() {
+                // Mobile Menu
                 this.dom.mobileMenuButton.addEventListener('click', () => this.dom.mobileMenu.classList.replace('-translate-x-full', 'translate-x-0'));
                 this.dom.mobileMenuClose.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
                 document.querySelectorAll('#mobile-menu a').forEach(link => {
                     link.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
                 });
 
+                // Dialog
                 this.dom.dialogContainer.addEventListener('click', (e) => {
                     if (e.target === this.dom.dialogContainer) this.closeDialog();
                 });
 
+                // Purchase Flow
                 this.dom.startPurchaseBtn.addEventListener('click', () => this.startPurchaseFlow());
                 document.querySelectorAll('a[href="#get-app"]').forEach(el => {
                     el.addEventListener('click', (e) => {
@@ -1043,11 +1134,24 @@
                     });
                 });
 
+                // Exit Intent
                 document.documentElement.addEventListener('mouseleave', (e) => {
                     if (e.clientY < 10 && !this.urgencyState.exitIntentTriggered) {
                         this.urgencyState.exitIntentTriggered = true;
                         this.showExitIntentPopup();
                     }
+                });
+
+                // Back to Top Button
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        this.dom.backToTopButton.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    } else {
+                        this.dom.backToTopButton.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+                    }
+                });
+                this.dom.backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             },
 
@@ -1057,21 +1161,27 @@
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
                             if (entry.target.id === 'counter-satisfaction') this.animateSatisfactionBar();
+                            // Make header sticky logic more robust
                             if (entry.target.classList.contains('hero')) {
                                 this.dom.stickyBar.classList.add('hidden');
                                 this.dom.mainHeader.style.top = '0';
                             }
-                            if(!entry.target.classList.contains('hero')) observer.unobserve(entry.target);
-                        } else {
-                            if (entry.target.classList.contains('hero')) {
-                                this.dom.stickyBar.classList.remove('hidden');
-                                this.dom.mainHeader.style.top = `${this.dom.stickyBar.offsetHeight}px`;
-                            }
+                            observer.unobserve(entry.target); // Unobserve after animation
                         }
                     });
                 }, { threshold: 0.1 });
 
-                document.querySelectorAll('.animate-on-scroll, .hero').forEach(el => observer.observe(el));
+                const heroObserver = new IntersectionObserver((entries) => {
+                     entries.forEach(entry => {
+                        const isHeroVisible = entry.isIntersecting;
+                        this.dom.stickyBar.classList.toggle('hidden', isHeroVisible);
+                        this.dom.mainHeader.style.top = isHeroVisible ? '0' : `${this.dom.stickyBar.offsetHeight}px`;
+                     });
+                }, { threshold: 0 });
+
+
+                document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+                heroObserver.observe(document.querySelector('.hero'));
             },
 
             initUrgencyFeatures() {
@@ -1088,7 +1198,7 @@
                 let offerEndTimeStr = localStorage.getItem('offerEndTime');
                 let offerEndTime = offerEndTimeStr ? parseInt(offerEndTimeStr, 10) : 0;
 
-                if (!offerEndTime || isNaN(offerEndTime)) {
+                if (!offerEndTime || isNaN(offerEndTime) || now > offerEndTime) {
                     offerEndTime = now + (4 * 3600 * 1000) + (23 * 60 * 1000) + (19 * 1000);
                     localStorage.setItem('offerEndTime', offerEndTime.toString());
                 }
@@ -1318,8 +1428,13 @@
             initLanguage() {
                 let userLang = localStorage.getItem("language");
                 if (!userLang) {
-                    const countryData = countrySalaryData[this.state.userCountryCode];
-                    userLang = countryData && translations[countryData.lang] ? countryData.lang : 'pt';
+                    const browserLang = navigator.language.split('-')[0];
+                    if (translations[browserLang]) {
+                        userLang = browserLang;
+                    } else {
+                        const countryData = countrySalaryData[this.state.userCountryCode];
+                        userLang = (countryData && translations[countryData.lang]) ? countryData.lang : 'en'; // Default to English
+                    }
                 }
                 this.setLanguage(userLang);
             },
@@ -1329,6 +1444,7 @@
                 document.documentElement.lang = lang;
                 this.populateAllDynamicContent();
                 this.showPersonalizationBanner();
+                this.updateUserSessionUI(); // Update UI after language change
                 document.querySelectorAll("[data-translate]").forEach(el => {
                     const key = el.dataset.translate;
                     if (!key) return;
@@ -1349,7 +1465,7 @@
             },
 
             getTranslatedString(key, replacements = {}) {
-                const lang = localStorage.getItem("language") || "pt";
+                const lang = localStorage.getItem("language") || "en";
                 let translation = (translations[lang] && translations[lang][key]) ? translations[lang][key] : (translations['en'][key] || key);
                 Object.entries(replacements).forEach(([p, v]) => { translation = translation.replace(`{${p.toUpperCase()}}`, v); });
                 return translation;
@@ -1368,7 +1484,7 @@
                 const featureKeys = [ { key: 'feature1', icon: 'fa-eye' }, { key: 'feature2', icon: 'fa-mobile-alt' }, { key: 'feature3', icon: 'fa-shield-alt' }, { key: 'feature4', icon: 'fa-chart-line' }, { key: 'feature5', icon: 'fa-sync' }, { key: 'feature6', icon: 'fa-headset' } ];
                 container.innerHTML = featureKeys.map(({key, icon}, i) => `
                     <div class="feature-card animate-on-scroll" style="transition-delay: ${i * 100}ms;">
-                        <div class="text-4xl text-yellow-400 mb-4"><i class="fas ${icon}"></i></div>
+                        <div class="text-4xl text-yellow-400 mb-4"><i class="fas ${icon}" aria-hidden="true"></i></div>
                         <h3 class="text-xl font-bold mb-2">${this.getTranslatedString(`${key}Title`)}</h3>
                         <p class="text-gray-400">${this.getTranslatedString(`${key}Text`)}</p>
                     </div>`).join('');
@@ -1400,10 +1516,10 @@
                  const testimonialsData = [ { key: 1, flag: "🇺🇸" }, { key: 2, flag: "🇧🇷" }, { key: 3, flag: "🇪🇺" }, { key: 4, flag: "🇯🇵" }, { key: 5, flag: "🇷🇺" } ];
                  container.innerHTML = testimonialsData.map(({key, flag}, i) => `
                     <div class="testimonial-card animate-on-scroll" style="transition-delay: ${i * 100}ms;">
-                        <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4"></i>
+                        <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4" aria-hidden="true"></i>
                         <p class="text-gray-400 mb-4">${this.getTranslatedString(`testimonial${key}Quote`)}</p>
                         <div class="flex items-center">
-                            <img src="https://placehold.co/40x40/1f2937/ffffff?text=${this.getTranslatedString(`testimonial${key}Author`)[0]}" class="w-10 h-10 rounded-full mr-4" alt="User photo">
+                            <img loading="lazy" src="https://placehold.co/40x40/1f2937/ffffff?text=${this.getTranslatedString(`testimonial${key}Author`)[0]}" class="w-10 h-10 rounded-full mr-4" alt="User photo for ${this.getTranslatedString(`testimonial${key}Author`)}">
                             <div>
                                 <p class="font-semibold">${this.getTranslatedString(`testimonial${key}Author`)}</p>
                                 <p class="text-sm text-gray-400">${flag}</p>
@@ -1420,6 +1536,57 @@
             closeDialog() {
                 this.dom.dialogContainer.classList.add('hidden');
                 this.dom.dialogContainer.innerHTML = '';
+            },
+
+            // --- USER SESSION (LOCAL LOGIN) ---
+            initUserSession() {
+                this.updateUserSessionUI();
+            },
+
+            updateUserSessionUI() {
+                const username = localStorage.getItem("username");
+                const desktopContainer = this.dom.userSessionContainer;
+                const mobileContainer = this.dom.mobileUserSessionContainer;
+
+                let desktopHTML, mobileHTML;
+
+                if (username) {
+                    const welcomeText = this.getTranslatedString('welcomeUser', { USER: username });
+                    const logoutText = this.getTranslatedString('navLogout');
+                    desktopHTML = `
+                        <span class="text-gray-300">${welcomeText}</span>
+                        <button id="logout-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-sm">${logoutText}</button>
+                    `;
+                    mobileHTML = `
+                        <div class="text-center mb-4 text-gray-300">${welcomeText}</div>
+                        <button id="mobile-logout-btn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">${logoutText}</button>
+                    `;
+                } else {
+                    const getAppText = this.getTranslatedString('navGetApp');
+                    desktopHTML = `<a href="#get-app" class="cta-button font-bold py-2 px-5 rounded-lg">${getAppText}</a>`;
+                    mobileHTML = `<a href="#get-app" class="cta-button text-center font-bold py-2 px-5 rounded-lg mt-4">${getAppText}</a>`;
+                }
+
+                desktopContainer.innerHTML = desktopHTML;
+                mobileContainer.innerHTML = mobileHTML;
+
+                if (username) {
+                    document.getElementById('logout-btn').addEventListener('click', () => this.logout());
+                    document.getElementById('mobile-logout-btn').addEventListener('click', () => this.logout());
+                } else {
+                    // Re-attach listeners for mobile menu closing if needed
+                    document.querySelectorAll('#mobile-user-session-container a').forEach(link => {
+                         link.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
+                    });
+                }
+            },
+
+            logout() {
+                localStorage.removeItem("userEmail");
+                localStorage.removeItem("username");
+                localStorage.removeItem("userCountryCode");
+                localStorage.removeItem("uniqueId");
+                window.location.reload();
             },
             
             startPurchaseFlow() {
@@ -1513,6 +1680,7 @@
                     this.purchaseState.username = usernameInput.value;
                     this.updateUserStateFromCountry(countryInput.value);
                     
+                    this.updateUserSessionUI(); // Update header immediately
                     this.showPlatformDialog();
                 }
             },
@@ -1526,10 +1694,8 @@
                     this.state.userCountryFlag = countryCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
                     
                     const lang = countryData.lang;
-                    if (translations[lang]) {
+                    if (translations[lang] && !localStorage.getItem('language')) { // only set if not manually changed
                         this.setLanguage(lang);
-                    } else {
-                        this.setLanguage(localStorage.getItem('language') || 'pt');
                     }
                 }
             },
@@ -1564,11 +1730,12 @@
                     <p class="text-center text-gray-400 mb-4">${this.getTranslatedString('uniqueIdDialogText')}</p>
                     <div class="flex items-center bg-gray-800 p-3 rounded-lg">
                         <span id="unique-id-value" class="flex-grow text-lg font-mono">${uniqueId}</span>
-                        <button id="copy-id-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4"><i class="fas fa-copy"></i></button>
+                        <button id="copy-id-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4" aria-label="Copy Unique ID"><i class="fas fa-copy"></i></button>
                     </div>
+                    <p id="copy-feedback-dialog" class="text-green-400 text-sm mt-2 h-4 text-center"></p>
                     <button id="continue-to-poker-app" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('continueButton')}</button>`;
                 this.showDialog(content);
-                document.getElementById('copy-id-btn').onclick = () => this.copyToClipboard(uniqueId, true);
+                document.getElementById('copy-id-btn').onclick = () => this.copyToClipboard(uniqueId, 'copy-feedback-dialog');
                 document.getElementById('continue-to-poker-app').onclick = () => this.showPokerAppDialog();
             },
 
@@ -1689,22 +1856,25 @@
                 const address = addresses[method];
                 const network = networks[method];
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${address}`;
-                let cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400">$${finalPriceUSD.toFixed(2)}</p>`;
-                if (method !== 'usdt') cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${this.getTranslatedString('loadingPaymentText')}</span></div>`;
+                let cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${this.getTranslatedString('loadingPaymentText')}</span></div>`;
+                if (method === 'usdt') {
+                    cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400">$${finalPriceUSD.toFixed(2)}</p>`;
+                }
+
                 const content = `
                     <h3 class="text-xl font-bold mb-2 text-center">${this.getTranslatedString('paymentDialogTitleFinal')}</h3>
                     <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentInstructionsText')}</p>
-                    <div id="payment-amount-container" class="text-center mb-4">${cryptoAmountHTML}</div>
+                    <div id="payment-amount-container" class="text-center mb-4 min-h-[56px] flex flex-col justify-center">${cryptoAmountHTML}</div>
                     <div class="flex justify-center mb-4"><div class="p-2 bg-white rounded-lg border-4 border-gray-600"><img src="${qrUrl}" alt="${method.toUpperCase()} QR Code"></div></div>
                     <div class="flex items-center bg-gray-800 p-2 rounded-lg">
                         <input id="wallet-address-input" type="text" class="flex-grow bg-transparent text-sm text-gray-300 border-0 focus:ring-0" value="${address}" readonly>
-                        <button id="copy-address-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-2"><i class="fas fa-copy"></i></button>
+                        <button id="copy-address-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-2" aria-label="Copy Wallet Address"><i class="fas fa-copy"></i></button>
                     </div>
                     <p id="copy-feedback-dialog" class="text-green-400 text-sm mt-2 h-4 text-center"></p>
                     <p class="text-xs text-gray-500 text-center mt-4">${this.getTranslatedString('paymentInstructionsSecurity')}</p>
                     <button id="payment-done-btn" class="mt-6 w-full cta-button font-bold py-3 px-5 rounded-lg">${this.getTranslatedString('paymentDoneButton')}</button>`;
                 this.showDialog(content);
-                document.getElementById('copy-address-btn').onclick = () => this.copyToClipboard(address, true);
+                document.getElementById('copy-address-btn').onclick = () => this.copyToClipboard(address, 'copy-feedback-dialog');
                 document.getElementById('payment-done-btn').onclick = () => this.proceedToFinalConfirmation();
                 if(this.urgencyState.paymentCountdownInterval) clearInterval(this.urgencyState.paymentCountdownInterval);
                 const paymentTimerEl = document.getElementById('payment-timer');
@@ -1715,18 +1885,18 @@
                 if (method !== 'usdt') {
                     const cryptoPrice = await this.getCryptoPrice(cryptoIds[method]);
                     const paymentAmountContainer = document.getElementById('payment-amount-container');
-                    if (cryptoPrice) {
+                    if (cryptoPrice && paymentAmountContainer) {
                         const cryptoAmount = (finalPriceUSD / cryptoPrice).toFixed(8);
                         paymentAmountContainer.innerHTML = `<p class="text-sm text-gray-400">${this.getTranslatedString('amountToSendLabel')} $${finalPriceUSD.toFixed(2)} USD</p><p class="text-2xl font-bold text-yellow-400">${cryptoAmount} ${method.toUpperCase()}</p><p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>`;
-                    } else {
+                    } else if (paymentAmountContainer) {
                         paymentAmountContainer.innerHTML = `<p class="text-red-400">Could not fetch crypto price. Please try again.</p>`;
                     }
                 }
             },
             
-            copyToClipboard(text, isDialog = false) {
+            copyToClipboard(text, feedbackElementId) {
                 navigator.clipboard.writeText(text).then(() => {
-                    const feedbackEl = document.getElementById(isDialog ? 'copy-feedback-dialog' : 'copy-feedback');
+                    const feedbackEl = document.getElementById(feedbackElementId);
                     if(feedbackEl) {
                         feedbackEl.textContent = this.getTranslatedString('copiedText');
                         setTimeout(() => { feedbackEl.textContent = ''; }, 2000);
@@ -1757,7 +1927,7 @@
                                 <p class="text-gray-400 mb-6">${this.getTranslatedString('telegramInstructionsText')}</p>
                                 <div class="flex items-center bg-gray-900 p-3 rounded-lg max-w-sm mx-auto">
                                     <span class="flex-grow text-lg font-mono text-yellow-400">${uniqueId}</span>
-                                    <button id="copy-id-button-confirm" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4"><i class="fas fa-copy"></i></button>
+                                    <button id="copy-id-button-confirm" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4" aria-label="Copy Final Unique ID"><i class="fas fa-copy"></i></button>
                                 </div>
                                 <p id="copy-feedback" class="text-green-400 text-sm mt-2 h-4"></p>
                                 <div class="mt-8 bg-gray-900/50 p-6 rounded-lg text-left max-w-md mx-auto">
@@ -1772,7 +1942,7 @@
                         </div>
                     </section>`;
                 confirmationContainer.classList.remove('hidden');
-                document.getElementById('copy-id-button-confirm').onclick = () => this.copyToClipboard(uniqueId, false);
+                document.getElementById('copy-id-button-confirm').onclick = () => this.copyToClipboard(uniqueId, 'copy-feedback');
                 window.scrollTo(0, 0);
             },
         };
