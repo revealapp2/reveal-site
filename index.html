@@ -864,12 +864,15 @@
     
     // --- Localized Social Proof Data --- 
     const socialProofData = {
-        "de": { names: ["Klaus","Hans","Müller"], cities:["Berlin","Hamburg"], flag: "🇩🇪", country: "Germany" },
-        "it": { names: ["Giovanni","Marco","Luca"], cities:["Roma","Milano"], flag: "🇮🇹", country: "Italy" },
-        "us": { names: ["James","John","Michael"], cities:["New York","Miami"], flag: "🇺🇸", country: "the USA" },
-        "ru": { names: ["Dmitri","Ivan","Sergey"], cities:["Moscow","St. Petersburg"], flag: "🇷🇺", country: "Russia" },
-        "br": { names: ["Paulo","Thiago","Lucas"], cities:["São Paulo","Rio de Janeiro"], flag: "🇧🇷", country: "Brasil" },
-        "ph": { names: ["Juan", "Antonio", "Jose"], cities:["Manila", "Cebu"], flag: "🇵🇭", country: "the Philippines"}
+        "de": { names: ["Klaus", "Hans", "Müller", "Lukas", "Leon", "Finn", "Jonas", "Maximilian"], cities: ["Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt"], flag: "🇩�", country: "Germany" },
+        "it": { names: ["Giovanni", "Marco", "Luca", "Alessandro", "Francesco", "Matteo", "Andrea", "Simone"], cities: ["Roma", "Milano", "Napoli", "Torino", "Palermo"], flag: "🇮🇹", country: "Italy" },
+        "us": { names: ["James", "John", "Michael", "David", "Chris", "Robert", "Daniel", "William"], cities: ["New York", "Miami", "Los Angeles", "Chicago", "Houston", "Las Vegas"], flag: "🇺🇸", country: "the USA" },
+        "ru": { names: ["Dmitri", "Ivan", "Sergey", "Alexander", "Andrey", "Alexey", "Maxim", "Vladimir"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
+        "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Matheus", "Pedro", "Guilherme", "Rafael"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília", "Curitiba"], flag: "🇧🇷", country: "Brasil" },
+        "ph": { names: ["Juan", "Antonio", "Jose", "Manuel", "Angelo", "Miguel", "Carlos", "Paolo"], cities: ["Manila", "Cebu", "Davao City", "Quezon City"], flag: "🇵🇭", country: "the Philippines" },
+        "es": { names: ["José", "Antonio", "Juan", "Manuel", "Francisco", "David", "Javier", "Daniel"], cities: ["Madrid", "Barcelona", "Valencia", "Seville"], flag: "🇪🇸", country: "Spain" },
+        "fr": { names: ["Jean", "Pierre", "Michel", "André", "Philippe", "Louis", "Nicolas", "Julien"], cities: ["Paris", "Marseille", "Lyon", "Toulouse"], flag: "🇫🇷", country: "France" },
+        "ca": { names: ["Liam", "Noah", "William", "James", "Benjamin", "Lucas", "Henry", "Ethan"], cities: ["Toronto", "Montreal", "Vancouver", "Calgary"], flag: "🇨🇦", country: "Canada" }
     };
 
     function googleTranslateElementInit() {
@@ -880,115 +883,8 @@
     // --- Core Application Logic --- 
     document.addEventListener('DOMContentLoaded', () => {
         // --- DATA ---
-        // This object holds the salary data for dynamic pricing.
-        // Formula: Price = 1.1 * Salary (in USD), with caps.
         const countrySalaryData = {
-            "AL": { salary: 701, currency: "ALL", lang: "sq" }, // Albania
-            "DZ": { salary: 267, currency: "DZD", lang: "ar" }, // Algeria
-            "DE": { salary: 3984, currency: "EUR", lang: "de" }, // Germany
-            "AD": { salary: 1273, currency: "EUR", lang: "ca" }, // Andorra
-            "AG": { salary: 857, currency: "XCD", lang: "en" }, // Antigua and Barbuda
-            "SA": { salary: 2002, currency: "SAR", lang: "ar" }, // Saudi Arabia
-            "AR": { salary: 413, currency: "ARS", lang: "es" }, // Argentina
-            "AM": { salary: 688, currency: "AMD", lang: "hy" }, // Armenia
-            "AU": { salary: 4218, currency: "AUD", lang: "en" }, // Australia
-            "AT": { salary: 4798, currency: "EUR", lang: "de" }, // Austria
-            "AZ": { salary: 549, currency: "AZN", lang: "az" }, // Azerbaijan
-            "BB": { salary: 1084, currency: "BBD", lang: "en" }, // Barbados
-            "BY": { salary: 637, currency: "BYN", lang: "be" }, // Belarus
-            "BE": { salary: 5108, currency: "EUR", lang: "nl" }, // Belgium
-            "BA": { salary: 927, currency: "BAM", lang: "bs" }, // Bosnia and Herzegovina
-            "BR": { salary: 800, currency: "BRL", lang: "pt" }, // Brazil
-            "BG": { salary: 947, currency: "BGN", lang: "bg" }, // Bulgaria
-            "CA": { salary: 5081, currency: "CAD", lang: "en" }, // Canada
-            "KZ": { salary: 673, currency: "KZT", lang: "kk" }, // Kazakhstan
-            "CL": { salary: 684, currency: "CLP", lang: "es" }, // Chile
-            "CN": { salary: 1122, currency: "CNY", lang: "zh-CN" }, // China
-            "CY": { salary: 2555, currency: "EUR", lang: "el" }, // Cyprus
-            "CO": { salary: 311, currency: "COP", lang: "es" }, // Colombia
-            "KR": { salary: 2180, currency: "KRW", lang: "ko" }, // South Korea
-            "CR": { salary: 722, currency: "CRC", lang: "es" }, // Costa Rica
-            "HR": { salary: 959, currency: "EUR", lang: "hr" }, // Croatia
-            "DK": { salary: 5642, currency: "DKK", lang: "da" }, // Denmark
-            "EC": { salary: 791, currency: "USD", lang: "es" }, // Ecuador
-            "SK": { salary: 1512, currency: "EUR", lang: "sk" }, // Slovakia
-            "SI": { salary: 3058, currency: "EUR", lang: "sl" }, // Slovenia
-            "ES": { salary: 2879, currency: "EUR", lang: "es" }, // Spain
-            "US": { salary: 6455, currency: "USD", lang: "en" }, // United States
-            "EE": { salary: 1981, currency: "EUR", lang: "et" }, // Estonia
-            "PH": { salary: 306, currency: "PHP", lang: "tl" }, // Philippines
-            "FI": { salary: 4090, currency: "EUR", lang: "fi" }, // Finland
-            "FR": { salary: 3655, currency: "EUR", lang: "fr" }, // France
-            "GE": { salary: 707, currency: "GEL", lang: "ka" }, // Georgia
-            "GR": { salary: 1417, currency: "EUR", lang: "el" }, // Greece
-            "GL": { salary: 4665, currency: "DKK", lang: "kl" }, // Greenland
-            "GG": { salary: 3011, currency: "GBP", lang: "en" }, // Guernsey
-            "NL": { salary: 4581, currency: "EUR", lang: "nl" }, // Netherlands
-            "HK": { salary: 2828, currency: "HKD", lang: "zh-HK" }, // Hong Kong
-            "HU": { salary: 1189, currency: "HUF", lang: "hu" }, // Hungary
-            "YE": { salary: 200, currency: "YER", lang: "ar" }, // Yemen (default value)
-            "MV": { salary: 920, currency: "MVR", lang: "dv" }, // Maldives
-            "IN": { salary: 569, currency: "INR", lang: "hi" }, // India
-            "ID": { salary: 340, currency: "IDR", lang: "id" }, // Indonesia
-            "IR": { salary: 307, currency: "IRR", lang: "fa" }, // Iran
-            "IQ": { salary: 538, currency: "IQD", lang: "ar" }, // Iraq
-            "IE": { salary: 4622, currency: "EUR", lang: "en" }, // Ireland
-            "IS": { salary: 6441, currency: "ISK", lang: "is" }, // Iceland
-            "IL": { salary: 3608, currency: "ILS", lang: "he" }, // Israel
-            "IT": { salary: 2924, currency: "EUR", lang: "it" }, // Italy
-            "JM": { salary: 616, currency: "JMD", lang: "en" }, // Jamaica
-            "JP": { salary: 2503, currency: "JPY", lang: "ja" }, // Japan
-            "JO": { salary: 619, currency: "JOD", lang: "ar" }, // Jordan
-            "KG": { salary: 360, currency: "KGS", lang: "ky" }, // Kyrgyzstan
-            "KI": { salary: 658, currency: "AUD", lang: "en" }, // Kiribati
-            "KW": { salary: 2026, currency: "KWD", lang: "ar" }, // Kuwait
-            "LV": { salary: 1303, currency: "EUR", lang: "lv" }, // Latvia
-            "LB": { salary: 837, currency: "LBP", lang: "ar" }, // Lebanon
-            "LY": { salary: 275, currency: "LYD", lang: "ar" }, // Libya
-            "LI": { salary: 4321, currency: "CHF", lang: "de" }, // Liechtenstein
-            "LT": { salary: 2173, currency: "EUR", lang: "lt" }, // Lithuania
-            "LU": { salary: 6633, currency: "EUR", lang: "fr" }, // Luxembourg
-            "MK": { salary: 965, currency: "MKD", lang: "mk" }, // North Macedonia
-            "MY": { salary: 855, currency: "MYR", lang: "ms" }, // Malaysia
-            "MT": { salary: 1216, currency: "EUR", lang: "mt" }, // Malta
-            "MA": { salary: 394, currency: "MAD", lang: "ar" }, // Morocco
-            "MU": { salary: 501, currency: "MUR", lang: "en" }, // Mauritius
-            "MX": { salary: 704, currency: "MXN", lang: "es" }, // Mexico
-            "MD": { salary: 672, currency: "MDL", lang: "ro" }, // Moldova
-            "ME": { salary: 929, currency: "EUR", lang: "sr" }, // Montenegro
-            "NO": { salary: 5665, currency: "NOK", lang: "no" }, // Norway
-            "NZ": { salary: 2983, currency: "NZD", lang: "en" }, // New Zealand
-            "PS": { salary: 778, currency: "ILS", lang: "ar" }, // Palestine
-            "PA": { salary: 717, currency: "PAB", lang: "es" }, // Panama
-            "PE": { salary: 414, currency: "PEN", lang: "es" }, // Peru
-            "PL": { salary: 1416, currency: "PLN", lang: "pl" }, // Poland
-            "PR": { salary: 1788, currency: "USD", lang: "es" }, // Puerto Rico
-            "PT": { salary: 1983, currency: "EUR", lang: "pt" }, // Portugal
-            "QA": { salary: 3937, currency: "QAR", lang: "ar" }, // Qatar
-            "KE": { salary: 385, currency: "KES", lang: "sw" }, // Kenya
-            "GB": { salary: 4179, currency: "GBP", lang: "en" }, // United Kingdom
-            "DO": { salary: 383, currency: "DOP", lang: "es" }, // Dominican Republic
-            "CZ": { salary: 2013, currency: "CZK", lang: "cs" }, // Czech Republic
-            "RO": { salary: 1306, currency: "RON", lang: "ro" }, // Romania
-            "RU": { salary: 936, currency: "RUB", lang: "ru" }, // Russia
-            "WS": { salary: 1402, currency: "WST", lang: "sm" }, // Samoa
-            "SM": { salary: 3237, currency: "EUR", lang: "it" }, // San Marino
-            "RS": { salary: 925, currency: "RSD", lang: "sr" }, // Serbia
-            "SG": { salary: 4350, currency: "SGD", lang: "en" }, // Singapore
-            "ZA": { salary: 1362, currency: "ZAR", lang: "en" }, // South Africa
-            "SE": { salary: 3977, currency: "SEK", lang: "sv" }, // Sweden
-            "CH": { salary: 8111, currency: "CHF", lang: "de" }, // Switzerland
-            "TH": { salary: 543, currency: "THB", lang: "th" }, // Thailand
-            "TW": { salary: 1521, currency: "TWD", lang: "zh-TW" }, // Taiwan
-            "TJ": { salary: 160, currency: "TJS", lang: "tg" }, // Tajikistan
-            "TT": { salary: 785, currency: "TTD", lang: "en" }, // Trinidad and Tobago
-            "TN": { salary: 303, currency: "TND", lang: "ar" }, // Tunisia
-            "TM": { salary: 401, currency: "TMT", lang: "tk" }, // Turkmenistan
-            "TR": { salary: 917, currency: "TRY", lang: "tr" }, // Turkey
-            "UA": { salary: 477, currency: "UAH", lang: "uk" }, // Ukraine
-            "UY": { salary: 1122, currency: "UYU", lang: "es" }, // Uruguay
-            "UZ": { salary: 324, currency: "UZS", lang: "uz" }, // Uzbekistan
-            "VU": { salary: 1241, currency: "VUV", lang: "bi" }, // Vanuatu
+            "AL": { salary: 701, currency: "ALL", lang: "sq" }, "DZ": { salary: 267, currency: "DZD", lang: "ar" }, "DE": { salary: 3984, currency: "EUR", lang: "de" }, "AD": { salary: 1273, currency: "EUR", lang: "ca" }, "AG": { salary: 857, currency: "XCD", lang: "en" }, "SA": { salary: 2002, currency: "SAR", lang: "ar" }, "AR": { salary: 413, currency: "ARS", lang: "es" }, "AM": { salary: 688, currency: "AMD", lang: "hy" }, "AU": { salary: 4218, currency: "AUD", lang: "en" }, "AT": { salary: 4798, currency: "EUR", lang: "de" }, "AZ": { salary: 549, currency: "AZN", lang: "az" }, "BB": { salary: 1084, currency: "BBD", lang: "en" }, "BY": { salary: 637, currency: "BYN", lang: "be" }, "BE": { salary: 5108, currency: "EUR", lang: "nl" }, "BA": { salary: 927, currency: "BAM", lang: "bs" }, "BR": { salary: 800, currency: "BRL", lang: "pt" }, "BG": { salary: 947, currency: "BGN", lang: "bg" }, "CA": { salary: 5081, currency: "CAD", lang: "en" }, "KZ": { salary: 673, currency: "KZT", lang: "kk" }, "CL": { salary: 684, currency: "CLP", lang: "es" }, "CN": { salary: 1122, currency: "CNY", lang: "zh-CN" }, "CY": { salary: 2555, currency: "EUR", lang: "el" }, "CO": { salary: 311, currency: "COP", lang: "es" }, "KR": { salary: 2180, currency: "KRW", lang: "ko" }, "CR": { salary: 722, currency: "CRC", lang: "es" }, "HR": { salary: 959, currency: "EUR", lang: "hr" }, "DK": { salary: 5642, currency: "DKK", lang: "da" }, "EC": { salary: 791, currency: "USD", lang: "es" }, "SK": { salary: 1512, currency: "EUR", lang: "sk" }, "SI": { salary: 3058, currency: "EUR", lang: "sl" }, "ES": { salary: 2879, currency: "EUR", lang: "es" }, "US": { salary: 6455, currency: "USD", lang: "en" }, "EE": { salary: 1981, currency: "EUR", lang: "et" }, "PH": { salary: 306, currency: "PHP", lang: "tl" }, "FI": { salary: 4090, currency: "EUR", lang: "fi" }, "FR": { salary: 3655, currency: "EUR", lang: "fr" }, "GE": { salary: 707, currency: "GEL", lang: "ka" }, "GR": { salary: 1417, currency: "EUR", lang: "el" }, "GL": { salary: 4665, currency: "DKK", lang: "kl" }, "GG": { salary: 3011, currency: "GBP", lang: "en" }, "NL": { salary: 4581, currency: "EUR", lang: "nl" }, "HK": { salary: 2828, currency: "HKD", lang: "zh-HK" }, "HU": { salary: 1189, currency: "HUF", lang: "hu" }, "YE": { salary: 200, currency: "YER", lang: "ar" }, "MV": { salary: 920, currency: "MVR", lang: "dv" }, "IN": { salary: 569, currency: "INR", lang: "hi" }, "ID": { salary: 340, currency: "IDR", lang: "id" }, "IR": { salary: 307, currency: "IRR", lang: "fa" }, "IQ": { salary: 538, currency: "IQD", lang: "ar" }, "IE": { salary: 4622, currency: "EUR", lang: "en" }, "IS": { salary: 6441, currency: "ISK", lang: "is" }, "IL": { salary: 3608, currency: "ILS", lang: "he" }, "IT": { salary: 2924, currency: "EUR", lang: "it" }, "JM": { salary: 616, currency: "JMD", lang: "en" }, "JP": { salary: 2503, currency: "JPY", lang: "ja" }, "JO": { salary: 619, currency: "JOD", lang: "ar" }, "KG": { salary: 360, currency: "KGS", lang: "ky" }, "KI": { salary: 658, currency: "AUD", lang: "en" }, "KW": { salary: 2026, currency: "KWD", lang: "ar" }, "LV": { salary: 1303, currency: "EUR", lang: "lv" }, "LB": { salary: 837, currency: "LBP", lang: "ar" }, "LY": { salary: 275, currency: "LYD", lang: "ar" }, "LI": { salary: 4321, currency: "CHF", lang: "de" }, "LT": { salary: 2173, currency: "EUR", lang: "lt" }, "LU": { salary: 6633, currency: "EUR", lang: "fr" }, "MK": { salary: 965, currency: "MKD", lang: "mk" }, "MY": { salary: 855, currency: "MYR", lang: "ms" }, "MT": { salary: 1216, currency: "EUR", lang: "mt" }, "MA": { salary: 394, currency: "MAD", lang: "ar" }, "MU": { salary: 501, currency: "MUR", lang: "en" }, "MX": { salary: 704, currency: "MXN", lang: "es" }, "MD": { salary: 672, currency: "MDL", lang: "ro" }, "ME": { salary: 929, currency: "EUR", lang: "sr" }, "NO": { salary: 5665, currency: "NOK", lang: "no" }, "NZ": { salary: 2983, currency: "NZD", lang: "en" }, "PS": { salary: 778, currency: "ILS", lang: "ar" }, "PA": { salary: 717, currency: "PAB", lang: "es" }, "PE": { salary: 414, currency: "PEN", lang: "es" }, "PL": { salary: 1416, currency: "PLN", lang: "pl" }, "PR": { salary: 1788, currency: "USD", lang: "es" }, "PT": { salary: 1983, currency: "EUR", lang: "pt" }, "QA": { salary: 3937, currency: "QAR", lang: "ar" }, "KE": { salary: 385, currency: "KES", lang: "sw" }, "GB": { salary: 4179, currency: "GBP", lang: "en" }, "DO": { salary: 383, currency: "DOP", lang: "es" }, "CZ": { salary: 2013, currency: "CZK", lang: "cs" }, "RO": { salary: 1306, currency: "RON", lang: "ro" }, "RU": { salary: 936, currency: "RUB", lang: "ru" }, "WS": { salary: 1402, currency: "WST", lang: "sm" }, "SM": { salary: 3237, currency: "EUR", lang: "it" }, "RS": { salary: 925, currency: "RSD", lang: "sr" }, "SG": { salary: 4350, currency: "SGD", lang: "en" }, "ZA": { salary: 1362, currency: "ZAR", lang: "en" }, "SE": { salary: 3977, currency: "SEK", lang: "sv" }, "CH": { salary: 8111, currency: "CHF", lang: "de" }, "TH": { salary: 543, currency: "THB", lang: "th" }, "TW": { salary: 1521, currency: "TWD", lang: "zh-TW" }, "TJ": { salary: 160, currency: "TJS", lang: "tg" }, "TT": { salary: 785, currency: "TTD", lang: "en" }, "TN": { salary: 303, currency: "TND", lang: "ar" }, "TM": { salary: 401, currency: "TMT", lang: "tk" }, "TR": { salary: 917, currency: "TRY", lang: "tr" }, "UA": { salary: 477, currency: "UAH", lang: "uk" }, "UY": { salary: 1122, currency: "UYU", lang: "es" }, "UZ": { salary: 324, currency: "UZS", lang: "uz" }, "VU": { salary: 1241, currency: "VUV", lang: "bi" },
         };
 
         const App = {
@@ -997,7 +893,7 @@
                 userCountryCode: null,
                 userCurrency: 'USD',
                 userCountryName: 'your country',
-                userCountryFlag: '�',
+                userCountryFlag: '🌍',
                 exchangeRates: null,
             },
             purchaseState: {
@@ -1071,28 +967,10 @@
 
             async fetchInitialData() {
                 const savedCountryCode = localStorage.getItem('userCountryCode');
-
                 if (savedCountryCode) {
                     this.updateUserStateFromCountry(savedCountryCode);
                 } else {
-                    try {
-                        const geoResponse = await fetch('https://ipapi.co/json/');
-                        if (!geoResponse.ok) throw new Error('Geolocation fetch failed');
-                        const geoData = await geoResponse.json();
-                        
-                        this.state.userCountryCode = geoData.country_code;
-                        this.state.userCurrency = geoData.currency;
-                        this.state.userCountryName = geoData.country_name;
-                        const flag = geoData.country_code.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-                        this.state.userCountryFlag = flag;
-
-                    } catch (error) {
-                        console.warn("Could not fetch geolocation data, falling back to defaults.", error);
-                        this.state.userCountryCode = 'US';
-                        this.state.userCurrency = 'USD';
-                        this.state.userCountryName = 'the United States';
-                        this.state.userCountryFlag = '🇺🇸';
-                    }
+                    await this.fetchBrowserLocation();
                 }
 
                 try {
@@ -1103,6 +981,46 @@
                 } catch (error) {
                     console.error("Could not fetch exchange rates. Prices will be shown in USD only.", error);
                     this.state.exchangeRates = { 'USD': 1.0 };
+                }
+            },
+
+            async fetchBrowserLocation() {
+                if (!navigator.geolocation) {
+                    console.log("Browser geolocation not supported. Falling back to IP.");
+                    await this.fetchIpData();
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        try {
+                            const { latitude, longitude } = position.coords;
+                            const reverseGeoUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`;
+                            const response = await fetch(reverseGeoUrl);
+                            if (!response.ok) throw new Error('Reverse geocoding failed');
+                            const data = await response.json();
+                            this.updateUserStateFromCountry(data.countryCode);
+                        } catch (error) {
+                            console.warn("Reverse geocoding failed, falling back to IP.", error);
+                            await this.fetchIpData();
+                        }
+                    },
+                    async (error) => {
+                        console.warn(`Geolocation permission denied (${error.message}). Falling back to IP.`);
+                        await this.fetchIpData();
+                    }
+                );
+            },
+
+            async fetchIpData() {
+                 try {
+                    const geoResponse = await fetch('https://ipapi.co/json/');
+                    if (!geoResponse.ok) throw new Error('IP-based geolocation fetch failed');
+                    const geoData = await geoResponse.json();
+                    this.updateUserStateFromCountry(geoData.country_code);
+                } catch (error) {
+                    console.warn("Could not fetch IP geolocation data, falling back to defaults.", error);
+                    this.updateUserStateFromCountry('US'); // Default to US
                 }
             },
             
@@ -1520,10 +1438,10 @@
             },
 
             showRegistrationDialog() {
-                const countryOptions = Object.keys(countrySalaryData).map(code => {
+                const countryOptions = Object.entries(countrySalaryData).map(([code, data]) => {
                     const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(code);
                     return `<option value="${code}">${countryName}</option>`;
-                }).sort().join('');
+                }).sort((a, b) => a.localeCompare(b)).join('');
 
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('registerTitle')}</h3>
@@ -1674,7 +1592,8 @@
                 this.purchaseState.app = app;
                 const countryData = countrySalaryData[this.state.userCountryCode] || countrySalaryData['US'];
                 const salary = countryData.salary;
-                let calculatedPrice = salary * 1.1;
+                const priceMultiplier = app === 'ClubGG' ? 1.6 : 1.1;
+                let calculatedPrice = salary * priceMultiplier;
                 const maxPrice = app === 'ClubGG' ? 2500 : 1600;
                 this.purchaseState.basePriceUSD = Math.min(calculatedPrice, maxPrice);
                 this.purchaseState.discount = 0;
