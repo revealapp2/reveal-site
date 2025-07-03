@@ -692,8 +692,8 @@
             applyCouponButton: "Apply",
             proceedButton: "Proceed to Payment",
             loadingPaymentText: "Getting price...",
-            paymentInstructionsTitle: "Complete Your Secure Payment",
-            paymentInstructionsText: "Your order is reserved for <strong id='payment-timer' class='text-yellow-400'>30:00</strong>. Send the exact amount to the address below. No banks, no traces—you are in control.",
+            paymentInstructionsReservation: "Your order is reserved for:",
+            paymentInstructionsSend: "Send the exact amount to the address below. No banks, no traces—you are in control.",
             paymentInstructionsSecurity: "Payment is 100% decentralized via blockchain. If activation fails, your payment is returned via crypto. You have our guarantee.",
             amountToSendLabel: "Amount to Send:",
             cryptoAmountLabel: "In {CRYPTO}:",
@@ -856,8 +856,8 @@
             applyCouponButton: "Aplicar",
             proceedButton: "Prosseguir para Pagamento",
             loadingPaymentText: "A obter cotação...",
-            paymentInstructionsTitle: "Conclua Seu Pagamento Seguro",
-            paymentInstructionsText: "Seu pedido está reservado por <strong id='payment-timer' class='text-yellow-400'>30:00</strong>. Envie o valor exato para o endereço abaixo. Sem bancos, sem rastros — você no controle.",
+            paymentInstructionsReservation: "A sua encomenda está reservada por:",
+            paymentInstructionsSend: "Envie o valor exato para o endereço abaixo. Sem bancos, sem rastros — você está no controlo.",
             paymentInstructionsSecurity: "O pagamento é 100% descentralizado via blockchain. Se a ativação falhar, seu pagamento é devolvido via cripto. Você tem nossa garantia.",
             amountToSendLabel: "Valor a Enviar:",
             cryptoAmountLabel: "Em {CRYPTO}:",
@@ -970,7 +970,7 @@
     const socialProofData = {
         "de": { names: ["Klaus", "Hans", "Müller", "Lukas", "Leon", "Finn", "Jonas", "Maximilian"], cities: ["Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt"], flag: "🇩🇪", country: "Germany" },
         "it": { names: ["Giovanni", "Marco", "Luca", "Alessandro", "Francesco", "Matteo", "Andrea", "Simone"], cities: ["Roma", "Milano", "Napoli", "Torino", "Palermo"], flag: "🇮🇹", country: "Italy" },
-        "us": { names: ["James Smith", "Michael Brown", "William Jones", "David Miller", "Daniel Wilson", "Matthew Anderson", "Christopher Jackson", "Joshua Harris", "Andrew Thompson", "Joseph Martinez", "Benjamin Clark", "Samuel Lewis", "Jonathan Young", "Alexander Scott", "Nicholas King", "Ethan Wright", "Ryan Walker", "Henry Hall", "Jack Allen", "Logan Adams"], cities: ["New York", "Miami", "Los Angeles", "Chicago", "Houston", "Las Vegas"], flag: "�🇸", country: "the USA" },
+        "us": { names: ["James Smith", "Michael Brown", "William Jones", "David Miller", "Daniel Wilson", "Matthew Anderson", "Christopher Jackson", "Joshua Harris", "Andrew Thompson", "Joseph Martinez", "Benjamin Clark", "Samuel Lewis", "Jonathan Young", "Alexander Scott", "Nicholas King", "Ethan Wright", "Ryan Walker", "Henry Hall", "Jack Allen", "Logan Adams"], cities: ["New York", "Miami", "Los Angeles", "Chicago", "Houston", "Las Vegas"], flag: "🇺🇸", country: "the USA" },
         "ru": { names: ["Дмитрий Иванов", "Алексей Петров", "Сергей Смирнов", "Владимир Кузнецов", "Андрей Попов", "Михаил Соколов", "Николай Лебедев", "Игорь Морозов", "Роман Волков", "Евгений Орлов"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
         "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Matheus", "Pedro", "Guilherme", "Rafael"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília", "Curitiba"], flag: "🇧🇷", country: "Brasil" },
         "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei", "Liu Yang", "Chen Hao", "Yang Li", "Huang Ming", "Zhao Lei", "Wu Jing", "Zhou Lin", "Xu Dong", "Sun Qi", "Ma Jun", "Zhu Peng", "Hu Yong", "Guo Feng", "He Tao", "Gao Xin", "Lin Yu", "Luo Jie"], cities: ["Shanghai", "Beijing", "Chongqing", "Tianjin", "Guangzhou"], flag: "🇨🇳", country: "China" },
@@ -1000,7 +1000,7 @@
                 userCountryCode: null,
                 userCurrency: 'USD',
                 userCountryName: 'your country',
-                userCountryFlag: '🌍',
+                userCountryFlag: '�',
                 exchangeRates: null,
             },
             purchaseState: {
@@ -1863,7 +1863,11 @@
 
                 const content = `
                     <h3 class="text-xl font-bold mb-2 text-center">${this.getTranslatedString('paymentDialogTitleFinal')}</h3>
-                    <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentInstructionsText')}</p>
+                    <div class="text-center text-gray-400 mb-4">
+                        <span>${this.getTranslatedString('paymentInstructionsReservation')}</span>
+                        <strong id="payment-timer" class="text-yellow-400 text-lg font-bold ml-2">30:00</strong>
+                    </div>
+                    <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentInstructionsSend')}</p>
                     <div id="payment-amount-container" class="text-center mb-4 min-h-[56px] flex flex-col justify-center">${cryptoAmountHTML}</div>
                     <div class="flex justify-center mb-4"><div class="p-2 bg-white rounded-lg border-4 border-gray-600"><img src="${qrUrl}" alt="${method.toUpperCase()} QR Code"></div></div>
                     <div class="flex items-center bg-gray-800 p-2 rounded-lg">
