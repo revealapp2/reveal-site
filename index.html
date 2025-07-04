@@ -68,6 +68,8 @@
             background-color: var(--background-light);
             border: 1px solid #2d3748;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            max-height: 90vh; /* Ensures modal fits on small screens */
+            overflow-y: auto; /* Allows scrolling within the modal */
         }
         .video-container {
             position: relative;
@@ -531,7 +533,7 @@
     </footer>
     
     <!-- Floating Chat Widget -->
-    <a href="https://t.me/bedmalcon_temp" target="_blank" class="fixed bottom-5 right-5 bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg z-40 transform hover:scale-110 transition-transform" aria-label="Contact us on Telegram">
+    <a id="floating-chat-widget" href="https://t.me/bedmalcon_temp" target="_blank" class="fixed bottom-5 right-5 bg-blue-500 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-lg z-40 transform hover:scale-110 transition-transform" aria-label="Contact us on Telegram">
         <i class="fab fa-telegram-plane text-3xl" aria-hidden="true"></i>
     </a>
 
@@ -564,7 +566,6 @@
             navStory: "Our Story",
             navTestimonials: "Testimonials",
             navGetApp: "Get Your Edge",
-            navLogout: "Logout",
             welcomeUser: "Welcome, {USER}",
             heroTitle: "Stop Playing in the Dark. See Their Cards & Multiply Your Winnings.",
             heroTagline: "While others rely on luck, you'll play with perfect information. Over 1,200 players are profiting right now on PPPOKER, XPoker & ClubGG. Why not you?",
@@ -728,7 +729,6 @@
             navStory: "Nossa História",
             navTestimonials: "Depoimentos",
             navGetApp: "Obtenha Sua Vantagem",
-            navLogout: "Sair",
             welcomeUser: "Olá, {USER}",
             heroTitle: "Pare de Jogar no Escuro. Veja as Cartas e Multiplique Seus Ganhos.",
             heroTagline: "Enquanto outros confiam na sorte, você joga com informação perfeita. Mais de 1.200 jogadores estão lucrando agora no PPPOKER, XPoker & ClubGG. Por que não você?",
@@ -893,7 +893,6 @@
             navStory: "Nuestra Historia",
             navTestimonials: "Testimonios",
             navGetApp: "Obtén tu Ventaja",
-            navLogout: "Cerrar Sesión",
             welcomeUser: "Bienvenido, {USER}",
             heroTitle: "Deja de Jugar a Ciegas. Ve sus Cartas y Multiplica tus Ganancias.",
             heroTagline: "Mientras otros confían en la suerte, tú jugarás con información perfecta. Más de 1,200 jugadores están ganando ahora mismo en PPPOKER, XPoker y ClubGG. ¿Por qué no tú?",
@@ -909,7 +908,6 @@
             navStory: "我们的故事",
             navTestimonials: "推荐",
             navGetApp: "获取优势",
-            navLogout: "登出",
             welcomeUser: "欢迎, {USER}",
             heroTitle: "不要再盲目玩牌。看到他们的牌并倍增您的奖金。",
             heroTagline: "当别人还在凭运气时，您将拥有完美的信息。超过1200名玩家正在PPPOKER、XPoker和ClubGG上盈利。为什么不是您？",
@@ -925,7 +923,6 @@
             navStory: "हमारी कहानी",
             navTestimonials: "प्रशंसापत्र",
             navGetApp: "अपना लाभ प्राप्त करें",
-            navLogout: "लॉग आउट",
             welcomeUser: "स्वागत है, {USER}",
             heroTitle: "अंधेरे में खेलना बंद करें। उनके कार्ड देखें और अपनी जीत को गुणा करें।",
             heroTagline: "जबकि अन्य भाग्य पर भरोसा करते हैं, आप सही जानकारी के साथ खेलेंगे। 1,200 से अधिक खिलाड़ी अभी PPPOKER, XPoker और ClubGG पर लाभ कमा रहे हैं। आप क्यों नहीं?",
@@ -941,7 +938,6 @@
             navStory: "قصتنا",
             navTestimonials: "الشهادات",
             navGetApp: "احصل على ميزتك",
-            navLogout: "تسجيل الخروج",
             welcomeUser: "مرحباً، {USER}",
             heroTitle: "توقف عن اللعب في الظلام. شاهد بطاقاتهم وضاعف أرباحك.",
             heroTagline: "بينما يعتمد الآخرون على الحظ، ستلعب بمعلومات مثالية. أكثر من 1200 لاعب يحققون أرباحًا الآن على PPPOKER و XPoker و ClubGG. لماذا ليس أنت؟",
@@ -957,7 +953,6 @@
             navStory: "Наша история",
             navTestimonials: "Отзывы",
             navGetApp: "Получить преимущество",
-            navLogout: "Выйти",
             welcomeUser: "Добро пожаловать, {USER}",
             heroTitle: "Хватит играть вслепую. Видьте их карты и умножайте свои выигрыши.",
             heroTagline: "Пока другие полагаются на удачу, вы будете играть с полной информацией. Более 1200 игроков уже получают прибыль на PPPOKER, XPoker и ClubGG. Почему не вы?",
@@ -972,7 +967,7 @@
         "it": { names: ["Giovanni", "Marco", "Luca", "Alessandro", "Francesco", "Matteo", "Andrea", "Simone"], cities: ["Roma", "Milano", "Napoli", "Torino", "Palermo"], flag: "🇮🇹", country: "Italy" },
         "us": { names: ["James Smith", "Michael Brown", "William Jones", "David Miller", "Daniel Wilson", "Matthew Anderson", "Christopher Jackson", "Joshua Harris", "Andrew Thompson", "Joseph Martinez", "Benjamin Clark", "Samuel Lewis", "Jonathan Young", "Alexander Scott", "Nicholas King", "Ethan Wright", "Ryan Walker", "Henry Hall", "Jack Allen", "Logan Adams"], cities: ["New York", "Miami", "Los Angeles", "Chicago", "Houston", "Las Vegas"], flag: "🇺🇸", country: "the USA" },
         "ru": { names: ["Дмитрий Иванов", "Алексей Петров", "Сергей Смирнов", "Владимир Кузнецов", "Андрей Попов", "Михаил Соколов", "Николай Лебедев", "Игорь Морозов", "Роман Волков", "Евгений Орлов"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
-        "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Matheus", "Pedro", "Guilherme", "Rafael"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília", "Curitiba"], flag: "🇧🇷", country: "Brasil" },
+        "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Matheus", "Pedro", "Guilherme", "Rafael"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília", "Curitiba"], flag: "�🇷", country: "Brasil" },
         "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei", "Liu Yang", "Chen Hao", "Yang Li", "Huang Ming", "Zhao Lei", "Wu Jing", "Zhou Lin", "Xu Dong", "Sun Qi", "Ma Jun", "Zhu Peng", "Hu Yong", "Guo Feng", "He Tao", "Gao Xin", "Lin Yu", "Luo Jie"], cities: ["Shanghai", "Beijing", "Chongqing", "Tianjin", "Guangzhou"], flag: "🇨🇳", country: "China" },
         "es": { names: ["José Luis", "Juan Carlos", "Francisco Javier", "Luis Miguel", "Diego Armando", "Alejandro Martín", "Antonio José", "Manuel Alejandro", "Carlos Alberto", "Sergio Enrique", "Miguel Ángel", "Jorge Eduardo", "Pedro Antonio", "Ricardo Felipe", "Andrés Sebastián", "Álvaro Ignacio", "Javier Nicolás", "Guillermo Rodrigo", "Fernando Esteban", "Rafael Adrián"], cities: ["Madrid", "Barcelona", "Mexico City", "Buenos Aires", "Bogotá"], flag: "🇪🇸", country: "Spain" },
         "in": { names: ["Aarav Sharma", "Vivaan Singh", "Aditya Kumar", "Krish Mehta", "Aryan Joshi", "Rohan Nair", "Siddharth Choudhary", "Arjun Rana", "Manav Goel", "Yash Kapoor", "Raj Malhotra", "Kunal Bansal", "Nikhil Rathi", "Saurabh Tripathi", "Harsh Vardhan", "Mohit Khanna", "Pranav Saxena", "Shubham Agrawal", "Tushar Sinha", "Abhinav Chauhan"], cities: ["Mumbai", "Delhi", "Bangalore", "Kolkata", "Chennai"], flag: "🇮🇳", country: "India" },
@@ -1000,8 +995,9 @@
                 userCountryCode: null,
                 userCurrency: 'USD',
                 userCountryName: 'your country',
-                userCountryFlag: '�',
+                userCountryFlag: '🌍',
                 exchangeRates: null,
+                isDialogActive: false, // Prevents multiple popups
             },
             purchaseState: {
                 basePriceUSD: 0,
@@ -1056,6 +1052,7 @@
                 userSessionContainer: document.getElementById('user-session-container'),
                 mobileUserSessionContainer: document.getElementById('mobile-user-session-container'),
                 backToTopButton: document.getElementById('back-to-top'),
+                floatingChatWidget: document.getElementById('floating-chat-widget'),
             },
 
             // --- METHODS ---
@@ -1174,7 +1171,7 @@
                 const heroObserver = new IntersectionObserver((entries) => {
                      entries.forEach(entry => {
                         const isHeroVisible = entry.isIntersecting;
-                        this.dom.stickyBar.classList.toggle('hidden', isHeroVisible);
+                        this.dom.stickyBar.classList.toggle('hidden', isHeroVisible || this.state.isDialogActive);
                         this.dom.mainHeader.style.top = isHeroVisible ? '0' : `${this.dom.stickyBar.offsetHeight}px`;
                      });
                 }, { threshold: 0 });
@@ -1245,6 +1242,7 @@
             },
 
             showOfferExpiredPopup() {
+                if (this.state.isDialogActive) return;
                 const content = `
                     <div class="text-center">
                         <div class="text-5xl mb-4">⏳</div>
@@ -1300,6 +1298,7 @@
             },
             
             showTimedPopup() {
+                if (this.state.isDialogActive) return; // Do not show if another dialog is active
                 let slotData = JSON.parse(localStorage.getItem('slotData'));
                 if (slotData && !slotData.extraSlotsAwarded) {
                     slotData.currentSlots += 2;
@@ -1322,6 +1321,7 @@
             },
 
             showExitIntentPopup() {
+                if (this.state.isDialogActive) return; // Do not show if another dialog is active
                 const content = `
                     <div class="text-center">
                         <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('exitIntentTitle')}</h3>
@@ -1528,12 +1528,30 @@
                     </div>`).join('');
             },
 
+            toggleBackgroundElements(show) {
+                const elements = [
+                    this.dom.stickyBar,
+                    this.dom.mainHeader,
+                    this.dom.backToTopButton,
+                    this.dom.floatingChatWidget
+                ];
+                elements.forEach(el => {
+                    if (el) {
+                        el.style.display = show ? '' : 'none';
+                    }
+                });
+            },
+
             showDialog(content) {
+                this.state.isDialogActive = true;
+                this.toggleBackgroundElements(false);
                 this.dom.dialogContainer.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg animate-on-scroll is-visible">${content}</div>`;
                 this.dom.dialogContainer.classList.remove('hidden');
             },
 
             closeDialog() {
+                this.state.isDialogActive = false;
+                this.toggleBackgroundElements(true);
                 this.dom.dialogContainer.classList.add('hidden');
                 this.dom.dialogContainer.innerHTML = '';
             },
@@ -1552,14 +1570,11 @@
 
                 if (username) {
                     const welcomeText = this.getTranslatedString('welcomeUser', { USER: username });
-                    const logoutText = this.getTranslatedString('navLogout');
                     desktopHTML = `
                         <span class="text-gray-300">${welcomeText}</span>
-                        <button id="logout-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg text-sm">${logoutText}</button>
                     `;
                     mobileHTML = `
                         <div class="text-center mb-4 text-gray-300">${welcomeText}</div>
-                        <button id="mobile-logout-btn" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg">${logoutText}</button>
                     `;
                 } else {
                     const getAppText = this.getTranslatedString('navGetApp');
@@ -1570,23 +1585,12 @@
                 desktopContainer.innerHTML = desktopHTML;
                 mobileContainer.innerHTML = mobileHTML;
 
-                if (username) {
-                    document.getElementById('logout-btn').addEventListener('click', () => this.logout());
-                    document.getElementById('mobile-logout-btn').addEventListener('click', () => this.logout());
-                } else {
+                if (!username) {
                     // Re-attach listeners for mobile menu closing if needed
                     document.querySelectorAll('#mobile-user-session-container a').forEach(link => {
                          link.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
                     });
                 }
-            },
-
-            logout() {
-                localStorage.removeItem("userEmail");
-                localStorage.removeItem("username");
-                localStorage.removeItem("userCountryCode");
-                localStorage.removeItem("uniqueId");
-                window.location.reload();
             },
             
             startPurchaseFlow() {
