@@ -18,7 +18,6 @@
     <!-- Translated Keywords -->
     <meta name="keywords" lang="pt" content="hack de poker, hack pppoker, hack xpoker, hack clubgg, truque de poker online, ver cartas poker, aplicativo para revelar cartas, ganhar no poker online">
     <meta name="keywords" lang="es" content="hack de póker, hack pppoker, hack xpoker, hack clubgg, trampa de póker en línea, ver cartas de póker, aplicación para revelar cartas, ganar en el póker en línea">
-    <meta name="keywords" lang="de" content="Poker-Hack, PPPOKER-Hack, XPoker-Hack, ClubGG-Hack, Online-Poker-Cheat, Karten sehen Poker, Poker-Tool, Poker-Vorteilssoftware, Online-Poker gewinnen">
     
     <!-- SVG Favicon -->
     <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%220%25%22><stop offset=%220%25%22 stop-color=%22%2300e5ff%22 /><stop offset=%22100%25%22 stop-color=%22%23ffab00%22 /></linearGradient></defs><path fill=%22%23ffab00%22 d=%22M50 0A50 50 0 1 0 50 100 50 50 0 0 0 50 0zm0 87.5A37.5 37.5 0 1 1 50 12.5a37.5 37.5 0 0 1 0 75z%22/><path fill=%22%2300e5ff%22 d=%22M50 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50zm0 37.5a12.5 12.5 0 1 1 0-25 12.5 12.5 0 0 1 0 25z%22/><circle cx=%2250%22 cy=%2250%22 r=%225%22 fill=%22white%22/></svg>">
@@ -45,10 +44,15 @@
             --text-light: #e2e8f0;
             --text-dark: #1a202c;
         }
+        html {
+            font-size: 16px;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background-dark);
             color: var(--text-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .cta-button {
             background: linear-gradient(90deg, #ffab00, #ffc700);
@@ -68,8 +72,8 @@
             background-color: var(--background-light);
             border: 1px solid #2d3748;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            max-height: 90vh; /* Ensures modal fits on small screens */
-            overflow-y: auto; /* Allows scrolling within the modal */
+            max-height: 90vh;
+            overflow-y: auto;
         }
         .video-container {
             position: relative;
@@ -123,7 +127,7 @@
         .hero-bg {
             background-image: url('https://images.unsplash.com/photo-1618621933758-c54179458234?q=80&w=2127&auto=format&fit=crop');
         }
-        .feature-card, .testimonial-card, .story-card {
+        .feature-card, .testimonial-card, .faq-item {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -131,13 +135,15 @@
             padding: 1.5rem;
             transition: all 0.3s ease;
         }
-        .feature-card:hover, .testimonial-card:hover, .story-card:hover {
+        .feature-card:hover, .testimonial-card:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.1);
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
         }
+        .faq-item summary { cursor: pointer; }
+        .faq-item[open] summary { color: var(--secondary-color); }
+        .faq-item summary::-webkit-details-marker { display: none; }
         
-        /* Animation on Scroll */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
@@ -156,17 +162,9 @@
         .hero-tagline { animation-delay: 0.4s; }
         .hero-cta-container { animation-delay: 0.6s; }
 
-        /* Conversion Styles */
         @keyframes pulse-cta {
             0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 171, 0, 0.7); }
             50% { transform: scale(1.05); box-shadow: 0 0 15px 10px rgba(255, 171, 0, 0); }
-        }
-        @keyframes subtle-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        .blinking-badge {
-            animation: subtle-blink 2.5s infinite ease-in-out;
         }
         .social-proof-notification {
             transition: opacity 0.5s, transform 0.5s;
@@ -187,7 +185,6 @@
             width: 0; /* Set by JS */
             transition: width 2s ease-out;
         }
-        /* Back to Top Button */
         #back-to-top {
             transition: opacity 0.3s, transform 0.3s;
         }
@@ -198,7 +195,6 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-6WV95XF58S');
     </script>
 </head>
@@ -211,7 +207,7 @@
 
     <!-- Sticky Top Bar -->
     <div id="sticky-bar" class="fixed top-0 left-0 w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-black p-2 text-center text-sm md:text-base font-bold z-50 shadow-lg hidden">
-        <span id="sticky-bar-text-container"></span> <span id="countdown-timer"></span>
+        <span id="sticky-bar-text-container"></span> <span id="countdown-timer" class="tabular-nums"></span>
     </div>
 
     <!-- Header -->
@@ -239,11 +235,11 @@
                 </div>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex md:space-x-8" aria-label="Main navigation">
-                    <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
-                    <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
-                    <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
-                    <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
+                <nav class="hidden md:flex md:space-x-4 lg:space-x-8" aria-label="Main navigation">
+                    <a href="#features" class="text-gray-300 hover:text-white transition px-2 py-1" data-translate="navFeatures">Features</a>
+                    <a href="#how-it-works" class="text-gray-300 hover:text-white transition px-2 py-1" data-translate="navHowItWorks">How It Works</a>
+                    <a href="#demo" class="text-gray-300 hover:text-white transition px-2 py-1" data-translate="navDemo">Demo</a>
+                    <a href="#faq" class="text-gray-300 hover:text-white transition px-2 py-1" data-translate="navFaq">FAQ</a>
                 </nav>
 
                 <!-- CTA and Language Selector -->
@@ -290,7 +286,7 @@
             <a href="#features" class="text-gray-300 hover:text-white transition" data-translate="navFeatures">Features</a>
             <a href="#how-it-works" class="text-gray-300 hover:text-white transition" data-translate="navHowItWorks">How It Works</a>
             <a href="#demo" class="text-gray-300 hover:text-white transition" data-translate="navDemo">Demo</a>
-            <a href="#story" class="text-gray-300 hover:text-white transition" data-translate="navStory">Our Story</a>
+            <a href="#faq" class="text-gray-300 hover:text-white transition" data-translate="navFaq">FAQ</a>
             <a href="#testimonials" class="text-gray-300 hover:text-white transition" data-translate="navTestimonials">Testimonials</a>
             <div id="mobile-user-session-container" class="mt-4">
                 <!-- Mobile user session populated by JS -->
@@ -308,7 +304,7 @@
             <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true"></div>
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
                 <div id="personalization-banner" class="mb-4 text-yellow-400 font-semibold text-lg animate-on-scroll"></div>
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 fade-in-up hero-title" data-translate="heroTitle"></h1>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 fade-in-up hero-title" data-translate="heroTitle"></h1>
                 <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 fade-in-up hero-tagline" data-translate="heroTagline"></p>
                 <div class="fade-in-up hero-cta-container">
                     <a href="#get-app" class="cta-button text-lg font-bold py-4 px-8 rounded-lg" data-translate="heroCta"></a>
@@ -347,7 +343,7 @@
         <section id="features" class="py-16 md:py-24 bg-gray-900">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="featuresTitle">Why Choose Reveal App?</h2>
-                <div id="features-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="features-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <!-- Feature Cards will be injected by JS -->
                 </div>
             </div>
@@ -403,30 +399,18 @@
             </div>
         </section>
         
-        <!-- Our Story Section -->
-        <section id="story" class="py-16 md:py-24 bg-gray-900">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="animate-on-scroll">
-                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12" data-translate="storyTitle"></h2>
-                    <div id="story-container" class="max-w-4xl mx-auto story-card text-center">
-                            <!-- Story content injected by JS -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Testimonials Section -->
-        <section id="testimonials" class="py-16 md:py-24 bg-gray-800/50">
+        <section id="testimonials" class="py-16 md:py-24 bg-gray-900">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="testimonialsTitle">What Our Users Say</h2>
-                <div id="testimonials-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="testimonials-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <!-- Testimonials will be loaded dynamically -->
                 </div>
             </div>
         </section>
         
         <!-- Get App Section -->
-        <section id="get-app" class="py-16 md:py-24 text-center bg-gray-900">
+        <section id="get-app" class="py-16 md:py-24 text-center bg-gray-800/50">
              <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
                 <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
@@ -444,7 +428,7 @@
                         <i class="fas fa-shield-alt text-3xl text-green-400" aria-hidden="true"></i>
                         <span class="text-xs font-bold" data-translate="secureBadge"></span>
                     </div>
-                    <div class="flex flex-col items-center space-y-2 blinking-badge">
+                    <div class="flex flex-col items-center space-y-2">
                         <i class="fas fa-thumbs-up text-3xl text-green-400" aria-hidden="true"></i>
                         <span class="text-xs" data-translate="satisfactionGuaranteeBadge"></span>
                     </div>
@@ -456,28 +440,26 @@
             </div>
         </section>
 
+        <!-- FAQ Section -->
+        <section id="faq" class="py-16 md:py-24 bg-gray-900">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="faqTitle">Frequently Asked Questions</h2>
+                <div id="faq-container" class="max-w-3xl mx-auto space-y-4">
+                    <!-- FAQ items will be injected by JS -->
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section class="contact py-16 md:py-24 text-center bg-gray-800/50" id="contact">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl animate-on-scroll">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle">Contact Us</h2>
                 <p class="text-lg text-gray-400 mb-8" data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
                 <div class="flex flex-col items-center justify-center gap-6">
-                    <!-- Main CTA for Telegram -->
                     <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
                         <i class="fab fa-telegram-plane mr-2" aria-hidden="true"></i>
                         <span data-translate="contactTelegram">Contact on Telegram</span> <span class="text-xs opacity-80">(24/7)</span>
                     </a>
-                     <!-- Secondary contacts -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 text-gray-400 mt-4">
-                         <a href="mailto:support@revealpoker.top" class="hover:text-white transition flex items-center gap-2">
-                             <i class="fas fa-envelope" aria-hidden="true"></i>
-                             <span>support@revealpoker.top</span>
-                           </a>
-                         <a href="https://www.instagram.com/hackpoker_updated" target="_blank" class="hover:text-white transition flex items-center gap-2">
-                             <i class="fab fa-instagram" aria-hidden="true"></i>
-                             <span>@hackpoker_updated</span>
-                           </a>
-                    </div>
                 </div>
             </div>
         </section>
@@ -502,27 +484,17 @@
                     <ul class="space-y-2">
                         <li><a href="#features" class="text-gray-400 hover:text-white" data-translate="footerLinkFeatures">Features</a></li>
                         <li><a href="#how-it-works" class="text-gray-400 hover:text-white" data-translate="footerLinkHowItWorks">How It Works</a></li>
-                        <li><a href="#get-app" class="text-gray-400 hover:text-white" data-translate="footerLinkPricing">Pricing</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white" data-translate="navFaq">FAQ</a></li>
                         <li><a href="#contact" class="text-gray-400 hover:text-white" data-translate="footerLinkContact">Contact Us</a></li>
                     </ul>
                 </div>
                 <!-- Connect -->
                 <div>
                     <h3 class="text-lg font-semibold mb-4" data-translate="footerConnectTitle">Connect With Us</h3>
-                    <div class="space-y-3">
-                        <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
-                            <i class="fab fa-telegram w-6 text-center" aria-hidden="true"></i>
-                            <span class="ml-2">Telegram</span> <span class="text-xs opacity-80">(24/7)</span>
-                        </a>
-                        <a href="https://www.instagram.com/hackpoker_updated" target="_blank" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
-                            <i class="fab fa-instagram w-6 text-center" aria-hidden="true"></i>
-                            <span class="ml-2">@hackpoker_updated</span>
-                        </a>
-                        <a href="mailto:support@revealpoker.top" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
-                            <i class="fas fa-envelope w-6 text-center" aria-hidden="true"></i>
-                            <span class="ml-2">support@revealpoker.top</span>
-                        </a>
-                    </div>
+                     <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
+                        <i class="fab fa-telegram w-6 text-center" aria-hidden="true"></i>
+                        <span class="ml-2">Telegram</span> <span class="text-xs opacity-80">(24/7)</span>
+                    </a>
                 </div>
             </div>
             <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
@@ -563,8 +535,8 @@
             navFeatures: "Features",
             navHowItWorks: "How It Works",
             navDemo: "Demo",
-            navStory: "Our Story",
             navTestimonials: "Testimonials",
+            navFaq: "FAQ",
             navGetApp: "Get Your Edge",
             welcomeUser: "Welcome, {USER}",
             heroTitle: "Stop Playing in the Dark. See Their Cards & Multiply Your Winnings.",
@@ -600,9 +572,6 @@
             demoPPPOKERTitle: "PPPOKER Demo",
             demoXPokerTitle: "XPoker Demo",
             demoClubGGTitle: "ClubGG Demo",
-            storyTitle: "Our Story: How We Cracked the Code",
-            storyText: "It all started with a series of unexpected defeats, sparking a quest to uncover hidden vulnerabilities in popular poker apps like PPPOKER and XPoker. Through months of rigorous research, we revealed critical flaws that were being exploited. In November 2023, the <strong>Reveal App</strong> was born, empowering players to level the playing field by revealing opponents' cards.",
-            storyCallToAction: "This isn't just a tool—it's a revolution. Players worldwide are gaining a strategic edge, and now it's your turn to transform your game. <strong>Act now, because every hand without this app is money lost!</strong>",
             testimonialsTitle: "Proof from the Winners' Circle",
             testimonial1Quote: "This app completely changed my game. I went from a break-even player to consistently profitable. Seeing the cards is an unbelievable advantage.",
             testimonial1Author: "Alex R.",
@@ -610,10 +579,6 @@
             testimonial2Author: "Maria S.",
             testimonial3Quote: "The best investment I've made in poker. It paid for itself in a single session. Highly recommended for serious players.",
             testimonial3Author: "John D.",
-            testimonial4Quote: "Finally, a tool that gives a real edge. The support team is also fantastic, very helpful with the setup process.",
-            testimonial4Author: "Kenji T.",
-            testimonial5Quote: "Playing without it feels like playing blind. If you're not using Reveal App, you're leaving money on the table. Simple as that.",
-            testimonial5Author: "David L.",
             getAppTitle: "Activate Your Unfair Advantage Now",
             getAppText: "Every hand you play without Reveal App is a missed opportunity. It's time to invest in your success.",
             urgencyText: "⚠️ Only",
@@ -622,6 +587,17 @@
             secureBadge: "100% Secure & Undetectable",
             satisfactionGuaranteeBadge: "Satisfaction Guarantee",
             dataPrivacyBadge: "Data Privacy",
+            faqTitle: "Frequently Asked Questions",
+            faq1Question: "Is this app safe to use? Can I be banned?",
+            faq1Answer: "Yes, it is 100% safe. Reveal App operates as an external assistant and does not modify the poker app's files, making it completely undetectable by their security systems. We have thousands of users who have played safely for months without any issues.",
+            faq2Question: "How does the payment process work?",
+            faq2Answer: "We use cryptocurrency for payments to ensure your complete anonymity and security. The process is simple: you select your preferred crypto (USDT, BTC, ETH), send the exact amount to the provided address, and then contact our support on Telegram with your unique ID to finalize the activation.",
+            faq3Question: "Is this a one-time payment or a subscription?",
+            faq3Answer: "This is a one-time payment for a lifetime license. You will receive all future updates for your chosen poker app at no additional cost.",
+            faq4Question: "How long does activation take after I pay?",
+            faq4Answer: "Activation is very fast. After you send your unique ID to our 24/7 support on Telegram, the process is usually completed in under 5-10 minutes.",
+            faq5Question: "What if I need help or have a problem?",
+            faq5Answer: "Our VIP support team is available 24/7 on Telegram. We are committed to your success and will help you with any questions, from installation to usage.",
             contactTitle: "Contact Us",
             contactText: "Have questions or need assistance? Our 24/7 support team is ready to help you get started with Reveal App.",
             contactTelegram: "Contact on Telegram",
@@ -630,104 +606,73 @@
             footerLinksTitle: "Quick Links",
             footerLinkFeatures: "Features",
             footerLinkHowItWorks: "How It Works",
-            footerLinkPricing: "Pricing",
             footerLinkContact: "Contact Us",
             footerConnectTitle: "Connect With Us",
             footerRights: "All Rights Reserved. Your success is our mission.",
             footerDisclaimer: "Disclaimer: This tool is an external assistant. Use responsibly and be aware of the terms of service of the poker platforms you use.",
             
-            // New/Improved Translations 
-            stickyBarTextActive: "🔥 Special Offer <strong>10OFF</strong> Expires In:",
+            stickyBarTextActive: "🔥 Special Offer Expires In:",
             stickyBarTextExpired: "Main offer expired! Get <strong>5% OFF</strong> now!",
-            scarcityPopupTitle: "⚠️ Only {SLOTS} licenses available for today!",
-            scarcityPopupText: "Secure yours now to unlock the Reveal App before they run out.",
-            scarcityPopupButton: "Guarantee My License",
-            timedPopupTitle: "🎯 Extra Slots Just Released!",
-            timedPopupText: "For a limited time, we've opened a few extra slots. Secure your advantage before they're gone again!",
-            timedPopupButton: "Claim My Slot Now",
-            exitIntentTitle: "Wait! Before You Go...",
-            exitIntentText: "⚠️ This is your only chance. Use coupon <strong>10OFF</strong> to get 10% OFF your advantage right now.",
-            exitIntentButton: "Apply Discount & Continue",
             socialProofAcquired: "🎉 {NAME} from {LOCATION} just activated Reveal App for {APP}!",
-            socialProofGenerated: "🎟️ {NAME} from {LOCATION} just generated a QR code for {APP}!",
-            socialProofSeeing: "👀 {NAME} from {LOCATION} is now seeing all cards on {APP}!",
             midCtaTitle: "Ready to Dominate the Tables?",
             midCtaButton: "Yes, Claim My Advantage Now!",
             licensesLeftText: "Only",
-            personalizationText: "Perfect! We have slots left today for <strong>{APP} on {PLATFORM}</strong>. Click below to complete.",
             personalizationBanner: "Special offer for players from {COUNTRY} {FLAG}",
             offerExpired: "Expired",
             offerExpiredTitle: "🔥 You Missed the Main Offer!",
             offerExpiredText: "But you're in luck. For a short time, you can still get a 5% discount. Use code <strong>5OFF</strong> before this also expires.",
             offerExpiredButton: "Apply 5% Discount",
 
-            // Dialog translations 
             registerTitle: "Register to Continue",
             emailLabel: "Email Address",
             emailPlaceholder: "Enter your email address",
-            usernameLabel: "Username",
-            usernamePlaceholder: "Choose a username (min. 3 characters)",
             countryLabel: "Country",
             countrySelectPlaceholder: "Select your country",
             registerButton: "Register & Continue",
             emailValidationError: "Please enter a valid email address.",
-            usernameValidationError: "Username must be at least 3 characters.",
             countryValidationError: "Please select your country.",
-            platformDialogTitle: "Select Your Device",
-            platformDialogText: "Choose the platform you'll be using Reveal App on:",
+            platformDialogTitle: "Select Your Device & Poker App",
+            platformDialogText: "Choose your platform and the poker app you'll be using:",
             platformAndroid: "Android",
             platformIOS: "iOS",
             uniqueIdDialogTitle: "Your Unique ID",
-            uniqueIdDialogText: "This is your unique ID. Please save it as you'll need it for activation:",
+            uniqueIdDialogText: "This is your unique ID. Please save it, you'll need it for activation:",
             copyIdButton: "Copy ID",
             copiedText: "Copied!",
             continueButton: "Continue",
-            pokerAppDialogTitle: "Select Poker App",
-            pokerAppDialogText: "Choose the poker app you want to use Reveal App with:",
-            couponDialogTitle: "Your Personalized Offer",
-            couponDialogText: "If you have a coupon code, enter it below.",
-            couponPlaceholder: "Enter coupon code",
             paymentMethodDialogTitle: "Select Payment Method",
             paymentMethodDialogText: "Choose your preferred payment method:",
             paymentDialogTitle: "Payment Details",
-            applyCouponButton: "Apply",
             proceedButton: "Proceed to Payment",
             loadingPaymentText: "Getting price...",
             paymentInstructionsReservation: "Your order is reserved for:",
-            paymentInstructionsSend: "Send the exact amount to the address below. No banks, no traces—you are in control.",
+            paymentInstructionsSend: "Send the exact amount to the address below. The unique cents value helps us identify your payment instantly.",
             paymentInstructionsSecurity: "Payment is 100% decentralized via blockchain. If activation fails, your payment is returned via crypto. You have our guarantee.",
             amountToSendLabel: "Amount to Send:",
             cryptoAmountLabel: "In {CRYPTO}:",
             networkLabel: "Network:",
-            qrCodeScanText: "Scan with your wallet app",
             copyAddressButton: "Copy Address",
-            alertCopied: "Address copied to clipboard!",
-            alertCopyFailed: "Failed to copy address.",
             paymentDoneButton: "I have made the payment",
-            couponErrorInvalid: "Invalid or expired coupon code.",
-            couponAppliedSuccess: "Coupon '{COUPON_CODE}' applied! You get a {DISCOUNT}% discount.",
             amountTextBase: "Amount: {LOCAL_PRICE} ({USD_PRICE})",
-            originalAmountLabel: "Original",
             paymentDialogTitleFinal: "Complete Your Payment",
             
-            // Payment Confirmation Page 
-            telegramInstructionsTitle: "Send Your ID to Admin via Telegram",
-            telegramInstructionsText: "To complete your activation, please copy your unique ID below and send it to our administrator via Telegram:",
+            telegramInstructionsTitle: "Final Step: Activate Your License",
+            telegramInstructionsText: "Your payment is being processed. To complete your activation, please send your unique ID to our administrator via Telegram:",
             telegramStep1Title: "1. Copy Your Unique ID",
-            telegramStep1Desc: "Click the 'Copy ID' button above.",
+            telegramStep1Desc: "Click the 'Copy ID' button below.",
             telegramStep2Title: "2. Open Telegram",
             telegramStep2Desc: "Click the button below to contact our admin.",
             telegramStep3Title: "3. Send Your ID",
-            telegramStep3Desc: "Paste your ID in the chat to receive activation instructions.",
-            openTelegramButton: "Open Telegram",
+            telegramStep3Desc: "Paste your ID in the chat to receive your personalized activation instructions in minutes.",
+            openTelegramButton: "Contact Support on Telegram",
         },
         pt: {
             pageTitle: "Reveal App: A Vantagem Definitiva para PPPOKER, XPoker e ClubGG",
             navFeatures: "Recursos",
             navHowItWorks: "Como Funciona",
             navDemo: "Demo",
-            navStory: "Nossa História",
             navTestimonials: "Depoimentos",
+            navFaq: "Dúvidas",
             navGetApp: "Obtenha Sua Vantagem",
             welcomeUser: "Olá, {USER}",
             heroTitle: "Pare de Jogar no Escuro. Veja as Cartas e Multiplique Seus Ganhos.",
@@ -763,9 +708,6 @@
             demoPPPOKERTitle: "Demonstração PPPOKER",
             demoXPokerTitle: "Demonstração XPoker",
             demoClubGGTitle: "Demonstração ClubGG",
-            storyTitle: "Nossa História: Como Quebramos o Código",
-            storyText: "Tudo começou com uma série de derrotas inesperadas, o que deu início a uma busca para descobrir vulnerabilidades ocultas em aplicativos de poker populares como PPPOKER e XPoker. Após meses de pesquisa rigorosa, revelamos falhas críticas que estavam sendo exploradas. Em novembro de 2023, nasceu o <strong>Reveal App</strong>, capacitando os jogadores a nivelar o campo de jogo, revelando as cartas dos oponentes.",
-            storyCallToAction: "Isso não é apenas uma ferramenta - é uma revolução. Jogadores de todo o mundo estão ganhando uma vantagem estratégica, e agora é a sua vez de transformar seu jogo. <strong>Aja agora, porque cada mão sem este aplicativo é dinheiro perdido!</strong>",
             testimonialsTitle: "Prova do Círculo dos Vencedores",
             testimonial1Quote: "Este aplicativo mudou completamente o meu jogo. De um jogador que empatava, passei a ser consistentemente lucrativo. Ver as cartas é uma vantagem inacreditável.",
             testimonial1Author: "Alex R.",
@@ -773,10 +715,6 @@
             testimonial2Author: "Maria S.",
             testimonial3Quote: "O melhor investimento que fiz no poker. Pagou-se em uma única sessão. Altamente recomendado para jogadores sérios.",
             testimonial3Author: "João D.",
-            testimonial4Quote: "Finalmente, uma ferramenta que dá uma vantagem real. A equipe de suporte também é fantástica, muito prestativa no processo de configuração.",
-            testimonial4Author: "Kenji T.",
-            testimonial5Quote: "Jogar sem ele parece jogar às cegas. Se você não está usando o Reveal App, está deixando dinheiro na mesa. Simples assim.",
-            testimonial5Author: "David L.",
             getAppTitle: "Ative Sua Vantagem Injusta Agora",
             getAppText: "Cada mão que você joga sem o Reveal App é uma oportunidade perdida. É hora de investir no seu sucesso.",
             urgencyText: "⚠️ Restam apenas",
@@ -785,6 +723,17 @@
             secureBadge: "100% Seguro & Indetectável",
             satisfactionGuaranteeBadge: "Satisfação Garantida",
             dataPrivacyBadge: "Privacidade de Dados",
+            faqTitle: "Perguntas Frequentes",
+            faq1Question: "Este aplicativo é seguro? Posso ser banido?",
+            faq1Answer: "Sim, é 100% seguro. O Reveal App opera como um assistente externo e não modifica os arquivos do aplicativo de poker, tornando-o completamente indetectável pelos sistemas de segurança. Temos milhares de usuários que jogam com segurança há meses sem nenhum problema.",
+            faq2Question: "Como funciona o processo de pagamento?",
+            faq2Answer: "Usamos criptomoedas para pagamentos para garantir seu completo anonimato e segurança. O processo é simples: você seleciona sua cripto preferida (USDT, BTC, ETH), envia o valor exato para o endereço fornecido e, em seguida, entra em contato com nosso suporte no Telegram com seu ID exclusivo para finalizar a ativação.",
+            faq3Question: "Este é um pagamento único ou uma assinatura?",
+            faq3Answer: "Este é um pagamento único para uma licença vitalícia. Você receberá todas as futuras atualizações para o aplicativo de poker escolhido sem custo adicional.",
+            faq4Question: "Quanto tempo leva a ativação após o pagamento?",
+            faq4Answer: "A ativação é muito rápida. Depois de enviar seu ID exclusivo para nosso suporte 24/7 no Telegram, o processo geralmente é concluído em menos de 5 a 10 minutos.",
+            faq5Question: "E se eu precisar de ajuda ou tiver um problema?",
+            faq5Answer: "Nossa equipe de suporte VIP está disponível 24/7 no Telegram. Estamos comprometidos com o seu sucesso e ajudaremos com qualquer dúvida, desde a instalação até o uso.",
             contactTitle: "Entre em Contato",
             contactText: "Tem dúvidas ou precisa de ajuda? Nossa equipe de suporte 24/7 está pronta para ajudá-lo a começar com o Reveal App.",
             contactTelegram: "Contato no Telegram",
@@ -793,51 +742,33 @@
             footerLinksTitle: "Links Rápidos",
             footerLinkFeatures: "Recursos",
             footerLinkHowItWorks: "Como Funciona",
-            footerLinkPricing: "Preços",
             footerLinkContact: "Contato",
             footerConnectTitle: "Conecte-se Conosco",
             footerRights: "Todos os Direitos Reservados. O seu sucesso é a nossa missão.",
             footerDisclaimer: "Aviso: Esta ferramenta é um assistente externo. Use com responsabilidade e esteja ciente dos termos de serviço das plataformas de poker que você utiliza.",
 
-            // New/Improved Translations 
-            stickyBarTextActive: "🔥 Oferta Especial <strong>10OFF</strong> Expira Em:",
+            stickyBarTextActive: "🔥 Oferta Especial Expira Em:",
             stickyBarTextExpired: "Oferta principal expirou! Garanta <strong>5% OFF</strong> agora!",
-            scarcityPopupTitle: "⚠️ Apenas {SLOTS} licenças disponíveis para hoje!",
-            scarcityPopupText: "Garanta a sua agora para desbloquear o Reveal App antes que acabem.",
-            scarcityPopupButton: "Garantir Minha Licença",
-            timedPopupTitle: "🎯 Vagas Extras Liberadas!",
-            timedPopupText: "Por tempo limitado, abrimos algumas vagas extras. Garanta sua vantagem antes que desapareçam novamente!",
-            timedPopupButton: "Garantir Minha Vaga Agora",
-            exitIntentTitle: "Espere! Antes de Sair...",
-            exitIntentText: "⚠️ Esta é sua única chance. Use o cupom <strong>10OFF</strong> para obter 10% de desconto em sua vantagem agora mesmo.",
-            exitIntentButton: "Aplicar Desconto e Continuar",
             socialProofAcquired: "🎉 {NAME} de {LOCATION} acabou de ativar o Reveal App para {APP}!",
-            socialProofGenerated: "🎟️ {NAME} de {LOCATION} acabou de gerar um QR code para {APP}!",
-            socialProofSeeing: "👀 {NAME} de {LOCATION} agora está vendo todas as cartas no {APP}!",
             midCtaTitle: "Pronto para Dominar as Mesas?",
             midCtaButton: "Sim, Quero a Minha Vantagem Agora!",
             licensesLeftText: "Apenas",
-            personalizationText: "Perfeito! Temos vagas restantes hoje para <strong>{APP} no {PLATFORM}</strong>. Clique abaixo para concluir.",
             personalizationBanner: "Oferta especial para jogadores do {COUNTRY} {FLAG}",
             offerExpired: "Expirada",
             offerExpiredTitle: "🔥 Você Perdeu a Oferta Principal!",
             offerExpiredText: "Mas você está com sorte. Por um curto período, ainda pode obter um desconto de 5%. Use o código <strong>5OFF</strong> antes que este também expire.",
             offerExpiredButton: "Aplicar Desconto de 5%",
 
-            // Dialog translations 
-            registerTitle: "Registre-se para Continuar",
+            registerTitle: "Cadastre-se para Continuar",
             emailLabel: "Endereço de Email",
             emailPlaceholder: "Digite seu endereço de email",
-            usernameLabel: "Nome de Usuário",
-            usernamePlaceholder: "Escolha um nome de usuário (mín. 3 caracteres)",
             countryLabel: "País",
-            countrySelectPlaceholder: "Selecione o seu país",
-            registerButton: "Registrar e Continuar",
+            countrySelectPlaceholder: "Selecione seu país",
+            registerButton: "Cadastrar e Continuar",
             emailValidationError: "Por favor, insira um email válido.",
-            usernameValidationError: "O nome de usuário deve ter pelo menos 3 caracteres.",
-            countryValidationError: "Por favor, selecione o seu país.",
-            platformDialogTitle: "Selecione seu Dispositivo",
-            platformDialogText: "Escolha a plataforma em que você usará o Reveal App:",
+            countryValidationError: "Por favor, selecione um país.",
+            platformDialogTitle: "Selecione seu Dispositivo e App de Poker",
+            platformDialogText: "Escolha sua plataforma e o aplicativo de poker que você usará:",
             platformAndroid: "Android",
             platformIOS: "iOS",
             uniqueIdDialogTitle: "Seu ID Exclusivo",
@@ -845,135 +776,181 @@
             copyIdButton: "Copiar ID",
             copiedText: "Copiado!",
             continueButton: "Continuar",
-            pokerAppDialogTitle: "Selecione o App de Poker",
-            pokerAppDialogText: "Escolha o aplicativo de poker com o qual deseja usar o Reveal App:",
-            couponDialogTitle: "Sua Oferta Personalizada",
-            couponDialogText: "Se tiver um código de cupom, insira-o abaixo.",
-            couponPlaceholder: "Insira o código do cupom",
             paymentMethodDialogTitle: "Selecione o Método de Pagamento",
             paymentMethodDialogText: "Escolha o seu método de pagamento preferido:",
             paymentDialogTitle: "Detalhes do Pagamento",
-            applyCouponButton: "Aplicar",
             proceedButton: "Prosseguir para Pagamento",
             loadingPaymentText: "A obter cotação...",
             paymentInstructionsReservation: "A sua encomenda está reservada por:",
-            paymentInstructionsSend: "Envie o valor exato para o endereço abaixo. Sem bancos, sem rastros — você está no controlo.",
+            paymentInstructionsSend: "Envie o valor exato para o endereço abaixo. O valor com centavos únicos nos ajuda a identificar seu pagamento instantaneamente.",
             paymentInstructionsSecurity: "O pagamento é 100% descentralizado via blockchain. Se a ativação falhar, seu pagamento é devolvido via cripto. Você tem nossa garantia.",
             amountToSendLabel: "Valor a Enviar:",
             cryptoAmountLabel: "Em {CRYPTO}:",
             networkLabel: "Rede:",
-            qrCodeScanText: "Escaneie com seu app de carteira",
             copyAddressButton: "Copiar Endereço",
-            alertCopied: "Endereço copiado para a área de transferência!",
-            alertCopyFailed: "Falha ao copiar o endereço.",
             paymentDoneButton: "Eu fiz o pagamento",
-            couponErrorInvalid: "Código de cupom inválido ou expirado.",
-            couponAppliedSuccess: "Cupom '{COUPON_CODE}' aplicado! Você recebeu {DISCOUNT}% de desconto.",
             amountTextBase: "Valor: {LOCAL_PRICE} ({USD_PRICE})",
-            originalAmountLabel: "Original",
             paymentDialogTitleFinal: "Conclua seu Pagamento",
-
-            // Payment Confirmation Page 
-            telegramInstructionsTitle: "Envie o seu ID para o Admin via Telegram",
-            telegramInstructionsText: "Para completar a sua ativação, por favor, copie o seu ID exclusivo abaixo e envie para o nosso administrador via Telegram:",
-            telegramStep1Title: "1. Copie o seu ID Exclusivo",
-            telegramStep1Desc: "Clique no botão 'Copiar ID' acima.",
+            
+            telegramInstructionsTitle: "Passo Final: Ative Sua Licença",
+            telegramInstructionsText: "Seu pagamento está sendo processado. Para completar sua ativação, por favor, envie seu ID exclusivo para nosso administrador via Telegram:",
+            telegramStep1Title: "1. Copie seu ID Exclusivo",
+            telegramStep1Desc: "Clique no botão 'Copiar ID' abaixo.",
             telegramStep2Title: "2. Abra o Telegram",
-            telegramStep2Desc: "Clique no botão abaixo para contactar o nosso administrador.",
-            telegramStep3Title: "3. Envie o seu ID",
-            telegramStep3Desc: "Cole o seu ID na conversa para receber as instruções de ativação.",
-            openTelegramButton: "Abrir Telegram",
+            telegramStep2Desc: "Clique no botão abaixo para contatar nosso administrador.",
+            telegramStep3Title: "3. Envie seu ID",
+            telegramStep3Desc: "Cole seu ID na conversa para receber suas instruções de ativação personalizadas em minutos.",
+            openTelegramButton: "Contatar Suporte no Telegram",
         },
         es: {
-            // Spanish translations... (same structure as en/pt)
             pageTitle: "Reveal App: La Ventaja Definitiva para PPPOKER, XPoker y ClubGG",
             navFeatures: "Características",
             navHowItWorks: "Cómo Funciona",
             navDemo: "Demo",
-            navStory: "Nuestra Historia",
             navTestimonials: "Testimonios",
+            navFaq: "Preguntas",
             navGetApp: "Obtén tu Ventaja",
             welcomeUser: "Bienvenido, {USER}",
             heroTitle: "Deja de Jugar a Ciegas. Ve sus Cartas y Multiplica tus Ganancias.",
             heroTagline: "Mientras otros confían en la suerte, tú jugarás con información perfecta. Más de 1,200 jugadores están ganando ahora mismo en PPPOKER, XPoker y ClubGG. ¿Por qué no tú?",
             heroCta: "Activar Mi Ventaja Ahora",
-            // ... all other keys translated to Spanish
-        },
-        'zh-CN': {
-            // Mandarin Chinese translations...
-            pageTitle: "Reveal App: PPPOKER、XPoker 和 ClubGG 的终极优势",
-            navFeatures: "功能",
-            navHowItWorks: "运作方式",
-            navDemo: "演示",
-            navStory: "我们的故事",
-            navTestimonials: "推荐",
-            navGetApp: "获取优势",
-            welcomeUser: "欢迎, {USER}",
-            heroTitle: "不要再盲目玩牌。看到他们的牌并倍增您的奖金。",
-            heroTagline: "当别人还在凭运气时，您将拥有完美的信息。超过1200名玩家正在PPPOKER、XPoker和ClubGG上盈利。为什么不是您？",
-            heroCta: "立即激活我的优势",
-            // ... all other keys translated to Mandarin
-        },
-        hi: {
-            // Hindi translations...
-            pageTitle: "रिवील ऐप: PPPOKER, XPoker, और ClubGG के लिए अंतिम लाभ",
-            navFeatures: "विशेषताएँ",
-            navHowItWorks: "यह कैसे काम करता है",
-            navDemo: "डेमो",
-            navStory: "हमारी कहानी",
-            navTestimonials: "प्रशंसापत्र",
-            navGetApp: "अपना लाभ प्राप्त करें",
-            welcomeUser: "स्वागत है, {USER}",
-            heroTitle: "अंधेरे में खेलना बंद करें। उनके कार्ड देखें और अपनी जीत को गुणा करें।",
-            heroTagline: "जबकि अन्य भाग्य पर भरोसा करते हैं, आप सही जानकारी के साथ खेलेंगे। 1,200 से अधिक खिलाड़ी अभी PPPOKER, XPoker और ClubGG पर लाभ कमा रहे हैं। आप क्यों नहीं?",
-            heroCta: "मेरा लाभ अभी सक्रिय करें",
-            // ... all other keys translated to Hindi
-        },
-        ar: {
-            // Arabic translations...
-            pageTitle: "تطبيق Reveal: الميزة المطلقة لـ PPPOKER و XPoker و ClubGG",
-            navFeatures: "الميزات",
-            navHowItWorks: "كيف يعمل",
-            navDemo: "عرض",
-            navStory: "قصتنا",
-            navTestimonials: "الشهادات",
-            navGetApp: "احصل على ميزتك",
-            welcomeUser: "مرحباً، {USER}",
-            heroTitle: "توقف عن اللعب في الظلام. شاهد بطاقاتهم وضاعف أرباحك.",
-            heroTagline: "بينما يعتمد الآخرون على الحظ، ستلعب بمعلومات مثالية. أكثر من 1200 لاعب يحققون أرباحًا الآن على PPPOKER و XPoker و ClubGG. لماذا ليس أنت؟",
-            heroCta: "قم بتفعيل ميزتي الآن",
-            // ... all other keys translated to Arabic
-        },
-        ru: {
-            // Russian translations...
-            pageTitle: "Reveal App: Максимальное преимущество для PPPOKER, XPoker и ClubGG",
-            navFeatures: "Функции",
-            navHowItWorks: "Как это работает",
-            navDemo: "Демо",
-            navStory: "Наша история",
-            navTestimonials: "Отзывы",
-            navGetApp: "Получить преимущество",
-            welcomeUser: "Добро пожаловать, {USER}",
-            heroTitle: "Хватит играть вслепую. Видьте их карты и умножайте свои выигрыши.",
-            heroTagline: "Пока другие полагаются на удачу, вы будете играть с полной информацией. Более 1200 игроков уже получают прибыль на PPPOKER, XPoker и ClubGG. Почему не вы?",
-            heroCta: "Активировать мое преимущество сейчас",
-            // ... all other keys translated to Russian
+            counterPlayers: "Jugadores Activos HOY",
+            counterWinnings: "Ganancias Solo Esta Semana",
+            counterSatisfaction: "Tasa de Satisfacción",
+            featuresTitle: "¿Por Qué Reveal App es Tu Ventaja Injusta?",
+            feature1Title: "Ve Todas las Manos",
+            feature1Text: "Sin Reveal App: ganas el 20% de las manos. Con Reveal App: 80%. Transforma la incertidumbre en ganancias y toma decisiones seguras y ganadoras.",
+            feature2Title: "Dominio Multiplataforma",
+            feature2Text: "Funciona a la perfección como asistente externo para PPPOKER, XPoker y ClubGG tanto en Android como en iOS.",
+            feature3Title: "100% Indetectable",
+            feature3Text: "Juega con cero riesgo. Nuestra tecnología garantiza que tu ventaja permanezca en completo secreto y tu cuenta siempre segura.",
+            feature4Title: "Ganancias Constantes",
+            feature4Text: "Convierte cada sesión en una ganadora. Con información perfecta, tomarás la decisión óptima, cada vez.",
+            feature5Title: "Siempre por Delante",
+            feature5Text: "Mantente a la vanguardia con actualizaciones continuas que se adaptan a los cambios de la plataforma, asegurando que tu ventaja se mantenga nítida e ininterrumpida.",
+            feature6Title: "Soporte VIP 24/7",
+            feature6Text: "Obtén asistencia personalizada y prioritaria de nuestro equipo de expertos en menos de 5 minutos a través de Telegram. Estamos comprometidos con tu éxito.",
+            howItWorksTitle: "Pasos Sencillos para Dominar",
+            step1Title: "Elige Tu Plan",
+            step1Text: "Selecciona el acceso a Reveal App que se ajuste a tus necesidades.",
+            step2Title: "Obtén Tu ID Único",
+            step2Text: "Recibe tu ID privado para una activación segura.",
+            step3Title: "Activa y Juega",
+            step3Text: "¡Sigue instrucciones sencillas para activar y empezar a ver las cartas al instante!",
+            step4Title: "Gana Constantemente",
+            step4Text: "Disfruta de tu nueva ventaja y observa cómo crecen tus ganancias sesión tras sesión.",
+            demoTitle: "Ver la App en Acción",
+            demoText: "Observa cómo nuestro asistente externo te da la ventaja definitiva. Así es como se ve ganar:",
+            demoPPPOKERTitle: "Demostración de PPPOKER",
+            demoXPokerTitle: "Demostración de XPoker",
+            demoClubGGTitle: "Demostración de ClubGG",
+            testimonialsTitle: "Pruebas del Círculo de Ganadores",
+            testimonial1Quote: "Esta aplicación cambió mi juego por completo. Pasé de ser un jugador de punto de equilibrio a ser consistentemente rentable. Ver las cartas es una ventaja increíble.",
+            testimonial1Author: "Alex R.",
+            testimonial2Quote: "Al principio era escéptico, pero Reveal App cumplió. Es fácil de configurar y funciona sin problemas. Mi tasa de victorias se ha disparado.",
+            testimonial2Author: "María S.",
+            testimonial3Quote: "La mejor inversión que he hecho en el póker. Se pagó sola en una sola sesión. Muy recomendable para jugadores serios.",
+            testimonial3Author: "Juan D.",
+            getAppTitle: "Activa Tu Ventaja Injusta Ahora",
+            getAppText: "Cada mano que juegas sin Reveal App es una oportunidad perdida. Es hora de invertir en tu éxito.",
+            urgencyText: "⚠️ Solo quedan",
+            urgencyText2: "licencias a este precio. Después, las ventas se cerrarán hasta el próximo lote.",
+            getAppButton: "Sí, Quiero Ganar Más",
+            secureBadge: "100% Seguro e Indetectable",
+            satisfactionGuaranteeBadge: "Satisfacción Garantizada",
+            dataPrivacyBadge: "Privacidad de Datos",
+            faqTitle: "Preguntas Frecuentes",
+            faq1Question: "¿Es segura esta aplicación? ¿Me pueden banear?",
+            faq1Answer: "Sí, es 100% segura. Reveal App funciona como un asistente externo y no modifica los archivos de la aplicación de póker, lo que la hace completamente indetectable por sus sistemas de seguridad. Tenemos miles de usuarios que han jugado de forma segura durante meses sin ningún problema.",
+            faq2Question: "¿Cómo funciona el proceso de pago?",
+            faq2Answer: "Utilizamos criptomonedas para los pagos para garantizar tu completo anonimato y seguridad. El proceso es simple: seleccionas tu cripto preferida (USDT, BTC, ETH), envías la cantidad exacta a la dirección proporcionada y luego contactas a nuestro soporte en Telegram con tu ID único para finalizar la activación.",
+            faq3Question: "¿Es un pago único o una suscripción?",
+            faq3Answer: "Este es un pago único por una licencia de por vida. Recibirás todas las futuras actualizaciones para la aplicación de póker que elijas sin costo adicional.",
+            faq4Question: "¿Cuánto tarda la activación después de pagar?",
+            faq4Answer: "La activación es muy rápida. Después de que envíes tu ID único a nuestro soporte 24/7 en Telegram, el proceso generalmente se completa en menos de 5-10 minutos.",
+            faq5Question: "¿Qué pasa si necesito ayuda o tengo un problema?",
+            faq5Answer: "Nuestro equipo de soporte VIP está disponible 24/7 en Telegram. Estamos comprometidos con tu éxito y te ayudaremos con cualquier pregunta, desde la instalación hasta el uso.",
+            contactTitle: "Contáctanos",
+            contactText: "¿Tienes preguntas o necesitas ayuda? Nuestro equipo de soporte 24/7 está listo para ayudarte a comenzar con Reveal App.",
+            contactTelegram: "Contactar en Telegram",
+            footerAboutTitle: "Acerca de Reveal App",
+            footerAboutText: "Reveal App proporciona una ventaja estratégica en el póker en línea al permitirte ver las cartas de los oponentes en PPPOKER, XPoker y ClubGG. Juega más inteligentemente, gana más grande.",
+            footerLinksTitle: "Enlaces Rápidos",
+            footerLinkFeatures: "Características",
+            footerLinkHowItWorks: "Cómo Funciona",
+            footerLinkContact: "Contacto",
+            footerConnectTitle: "Conéctate con Nosotros",
+            footerRights: "Todos los Derechos Reservados. Tu éxito es nuestra misión.",
+            footerDisclaimer: "Descargo de responsabilidad: Esta herramienta es un asistente externo. Úsala de manera responsable y sé consciente de los términos de servicio de las plataformas de póker que utilizas.",
+
+            stickyBarTextActive: "🔥 Oferta Especial Termina En:",
+            stickyBarTextExpired: "¡La oferta principal ha expirado! ¡Obtén un <strong>5% de descuento</strong> ahora!",
+            socialProofAcquired: "🎉 ¡{NAME} de {LOCATION} acaba de activar Reveal App para {APP}!",
+            midCtaTitle: "¿Listo para Dominar las Mesas?",
+            midCtaButton: "¡Sí, Reclamo Mi Ventaja Ahora!",
+            licensesLeftText: "Solo",
+            personalizationBanner: "Oferta especial para jugadores de {COUNTRY} {FLAG}",
+            offerExpired: "Expirada",
+            offerExpiredTitle: "🔥 ¡Te Perdiste la Oferta Principal!",
+            offerExpiredText: "Pero tienes suerte. Por un corto tiempo, todavía puedes obtener un 5% de descuento. Usa el código <strong>5OFF</strong> antes de que este también expire.",
+            offerExpiredButton: "Aplicar 5% de Descuento",
+
+            registerTitle: "Regístrate para Continuar",
+            emailLabel: "Dirección de Correo Electrónico",
+            emailPlaceholder: "Introduce tu dirección de correo electrónico",
+            countryLabel: "País",
+            countrySelectPlaceholder: "Selecciona tu país",
+            registerButton: "Registrarse y Continuar",
+            emailValidationError: "Por favor, introduce un correo electrónico válido.",
+            countryValidationError: "Por favor, selecciona un país.",
+            platformDialogTitle: "Selecciona tu Dispositivo y App de Póker",
+            platformDialogText: "Elige tu plataforma y la aplicación de póker que usarás:",
+            platformAndroid: "Android",
+            platformIOS: "iOS",
+            uniqueIdDialogTitle: "Tu ID Único",
+            uniqueIdDialogText: "Este es tu ID único. Por favor, guárdalo, lo necesitarás para la activación:",
+            copyIdButton: "Copiar ID",
+            copiedText: "¡Copiado!",
+            continueButton: "Continuar",
+            paymentMethodDialogTitle: "Selecciona el Método de Pago",
+            paymentMethodDialogText: "Elige tu método de pago preferido:",
+            paymentDialogTitle: "Detalles del Pago",
+            proceedButton: "Proceder al Pago",
+            loadingPaymentText: "Obteniendo precio...",
+            paymentInstructionsReservation: "Tu pedido está reservado por:",
+            paymentInstructionsSend: "Envía la cantidad exacta a la dirección de abajo. El valor con centavos únicos nos ayuda a identificar tu pago instantáneamente.",
+            paymentInstructionsSecurity: "El pago es 100% descentralizado a través de blockchain. Si la activación falla, tu pago se devuelve a través de cripto. Tienes nuestra garantía.",
+            amountToSendLabel: "Cantidad a Enviar:",
+            cryptoAmountLabel: "En {CRYPTO}:",
+            networkLabel: "Red:",
+            copyAddressButton: "Copiar Dirección",
+            paymentDoneButton: "He realizado el pago",
+            amountTextBase: "Monto: {LOCAL_PRICE} ({USD_PRICE})",
+            paymentDialogTitleFinal: "Completa Tu Pago",
+            
+            telegramInstructionsTitle: "Paso Final: Activa Tu Licencia",
+            telegramInstructionsText: "Tu pago se está procesando. Para completar tu activación, por favor envía tu ID único a nuestro administrador a través de Telegram:",
+            telegramStep1Title: "1. Copia tu ID Único",
+            telegramStep1Desc: "Haz clic en el botón 'Copiar ID' de abajo.",
+            telegramStep2Title: "2. Abre Telegram",
+            telegramStep2Desc: "Haz clic en el botón de abajo para contactar a nuestro administrador.",
+            telegramStep3Title: "3. Envía tu ID",
+            telegramStep3Desc: "Pega tu ID en el chat para recibir tus instrucciones de activación personalizadas en minutos.",
+            openTelegramButton: "Contactar Soporte en Telegram",
         }
     };
     
     // --- Localized Social Proof Data --- 
     const socialProofData = {
-        "de": { names: ["Klaus", "Hans", "Müller", "Lukas", "Leon", "Finn", "Jonas", "Maximilian"], cities: ["Berlin", "Hamburg", "Munich", "Cologne", "Frankfurt"], flag: "🇩🇪", country: "Germany" },
-        "it": { names: ["Giovanni", "Marco", "Luca", "Alessandro", "Francesco", "Matteo", "Andrea", "Simone"], cities: ["Roma", "Milano", "Napoli", "Torino", "Palermo"], flag: "🇮🇹", country: "Italy" },
-        "us": { names: ["James Smith", "Michael Brown", "William Jones", "David Miller", "Daniel Wilson", "Matthew Anderson", "Christopher Jackson", "Joshua Harris", "Andrew Thompson", "Joseph Martinez", "Benjamin Clark", "Samuel Lewis", "Jonathan Young", "Alexander Scott", "Nicholas King", "Ethan Wright", "Ryan Walker", "Henry Hall", "Jack Allen", "Logan Adams"], cities: ["New York", "Miami", "Los Angeles", "Chicago", "Houston", "Las Vegas"], flag: "🇺🇸", country: "the USA" },
-        "ru": { names: ["Дмитрий Иванов", "Алексей Петров", "Сергей Смирнов", "Владимир Кузнецов", "Андрей Попов", "Михаил Соколов", "Николай Лебедев", "Игорь Морозов", "Роман Волков", "Евгений Орлов"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
-        "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Matheus", "Pedro", "Guilherme", "Rafael"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Salvador", "Brasília", "Curitiba"], flag: "�🇷", country: "Brasil" },
-        "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei", "Liu Yang", "Chen Hao", "Yang Li", "Huang Ming", "Zhao Lei", "Wu Jing", "Zhou Lin", "Xu Dong", "Sun Qi", "Ma Jun", "Zhu Peng", "Hu Yong", "Guo Feng", "He Tao", "Gao Xin", "Lin Yu", "Luo Jie"], cities: ["Shanghai", "Beijing", "Chongqing", "Tianjin", "Guangzhou"], flag: "🇨🇳", country: "China" },
-        "es": { names: ["José Luis", "Juan Carlos", "Francisco Javier", "Luis Miguel", "Diego Armando", "Alejandro Martín", "Antonio José", "Manuel Alejandro", "Carlos Alberto", "Sergio Enrique", "Miguel Ángel", "Jorge Eduardo", "Pedro Antonio", "Ricardo Felipe", "Andrés Sebastián", "Álvaro Ignacio", "Javier Nicolás", "Guillermo Rodrigo", "Fernando Esteban", "Rafael Adrián"], cities: ["Madrid", "Barcelona", "Mexico City", "Buenos Aires", "Bogotá"], flag: "🇪🇸", country: "Spain" },
-        "in": { names: ["Aarav Sharma", "Vivaan Singh", "Aditya Kumar", "Krish Mehta", "Aryan Joshi", "Rohan Nair", "Siddharth Choudhary", "Arjun Rana", "Manav Goel", "Yash Kapoor", "Raj Malhotra", "Kunal Bansal", "Nikhil Rathi", "Saurabh Tripathi", "Harsh Vardhan", "Mohit Khanna", "Pranav Saxena", "Shubham Agrawal", "Tushar Sinha", "Abhinav Chauhan"], cities: ["Mumbai", "Delhi", "Bangalore", "Kolkata", "Chennai"], flag: "🇮🇳", country: "India" },
-        "sa": { names: ["Ahmed Ali", "Omar Hassan", "Yusuf Ibrahim", "Samir Nasser", "Khalid Mansour", "Mustafa Said", "Rami Abdul", "Tariq Saleh", "Hassan Tawfiq", "Ali Rashed"], cities: ["Riyadh", "Jeddah", "Cairo", "Dubai", "Casablanca"], flag: "🇸🇦", country: "Saudi Arabia" },
-        "fr": { names: ["Jean", "Pierre", "Michel", "André", "Philippe", "Louis", "Nicolas", "Julien"], cities: ["Paris", "Marseille", "Lyon", "Toulouse"], flag: "🇫🇷", country: "France" },
-        "ca": { names: ["Liam", "Noah", "William", "James", "Benjamin", "Lucas", "Henry", "Ethan"], cities: ["Toronto", "Montreal", "Vancouver", "Calgary"], flag: "🇨🇦", country: "Canada" }
+        "de": { names: ["Klaus", "Lukas", "Finn"], cities: ["Berlin", "Hamburg", "Munich"], flag: "🇩🇪", country: "Germany" },
+        "it": { names: ["Giovanni", "Marco", "Luca"], cities: ["Roma", "Milano", "Napoli"], flag: "🇮🇹", country: "Italy" },
+        "us": { names: ["James", "Michael", "David"], cities: ["New York", "Miami", "Las Vegas"], flag: "🇺🇸", country: "the USA" },
+        "ru": { names: ["Дмитрий", "Алексей", "Сергей"], cities: ["Moscow", "St. Petersburg", "Novosibirsk"], flag: "🇷🇺", country: "Russia" },
+        "br": { names: ["Paulo", "Thiago", "Lucas"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte"], flag: "🇧🇷", country: "Brasil" },
+        "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei"], cities: ["Shanghai", "Beijing", "Guangzhou"], flag: "🇨🇳", country: "China" },
+        "es": { names: ["José", "Juan", "Diego"], cities: ["Madrid", "Barcelona", "Mexico City"], flag: "🇪🇸", country: "Spain" },
+        "fr": { names: ["Jean", "Pierre", "Michel"], cities: ["Paris", "Marseille", "Lyon"], flag: "🇫🇷", country: "France" },
+        "ca": { names: ["Liam", "Noah", "William"], cities: ["Toronto", "Montreal", "Vancouver"], flag: "🇨🇦", country: "Canada" }
     };
 
 
@@ -985,9 +962,8 @@
     // --- Core Application Logic --- 
     document.addEventListener('DOMContentLoaded', () => {
         // --- DATA ---
-        const countrySalaryData = {
-            "AL": { salary: 701, currency: "ALL", lang: "sq" }, "DZ": { salary: 267, currency: "DZD", lang: "ar" }, "DE": { salary: 3984, currency: "EUR", lang: "de" }, "AD": { salary: 1273, currency: "EUR", lang: "ca" }, "AG": { salary: 857, currency: "XCD", lang: "en" }, "SA": { salary: 2002, currency: "SAR", lang: "ar" }, "AR": { salary: 413, currency: "ARS", lang: "es" }, "AM": { salary: 688, currency: "AMD", lang: "hy" }, "AU": { salary: 4218, currency: "AUD", lang: "en" }, "AT": { salary: 4798, currency: "EUR", lang: "de" }, "AZ": { salary: 549, currency: "AZN", lang: "az" }, "BB": { salary: 1084, currency: "BBD", lang: "en" }, "BY": { salary: 637, currency: "BYN", lang: "be" }, "BE": { salary: 5108, currency: "EUR", lang: "nl" }, "BA": { salary: 927, currency: "BAM", lang: "bs" }, "BR": { salary: 800, currency: "BRL", lang: "pt" }, "BG": { salary: 947, currency: "BGN", lang: "bg" }, "CA": { salary: 5081, currency: "CAD", lang: "en" }, "KZ": { salary: 673, currency: "KZT", lang: "kk" }, "CL": { salary: 684, currency: "CLP", lang: "es" }, "CN": { salary: 1122, currency: "CNY", lang: "zh-CN" }, "CY": { salary: 2555, currency: "EUR", lang: "el" }, "CO": { salary: 311, currency: "COP", lang: "es" }, "KR": { salary: 2180, currency: "KRW", lang: "ko" }, "CR": { salary: 722, currency: "CRC", lang: "es" }, "HR": { salary: 959, currency: "EUR", lang: "hr" }, "DK": { salary: 5642, currency: "DKK", lang: "da" }, "EC": { salary: 791, currency: "USD", lang: "es" }, "SK": { salary: 1512, currency: "EUR", lang: "sk" }, "SI": { salary: 3058, currency: "EUR", lang: "sl" }, "ES": { salary: 2879, currency: "EUR", lang: "es" }, "US": { salary: 6455, currency: "USD", lang: "en" }, "EE": { salary: 1981, currency: "EUR", lang: "et" }, "PH": { salary: 306, currency: "PHP", lang: "tl" }, "FI": { salary: 4090, currency: "EUR", lang: "fi" }, "FR": { salary: 3655, currency: "EUR", lang: "fr" }, "GE": { salary: 707, currency: "GEL", lang: "ka" }, "GR": { salary: 1417, currency: "EUR", lang: "el" }, "GL": { salary: 4665, currency: "DKK", lang: "kl" }, "GG": { salary: 3011, currency: "GBP", lang: "en" }, "NL": { salary: 4581, currency: "EUR", lang: "nl" }, "HK": { salary: 2828, currency: "HKD", lang: "zh-HK" }, "HU": { salary: 1189, currency: "HUF", lang: "hu" }, "YE": { salary: 200, currency: "YER", lang: "ar" }, "MV": { salary: 920, currency: "MVR", lang: "dv" }, "IN": { salary: 569, currency: "INR", lang: "hi" }, "ID": { salary: 340, currency: "IDR", lang: "id" }, "IR": { salary: 307, currency: "IRR", lang: "fa" }, "IQ": { salary: 538, currency: "IQD", lang: "ar" }, "IE": { salary: 4622, currency: "EUR", lang: "en" }, "IS": { salary: 6441, currency: "ISK", lang: "is" }, "IL": { salary: 3608, currency: "ILS", lang: "he" }, "IT": { salary: 2924, currency: "EUR", lang: "it" }, "JM": { salary: 616, currency: "JMD", lang: "en" }, "JP": { salary: 2503, currency: "JPY", lang: "ja" }, "JO": { salary: 619, currency: "JOD", lang: "ar" }, "KG": { salary: 360, currency: "KGS", lang: "ky" }, "KI": { salary: 658, currency: "AUD", lang: "en" }, "KW": { salary: 2026, currency: "KWD", lang: "ar" }, "LV": { salary: 1303, currency: "EUR", lang: "lv" }, "LB": { salary: 837, currency: "LBP", lang: "ar" }, "LY": { salary: 275, currency: "LYD", lang: "ar" }, "LI": { salary: 4321, currency: "CHF", lang: "de" }, "LT": { salary: 2173, currency: "EUR", lang: "lt" }, "LU": { salary: 6633, currency: "EUR", lang: "fr" }, "MK": { salary: 965, currency: "MKD", lang: "mk" }, "MY": { salary: 855, currency: "MYR", lang: "ms" }, "MT": { salary: 1216, currency: "EUR", lang: "mt" }, "MA": { salary: 394, currency: "MAD", lang: "ar" }, "MU": { salary: 501, currency: "MUR", lang: "en" }, "MX": { salary: 704, currency: "MXN", lang: "es" }, "MD": { salary: 672, currency: "MDL", lang: "ro" }, "ME": { salary: 929, currency: "EUR", lang: "sr" }, "NO": { salary: 5665, currency: "NOK", lang: "no" }, "NZ": { salary: 2983, currency: "NZD", lang: "en" }, "PS": { salary: 778, currency: "ILS", lang: "ar" }, "PA": { salary: 717, currency: "PAB", lang: "es" }, "PE": { salary: 414, currency: "PEN", lang: "es" }, "PL": { salary: 1416, currency: "PLN", lang: "pl" }, "PR": { salary: 1788, currency: "USD", lang: "es" }, "PT": { salary: 1983, currency: "EUR", lang: "pt" }, "QA": { salary: 3937, currency: "QAR", lang: "ar" }, "KE": { salary: 385, currency: "KES", lang: "sw" }, "GB": { salary: 4179, currency: "GBP", lang: "en" }, "DO": { salary: 383, currency: "DOP", lang: "es" }, "CZ": { salary: 2013, currency: "CZK", lang: "cs" }, "RO": { salary: 1306, currency: "RON", lang: "ro" }, "RU": { salary: 936, currency: "RUB", lang: "ru" }, "WS": { salary: 1402, currency: "WST", lang: "sm" }, "SM": { salary: 3237, currency: "EUR", lang: "it" }, "RS": { salary: 925, currency: "RSD", lang: "sr" }, "SG": { salary: 4350, currency: "SGD", lang: "en" }, "ZA": { salary: 1362, currency: "ZAR", lang: "en" }, "SE": { salary: 3977, currency: "SEK", lang: "sv" }, "CH": { salary: 8111, currency: "CHF", lang: "de" }, "TH": { salary: 543, currency: "THB", lang: "th" }, "TW": { salary: 1521, currency: "TWD", lang: "zh-TW" }, "TJ": { salary: 160, currency: "TJS", lang: "tg" }, "TT": { salary: 785, currency: "TTD", lang: "en" }, "TN": { salary: 303, currency: "TND", lang: "ar" }, "TM": { salary: 401, currency: "TMT", lang: "tk" }, "TR": { salary: 917, currency: "TRY", lang: "tr" }, "UA": { salary: 477, currency: "UAH", lang: "uk" }, "UY": { salary: 1122, currency: "UYU", lang: "es" }, "UZ": { salary: 324, currency: "UZS", lang: "uz" }, "VU": { salary: 1241, currency: "VUV", lang: "bi" },
-        };
+        // Base salaries as of Jan 1, 2024. The script will dynamically add $0.50 per day since then.
+        const countrySalaryData = { "AL":{s:701,c:"ALL",l:"sq"},"DZ":{s:267,c:"DZD",l:"ar"},"DE":{s:3984,c:"EUR",l:"de"},"AD":{s:1273,c:"EUR",l:"ca"},"SA":{s:2002,c:"SAR",l:"ar"},"AR":{s:413,c:"ARS",l:"es"},"AU":{s:4218,c:"AUD",l:"en"},"AT":{s:4798,c:"EUR",l:"de"},"AZ":{s:549,c:"AZN",l:"az"},"BE":{s:5108,c:"EUR",l:"nl"},"BA":{s:927,c:"BAM",l:"bs"},"BR":{s:800,c:"BRL",l:"pt"},"BG":{s:947,c:"BGN",l:"bg"},"CA":{s:5081,c:"CAD",l:"en"},"KZ":{s:673,c:"KZT",l:"kk"},"CL":{s:684,c:"CLP",l:"es"},"CN":{s:1122,c:"CNY",l:"zh-CN"},"CY":{s:2555,c:"EUR",l:"el"},"CO":{s:311,c:"COP",l:"es"},"KR":{s:2180,c:"KRW",l:"ko"},"CR":{s:722,c:"CRC",l:"es"},"HR":{s:959,c:"EUR",l:"hr"},"DK":{s:5642,c:"DKK",l:"da"},"EC":{s:791,c:"USD",l:"es"},"SK":{s:1512,c:"EUR",l:"sk"},"SI":{s:3058,c:"EUR",l:"sl"},"ES":{s:2879,c:"EUR",l:"es"},"US":{s:6455,c:"USD",l:"en"},"EE":{s:1981,c:"EUR",l:"et"},"PH":{s:306,c:"PHP",l:"tl"},"FI":{s:4090,c:"EUR",l:"fi"},"FR":{s:3655,c:"EUR",l:"fr"},"GR":{s:1417,c:"EUR",l:"el"},"NL":{s:4581,c:"EUR",l:"nl"},"HK":{s:2828,c:"HKD",l:"zh-HK"},"HU":{s:1189,c:"HUF",l:"hu"},"IN":{s:569,c:"INR",l:"hi"},"ID":{s:340,c:"IDR",l:"id"},"IE":{s:4622,c:"EUR",l:"en"},"IS":{s:6441,c:"ISK",l:"is"},"IL":{s:3608,c:"ILS",l:"he"},"IT":{s:2924,c:"EUR",l:"it"},"JP":{s:2503,c:"JPY",l:"ja"},"LV":{s:1303,c:"EUR",l:"lv"},"LT":{s:2173,c:"EUR",l:"lt"},"LU":{s:6633,c:"EUR",l:"fr"},"MY":{s:855,c:"MYR",l:"ms"},"MT":{s:1216,c:"EUR",l:"mt"},"MX":{s:704,c:"MXN",l:"es"},"NO":{s:5665,c:"NOK",l:"no"},"NZ":{s:2983,c:"NZD",l:"en"},"PA":{s:717,c:"PAB",l:"es"},"PE":{s:414,c:"PEN",l:"es"},"PL":{s:1416,c:"PLN",l:"pl"},"PR":{s:1788,c:"USD",l:"es"},"PT":{s:1983,c:"EUR",l:"pt"},"QA":{s:3937,c:"QAR",l:"ar"},"GB":{s:4179,c:"GBP",l:"en"},"CZ":{s:2013,c:"CZK",l:"cs"},"RO":{s:1306,c:"RON",l:"ro"},"RU":{s:936,c:"RUB",l:"ru"},"SG":{s:4350,c:"SGD",l:"en"},"ZA":{s:1362,c:"ZAR",l:"en"},"SE":{s:3977,c:"SEK",l:"sv"},"CH":{s:8111,c:"CHF",l:"de"},"TH":{s:543,c:"THB",l:"th"},"TR":{s:917,c:"TRY",l:"tr"},"UA":{s:477,c:"UAH",l:"uk"}};
 
         const App = {
             // --- STATE ---
@@ -997,14 +973,13 @@
                 userCountryName: 'your country',
                 userCountryFlag: '🌍',
                 exchangeRates: null,
-                isDialogActive: false, // Prevents multiple popups
+                isDialogActive: false,
+                dailySalaryBonus: 0,
             },
             purchaseState: {
                 basePriceUSD: 0,
-                discount: 0,
                 finalPriceUSD: 0,
                 email: null,
-                username: null,
                 platform: null,
                 uniqueId: null,
                 app: null,
@@ -1017,7 +992,6 @@
                 countdownInterval: null,
                 paymentCountdownInterval: null,
                 socialProofTimeout: null,
-                exitIntentTriggered: false,
                 isOfferExpired: false,
             },
 
@@ -1026,8 +1000,8 @@
                 currentYear: document.getElementById('current-year'),
                 featuresGrid: document.getElementById('features-grid'),
                 howItWorksGrid: document.getElementById('how-it-works-grid'),
-                storyContainer: document.getElementById('story-container'),
                 testimonialsContainer: document.getElementById('testimonials-container'),
+                faqContainer: document.getElementById('faq-container'),
                 mobileMenu: document.getElementById('mobile-menu'),
                 mobileMenuButton: document.getElementById('mobile-menu-button'),
                 mobileMenuClose: document.getElementById('mobile-menu-close'),
@@ -1060,10 +1034,11 @@
             // Initialization
             async init() {
                 this.dom.currentYear.textContent = new Date().getFullYear();
+                this.calculateDailySalaryBonus();
                 
-                await this.fetchInitialData(); // Fetch location and rates first
+                await this.fetchInitialData();
                 
-                this.initLanguage(); // Then set language based on fetched data or browser preference
+                this.initLanguage();
                 this.initEventListeners();
                 this.initUserSession();
                 this.initStaticCounters();
@@ -1073,12 +1048,24 @@
                 setInterval(() => this.updateLiveCounters(), 10000);
             },
 
+            calculateDailySalaryBonus() {
+                const baseDate = new Date('2024-01-01T00:00:00Z');
+                const today = new Date();
+                const diffTime = Math.abs(today - baseDate);
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                this.state.dailySalaryBonus = diffDays * 0.50; // $0.50 bonus per day
+            },
+
+            getAdjustedSalary(baseSalary) {
+                return baseSalary + this.state.dailySalaryBonus;
+            },
+
             async fetchInitialData() {
                 const savedCountryCode = localStorage.getItem('userCountryCode');
                 if (savedCountryCode) {
                     this.updateUserStateFromCountry(savedCountryCode);
                 } else {
-                    await this.fetchBrowserLocation();
+                    await this.fetchUserLocation();
                 }
 
                 try {
@@ -1092,20 +1079,15 @@
                 }
             },
 
-            async fetchBrowserLocation() {
-                // Using a reliable IP-based geolocation service as a primary method
-                await this.fetchIpData();
-            },
-
-            async fetchIpData() {
+            async fetchUserLocation() {
                  try {
                     const geoResponse = await fetch('https://ipapi.co/json/');
                     if (!geoResponse.ok) throw new Error('IP-based geolocation fetch failed');
                     const geoData = await geoResponse.json();
                     this.updateUserStateFromCountry(geoData.country_code);
                 } catch (error) {
-                    console.warn("Could not fetch IP geolocation data, falling back to defaults.", error);
-                    this.updateUserStateFromCountry('US'); // Default to US
+                    console.warn("Could not fetch IP geolocation data, falling back to default.", error);
+                    this.updateUserStateFromCountry(null); // Set to null to force user selection
                 }
             },
             
@@ -1131,14 +1113,6 @@
                     });
                 });
 
-                // Exit Intent
-                document.documentElement.addEventListener('mouseleave', (e) => {
-                    if (e.clientY < 10 && !this.urgencyState.exitIntentTriggered) {
-                        this.urgencyState.exitIntentTriggered = true;
-                        this.showExitIntentPopup();
-                    }
-                });
-
                 // Back to Top Button
                 window.addEventListener('scroll', () => {
                     if (window.scrollY > 300) {
@@ -1158,12 +1132,7 @@
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
                             if (entry.target.id === 'counter-satisfaction') this.animateSatisfactionBar();
-                            // Make header sticky logic more robust
-                            if (entry.target.classList.contains('hero')) {
-                                this.dom.stickyBar.classList.add('hidden');
-                                this.dom.mainHeader.style.top = '0';
-                            }
-                            observer.unobserve(entry.target); // Unobserve after animation
+                            observer.unobserve(entry.target);
                         }
                     });
                 }, { threshold: 0.1 });
@@ -1176,14 +1145,12 @@
                      });
                 }, { threshold: 0 });
 
-
                 document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
                 heroObserver.observe(document.querySelector('.hero'));
             },
 
             initUrgencyFeatures() {
                 this.initializeDailySlots();
-                setTimeout(() => this.showTimedPopup(), 45000);
                 this.initializeCountdown();
                 this.scheduleSocialProof();
             },
@@ -1191,16 +1158,15 @@
             initializeCountdown() {
                 if (this.urgencyState.countdownInterval) clearInterval(this.urgencyState.countdownInterval);
                 
+                let offerEndTime = localStorage.getItem('offerEndTime');
                 const now = new Date().getTime();
-                let offerEndTimeStr = localStorage.getItem('offerEndTime');
-                let offerEndTime = offerEndTimeStr ? parseInt(offerEndTimeStr, 10) : 0;
 
-                if (!offerEndTime || isNaN(offerEndTime) || now > offerEndTime) {
-                    offerEndTime = now + (4 * 3600 * 1000) + (23 * 60 * 1000) + (19 * 1000);
+                if (!offerEndTime || now > parseInt(offerEndTime, 10)) {
+                    offerEndTime = now + (4 * 3600 * 1000) + (23 * 60 * 1000) + (19 * 1000); // 4h 23m 19s
                     localStorage.setItem('offerEndTime', offerEndTime.toString());
                 }
 
-                const durationInSeconds = Math.round((offerEndTime - now) / 1000);
+                const durationInSeconds = Math.round((parseInt(offerEndTime, 10) - now) / 1000);
 
                 if (durationInSeconds > 0) {
                     this.urgencyState.isOfferExpired = false;
@@ -1208,7 +1174,6 @@
                     this.urgencyState.countdownInterval = this.startCountdown(durationInSeconds, this.dom.countdownTimer, () => {
                         this.urgencyState.isOfferExpired = true;
                         this.handleExpiredOffer();
-                        this.showOfferExpiredPopup();
                     });
                 } else {
                     this.urgencyState.isOfferExpired = true;
@@ -1225,12 +1190,9 @@
                         return;
                     }
                     timer--;
-                    let hours = parseInt(timer / 3600, 10);
-                    let minutes = parseInt((timer % 3600) / 60, 10);
-                    let seconds = parseInt(timer % 60, 10);
-                    hours = hours < 10 ? "0" + hours : hours;
-                    minutes = minutes < 10 ? "0" + minutes : minutes;
-                    seconds = seconds < 10 ? "0" + seconds : seconds;
+                    let hours = String(parseInt(timer / 3600, 10)).padStart(2, '0');
+                    let minutes = String(parseInt((timer % 3600) / 60, 10)).padStart(2, '0');
+                    let seconds = String(parseInt(timer % 60, 10)).padStart(2, '0');
                     if (displayElement) displayElement.textContent = `${hours}:${minutes}:${seconds}`;
                 }, 1000);
                 return intervalId;
@@ -1241,43 +1203,11 @@
                 if (this.dom.countdownTimer) this.dom.countdownTimer.textContent = "";
             },
 
-            showOfferExpiredPopup() {
-                if (this.state.isDialogActive) return;
-                const content = `
-                    <div class="text-center">
-                        <div class="text-5xl mb-4">⏳</div>
-                        <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('offerExpiredTitle')}</h3>
-                        <p class="text-gray-300 mb-6 text-lg">${this.getTranslatedString('offerExpiredText')}</p>
-                        <button id="expired-offer-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('offerExpiredButton')}</button>
-                    </div>`;
-                this.showDialog(content);
-                document.getElementById('expired-offer-cta').onclick = () => {
-                    this.closeDialog();
-                    this.startPurchaseFlow();
-                    setTimeout(() => {
-                        const couponInput = document.getElementById('coupon-input');
-                        if (couponInput) {
-                            couponInput.value = '5OFF';
-                            this.applyCoupon();
-                        }
-                    }, 500);
-                };
-            },
-
             initializeDailySlots() {
                 const todayStr = new Date().toISOString().split('T')[0];
                 let slotData = JSON.parse(localStorage.getItem('slotData'));
                 if (!slotData || slotData.date !== todayStr) {
-                    const daySeed = parseInt(todayStr.replace(/-/g, ''));
-                    const initialSlots = Math.floor(this.seededRandom(daySeed) * (15 - 7 + 1)) + 7;
-                    slotData = { date: todayStr, currentSlots: initialSlots, lastHourlyCheck: new Date().getTime(), extraSlotsAwarded: false };
-                } else {
-                    const now = new Date().getTime();
-                    const hoursPassed = Math.floor((now - slotData.lastHourlyCheck) / (1000 * 60 * 60));
-                    if (hoursPassed > 0) {
-                        slotData.currentSlots = Math.max(2, slotData.currentSlots - hoursPassed);
-                        slotData.lastHourlyCheck = now;
-                    }
+                    slotData = { date: todayStr, currentSlots: Math.floor(Math.random() * (15 - 7 + 1)) + 7 };
                 }
                 localStorage.setItem('slotData', JSON.stringify(slotData));
                 this.updateSlotsUI(slotData.currentSlots);
@@ -1285,61 +1215,8 @@
 
             updateSlotsUI(slots) {
                 [this.dom.slotsLeftHero, this.dom.slotsLeftMid, this.dom.slotsLeftMain].forEach(el => {
-                    if (el) {
-                        el.textContent = slots;
-                        const container = this.dom.urgencyTextContainer;
-                        if (container) {
-                            container.classList.toggle('text-red-600', slots < 5);
-                            container.classList.toggle('animate-ping', slots < 5);
-                            container.classList.toggle('text-red-500', slots >= 5);
-                        }
-                    }
+                    if (el) el.textContent = slots;
                 });
-            },
-            
-            showTimedPopup() {
-                if (this.state.isDialogActive) return; // Do not show if another dialog is active
-                let slotData = JSON.parse(localStorage.getItem('slotData'));
-                if (slotData && !slotData.extraSlotsAwarded) {
-                    slotData.currentSlots += 2;
-                    slotData.extraSlotsAwarded = true;
-                    localStorage.setItem('slotData', JSON.stringify(slotData));
-                    this.updateSlotsUI(slotData.currentSlots);
-                    const content = `
-                        <div class="text-center">
-                            <div class="text-5xl mb-4">🎯</div>
-                            <h3 class="text-2xl font-bold mb-2 text-yellow-400">${this.getTranslatedString('timedPopupTitle')}</h3>
-                            <p class="text-gray-300 mb-6">${this.getTranslatedString('timedPopupText')}</p>
-                            <a href="#get-app" id="timed-popup-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('timedPopupButton')}</a>
-                        </div>`;
-                    this.showDialog(content);
-                    document.getElementById('timed-popup-cta').addEventListener('click', () => {
-                        this.closeDialog();
-                        document.querySelector('#get-app').scrollIntoView({ behavior: 'smooth' });
-                    });
-                }
-            },
-
-            showExitIntentPopup() {
-                if (this.state.isDialogActive) return; // Do not show if another dialog is active
-                const content = `
-                    <div class="text-center">
-                        <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('exitIntentTitle')}</h3>
-                        <p class="text-gray-300 mb-6 text-lg">${this.getTranslatedString('exitIntentText')}</p>
-                        <button id="exit-intent-cta" class="cta-button font-bold py-3 px-6 rounded-lg">${this.getTranslatedString('exitIntentButton')}</button>
-                    </div>`;
-                this.showDialog(content);
-                document.getElementById('exit-intent-cta').onclick = () => {
-                    this.closeDialog();
-                    this.startPurchaseFlow();
-                    setTimeout(() => {
-                        const couponInput = document.getElementById('coupon-input');
-                        if (couponInput && !this.urgencyState.isOfferExpired) {
-                            couponInput.value = '10OFF';
-                            this.applyCoupon();
-                        }
-                    }, 500);
-                };
             },
             
             scheduleSocialProof() {
@@ -1351,15 +1228,14 @@
             },
 
             showSocialProofNotification() {
+                if (this.state.isDialogActive) return;
                 const langKeys = Object.keys(socialProofData);
                 const randomLangKey = langKeys[Math.floor(Math.random() * langKeys.length)];
                 const data = socialProofData[randomLangKey];
                 const name = data.names[Math.floor(Math.random() * data.names.length)];
                 const location = data.cities[Math.floor(Math.random() * data.cities.length)];
                 const app = ['PPPOKER', 'XPoker', 'ClubGG'][Math.floor(Math.random() * 3)];
-                const actions = ['socialProofAcquired', 'socialProofGenerated', 'socialProofSeeing'];
-                const actionKey = actions[Math.floor(Math.random() * actions.length)];
-                const text = this.getTranslatedString(actionKey, {NAME: name, LOCATION: location, APP: app});
+                const text = this.getTranslatedString('socialProofAcquired', {NAME: name, LOCATION: location, APP: app});
                 const notification = document.createElement('div');
                 notification.className = 'social-proof-notification bg-gray-800/90 backdrop-blur-sm border border-gray-700 rounded-lg p-4 shadow-lg flex items-center space-x-3 mb-3';
                 notification.innerHTML = `<div>${data.flag} ${text}</div>`;
@@ -1370,30 +1246,14 @@
                     setTimeout(() => notification.remove(), 500);
                 }, 5000);
             },
-
-            seededRandom(seed) {
-                var m = 0x80000000, a = 1103515245, c = 12345;
-                var state = seed;
-                state = (a * state + c) % m;
-                return state / (m - 1);
-            },
-
-            ensureNoRepeatingEndDigits(number) {
-                const numStr = String(Math.round(number));
-                if (numStr.length > 1 && numStr[numStr.length - 1] === numStr[numStr.length - 2]) return Math.round(number) + 1;
-                return Math.round(number);
-            },
             
             initStaticCounters() {
-                const today = new Date();
-                const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
-                const satisfaction = 98.50 + this.seededRandom(daySeed) * 0.5;
+                const satisfaction = 98.7;
                 if (this.dom.counterSatisfaction) {
-                    this.dom.counterSatisfaction.textContent = `${satisfaction.toFixed(1)}%`;
-                    this.dom.satisfactionBar.dataset.percent = satisfaction.toFixed(1);
+                    this.dom.counterSatisfaction.textContent = `${satisfaction}%`;
+                    this.dom.satisfactionBar.dataset.percent = satisfaction;
                 }
-                const weeklyWinnings = 148000 + this.seededRandom(daySeed) * 25000;
-                if (this.dom.counterWinnings) this.dom.counterWinnings.textContent = this.formatWinnings(weeklyWinnings);
+                if (this.dom.counterWinnings) this.dom.counterWinnings.textContent = `$${(150).toLocaleString()}K+`;
             },
 
             animateSatisfactionBar() {
@@ -1404,25 +1264,10 @@
             },
 
             updateLiveCounters() {
-                const today = new Date();
-                const daySeed = parseInt(today.toISOString().split('T')[0].replace(/-/g, ''));
-                const timePassed = today.getTime() - new Date(today.toISOString().split('T')[0]).getTime();
-                const MIN_PLAYERS = 1276, MAX_PLAYERS = 1550;
-                const twoMinuteIntervals = Math.floor(timePassed / 120000);
-                const intervalSeed = daySeed + twoMinuteIntervals;
-                let playerCount = MIN_PLAYERS + this.seededRandom(intervalSeed) * (MAX_PLAYERS - MIN_PLAYERS);
-                if (Math.floor((timePassed / 1000) % 120) >= 60) {
-                    const fluctuationSeed = intervalSeed * 3;
-                    playerCount += this.seededRandom(fluctuationSeed) < 0.5 ? 20 : -27;
+                if (this.dom.counterPlayers) {
+                    const playerCount = 1200 + Math.floor(Math.random() * 300);
+                    this.dom.counterPlayers.textContent = `+${playerCount.toLocaleString()}`;
                 }
-                playerCount = this.ensureNoRepeatingEndDigits(Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, playerCount)));
-                if (this.dom.counterPlayers) this.dom.counterPlayers.textContent = `+${playerCount.toLocaleString()}`;
-            },
-
-            formatWinnings(amount) {
-                if (amount >= 1000000) return `$${(amount / 1000000).toFixed(2)}M+`;
-                if (amount >= 1000) return `$${Math.round(amount / 1000)}K+`;
-                return `$${amount}`;
             },
 
             initLanguage() {
@@ -1433,7 +1278,7 @@
                         userLang = browserLang;
                     } else {
                         const countryData = countrySalaryData[this.state.userCountryCode];
-                        userLang = (countryData && translations[countryData.lang]) ? countryData.lang : 'en'; // Default to English
+                        userLang = (countryData && translations[countryData.l]) ? countryData.l : 'en';
                     }
                 }
                 this.setLanguage(userLang);
@@ -1444,22 +1289,18 @@
                 document.documentElement.lang = lang;
                 this.populateAllDynamicContent();
                 this.showPersonalizationBanner();
-                this.updateUserSessionUI(); // Update UI after language change
+                this.updateUserSessionUI();
                 document.querySelectorAll("[data-translate]").forEach(el => {
                     const key = el.dataset.translate;
                     if (!key) return;
                     const translation = this.getTranslatedString(key);
-                    if (['storyText', 'storyCallToAction', 'exitIntentText', 'offerExpiredText', 'stickyBarTextActive', 'stickyBarTextExpired'].includes(key)) {
-                        el.innerHTML = translation; 
-                    } else {
-                        el.textContent = translation;
-                    }
+                    el.innerHTML = translation; 
                 });
                 document.title = this.getTranslatedString('pageTitle');
             },
 
             showPersonalizationBanner() {
-                if (this.dom.personalizationBanner) {
+                if (this.dom.personalizationBanner && this.state.userCountryName !== 'your country') {
                     this.dom.personalizationBanner.innerHTML = this.getTranslatedString('personalizationBanner', { COUNTRY: this.state.userCountryName, FLAG: this.state.userCountryFlag });
                 }
             },
@@ -1474,8 +1315,8 @@
             populateAllDynamicContent() {
                 this.populateFeatures();
                 this.populateHowItWorks();
-                this.populateStory();
                 this.populateTestimonials();
+                this.populateFaq();
             },
 
             populateFeatures() {
@@ -1503,23 +1344,17 @@
                         <p class="text-gray-400">${this.getTranslatedString(`step${i}Text`)}</p>
                     </div>`).join('');
             },
-
-            populateStory() {
-                const container = this.dom.storyContainer;
-                if (!container) return;
-                container.innerHTML = `<p class="text-lg text-gray-300 mb-6">${this.getTranslatedString('storyText')}</p><p class="text-xl text-yellow-400 font-semibold">${this.getTranslatedString('storyCallToAction')}</p>`;
-            },
             
             populateTestimonials() {
                  const container = this.dom.testimonialsContainer;
                  if(!container) return;
-                 const testimonialsData = [ { key: 1, flag: "🇺🇸" }, { key: 2, flag: "🇧🇷" }, { key: 3, flag: "🇪🇺" }, { key: 4, flag: "🇯🇵" }, { key: 5, flag: "🇷🇺" } ];
+                 const testimonialsData = [ { key: 1, flag: "🇺🇸" }, { key: 2, flag: "🇧🇷" }, { key: 3, flag: "🇪🇸" } ];
                  container.innerHTML = testimonialsData.map(({key, flag}, i) => `
                     <div class="testimonial-card animate-on-scroll" style="transition-delay: ${i * 100}ms;">
                         <i class="fas fa-quote-left text-yellow-400 text-2xl mb-4" aria-hidden="true"></i>
                         <p class="text-gray-400 mb-4">${this.getTranslatedString(`testimonial${key}Quote`)}</p>
                         <div class="flex items-center">
-                            <img loading="lazy" src="https://placehold.co/40x40/1f2937/ffffff?text=${this.getTranslatedString(`testimonial${key}Author`)[0]}" class="w-10 h-10 rounded-full mr-4" alt="User photo for ${this.getTranslatedString(`testimonial${key}Author`)}">
+                            <img loading="lazy" src="https://i.pravatar.cc/40?u=user${key}" class="w-10 h-10 rounded-full mr-4" alt="User photo for ${this.getTranslatedString(`testimonial${key}Author`)}">
                             <div>
                                 <p class="font-semibold">${this.getTranslatedString(`testimonial${key}Author`)}</p>
                                 <p class="text-sm text-gray-400">${flag}</p>
@@ -1528,18 +1363,23 @@
                     </div>`).join('');
             },
 
+            populateFaq() {
+                const container = this.dom.faqContainer;
+                if (!container) return;
+                container.innerHTML = [1, 2, 3, 4, 5].map((i, index) => `
+                    <details class="faq-item animate-on-scroll" style="transition-delay: ${index * 100}ms;">
+                        <summary class="font-semibold text-lg list-none relative pr-8">
+                            ${this.getTranslatedString(`faq${i}Question`)}
+                            <i class="fas fa-chevron-down absolute right-0 top-1/2 -translate-y-1/2 transition-transform duration-300"></i>
+                        </summary>
+                        <p class="text-gray-400 mt-4">${this.getTranslatedString(`faq${i}Answer`)}</p>
+                    </details>
+                `).join('');
+            },
+
             toggleBackgroundElements(show) {
-                const elements = [
-                    this.dom.stickyBar,
-                    this.dom.mainHeader,
-                    this.dom.backToTopButton,
-                    this.dom.floatingChatWidget
-                ];
-                elements.forEach(el => {
-                    if (el) {
-                        el.style.display = show ? '' : 'none';
-                    }
-                });
+                const elements = [ this.dom.stickyBar, this.dom.mainHeader, this.dom.backToTopButton, this.dom.floatingChatWidget ];
+                elements.forEach(el => { if (el) el.style.display = show ? '' : 'none'; });
             },
 
             showDialog(content) {
@@ -1556,37 +1396,27 @@
                 this.dom.dialogContainer.innerHTML = '';
             },
 
-            // --- USER SESSION (LOCAL LOGIN) ---
             initUserSession() {
                 this.updateUserSessionUI();
             },
 
             updateUserSessionUI() {
-                const username = localStorage.getItem("username");
+                const email = localStorage.getItem("userEmail");
                 const desktopContainer = this.dom.userSessionContainer;
                 const mobileContainer = this.dom.mobileUserSessionContainer;
-
                 let desktopHTML, mobileHTML;
-
-                if (username) {
-                    const welcomeText = this.getTranslatedString('welcomeUser', { USER: username });
-                    desktopHTML = `
-                        <span class="text-gray-300">${welcomeText}</span>
-                    `;
-                    mobileHTML = `
-                        <div class="text-center mb-4 text-gray-300">${welcomeText}</div>
-                    `;
+                if (email) {
+                    const welcomeText = this.getTranslatedString('welcomeUser', { USER: email.split('@')[0] });
+                    desktopHTML = `<span class="text-gray-300">${welcomeText}</span>`;
+                    mobileHTML = `<div class="text-center mb-4 text-gray-300">${welcomeText}</div>`;
                 } else {
                     const getAppText = this.getTranslatedString('navGetApp');
                     desktopHTML = `<a href="#get-app" class="cta-button font-bold py-2 px-5 rounded-lg">${getAppText}</a>`;
                     mobileHTML = `<a href="#get-app" class="cta-button text-center font-bold py-2 px-5 rounded-lg mt-4">${getAppText}</a>`;
                 }
-
                 desktopContainer.innerHTML = desktopHTML;
                 mobileContainer.innerHTML = mobileHTML;
-
-                if (!username) {
-                    // Re-attach listeners for mobile menu closing if needed
+                if (!email) {
                     document.querySelectorAll('#mobile-user-session-container a').forEach(link => {
                          link.addEventListener('click', () => this.dom.mobileMenu.classList.replace('translate-x-0', '-translate-x-full'));
                     });
@@ -1595,13 +1425,10 @@
             
             startPurchaseFlow() {
                 const email = localStorage.getItem("userEmail");
-                const username = localStorage.getItem("username");
-                const country = localStorage.getItem("userCountryCode");
+                const countryCode = localStorage.getItem("userCountryCode");
 
-                if (email && username && country) {
+                if (email && countryCode) {
                     this.purchaseState.email = email;
-                    this.purchaseState.username = username;
-                    this.updateUserStateFromCountry(country);
                     this.showPlatformDialog();
                 } else {
                     this.showRegistrationDialog();
@@ -1619,13 +1446,8 @@
                     <div class="space-y-4">
                         <div>
                             <label for="email-input" class="block mb-2 text-sm font-medium">${this.getTranslatedString('emailLabel')}</label>
-                            <input type="email" id="email-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${this.getTranslatedString('emailPlaceholder')}" required>
-                             <p id="email-validation-message" class="text-red-500 text-sm mt-1 h-4"></p>
-                        </div>
-                        <div>
-                            <label for="username-input" class="block mb-2 text-sm font-medium">${this.getTranslatedString('usernameLabel')}</label>
-                            <input type="text" id="username-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${this.getTranslatedString('usernamePlaceholder')}" required>
-                            <p id="username-validation-message" class="text-red-500 text-sm mt-1 h-4"></p>
+                            <input type="email" id="email-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${this.getTranslatedString('emailPlaceholder')}" required value="${localStorage.getItem('userEmail') || ''}">
+                            <p id="email-validation-message" class="text-red-500 text-sm mt-1 h-4"></p>
                         </div>
                         <div>
                             <label for="country-input" class="block mb-2 text-sm font-medium">${this.getTranslatedString('countryLabel')}</label>
@@ -1638,34 +1460,27 @@
                         <button id="submit-registration-btn" class="w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('registerButton')}</button>
                     </div>`;
                 this.showDialog(content);
+                // Pre-select country if available
+                const countryInput = document.getElementById('country-input');
                 if (this.state.userCountryCode) {
-                    document.getElementById('country-input').value = this.state.userCountryCode;
+                    countryInput.value = this.state.userCountryCode;
                 }
                 document.getElementById('submit-registration-btn').onclick = () => this.submitRegistration();
             },
             
             submitRegistration() {
                 const emailInput = document.getElementById("email-input");
-                const usernameInput = document.getElementById("username-input");
                 const countryInput = document.getElementById("country-input");
                 const emailError = document.getElementById("email-validation-message");
-                const usernameError = document.getElementById("username-validation-message");
                 const countryError = document.getElementById("country-validation-message");
-                
+
                 let isValid = true;
-                
+
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
                     emailError.textContent = this.getTranslatedString('emailValidationError');
                     isValid = false;
                 } else {
                     emailError.textContent = '';
-                }
-
-                if (usernameInput.value.length < 3) {
-                    usernameError.textContent = this.getTranslatedString('usernameValidationError');
-                    isValid = false;
-                } else {
-                    usernameError.textContent = '';
                 }
 
                 if (countryInput.value === "") {
@@ -1677,28 +1492,25 @@
 
                 if(isValid) {
                     localStorage.setItem("userEmail", emailInput.value);
-                    localStorage.setItem("username", usernameInput.value);
                     localStorage.setItem("userCountryCode", countryInput.value);
-
                     this.purchaseState.email = emailInput.value;
-                    this.purchaseState.username = usernameInput.value;
                     this.updateUserStateFromCountry(countryInput.value);
                     
-                    this.updateUserSessionUI(); // Update header immediately
+                    this.updateUserSessionUI();
                     this.showPlatformDialog();
                 }
             },
 
             updateUserStateFromCountry(countryCode) {
+                if (!countryCode) return;
                 const countryData = countrySalaryData[countryCode];
                 if (countryData) {
                     this.state.userCountryCode = countryCode;
-                    this.state.userCurrency = countryData.currency;
+                    this.state.userCurrency = countryData.c;
                     this.state.userCountryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(countryCode);
                     this.state.userCountryFlag = countryCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-                    
-                    const lang = countryData.lang;
-                    if (translations[lang] && !localStorage.getItem('language')) { // only set if not manually changed
+                    const lang = countryData.l;
+                    if (translations[lang] && !localStorage.getItem('language')) {
                         this.setLanguage(lang);
                     }
                 }
@@ -1708,24 +1520,55 @@
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('platformDialogTitle')}</h3>
                     <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('platformDialogText')}</p>
-                    <div class="flex justify-center space-x-4">
-                        <button id="select-android" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-android mr-2"></i><span>${this.getTranslatedString('platformAndroid')}</span></button>
-                        <button id="select-ios" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition"><i class="fab fa-apple mr-2"></i><span>${this.getTranslatedString('platformIOS')}</span></button>
-                    </div>`;
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <button id="select-android" class="platform-btn bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"><i class="fab fa-android"></i><span>${this.getTranslatedString('platformAndroid')}</span></button>
+                        <button id="select-ios" class="platform-btn bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition flex items-center justify-center gap-2"><i class="fab fa-apple"></i><span>${this.getTranslatedString('platformIOS')}</span></button>
+                    </div>
+                    <div class="grid grid-cols-1 gap-3">
+                        <button id="select-pppoker" class="app-btn w-full bg-red-600/80 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition">PPPOKER</button>
+                        <button id="select-xpoker" class="app-btn w-full bg-blue-600/80 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition">XPoker</button>
+                        <button id="select-clubgg" class="app-btn w-full bg-green-600/80 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition">ClubGG</button>
+                    </div>
+                    <button id="continue-to-id" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg opacity-50" disabled>${this.getTranslatedString('continueButton')}</button>
+                    `;
                 this.showDialog(content);
-                document.getElementById('select-android').onclick = () => this.selectPlatform('Android');
-                document.getElementById('select-ios').onclick = () => this.selectPlatform('iOS');
+
+                const platformBtns = document.querySelectorAll('.platform-btn');
+                const appBtns = document.querySelectorAll('.app-btn');
+                const continueBtn = document.getElementById('continue-to-id');
+
+                const checkSelections = () => {
+                    if (this.purchaseState.platform && this.purchaseState.app) {
+                        continueBtn.disabled = false;
+                        continueBtn.classList.remove('opacity-50');
+                    }
+                };
+
+                platformBtns.forEach(btn => btn.onclick = (e) => {
+                    this.purchaseState.platform = e.currentTarget.id.includes('android') ? 'Android' : 'iOS';
+                    platformBtns.forEach(b => b.classList.remove('bg-yellow-500', 'text-black'));
+                    e.currentTarget.classList.add('bg-yellow-500', 'text-black');
+                    checkSelections();
+                });
+
+                appBtns.forEach(btn => btn.onclick = (e) => {
+                    this.purchaseState.app = e.currentTarget.textContent;
+                    appBtns.forEach(b => b.classList.remove('ring-2', 'ring-yellow-400'));
+                    e.currentTarget.classList.add('ring-2', 'ring-yellow-400');
+                    checkSelections();
+                });
+                
+                continueBtn.onclick = () => {
+                    if (this.purchaseState.platform && this.purchaseState.app) {
+                        this.showUniqueIdDialog();
+                    }
+                };
             },
             
-            selectPlatform(platform) {
-                this.purchaseState.platform = platform;
-                this.showUniqueIdDialog();
-            },
-
             showUniqueIdDialog() {
                 let uniqueId = localStorage.getItem("uniqueId");
                 if (!uniqueId) {
-                    uniqueId = Date.now().toString().slice(-9);
+                    uniqueId = Date.now().toString();
                     localStorage.setItem("uniqueId", uniqueId);
                 }
                 this.purchaseState.uniqueId = uniqueId;
@@ -1737,96 +1580,45 @@
                         <button id="copy-id-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4" aria-label="Copy Unique ID"><i class="fas fa-copy"></i></button>
                     </div>
                     <p id="copy-feedback-dialog" class="text-green-400 text-sm mt-2 h-4 text-center"></p>
-                    <button id="continue-to-poker-app" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('continueButton')}</button>`;
+                    <button id="continue-to-payment" class="mt-6 w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('continueButton')}</button>`;
                 this.showDialog(content);
                 document.getElementById('copy-id-btn').onclick = () => this.copyToClipboard(uniqueId, 'copy-feedback-dialog');
-                document.getElementById('continue-to-poker-app').onclick = () => this.showPokerAppDialog();
+                document.getElementById('continue-to-payment').onclick = () => this.calculatePriceAndShowPayment();
             },
 
-            showPokerAppDialog() {
-                const content = `
-                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('pokerAppDialogTitle')}</h3>
-                     <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('pokerAppDialogText')}</p>
-                     <div id="personalization-message" class="hidden text-center text-green-400 mb-6 font-semibold"></div>
-                    <div class="space-y-3">
-                        <button id="select-pppoker" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition">PPPOKER</button>
-                        <button id="select-xpoker" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition">XPoker</button>
-                        <button id="select-clubgg" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition">ClubGG</button>
-                    </div>`;
-                this.showDialog(content);
-                document.getElementById('select-pppoker').onclick = () => this.selectPokerApp('PPPOKER');
-                document.getElementById('select-xpoker').onclick = () => this.selectPokerApp('XPoker');
-                document.getElementById('select-clubgg').onclick = () => this.selectPokerApp('ClubGG');
-            },
-
-            selectPokerApp(app) {
-                this.purchaseState.app = app;
+            calculatePriceAndShowPayment() {
                 const countryData = countrySalaryData[this.state.userCountryCode] || countrySalaryData['US'];
-                const salary = countryData.salary;
-                const priceMultiplier = app === 'ClubGG' ? 1.6 : 1.1;
-                let calculatedPrice = salary * priceMultiplier;
-                const maxPrice = app === 'ClubGG' ? 2500 : 1600;
+                const baseSalary = countryData.s;
+                const adjustedSalary = this.getAdjustedSalary(baseSalary);
+                const priceMultiplier = this.purchaseState.app === 'ClubGG' ? 1.6 : 1.1;
+                let calculatedPrice = adjustedSalary * priceMultiplier;
+                const maxPrice = this.purchaseState.app === 'ClubGG' ? 2500 : 1600;
                 this.purchaseState.basePriceUSD = Math.min(calculatedPrice, maxPrice);
-                this.purchaseState.discount = 0;
-                this.showCouponDialog();
-            },
-
-            showCouponDialog() {
-                this.purchaseState.finalPriceUSD = this.purchaseState.basePriceUSD * (1 - this.purchaseState.discount);
-                const rate = this.state.exchangeRates[this.state.userCurrency] || 1;
-                const localPrice = this.purchaseState.finalPriceUSD * rate;
-                const localPriceFormatted = new Intl.NumberFormat(undefined, { style: 'currency', currency: this.state.userCurrency }).format(localPrice);
-                const usdPriceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.purchaseState.finalPriceUSD);
-                const priceText = this.getTranslatedString('amountTextBase', { LOCAL_PRICE: localPriceFormatted, USD_PRICE: usdPriceFormatted });
-                const content = `
-                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('couponDialogTitle')}</h3>
-                    <div class="text-center mb-4 space-y-1">
-                        <p id="final-price-display" class="text-2xl font-bold text-yellow-400">${priceText}</p>
-                    </div>
-                    <p class="text-center text-gray-400 mb-4">${this.getTranslatedString('couponDialogText')}</p>
-                    <div class="flex items-center space-x-2">
-                        <input type="text" id="coupon-input" class="w-full bg-gray-700 border border-gray-600 text-white text-sm rounded-lg p-2.5" placeholder="${this.getTranslatedString('couponPlaceholder')}">
-                        <button id="apply-coupon-btn" class="cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('applyCouponButton')}</button>
-                    </div>
-                    <p id="coupon-message" class="text-center h-5 mt-2 text-sm"></p>
-                    <button id="proceed-to-payment-method" class="mt-4 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('proceedButton')}</button>`;
-                this.showDialog(content);
-                document.getElementById('apply-coupon-btn').onclick = () => this.applyCoupon();
-                document.getElementById('proceed-to-payment-method').onclick = () => this.showPaymentMethodDialog();
-            },
-
-            applyCoupon() {
-                const couponInput = document.getElementById('coupon-input');
-                const code = couponInput.value.trim().toUpperCase();
-                let discount = 0, isValid = false;
-                if (code === 'QWERTY') { discount = 0.30; isValid = true; }
-                else if (code === '10OFF' && !this.urgencyState.isOfferExpired) { discount = 0.10; isValid = true; }
-                else if (code === '5OFF') { discount = 0.05; isValid = true; }
-                this.purchaseState.discount = isValid ? discount : 0;
-                this.showCouponDialog();
-                setTimeout(() => {
-                    const newCouponInput = document.getElementById('coupon-input');
-                    if (newCouponInput) newCouponInput.value = code;
-                    const messageEl = document.getElementById('coupon-message');
-                    if (messageEl) {
-                        if (isValid) {
-                            messageEl.textContent = this.getTranslatedString('couponAppliedSuccess', { COUPON_CODE: code, DISCOUNT: (discount * 100) });
-                            messageEl.className = 'text-center h-5 mt-2 text-sm text-green-400';
-                        } else {
-                            messageEl.textContent = this.getTranslatedString('couponErrorInvalid');
-                            messageEl.className = 'text-center h-5 mt-2 text-sm text-red-400';
-                        }
-                    }
-                }, 0);
+                this.showPaymentMethodDialog();
             },
             
+            getUniquePaymentAmount(price, uniqueId) {
+                const cents = parseInt(uniqueId.slice(-2), 10);
+                return parseFloat(price.toFixed(0)) + (cents / 100);
+            },
+
             showPaymentMethodDialog() {
+                this.purchaseState.finalPriceUSD = this.getUniquePaymentAmount(this.purchaseState.basePriceUSD, this.purchaseState.uniqueId);
+
+                const rate = this.state.exchangeRates[this.state.userCurrency] || 1;
+                const localPrice = this.purchaseState.finalPriceUSD * rate;
+                const localPriceFormatted = new Intl.NumberFormat(undefined, { style: 'currency', currency: this.state.userCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(localPrice);
+                const usdPriceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.purchaseState.finalPriceUSD);
+                
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('paymentMethodDialogTitle')}</h3>
+                    <div class="text-center mb-4 space-y-1">
+                        <p id="final-price-display" class="text-2xl font-bold text-yellow-400">${localPriceFormatted} <span class="text-lg opacity-75">(${usdPriceFormatted})</span></p>
+                    </div>
                     <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentMethodDialogText')}</p>
                     <div class="space-y-3">
                         <button id="pay-usdt" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition">USDT (TRC20)</button>
-                        <button id="pay-btc" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition">BTC</button>
+                        <button id="pay-btc" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-4 rounded-lg transition">BTC</button>
                         <button id="pay-eth" class="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg transition">ETH</button>
                     </div>`;
                 this.showDialog(content);
@@ -1862,14 +1654,14 @@
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${address}`;
                 let cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${this.getTranslatedString('loadingPaymentText')}</span></div>`;
                 if (method === 'usdt') {
-                    cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400">$${finalPriceUSD.toFixed(2)}</p>`;
+                    cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400 tabular-nums">${finalPriceUSD.toFixed(2)} USDT</p><p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>`;
                 }
 
                 const content = `
                     <h3 class="text-xl font-bold mb-2 text-center">${this.getTranslatedString('paymentDialogTitleFinal')}</h3>
                     <div class="text-center text-gray-400 mb-4">
                         <span>${this.getTranslatedString('paymentInstructionsReservation')}</span>
-                        <strong id="payment-timer" class="text-yellow-400 text-lg font-bold ml-2">30:00</strong>
+                        <strong id="payment-timer" class="text-yellow-400 text-lg font-bold ml-2 tabular-nums">30:00</strong>
                     </div>
                     <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentInstructionsSend')}</p>
                     <div id="payment-amount-container" class="text-center mb-4 min-h-[56px] flex flex-col justify-center">${cryptoAmountHTML}</div>
@@ -1887,7 +1679,7 @@
                 if(this.urgencyState.paymentCountdownInterval) clearInterval(this.urgencyState.paymentCountdownInterval);
                 const paymentTimerEl = document.getElementById('payment-timer');
                 this.urgencyState.paymentCountdownInterval = this.startCountdown(30 * 60, paymentTimerEl, () => {
-                    if(paymentTimerEl) paymentTimerEl.textContent = "Expired";
+                    if(paymentTimerEl) paymentTimerEl.textContent = this.getTranslatedString('offerExpired');
                     this.closeDialog();
                 });
                 if (method !== 'usdt') {
@@ -1895,7 +1687,7 @@
                     const paymentAmountContainer = document.getElementById('payment-amount-container');
                     if (cryptoPrice && paymentAmountContainer) {
                         const cryptoAmount = (finalPriceUSD / cryptoPrice).toFixed(8);
-                        paymentAmountContainer.innerHTML = `<p class="text-sm text-gray-400">${this.getTranslatedString('amountToSendLabel')} $${finalPriceUSD.toFixed(2)} USD</p><p class="text-2xl font-bold text-yellow-400">${cryptoAmount} ${method.toUpperCase()}</p><p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>`;
+                        paymentAmountContainer.innerHTML = `<p class="text-sm text-gray-400">${this.getTranslatedString('amountToSendLabel')} $${finalPriceUSD.toFixed(2)} USD</p><p class="text-2xl font-bold text-yellow-400 tabular-nums">${cryptoAmount} ${method.toUpperCase()}</p><p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>`;
                     } else if (paymentAmountContainer) {
                         paymentAmountContainer.innerHTML = `<p class="text-red-400">Could not fetch crypto price. Please try again.</p>`;
                     }
@@ -1921,9 +1713,7 @@
                 this.dom.mainContent.classList.add('hidden');
                 const confirmationContainer = this.dom.paymentConfirmationContent;
                 const uniqueId = this.purchaseState.uniqueId || localStorage.getItem('uniqueId');
-                const platform = this.purchaseState.platform || 'Not specified';
-                const app = this.purchaseState.app || 'Not specified';
-                const telegramMessage = `ID: ${uniqueId}\nPlatform: ${platform}\nApp: ${app}`;
+                const telegramMessage = `Activation Request\nID: ${uniqueId}\nApp: ${this.purchaseState.app}\nPlatform: ${this.purchaseState.platform}`;
                 const encodedTelegramMessage = encodeURIComponent(telegramMessage);
                 const telegramUrl = `https://t.me/bedmalcon_temp?text=${encodedTelegramMessage}`;
                 confirmationContainer.innerHTML = `
