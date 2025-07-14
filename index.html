@@ -656,6 +656,11 @@
             amountTextBase: "Amount: {LOCAL_PRICE} ({USD_PRICE})",
             paymentDialogTitleFinal: "Complete Your Payment",
             
+            txidDialogTitle: "Provide Transaction ID (Optional)",
+            txidDialogText: "To speed up confirmation, please paste the transaction ID (TxID) from your crypto payment below.",
+            txidInputPlaceholder: "Paste your TxID here",
+            txidSkipButton: "Skip / I don't have it",
+
             telegramInstructionsTitle: "Final Step: Activate Your License",
             telegramInstructionsText: "Your payment is being processed. To complete your activation, please send your unique ID to our administrator via Telegram:",
             telegramStep1Title: "1. Copy Your Unique ID",
@@ -792,6 +797,11 @@
             amountTextBase: "Valor: {LOCAL_PRICE} ({USD_PRICE})",
             paymentDialogTitleFinal: "Conclua seu Pagamento",
             
+            txidDialogTitle: "Fornecer ID da Transação (Opcional)",
+            txidDialogText: "Para acelerar a confirmação, por favor, cole o ID da transação (TxID) do seu pagamento de criptomoeda abaixo.",
+            txidInputPlaceholder: "Cole seu TxID aqui",
+            txidSkipButton: "Pular / Não tenho",
+
             telegramInstructionsTitle: "Passo Final: Ative Sua Licença",
             telegramInstructionsText: "Seu pagamento está sendo processado. Para completar sua ativação, por favor, envie seu ID exclusivo para nosso administrador via Telegram:",
             telegramStep1Title: "1. Copie seu ID Exclusivo",
@@ -928,6 +938,11 @@
             amountTextBase: "Monto: {LOCAL_PRICE} ({USD_PRICE})",
             paymentDialogTitleFinal: "Completa Tu Pago",
             
+            txidDialogTitle: "Proporcionar ID de Transacción (Opcional)",
+            txidDialogText: "Para acelerar la confirmación, por favor pega el ID de la transacción (TxID) de tu pago de criptomoneda abajo.",
+            txidInputPlaceholder: "Pega tu TxID aquí",
+            txidSkipButton: "Omitir / No lo tengo",
+
             telegramInstructionsTitle: "Paso Final: Activa Tu Licencia",
             telegramInstructionsText: "Tu pago se está procesando. Para completar tu activación, por favor envía tu ID único a nuestro administrador a través de Telegram:",
             telegramStep1Title: "1. Copia tu ID Único",
@@ -979,6 +994,9 @@
             purchaseState: {
                 basePriceUSD: 0,
                 finalPriceUSD: 0,
+                finalCryptoAmount: null,
+                cryptoCurrency: null,
+                txid: null,
                 email: null,
                 platform: null,
                 uniqueId: null,
@@ -1629,6 +1647,7 @@
 
             async selectPaymentMethod(method) {
                 this.purchaseState.method = method;
+                this.purchaseState.cryptoCurrency = method.toUpperCase();
                 await this.showPaymentDetailsDialog();
             },
 
@@ -1653,8 +1672,11 @@
                 const network = networks[method];
                 const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${address}`;
                 let cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner"></div><span class="ml-2">${this.getTranslatedString('loadingPaymentText')}</span></div>`;
+                
                 if (method === 'usdt') {
-                    cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400 tabular-nums">${finalPriceUSD.toFixed(2)} USDT</p><p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>`;
+                    const usdtAmount = finalPriceUSD.toFixed(2);
+                    this.purchaseState.finalCryptoAmount = usdtAmount;
+                    cryptoAmountHTML = `<p class="text-3xl font-bold text-yellow-400 tabular-nums">${usdtAmount} USDT</p><p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>`;
                 }
 
                 const content = `
@@ -1687,6 +1709,7 @@
                     const paymentAmountContainer = document.getElementById('payment-amount-container');
                     if (cryptoPrice && paymentAmountContainer) {
                         const cryptoAmount = (finalPriceUSD / cryptoPrice).toFixed(8);
+                        this.purchaseState.finalCryptoAmount = cryptoAmount;
                         paymentAmountContainer.innerHTML = `<p class="text-sm text-gray-400">${this.getTranslatedString('amountToSendLabel')} $${finalPriceUSD.toFixed(2)} USD</p><p class="text-2xl font-bold text-yellow-400 tabular-nums">${cryptoAmount} ${method.toUpperCase()}</p><p class="text-sm text-gray-500"><span>${this.getTranslatedString('networkLabel')}</span>: ${network}</p>`;
                     } else if (paymentAmountContainer) {
                         paymentAmountContainer.innerHTML = `<p class="text-red-400">Could not fetch crypto price. Please try again.</p>`;
@@ -1706,16 +1729,50 @@
 
             proceedToFinalConfirmation() {
                 this.closeDialog();
-                this.showPaymentConfirmationPage();
+                this.showTxidDialog();
+            },
+
+            showTxidDialog() {
+                const content = `
+                    <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('txidDialogTitle')}</h3>
+                    <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('txidDialogText')}</p>
+                    <div class="space-y-4">
+                        <div>
+                            <input type="text" id="txid-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="${this.getTranslatedString('txidInputPlaceholder')}">
+                        </div>
+                        <button id="submit-txid-btn" class="w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('continueButton')}</button>
+                        <button id="skip-txid-btn" class="w-full bg-gray-600 hover:bg-gray-500 text-white font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('txidSkipButton')}</button>
+                    </div>`;
+                this.showDialog(content);
+
+                document.getElementById('submit-txid-btn').onclick = () => {
+                    const txidInput = document.getElementById('txid-input');
+                    this.purchaseState.txid = txidInput.value || 'Not Provided';
+                    this.showPaymentConfirmationPage();
+                };
+
+                document.getElementById('skip-txid-btn').onclick = () => {
+                    this.purchaseState.txid = 'Not Provided';
+                    this.showPaymentConfirmationPage();
+                };
             },
 
             showPaymentConfirmationPage() {
+                this.closeDialog();
                 this.dom.mainContent.classList.add('hidden');
                 const confirmationContainer = this.dom.paymentConfirmationContent;
-                const uniqueId = this.purchaseState.uniqueId || localStorage.getItem('uniqueId');
-                const telegramMessage = `Activation Request\nID: ${uniqueId}\nApp: ${this.purchaseState.app}\nPlatform: ${this.purchaseState.platform}`;
+                const { uniqueId, app, platform, finalPriceUSD, finalCryptoAmount, cryptoCurrency, txid } = this.purchaseState;
+
+                const telegramMessage = `Activation Request\n\n` +
+                                      `ID: ${uniqueId}\n` +
+                                      `App: ${app}\n` +
+                                      `Platform: ${platform}\n` +
+                                      `Amount Paid: ${finalCryptoAmount} ${cryptoCurrency} (~$${finalPriceUSD.toFixed(2)} USD)\n` +
+                                      `TXID: ${txid}`;
+
                 const encodedTelegramMessage = encodeURIComponent(telegramMessage);
                 const telegramUrl = `https://t.me/bedmalcon_temp?text=${encodedTelegramMessage}`;
+                
                 confirmationContainer.innerHTML = `
                     <section class="min-h-screen py-16 md:py-24 flex items-center">
                         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
