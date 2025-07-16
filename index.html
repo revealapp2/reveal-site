@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reveal App: Poker Hack for PPPOKER, XPoker, ClubGG | See All Cards</title>
-    <meta name="description" content="Get the ultimate edge in online poker. Reveal App is a poker hack that lets you see opponent's cards on PPPOKER, XPoker, and ClubGG. Undetectable, safe, and easy to use. Start winning more today.">
+    <title>Reveal App: Vantagem Definitiva para PPPOKER, XPoker, ClubGG | Veja Todas as Cartas</title>
+    <meta name="description" content="Obtenha a vantagem máxima no poker online. O Reveal App é um assistente que permite ver as cartas dos oponentes no PPPOKER, XPoker e ClubGG. Indetectável, seguro e fácil de usar. Comece a ganhar mais hoje.">
     <meta name="keywords" content="poker hack, pppoker hack, xpoker hack, clubgg hack, kkpoker hack, upoker hack, pokerbros hack, tool hack poker, online poker cheat, see cards poker, poker cheat engine, poker tool, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
     
     <!-- SEO and Social Sharing -->
     <link rel="canonical" href="https://revealpoker.top/">
     <meta property="og:title" content="Reveal App: The Ultimate Poker Advantage">
-    <meta property="og:description" content="See your opponents' cards on PPPOKER, XPoker, and ClubGG. Play with perfect information and multiply your winnings.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1618621933758-c54179458234?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:description" content="Veja as cartas dos seus oponentes no PPPOKER, XPoker e ClubGG. Jogue com informação perfeita e multiplique seus ganhos.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1542131883-9467523412b3?q=80&w=1200&auto=format&fit=crop">
     <meta property="og:url" content="https://revealpoker.top/">
     <meta property="og:type" content="website">
 
@@ -43,6 +43,7 @@
             --background-light: #101827;
             --text-light: #e2e8f0;
             --text-dark: #1a202c;
+            --glow-color: rgba(0, 229, 255, 0.5);
         }
         html {
             font-size: 16px;
@@ -67,6 +68,7 @@
         .dialog {
             background-color: rgba(10, 14, 26, 0.8);
             backdrop-filter: blur(10px);
+            transition: opacity 0.3s ease-in-out;
         }
         .dialog-content {
             background-color: var(--background-light);
@@ -74,6 +76,11 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             max-height: 90vh;
             overflow-y: auto;
+            transform: scale(0.95);
+            transition: transform 0.3s ease-in-out;
+        }
+        .dialog:not(.hidden) .dialog-content {
+            transform: scale(1);
         }
         .video-container {
             position: relative;
@@ -125,7 +132,7 @@
             color: #e2e8f0 !important;
         }
         .hero-bg {
-            background-image: url('https://images.unsplash.com/photo-1618621933758-c54179458234?q=80&w=2127&auto=format&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1542131883-9467523412b3?q=80&w=2127&auto=format&fit=crop');
         }
         .feature-card, .testimonial-card, .faq-item {
             background: rgba(255, 255, 255, 0.05);
@@ -138,7 +145,7 @@
         .feature-card:hover, .testimonial-card:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            box-shadow: 0 0 25px var(--glow-color);
         }
         .faq-item summary { cursor: pointer; }
         .faq-item[open] summary { color: var(--secondary-color); }
@@ -180,10 +187,10 @@
             overflow: hidden;
         }
         .satisfaction-bar {
-            background: linear-gradient(90deg, #00e5ff, #ffab00);
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             height: 100%;
-            width: 0; /* Set by JS */
-            transition: width 2s ease-out;
+            width: 0; 
+            transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
         #back-to-top {
             transition: opacity 0.3s, transform 0.3s;
@@ -193,6 +200,10 @@
         }
         .language-switcher button:hover {
             transform: scale(1.1);
+        }
+        .discount-popup-content {
+            background: linear-gradient(145deg, #1a2333, #0f172a);
+            border: 1px solid var(--secondary-color);
         }
     </style>
     <!-- Google tag (gtag.js) -->
@@ -256,7 +267,7 @@
                     <!-- NEW: Hardswitch Language Selector -->
                     <div id="language-switcher-desktop" class="language-switcher flex items-center space-x-3 text-xl">
                         <button onclick="setLanguage('en')" aria-label="Switch to English">🇺🇸</button>
-                        <button onclick="setLanguage('es')" aria-label="Switch to Spanish">�🇸</button>
+                        <button onclick="setLanguage('es')" aria-label="Switch to Spanish">🇪🇸</button>
                         <button onclick="setLanguage('pt')" aria-label="Switch to Portuguese">🇧🇷</button>
                     </div>
                     <div id="google_translate_element"></div>
@@ -340,15 +351,15 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center">
                     <div class="animate-on-scroll">
                         <p class="text-4xl font-bold text-yellow-400" id="counter-players">+1,200</p>
-                        <p class="text-gray-400" data-translate="counterPlayers">Active Players Today</p>
+                        <p class="text-gray-400" data-translate="counterPlayers"></p>
                     </div>
                      <div class="animate-on-scroll" style="transition-delay: 0.2s;">
                         <p class="text-4xl font-bold text-yellow-400" id="counter-winnings">$150K+</p>
-                        <p class="text-gray-400" data-translate="counterWinnings">Winnings This Week Alone</p>
+                        <p class="text-gray-400" data-translate="counterWinnings"></p>
                     </div>
-                     <div class="animate-on-scroll" style="transition-delay: 0.4s;">
+                     <div class="animate-on-scroll" id="satisfaction-counter-container" style="transition-delay: 0.4s;">
                         <p class="text-4xl font-bold text-yellow-400" id="counter-satisfaction">98.7%</p>
-                        <p class="text-gray-400 mb-2" data-translate="counterSatisfaction">Satisfaction Rate</p>
+                        <p class="text-gray-400 mb-2" data-translate="counterSatisfaction"></p>
                         <div class="satisfaction-bar-container h-2 w-32 mx-auto">
                             <div id="satisfaction-bar-element" class="satisfaction-bar"></div>
                         </div>
@@ -360,7 +371,7 @@
         <!-- Features Section -->
         <section id="features" class="py-16 md:py-24 bg-gray-900">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="featuresTitle">Why Choose Reveal App?</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="featuresTitle"></h2>
                 <div id="features-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <!-- Feature Cards will be injected by JS -->
                 </div>
@@ -370,7 +381,7 @@
         <!-- How It Works Section -->
         <section id="how-it-works" class="py-16 md:py-24 bg-gray-800/50">
              <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="howItWorksTitle">Simple Steps to Dominate</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="howItWorksTitle"></h2>
                 <div id="how-it-works-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-start">
                     <!-- Steps will be injected by JS -->
                 </div>
@@ -391,24 +402,24 @@
         <!-- Demo Section -->
         <section id="demo" class="py-16 md:py-24 bg-gray-800/50">
              <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-on-scroll" data-translate="demoTitle">See the App in Action</h2>
-                <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-12 animate-on-scroll" data-translate="demoText">Watch our demo videos to understand how the Reveal App gives you the edge:</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 animate-on-scroll" data-translate="demoTitle"></h2>
+                <p class="text-lg text-gray-400 text-center max-w-2xl mx-auto mb-12 animate-on-scroll" data-translate="demoText"></p>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <div class="demo-video animate-on-scroll">
-                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoPPPOKERTitle">PPPOKER Demo</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoPPPOKERTitle"></h3>
                         <div class="video-container">
                             <iframe loading="lazy" src="https://www.youtube.com/embed/wgzzXJx_TAI" title="YouTube video player for PPPOKER Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="demo-video animate-on-scroll" style="transition-delay: 0.2s;">
-                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoXPokerTitle">XPoker Demo</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoXPokerTitle"></h3>
                         <div class="video-container">
                             <iframe loading="lazy" src="https://www.youtube.com/embed/JejQNbgaSSo" title="YouTube video player for XPoker Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                     </div>
                     <div class="demo-video animate-on-scroll" style="transition-delay: 0.4s;">
-                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoClubGGTitle">ClubGG Demo</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-center" data-translate="demoClubGGTitle"></h3>
                         <div class="video-container">
                             <iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" title="YouTube video player for ClubGG Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
@@ -420,7 +431,7 @@
         <!-- Testimonials Section -->
         <section id="testimonials" class="py-16 md:py-24 bg-gray-900">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="testimonialsTitle">What Our Users Say</h2>
+                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="testimonialsTitle"></h2>
                 <div id="testimonials-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <!-- Testimonials will be loaded dynamically -->
                 </div>
@@ -430,10 +441,10 @@
         <!-- Get App Section -->
         <section id="get-app" class="py-16 md:py-24 text-center bg-gray-800/50">
              <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
-                <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle"></h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText"></p>
                 
-                <!-- NEW: Urgency Progress Bar -->
+                <!-- Urgency Progress Bar -->
                 <div class="max-w-sm mx-auto my-6">
                     <div id="license-progress-bar-container" class="w-full bg-gray-600 rounded-full h-2.5">
                       <div id="license-progress-bar" class="bg-yellow-400 h-2.5 rounded-full" style="width: 0%;"></div>
@@ -449,7 +460,7 @@
                 
                 <button class="main-cta-button text-lg sm:text-xl font-bold py-4 px-6 sm:px-10 rounded-lg cta-button w-full sm:w-auto" id="start-purchase-btn" data-translate="getAppButton"></button>
                 
-                <!-- NEW: Enhanced Security Badges -->
+                <!-- Enhanced Security Badges -->
                 <div class="flex justify-center items-center flex-wrap gap-x-6 gap-y-4 md:gap-x-8 mt-8 text-gray-400">
                     <div class="flex items-center space-x-2">
                         <i class="fas fa-user-secret text-2xl text-green-400" aria-hidden="true"></i>
@@ -465,7 +476,7 @@
                     </div>
                 </div>
 
-                <!-- NEW: Why Crypto Mini-FAQ -->
+                <!-- Why Crypto Mini-FAQ -->
                 <div class="max-w-2xl mx-auto mt-12 text-left bg-gray-900/50 p-6 rounded-lg border border-gray-700">
                     <h4 class="text-xl font-bold text-center mb-4" data-translate="whyCryptoTitle"></h4>
                     <ul class="space-y-3 text-gray-300">
@@ -489,7 +500,7 @@
         <!-- FAQ Section -->
         <section id="faq" class="py-16 md:py-24 bg-gray-900">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="faqTitle">Frequently Asked Questions</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll" data-translate="faqTitle"></h2>
                 <div id="faq-container" class="max-w-3xl mx-auto space-y-4">
                     <!-- FAQ items will be injected by JS -->
                 </div>
@@ -499,12 +510,12 @@
         <!-- Contact Section -->
         <section class="contact py-16 md:py-24 text-center bg-gray-800/50" id="contact">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle">Contact Us</h2>
-                <p class="text-lg text-gray-400 mb-8" data-translate="contactText">Have questions or need assistance? Our support team is ready to help you get started with Reveal App.</p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="contactTitle"></h2>
+                <p class="text-lg text-gray-400 mb-8" data-translate="contactText"></p>
                 <div class="flex flex-col items-center justify-center gap-6">
                     <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg transition-transform duration-300 hover:scale-105">
                         <i class="fab fa-telegram-plane mr-2" aria-hidden="true"></i>
-                        <span data-translate="contactTelegram">Contact on Telegram</span> <span class="text-xs opacity-80">(24/7)</span>
+                        <span data-translate="contactTelegram"></span> <span class="text-xs opacity-80">(24/7)</span>
                     </a>
                 </div>
             </div>
@@ -521,22 +532,22 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
                 <!-- About -->
                 <div>
-                    <h3 class="text-lg font-semibold mb-4" data-translate="footerAboutTitle">About Reveal App</h3>
-                    <p class="text-gray-400" data-translate="footerAboutText">Reveal App provides a strategic advantage in online poker by allowing you to see opponent cards on PPPOKER, XPoker, and ClubGG. Play smarter, win bigger.</p>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="footerAboutTitle"></h3>
+                    <p class="text-gray-400" data-translate="footerAboutText"></p>
                 </div>
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-lg font-semibold mb-4" data-translate="footerLinksTitle">Quick Links</h3>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="footerLinksTitle"></h3>
                     <ul class="space-y-2">
-                        <li><a href="#features" class="text-gray-400 hover:text-white" data-translate="footerLinkFeatures">Features</a></li>
-                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white" data-translate="footerLinkHowItWorks">How It Works</a></li>
-                        <li><a href="#faq" class="text-gray-400 hover:text-white" data-translate="navFaq">FAQ</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white" data-translate="footerLinkContact">Contact Us</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white" data-translate="footerLinkFeatures"></a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white" data-translate="footerLinkHowItWorks"></a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-white" data-translate="navFaq"></a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white" data-translate="footerLinkContact"></a></li>
                     </ul>
                 </div>
                 <!-- Connect -->
                 <div>
-                    <h3 class="text-lg font-semibold mb-4" data-translate="footerConnectTitle">Connect With Us</h3>
+                    <h3 class="text-lg font-semibold mb-4" data-translate="footerConnectTitle"></h3>
                      <a href="https://t.me/bedmalcon_temp" target="_blank" class="inline-flex items-center justify-center md:justify-start text-gray-400 hover:text-white transition">
                         <i class="fab fa-telegram w-6 text-center" aria-hidden="true"></i>
                         <span class="ml-2">Telegram</span> <span class="text-xs opacity-80">(24/7)</span>
@@ -544,8 +555,8 @@
                 </div>
             </div>
             <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
-                <p>&copy; <span id="current-year"></span> Reveal App. <span data-translate="footerRights">All Rights Reserved. Your success is our mission.</span></p>
-                <p class="text-sm mt-2" data-translate="footerDisclaimer">Disclaimer: This tool is an external assistant. Use responsibly and be aware of the terms of service of the poker platforms you use.</p>
+                <p>&copy; <span id="current-year"></span> Reveal App. <span data-translate="footerRights"></span></p>
+                <p class="text-sm mt-2" data-translate="footerDisclaimer"></p>
             </div>
         </div>
     </footer>
@@ -570,6 +581,11 @@
         <!-- Dialog content will be injected here -->
     </div>
 
+    <!-- Discount Popup -->
+    <div id="discount-popup" class="fixed inset-0 z-60 flex items-center justify-center p-4 hidden dialog">
+        <!-- Discount Popup content will be injected here -->
+    </div>
+
 
     <!-- Scripts -->
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
@@ -588,7 +604,7 @@
             heroTitle: "Stop Playing in the Dark. See Their Cards & Multiply Your Winnings.",
             heroTagline: "While others rely on luck, you'll play with perfect information. Over 1,200 players are profiting right now on PPPOKER, XPoker & ClubGG. Why not you?",
             heroCta: "Activate My Advantage Now",
-            counterPlayers: "Active Players TODAY",
+            counterPlayers: "Active Players NOW",
             counterWinnings: "Winnings This Week Alone",
             counterSatisfaction: "Satisfaction Rate",
             featuresTitle: "Why is Reveal App Your Unfair Advantage?",
@@ -628,7 +644,7 @@
             getAppTitle: "Activate Your Unfair Advantage Now",
             getAppText: "Every hand you play without Reveal App is a missed opportunity. It's time to invest in your success.",
             urgencyText: "⚠️ Only",
-            urgencyText2: "licenses left at this price. After this, sales close until the next batch.",
+            urgencyText2: "licenses left for today. Sales close when they run out.",
             getAppButton: "Yes, I Want to Win More",
             secureBadge: "100% Secure & Undetectable",
             satisfactionGuaranteeBadge: "Satisfaction Guarantee",
@@ -725,6 +741,10 @@
             whyCrypto2: "<strong>Fast Confirmation:</strong> Your access is activated in minutes, not days.",
             whyCrypto3: "<strong>Zero Risk:</strong> No banks means no blocks and no chargeback risk for us, ensuring we stay operational.",
             licenseProgressText: "{PERCENT}% of licenses in this batch have been sold.",
+            discountPopupTitle: "Wait! A Special Offer For You!",
+            discountPopupText: "Because you are from {COUNTRY}, we are offering you a one-time discount of <strong>{DISCOUNT}%</strong>. Don't miss this chance!",
+            discountPopupCta: "Claim My {DISCOUNT}% Discount",
+            originalPrice: "Original Price:",
         },
         pt: {
             pageTitle: "Reveal App: A Vantagem Definitiva para PPPOKER, XPoker e ClubGG",
@@ -738,7 +758,7 @@
             heroTitle: "Pare de Jogar no Escuro. Veja as Cartas e Multiplique Seus Ganhos.",
             heroTagline: "Enquanto outros confiam na sorte, você joga com informação perfeita. Mais de 1.200 jogadores estão lucrando agora no PPPOKER, XPoker & ClubGG. Por que não você?",
             heroCta: "Ativar Minha Vantagem Agora",
-            counterPlayers: "Jogadores Ativos HOJE",
+            counterPlayers: "Jogadores Ativos AGORA",
             counterWinnings: "Ganhos Apenas Nesta Semana",
             counterSatisfaction: "Taxa de Satisfação",
             featuresTitle: "Por Que o Reveal App é a Sua Vantagem Injusta?",
@@ -778,7 +798,7 @@
             getAppTitle: "Ative Sua Vantagem Injusta Agora",
             getAppText: "Cada mão que você joga sem o Reveal App é uma oportunidade perdida. É hora de investir no seu sucesso.",
             urgencyText: "⚠️ Restam apenas",
-            urgencyText2: "licenças a este preço. Depois disso, as vendas fecham até o próximo lote.",
+            urgencyText2: "licenças para hoje. As vendas encerram quando esgotarem.",
             getAppButton: "Sim, Quero Ganhar Mais",
             secureBadge: "100% Seguro & Indetectável",
             satisfactionGuaranteeBadge: "Satisfação Garantida",
@@ -875,6 +895,10 @@
             whyCrypto2: "<strong>Confirmação Rápida:</strong> Seu acesso é ativado em minutos, não em dias.",
             whyCrypto3: "<strong>Risco Zero:</strong> Sem bancos significa sem bloqueios e sem risco de estorno para nós, garantindo que continuemos operacionais.",
             licenseProgressText: "{PERCENT}% das licenças deste lote já foram vendidas.",
+            discountPopupTitle: "Espere! Uma Oferta Especial Para Você!",
+            discountPopupText: "Por ser um visitante de {COUNTRY}, estamos oferecendo um desconto único de <strong>{DISCOUNT}%</strong>. Não perca esta chance!",
+            discountPopupCta: "Resgatar Meus {DISCOUNT}% de Desconto",
+            originalPrice: "Preço Original:",
         },
         es: {
             pageTitle: "Reveal App: La Ventaja Definitiva para PPPOKER, XPoker y ClubGG",
@@ -888,7 +912,7 @@
             heroTitle: "Deja de Jugar a Ciegas. Ve sus Cartas y Multiplica tus Ganancias.",
             heroTagline: "Mientras otros confían en la suerte, tú jugarás con información perfecta. Más de 1,200 jugadores están ganando ahora mismo en PPPOKER, XPoker y ClubGG. ¿Por qué no tú?",
             heroCta: "Activar Mi Ventaja Ahora",
-            counterPlayers: "Jugadores Activos HOY",
+            counterPlayers: "Jugadores Activos AHORA",
             counterWinnings: "Ganancias Solo Esta Semana",
             counterSatisfaction: "Tasa de Satisfacción",
             featuresTitle: "¿Por Qué Reveal App es Tu Ventaja Injusta?",
@@ -928,7 +952,7 @@
             getAppTitle: "Activa Tu Ventaja Injusta Ahora",
             getAppText: "Cada mano que juegas sin Reveal App es una oportunidad perdida. Es hora de invertir en tu éxito.",
             urgencyText: "⚠️ Solo quedan",
-            urgencyText2: "licencias a este precio. Después, las ventas se cerrarán hasta el próximo lote.",
+            urgencyText2: "licencias para hoy. Las ventas se cierran cuando se agotan.",
             getAppButton: "Sí, Quiero Ganar Más",
             secureBadge: "100% Seguro e Indetectable",
             satisfactionGuaranteeBadge: "Satisfacción Garantizada",
@@ -1025,6 +1049,10 @@
             whyCrypto2: "<strong>Confirmación Rápida:</strong> Tu acceso se activa en minutos, no en días.",
             whyCrypto3: "<strong>Riesgo Cero:</strong> No tener bancos significa que no hay bloqueos ni riesgo de contracargo para nosotros, lo que garantiza que sigamos operativos.",
             licenseProgressText: "{PERCENT}% de las licencias de este lote ya se han vendido.",
+            discountPopupTitle: "¡Espera! ¡Una Oferta Especial Para Ti!",
+            discountPopupText: "Porque eres de {COUNTRY}, te ofrecemos un descuento único de <strong>{DISCOUNT}%</strong>. ¡No pierdas esta oportunidad!",
+            discountPopupCta: "Reclamar Mi {DISCOUNT}% de Descuento",
+            originalPrice: "Precio Original:",
         }
     };
     
@@ -1035,7 +1063,7 @@
         "us": { names: ["James", "Michael", "David", "Chris", "Jessica"], cities: ["New York", "Miami", "Las Vegas", "Los Angeles"], flag: "🇺🇸", country: "the USA" },
         "ru": { names: ["Дмитрий", "Алексей", "Сергей", "Иван", "Анна"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
         "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Juliana"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília"], flag: "🇧🇷", country: "Brasil" },
-        "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei", "Liu Yang", "Chen Lin"], cities: ["Shanghai", "Beijing", "Guangzhou", "Shenzhen"], flag: "🇨🇳", country: "China" },
+        "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei", "Liu Yang", "Chen Lin"], cities: ["Shanghai", "Beijing", "Guangzhou", "Shenzhen"], flag: "�🇳", country: "China" },
         "es": { names: ["José", "Juan", "Diego", "Javier", "Carmen"], cities: ["Madrid", "Barcelona", "Mexico City", "Buenos Aires"], flag: "🇪🇸", country: "Spain" },
         "fr": { names: ["Jean", "Pierre", "Michel", "Nicolas", "Marie"], cities: ["Paris", "Marseille", "Lyon", "Toulouse"], flag: "🇫🇷", country: "France" },
         "ca": { names: ["Liam", "Noah", "William", "Ben", "Olivia"], cities: ["Toronto", "Montreal", "Vancouver", "Calgary"], flag: "🇨🇦", country: "Canada" },
@@ -1051,7 +1079,6 @@
     // --- Core Application Logic --- 
     document.addEventListener('DOMContentLoaded', () => {
         // --- DATA ---
-        // Base salaries as of Jan 1, 2024. The script will dynamically add $0.50 per day since then.
         const countrySalaryData = { "AL":{s:701,c:"ALL",l:"sq"},"DZ":{s:267,c:"DZD",l:"ar"},"DE":{s:3984,c:"EUR",l:"de"},"AD":{s:1273,c:"EUR",l:"ca"},"SA":{s:2002,c:"SAR",l:"ar"},"AR":{s:413,c:"ARS",l:"es"},"AU":{s:4218,c:"AUD",l:"en"},"AT":{s:4798,c:"EUR",l:"de"},"AZ":{s:549,c:"AZN",l:"az"},"BE":{s:5108,c:"EUR",l:"nl"},"BA":{s:927,c:"BAM",l:"bs"},"BR":{s:800,c:"BRL",l:"pt"},"BG":{s:947,c:"BGN",l:"bg"},"CA":{s:5081,c:"CAD",l:"en"},"KZ":{s:673,c:"KZT",l:"kk"},"CL":{s:684,c:"CLP",l:"es"},"CN":{s:1122,c:"CNY",l:"zh-CN"},"CY":{s:2555,c:"EUR",l:"el"},"CO":{s:311,c:"COP",l:"es"},"KR":{s:2180,c:"KRW",l:"ko"},"CR":{s:722,c:"CRC",l:"es"},"HR":{s:959,c:"EUR",l:"hr"},"DK":{s:5642,c:"DKK",l:"da"},"EC":{s:791,c:"USD",l:"es"},"SK":{s:1512,c:"EUR",l:"sk"},"SI":{s:3058,c:"EUR",l:"sl"},"ES":{s:2879,c:"EUR",l:"es"},"US":{s:6455,c:"USD",l:"en"},"EE":{s:1981,c:"EUR",l:"et"},"PH":{s:306,c:"PHP",l:"tl"},"FI":{s:4090,c:"EUR",l:"fi"},"FR":{s:3655,c:"EUR",l:"fr"},"GR":{s:1417,c:"EUR",l:"el"},"NL":{s:4581,c:"EUR",l:"nl"},"HK":{s:2828,c:"HKD",l:"zh-HK"},"HU":{s:1189,c:"HUF",l:"hu"},"IN":{s:569,c:"INR",l:"hi"},"ID":{s:340,c:"IDR",l:"id"},"IE":{s:4622,c:"EUR",l:"en"},"IS":{s:6441,c:"ISK",l:"is"},"IL":{s:3608,c:"ILS",l:"he"},"IT":{s:2924,c:"EUR",l:"it"},"JP":{s:2503,c:"JPY",l:"ja"},"LV":{s:1303,c:"EUR",l:"lv"},"LT":{s:2173,c:"EUR",l:"lt"},"LU":{s:6633,c:"EUR",l:"fr"},"MY":{s:855,c:"MYR",l:"ms"},"MT":{s:1216,c:"EUR",l:"mt"},"MX":{s:704,c:"MXN",l:"es"},"NO":{s:5665,c:"NOK",l:"no"},"NZ":{s:2983,c:"NZD",l:"en"},"PA":{s:717,c:"PAB",l:"es"},"PE":{s:414,c:"PEN",l:"es"},"PL":{s:1416,c:"PLN",l:"pl"},"PR":{s:1788,c:"USD",l:"es"},"PT":{s:1983,c:"EUR",l:"pt"},"QA":{s:3937,c:"QAR",l:"ar"},"GB":{s:4179,c:"GBP",l:"en"},"CZ":{s:2013,c:"CZK",l:"cs"},"RO":{s:1306,c:"RON",l:"ro"},"RU":{s:936,c:"RUB",l:"ru"},"SG":{s:4350,c:"SGD",l:"en"},"ZA":{s:1362,c:"ZAR",l:"en"},"SE":{s:3977,c:"SEK",l:"sv"},"CH":{s:8111,c:"CHF",l:"de"},"TH":{s:543,c:"THB",l:"th"},"TR":{s:917,c:"TRY",l:"tr"},"UA":{s:477,c:"UAH",l:"uk"}};
 
         const App = {
@@ -1076,6 +1103,8 @@
                 uniqueId: null,
                 app: null,
                 method: null,
+                discountRate: 0,
+                hasDiscountBeenApplied: false,
             },
             
             // --- URGENCY & SCARCITY STATE ---
@@ -1099,6 +1128,7 @@
                 mobileMenuButton: document.getElementById('mobile-menu-button'),
                 mobileMenuClose: document.getElementById('mobile-menu-close'),
                 dialogContainer: document.getElementById('dialog-container'),
+                discountPopup: document.getElementById('discount-popup'),
                 mainContent: document.getElementById('main-content'),
                 paymentConfirmationContent: document.getElementById('payment-confirmation-content'),
                 startPurchaseBtn: document.getElementById('start-purchase-btn'),
@@ -1106,6 +1136,7 @@
                 counterWinnings: document.getElementById('counter-winnings'),
                 counterSatisfaction: document.getElementById('counter-satisfaction'),
                 satisfactionBar: document.getElementById('satisfaction-bar-element'),
+                satisfactionCounterContainer: document.getElementById('satisfaction-counter-container'),
                 stickyBar: document.getElementById('sticky-bar'),
                 stickyBarTextContainer: document.getElementById('sticky-bar-text-container'),
                 mainHeader: document.getElementById('main-header'),
@@ -1140,6 +1171,8 @@
                 this.updateLiveCounters();
                 this.initScrollAnimations();
                 this.initUrgencyFeatures();
+                this.initDiscountPopup();
+
                 setInterval(() => this.updateLiveCounters(), 10000);
                 this.urgencyState.urgencyUpdateInterval = setInterval(() => this.updateDynamicUrgency(), 60 * 1000); // Update every minute
             },
@@ -1227,11 +1260,13 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('is-visible');
-                            if (entry.target.id === 'counter-satisfaction') this.animateSatisfactionBar();
+                            if (entry.target.id === 'satisfaction-counter-container') {
+                                this.animateSatisfactionBar();
+                            }
                             observer.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.1 });
+                }, { threshold: 0.5 }); // Use 0.5 threshold to ensure it's well in view
 
                 const heroObserver = new IntersectionObserver((entries) => {
                      entries.forEach(entry => {
@@ -1399,13 +1434,18 @@
             animateSatisfactionBar() {
                 if (this.dom.satisfactionBar) {
                     const percent = this.dom.satisfactionBar.dataset.percent || 0;
-                    this.dom.satisfactionBar.style.width = `${percent}%`;
+                    // Timeout to ensure the animation is visible after the element is rendered
+                    setTimeout(() => {
+                        this.dom.satisfactionBar.style.width = `${percent}%`;
+                    }, 100);
                 }
             },
 
             updateLiveCounters() {
                 if (this.dom.counterPlayers) {
-                    const playerCount = 1200 + Math.floor(Math.random() * 300);
+                    const baseCount = 1284;
+                    const randomAddition = Math.floor(Math.sin(Date.now() / 90000) * 50 + Math.random() * 25);
+                    const playerCount = baseCount + randomAddition;
                     this.dom.counterPlayers.textContent = `+${playerCount.toLocaleString()}`;
                 }
             },
@@ -1428,6 +1468,9 @@
                 localStorage.setItem("language", lang);
                 document.documentElement.lang = lang;
                 this.populateAllDynamicContent();
+            },
+
+            populateAllDynamicContent() {
                 this.showPersonalizationBanner();
                 this.updateUserSessionUI();
                 document.querySelectorAll("[data-translate]").forEach(el => {
@@ -1436,16 +1479,14 @@
                     let translation = this.getTranslatedString(key);
                     
                     if (key === 'licenseProgressText') {
-                        const { initialSlots, totalSlotsToSellToday } = this.urgencyState.dailySlotData;
+                        const { initialSlots } = this.urgencyState.dailySlotData;
+                        const slotsLeft = parseInt(this.dom.slotsLeftMain.textContent, 10) || 0;
                         if(initialSlots > 0) {
-                            const now = new Date();
-                            const startOfDay = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-                            const secondsInDay = 86400;
-                            const secondsPassed = (now.getTime() - startOfDay.getTime()) / 1000;
-                            let dayProgress = Math.min(1, secondsPassed / secondsInDay);
-                            const slotsSoldSoFar = Math.min(totalSlotsToSellToday, Math.floor(totalSlotsToSellToday * dayProgress));
-                            const percentageSold = Math.max(0, Math.min(100, (slotsSoldSoFar / initialSlots) * 100));
+                            const slotsSold = initialSlots - slotsLeft;
+                            const percentageSold = Math.max(0, Math.min(100, (slotsSold / initialSlots) * 100));
                             translation = this.getTranslatedString(key, { PERCENT: Math.round(percentageSold) });
+                        } else {
+                            translation = this.getTranslatedString(key, { PERCENT: 0 });
                         }
                     }
                     el.innerHTML = translation; 
@@ -1462,17 +1503,10 @@
             getTranslatedString(key, replacements = {}) {
                 const lang = localStorage.getItem("language") || "en";
                 let translation = (translations[lang] && translations[lang][key]) ? translations[lang][key] : (translations['en'][key] || key);
-                Object.entries(replacements).forEach(([p, v]) => { translation = translation.replace(`{${p.toUpperCase()}}`, v); });
+                Object.entries(replacements).forEach(([p, v]) => { translation = translation.replace(new RegExp(`{${p.toUpperCase()}}`, 'g'), v); });
                 return translation;
             },
             
-            populateAllDynamicContent() {
-                this.populateFeatures();
-                this.populateHowItWorks();
-                this.populateTestimonials();
-                this.populateFaq();
-            },
-
             populateFeatures() {
                 const container = this.dom.featuresGrid;
                 if(!container) return;
@@ -1536,18 +1570,22 @@
                 elements.forEach(el => { if (el) el.style.display = show ? '' : 'none'; });
             },
 
-            showDialog(content) {
+            showDialog(content, container = this.dom.dialogContainer) {
                 this.state.isDialogActive = true;
                 this.toggleBackgroundElements(false);
-                this.dom.dialogContainer.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg animate-on-scroll is-visible">${content}</div>`;
-                this.dom.dialogContainer.classList.remove('hidden');
+                container.innerHTML = `<div class="dialog-content w-full max-w-md p-6 rounded-lg">${content}</div>`;
+                container.classList.remove('hidden');
+                container.classList.add('flex');
             },
 
-            closeDialog() {
-                this.state.isDialogActive = false;
-                this.toggleBackgroundElements(true);
-                this.dom.dialogContainer.classList.add('hidden');
-                this.dom.dialogContainer.innerHTML = '';
+            closeDialog(container = this.dom.dialogContainer) {
+                container.classList.add('hidden');
+                container.classList.remove('flex');
+                container.innerHTML = '';
+                if(this.dom.discountPopup.classList.contains('hidden') && this.dom.dialogContainer.classList.contains('hidden')) {
+                    this.state.isDialogActive = false;
+                    this.toggleBackgroundElements(true);
+                }
             },
 
             initUserSession() {
@@ -1614,7 +1652,6 @@
                         <button id="submit-registration-btn" class="w-full cta-button font-bold py-2.5 px-5 rounded-lg">${this.getTranslatedString('registerButton')}</button>
                     </div>`;
                 this.showDialog(content);
-                // Pre-select country if available
                 const countryInput = document.getElementById('country-input');
                 if (this.state.userCountryCode) {
                     countryInput.value = this.state.userCountryCode;
@@ -1757,17 +1794,36 @@
             },
 
             showPaymentMethodDialog() {
-                this.purchaseState.finalPriceUSD = this.getUniquePaymentAmount(this.purchaseState.basePriceUSD, this.purchaseState.uniqueId);
+                let finalPrice = this.purchaseState.basePriceUSD;
+                let originalPrice = 0;
+
+                if (this.purchaseState.hasDiscountBeenApplied) {
+                    originalPrice = finalPrice;
+                    finalPrice = finalPrice * (1 - this.purchaseState.discountRate);
+                }
+
+                this.purchaseState.finalPriceUSD = this.getUniquePaymentAmount(finalPrice, this.purchaseState.uniqueId);
 
                 const rate = this.state.exchangeRates[this.state.userCurrency] || 1;
                 const localPrice = this.purchaseState.finalPriceUSD * rate;
                 const localPriceFormatted = new Intl.NumberFormat(undefined, { style: 'currency', currency: this.state.userCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(localPrice);
                 const usdPriceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.purchaseState.finalPriceUSD);
                 
+                let priceDisplayHTML = `<p id="final-price-display" class="text-2xl font-bold text-yellow-400">${localPriceFormatted} <span class="text-lg opacity-75">(${usdPriceFormatted})</span></p>`;
+
+                if (originalPrice > 0) {
+                    const originalLocalPrice = this.getUniquePaymentAmount(originalPrice, this.purchaseState.uniqueId) * rate;
+                    const originalLocalPriceFormatted = new Intl.NumberFormat(undefined, { style: 'currency', currency: this.state.userCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(originalLocalPrice);
+                    priceDisplayHTML = `
+                        <p class="text-lg text-gray-500 line-through">${this.getTranslatedString('originalPrice')} ${originalLocalPriceFormatted}</p>
+                        ${priceDisplayHTML}
+                    `;
+                }
+
                 const content = `
                     <h3 class="text-xl font-bold mb-4 text-center">${this.getTranslatedString('paymentMethodDialogTitle')}</h3>
                     <div class="text-center mb-4 space-y-1">
-                        <p id="final-price-display" class="text-2xl font-bold text-yellow-400">${localPriceFormatted} <span class="text-lg opacity-75">(${usdPriceFormatted})</span></p>
+                        ${priceDisplayHTML}
                     </div>
                     <p class="text-center text-gray-400 mb-6">${this.getTranslatedString('paymentMethodDialogText')}</p>
                     <div class="space-y-3">
@@ -1936,6 +1992,57 @@
                 document.getElementById('copy-id-button-confirm').onclick = () => this.copyToClipboard(uniqueId, 'copy-feedback');
                 window.scrollTo(0, 0);
             },
+
+            // --- DISCOUNT POPUP LOGIC ---
+            initDiscountPopup() {
+                const hasShownPopup = sessionStorage.getItem('discountPopupShown');
+                if (hasShownPopup) return;
+
+                document.body.addEventListener('mouseout', (e) => {
+                    // If the mouse is near the top of the viewport, it's a good indicator of exit intent.
+                    if (e.clientY <= 10 && !this.state.isDialogActive) {
+                        this.showDiscountPopup();
+                    }
+                }, { once: true }); // Only fire this listener once
+            },
+
+            showDiscountPopup() {
+                sessionStorage.setItem('discountPopupShown', 'true');
+                const countryCode = this.state.userCountryCode;
+                const countryData = countrySalaryData[countryCode] || {s: 6000}; // Default to high income
+                const salary = countryData.s;
+                
+                let discount = 10; // Default discount
+                if (salary < 1000) {
+                    discount = 30;
+                } else if (salary < 3000) {
+                    discount = 20;
+                }
+
+                const content = `
+                    <div class="dialog-content discount-popup-content w-full max-w-md p-8 rounded-lg text-center relative">
+                        <button id="close-discount-popup" class="absolute top-2 right-3 text-gray-400 hover:text-white text-2xl">&times;</button>
+                        <div class="text-5xl text-yellow-400 mb-4"><i class="fas fa-gift"></i></div>
+                        <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('discountPopupTitle')}</h3>
+                        <p class="text-gray-300 mb-6">${this.getTranslatedString('discountPopupText', {COUNTRY: this.state.userCountryName, DISCOUNT: discount})}</p>
+                        <button id="claim-discount-btn" class="w-full cta-button font-bold py-3 px-5 rounded-lg">${this.getTranslatedString('discountPopupCta', {DISCOUNT: discount})}</button>
+                    </div>`;
+                
+                this.showDialog(content, this.dom.discountPopup);
+
+                document.getElementById('claim-discount-btn').onclick = () => {
+                    this.purchaseState.discountRate = discount / 100;
+                    this.purchaseState.hasDiscountBeenApplied = true;
+                    this.closeDialog(this.dom.discountPopup);
+                    document.querySelector('#get-app').scrollIntoView({ behavior: 'smooth' });
+                    // Automatically start the purchase flow
+                    this.startPurchaseFlow();
+                };
+
+                document.getElementById('close-discount-popup').onclick = () => {
+                    this.closeDialog(this.dom.discountPopup);
+                };
+            }
         };
 
         window.setLanguage = App.setLanguage.bind(App);
