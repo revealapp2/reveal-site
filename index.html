@@ -188,6 +188,12 @@
         #back-to-top {
             transition: opacity 0.3s, transform 0.3s;
         }
+        .language-switcher button {
+            transition: transform 0.2s ease-in-out;
+        }
+        .language-switcher button:hover {
+            transform: scale(1.1);
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
@@ -247,6 +253,12 @@
                     <div id="user-session-container" class="flex items-center space-x-4">
                         <!-- This will be populated by JS -->
                     </div>
+                    <!-- NEW: Hardswitch Language Selector -->
+                    <div id="language-switcher-desktop" class="language-switcher flex items-center space-x-3 text-xl">
+                        <button onclick="setLanguage('en')" aria-label="Switch to English">🇺🇸</button>
+                        <button onclick="setLanguage('es')" aria-label="Switch to Spanish">🇪🇸</button>
+                        <button onclick="setLanguage('pt')" aria-label="Switch to Portuguese">🇧🇷</button>
+                    </div>
                     <div id="google_translate_element"></div>
                 </div>
                 <!-- Mobile Menu Button -->
@@ -262,7 +274,7 @@
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0a0e1a] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl">
         <div class="flex justify-between items-center mb-8">
-             <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer" aria-label="Reveal App Home">
+           <a href="#" onclick="window.location.reload()" class="flex items-center space-x-2 cursor-pointer" aria-label="Reveal App Home">
                 <svg class="h-10 w-auto" viewBox="0 0 200 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <defs>
                         <linearGradient id="logoGradientMobile" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -292,6 +304,12 @@
                 <!-- Mobile user session populated by JS -->
             </div>
             <div class="mt-4 space-y-4">
+                <!-- NEW: Hardswitch Language Selector for Mobile -->
+                <div id="language-switcher-mobile" class="language-switcher flex items-center justify-center space-x-4 text-2xl">
+                    <button onclick="setLanguage('en')" aria-label="Switch to English">�🇸</button>
+                    <button onclick="setLanguage('es')" aria-label="Switch to Spanish">🇪🇸</button>
+                    <button onclick="setLanguage('pt')" aria-label="Switch to Portuguese">🇧🇷</button>
+                </div>
                 <div id="google_translate_element_mobile"></div>
             </div>
         </nav>
@@ -415,6 +433,14 @@
                 <h2 class="text-3xl md:text-4xl font-bold mb-4" data-translate="getAppTitle">Get Your Reveal App Access</h2>
                 <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-8" data-translate="getAppText">Stop leaving money on the table. It's time to invest in your poker success. Choose your preferred poker app below to begin.</p>
                 
+                <!-- NEW: Urgency Progress Bar -->
+                <div class="max-w-sm mx-auto my-6">
+                    <div id="license-progress-bar-container" class="w-full bg-gray-600 rounded-full h-2.5">
+                      <div id="license-progress-bar" class="bg-yellow-400 h-2.5 rounded-full" style="width: 0%;"></div>
+                    </div>
+                    <p id="license-progress-text" class="text-xs mt-2 text-center text-yellow-400" data-translate="licenseProgressText"></p>
+                </div>
+                
                 <div class="my-6">
                     <div id="urgency-text-container" class="text-xl font-semibold text-red-500 animate-pulse">
                         <span data-translate="urgencyText"></span> <strong id="slots-left-main" class="text-xl">12</strong> <span data-translate="urgencyText2"></span>
@@ -423,19 +449,39 @@
                 
                 <button class="main-cta-button text-lg sm:text-xl font-bold py-4 px-6 sm:px-10 rounded-lg cta-button w-full sm:w-auto" id="start-purchase-btn" data-translate="getAppButton"></button>
                 
-                <div class="flex justify-center items-center flex-wrap gap-x-4 gap-y-4 md:gap-x-8 mt-8 text-gray-400">
-                    <div class="flex flex-col items-center space-y-2">
-                        <i class="fas fa-shield-alt text-3xl text-green-400" aria-hidden="true"></i>
-                        <span class="text-xs font-bold" data-translate="secureBadge"></span>
+                <!-- NEW: Enhanced Security Badges -->
+                <div class="flex justify-center items-center flex-wrap gap-x-6 gap-y-4 md:gap-x-8 mt-8 text-gray-400">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-user-secret text-2xl text-green-400" aria-hidden="true"></i>
+                        <span class="text-sm font-medium" data-translate="cryptoAnonymousBadge"></span>
                     </div>
-                    <div class="flex flex-col items-center space-y-2">
-                        <i class="fas fa-thumbs-up text-3xl text-green-400" aria-hidden="true"></i>
-                        <span class="text-xs" data-translate="satisfactionGuaranteeBadge"></span>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-shield-alt text-2xl text-green-400" aria-hidden="true"></i>
+                        <span class="text-sm font-medium" data-translate="secureBadge"></span>
                     </div>
-                    <div class="flex flex-col items-center space-y-2">
-                        <i class="fas fa-lock text-3xl text-green-400" aria-hidden="true"></i>
-                        <span class="text-xs" data-translate="dataPrivacyBadge"></span>
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-lock text-2xl text-green-400" aria-hidden="true"></i>
+                        <span class="text-sm font-medium" data-translate="blockchainBadge"></span>
                     </div>
+                </div>
+
+                <!-- NEW: Why Crypto Mini-FAQ -->
+                <div class="max-w-2xl mx-auto mt-12 text-left bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                    <h4 class="text-xl font-bold text-center mb-4" data-translate="whyCryptoTitle"></h4>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-user-secret text-yellow-400 w-5 mt-1 mr-3" aria-hidden="true"></i>
+                            <span data-translate="whyCrypto1"></span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-rocket text-yellow-400 w-5 mt-1 mr-3" aria-hidden="true"></i>
+                            <span data-translate="whyCrypto2"></span>
+                        </li>
+                        <li class="flex items-start">
+                             <i class="fas fa-university text-yellow-400 w-5 mt-1 mr-3" aria-hidden="true"></i>
+                            <span data-translate="whyCrypto3"></span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -670,6 +716,15 @@
             telegramStep3Title: "3. Send Your ID",
             telegramStep3Desc: "Paste your ID in the chat to receive your personalized activation instructions in minutes.",
             openTelegramButton: "Contact Support on Telegram",
+
+            // NEW TRANSLATIONS
+            cryptoAnonymousBadge: "100% Anonymous with Crypto",
+            blockchainBadge: "Protected by Blockchain",
+            whyCryptoTitle: "Why do we only accept crypto?",
+            whyCrypto1: "<strong>Total Anonymity:</strong> Your identity is protected. No bank statements, no personal data.",
+            whyCrypto2: "<strong>Fast Confirmation:</strong> Your access is activated in minutes, not days.",
+            whyCrypto3: "<strong>Zero Risk:</strong> No banks means no blocks and no chargeback risk for us, ensuring we stay operational.",
+            licenseProgressText: "{PERCENT}% of licenses in this batch have been sold.",
         },
         pt: {
             pageTitle: "Reveal App: A Vantagem Definitiva para PPPOKER, XPoker e ClubGG",
@@ -811,6 +866,15 @@
             telegramStep3Title: "3. Envie seu ID",
             telegramStep3Desc: "Cole seu ID na conversa para receber suas instruções de ativação personalizadas em minutos.",
             openTelegramButton: "Contatar Suporte no Telegram",
+
+            // NEW TRANSLATIONS
+            cryptoAnonymousBadge: "100% Anônimo com Cripto",
+            blockchainBadge: "Protegido por Blockchain",
+            whyCryptoTitle: "Por que só aceitamos cripto?",
+            whyCrypto1: "<strong>Anonimato Total:</strong> Sua identidade é protegida. Sem extratos bancários, sem dados pessoais.",
+            whyCrypto2: "<strong>Confirmação Rápida:</strong> Seu acesso é ativado em minutos, não em dias.",
+            whyCrypto3: "<strong>Risco Zero:</strong> Sem bancos significa sem bloqueios e sem risco de estorno para nós, garantindo que continuemos operacionais.",
+            licenseProgressText: "{PERCENT}% das licenças deste lote já foram vendidas.",
         },
         es: {
             pageTitle: "Reveal App: La Ventaja Definitiva para PPPOKER, XPoker y ClubGG",
@@ -952,20 +1016,30 @@
             telegramStep3Title: "3. Envía tu ID",
             telegramStep3Desc: "Pega tu ID en el chat para recibir tus instrucciones de activación personalizadas en minutos.",
             openTelegramButton: "Contactar Soporte en Telegram",
+
+            // NEW TRANSLATIONS
+            cryptoAnonymousBadge: "100% Anónimo con Cripto",
+            blockchainBadge: "Protegido por Blockchain",
+            whyCryptoTitle: "¿Por qué solo aceptamos cripto?",
+            whyCrypto1: "<strong>Anonimato Total:</strong> Tu identidad está protegida. Sin extractos bancarios, sin datos personales.",
+            whyCrypto2: "<strong>Confirmación Rápida:</strong> Tu acceso se activa en minutos, no en días.",
+            whyCrypto3: "<strong>Riesgo Cero:</strong> No tener bancos significa que no hay bloqueos ni riesgo de contracargo para nosotros, lo que garantiza que sigamos operativos.",
+            licenseProgressText: "{PERCENT}% de las licencias de este lote ya se han vendido.",
         }
     };
     
     // --- Localized Social Proof Data --- 
     const socialProofData = {
-        "de": { names: ["Klaus", "Lukas", "Finn"], cities: ["Berlin", "Hamburg", "Munich"], flag: "🇩🇪", country: "Germany" },
-        "it": { names: ["Giovanni", "Marco", "Luca"], cities: ["Roma", "Milano", "Napoli"], flag: "🇮🇹", country: "Italy" },
-        "us": { names: ["James", "Michael", "David"], cities: ["New York", "Miami", "Las Vegas"], flag: "🇺🇸", country: "the USA" },
-        "ru": { names: ["Дмитрий", "Алексей", "Сергей"], cities: ["Moscow", "St. Petersburg", "Novosibirsk"], flag: "🇷🇺", country: "Russia" },
-        "br": { names: ["Paulo", "Thiago", "Lucas"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte"], flag: "🇧🇷", country: "Brasil" },
-        "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei"], cities: ["Shanghai", "Beijing", "Guangzhou"], flag: "🇨🇳", country: "China" },
-        "es": { names: ["José", "Juan", "Diego"], cities: ["Madrid", "Barcelona", "Mexico City"], flag: "🇪🇸", country: "Spain" },
-        "fr": { names: ["Jean", "Pierre", "Michel"], cities: ["Paris", "Marseille", "Lyon"], flag: "🇫🇷", country: "France" },
-        "ca": { names: ["Liam", "Noah", "William"], cities: ["Toronto", "Montreal", "Vancouver"], flag: "🇨🇦", country: "Canada" }
+        "de": { names: ["Klaus", "Lukas", "Finn", "Maximilian", "Sophie"], cities: ["Berlin", "Hamburg", "Munich", "Cologne"], flag: "🇩🇪", country: "Germany" },
+        "it": { names: ["Giovanni", "Marco", "Luca", "Alessandro", "Giulia"], cities: ["Roma", "Milano", "Napoli", "Torino"], flag: "🇮🇹", country: "Italy" },
+        "us": { names: ["James", "Michael", "David", "Chris", "Jessica"], cities: ["New York", "Miami", "Las Vegas", "Los Angeles"], flag: "🇺🇸", country: "the USA" },
+        "ru": { names: ["Дмитрий", "Алексей", "Сергей", "Иван", "Анна"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
+        "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Juliana"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília"], flag: "🇧🇷", country: "Brasil" },
+        "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei", "Liu Yang", "Chen Lin"], cities: ["Shanghai", "Beijing", "Guangzhou", "Shenzhen"], flag: "🇨🇳", country: "China" },
+        "es": { names: ["José", "Juan", "Diego", "Javier", "Carmen"], cities: ["Madrid", "Barcelona", "Mexico City", "Buenos Aires"], flag: "🇪🇸", country: "Spain" },
+        "fr": { names: ["Jean", "Pierre", "Michel", "Nicolas", "Marie"], cities: ["Paris", "Marseille", "Lyon", "Toulouse"], flag: "🇫🇷", country: "France" },
+        "ca": { names: ["Liam", "Noah", "William", "Ben", "Olivia"], cities: ["Toronto", "Montreal", "Vancouver", "Calgary"], flag: "🇨🇦", country: "Canada" },
+        "gb": { names: ["Jack", "Harry", "George", "Emily", "Charlotte"], cities: ["London", "Manchester", "Birmingham", "Liverpool"], flag: "🇬🇧", country: "the UK" }
     };
 
 
@@ -1006,6 +1080,7 @@
             
             // --- URGENCY & SCARCITY STATE ---
             urgencyState: {
+                initialSlots: 15, // Set a fixed initial number for progress bar calculation
                 slotsLeft: 12,
                 countdownInterval: null,
                 paymentCountdownInterval: null,
@@ -1045,6 +1120,8 @@
                 mobileUserSessionContainer: document.getElementById('mobile-user-session-container'),
                 backToTopButton: document.getElementById('back-to-top'),
                 floatingChatWidget: document.getElementById('floating-chat-widget'),
+                licenseProgressBar: document.getElementById('license-progress-bar'),
+                licenseProgressText: document.getElementById('license-progress-text'),
             },
 
             // --- METHODS ---
@@ -1225,16 +1302,36 @@
                 const todayStr = new Date().toISOString().split('T')[0];
                 let slotData = JSON.parse(localStorage.getItem('slotData'));
                 if (!slotData || slotData.date !== todayStr) {
-                    slotData = { date: todayStr, currentSlots: Math.floor(Math.random() * (15 - 7 + 1)) + 7 };
+                    // Start with a random number of slots between 7 and 15
+                    const initialSlots = Math.floor(Math.random() * (15 - 7 + 1)) + 7;
+                    slotData = { 
+                        date: todayStr, 
+                        initialSlots: initialSlots,
+                        currentSlots: initialSlots 
+                    };
                 }
+                this.urgencyState.initialSlots = slotData.initialSlots;
+                this.urgencyState.slotsLeft = slotData.currentSlots;
                 localStorage.setItem('slotData', JSON.stringify(slotData));
-                this.updateSlotsUI(slotData.currentSlots);
+                this.updateSlotsUI(this.urgencyState.slotsLeft);
             },
 
             updateSlotsUI(slots) {
                 [this.dom.slotsLeftHero, this.dom.slotsLeftMid, this.dom.slotsLeftMain].forEach(el => {
                     if (el) el.textContent = slots;
                 });
+                this.updateLicenseProgressBar();
+            },
+
+            updateLicenseProgressBar() {
+                const { initialSlots, slotsLeft } = this.urgencyState;
+                if (!this.dom.licenseProgressBar || !this.dom.licenseProgressText) return;
+
+                const slotsSold = initialSlots - slotsLeft;
+                const percentageSold = Math.max(0, Math.min(100, (slotsSold / initialSlots) * 100));
+                
+                this.dom.licenseProgressBar.style.width = `${percentageSold}%`;
+                this.dom.licenseProgressText.innerHTML = this.getTranslatedString('licenseProgressText', { PERCENT: Math.round(percentageSold) });
             },
             
             scheduleSocialProof() {
@@ -1311,7 +1408,13 @@
                 document.querySelectorAll("[data-translate]").forEach(el => {
                     const key = el.dataset.translate;
                     if (!key) return;
-                    const translation = this.getTranslatedString(key);
+                    let translation = this.getTranslatedString(key);
+                    // Special handling for progress bar text
+                    if (key === 'licenseProgressText') {
+                         const slotsSold = this.urgencyState.initialSlots - this.urgencyState.slotsLeft;
+                         const percentageSold = Math.max(0, Math.min(100, (slotsSold / this.urgencyState.initialSlots) * 100));
+                         translation = this.getTranslatedString(key, { PERCENT: Math.round(percentageSold) });
+                    }
                     el.innerHTML = translation; 
                 });
                 document.title = this.getTranslatedString('pageTitle');
@@ -1787,9 +1890,9 @@
                                 <p id="copy-feedback" class="text-green-400 text-sm mt-2 h-4"></p>
                                 <div class="mt-8 bg-gray-900/50 p-6 rounded-lg text-left max-w-md mx-auto">
                                      <div class="space-y-4">
-                                         <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep1Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep1Desc')}</p></div>
-                                         <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep2Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep2Desc')}</p></div>
-                                         <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep3Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep3Desc')}</p></div>
+                                          <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep1Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep1Desc')}</p></div>
+                                          <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep2Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep2Desc')}</p></div>
+                                          <div><h4 class="font-semibold">${this.getTranslatedString('telegramStep3Title')}</h4><p class="text-sm text-gray-400">${this.getTranslatedString('telegramStep3Desc')}</p></div>
                                      </div>
                                 </div>
                                 <a href="${telegramUrl}" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg"><i class="fab fa-telegram-plane mr-2"></i><span>${this.getTranslatedString('openTelegramButton')}</span></a>
@@ -1818,3 +1921,4 @@
     </script>
 </body>
 </html>
+�
