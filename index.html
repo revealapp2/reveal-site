@@ -256,7 +256,7 @@
                     <!-- NEW: Hardswitch Language Selector -->
                     <div id="language-switcher-desktop" class="language-switcher flex items-center space-x-3 text-xl">
                         <button onclick="setLanguage('en')" aria-label="Switch to English">🇺🇸</button>
-                        <button onclick="setLanguage('es')" aria-label="Switch to Spanish">🇪🇸</button>
+                        <button onclick="setLanguage('es')" aria-label="Switch to Spanish">�🇸</button>
                         <button onclick="setLanguage('pt')" aria-label="Switch to Portuguese">🇧🇷</button>
                     </div>
                     <div id="google_translate_element"></div>
@@ -306,7 +306,7 @@
             <div class="mt-4 space-y-4">
                 <!-- NEW: Hardswitch Language Selector for Mobile -->
                 <div id="language-switcher-mobile" class="language-switcher flex items-center justify-center space-x-4 text-2xl">
-                    <button onclick="setLanguage('en')" aria-label="Switch to English">�🇸</button>
+                    <button onclick="setLanguage('en')" aria-label="Switch to English">🇺🇸</button>
                     <button onclick="setLanguage('es')" aria-label="Switch to Spanish">🇪🇸</button>
                     <button onclick="setLanguage('pt')" aria-label="Switch to Portuguese">🇧🇷</button>
                 </div>
@@ -1080,12 +1080,12 @@
             
             // --- URGENCY & SCARCITY STATE ---
             urgencyState: {
-                initialSlots: 15, // Set a fixed initial number for progress bar calculation
-                slotsLeft: 12,
+                dailySlotData: {}, // Will hold {initialSlots, totalSlotsToSellToday}
                 countdownInterval: null,
                 paymentCountdownInterval: null,
                 socialProofTimeout: null,
                 isOfferExpired: false,
+                urgencyUpdateInterval: null,
             },
 
             // --- DOM ELEMENTS ---
@@ -1141,6 +1141,7 @@
                 this.initScrollAnimations();
                 this.initUrgencyFeatures();
                 setInterval(() => this.updateLiveCounters(), 10000);
+                this.urgencyState.urgencyUpdateInterval = setInterval(() => this.updateDynamicUrgency(), 60 * 1000); // Update every minute
             },
 
             calculateDailySalaryBonus() {
@@ -1299,33 +1300,57 @@
             },
 
             initializeDailySlots() {
-                const todayStr = new Date().toISOString().split('T')[0];
-                let slotData = JSON.parse(localStorage.getItem('slotData'));
-                if (!slotData || slotData.date !== todayStr) {
-                    // Start with a random number of slots between 7 and 15
-                    const initialSlots = Math.floor(Math.random() * (15 - 7 + 1)) + 7;
-                    slotData = { 
-                        date: todayStr, 
-                        initialSlots: initialSlots,
-                        currentSlots: initialSlots 
-                    };
+                const now = new Date();
+                const todayStr = now.toISOString().split('T')[0]; // Use UTC date for consistency
+
+                let seed = 0;
+                for (let i = 0; i < todayStr.length; i++) {
+                    seed += todayStr.charCodeAt(i);
                 }
-                this.urgencyState.initialSlots = slotData.initialSlots;
-                this.urgencyState.slotsLeft = slotData.currentSlots;
-                localStorage.setItem('slotData', JSON.stringify(slotData));
-                this.updateSlotsUI(this.urgencyState.slotsLeft);
+
+                const seededRandom = (s) => {
+                    const x = Math.sin(s) * 10000;
+                    return x - Math.floor(x);
+                };
+
+                const initialSlots = 7 + Math.floor(seededRandom(seed) * 9); // 7-15
+                const soldPercentage = 0.6 + (seededRandom(seed + 1) * 0.35); // Sell 60%-95%
+                const totalSlotsToSellToday = Math.floor(initialSlots * soldPercentage);
+
+                this.urgencyState.dailySlotData = {
+                    initialSlots: initialSlots,
+                    totalSlotsToSellToday: totalSlotsToSellToday
+                };
+
+                this.updateDynamicUrgency(); // Initial call
             },
 
-            updateSlotsUI(slots) {
+            updateDynamicUrgency() {
+                const { initialSlots, totalSlotsToSellToday } = this.urgencyState.dailySlotData;
+                if (!initialSlots) return;
+
+                const now = new Date();
+                const startOfDay = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+                const secondsInDay = 86400;
+                const secondsPassed = (now.getTime() - startOfDay.getTime()) / 1000;
+
+                let dayProgress = Math.min(1, secondsPassed / secondsInDay);
+                
+                const slotsSoldSoFar = Math.min(totalSlotsToSellToday, Math.floor(totalSlotsToSellToday * dayProgress));
+                const currentSlotsLeft = initialSlots - slotsSoldSoFar;
+
+                this.updateSlotsUI(currentSlotsLeft, initialSlots);
+            },
+
+            updateSlotsUI(slots, initialSlots) {
                 [this.dom.slotsLeftHero, this.dom.slotsLeftMid, this.dom.slotsLeftMain].forEach(el => {
                     if (el) el.textContent = slots;
                 });
-                this.updateLicenseProgressBar();
+                this.updateLicenseProgressBar(slots, initialSlots);
             },
 
-            updateLicenseProgressBar() {
-                const { initialSlots, slotsLeft } = this.urgencyState;
-                if (!this.dom.licenseProgressBar || !this.dom.licenseProgressText) return;
+            updateLicenseProgressBar(slotsLeft, initialSlots) {
+                if (!this.dom.licenseProgressBar || !this.dom.licenseProgressText || !initialSlots) return;
 
                 const slotsSold = initialSlots - slotsLeft;
                 const percentageSold = Math.max(0, Math.min(100, (slotsSold / initialSlots) * 100));
@@ -1409,11 +1434,19 @@
                     const key = el.dataset.translate;
                     if (!key) return;
                     let translation = this.getTranslatedString(key);
-                    // Special handling for progress bar text
+                    
                     if (key === 'licenseProgressText') {
-                         const slotsSold = this.urgencyState.initialSlots - this.urgencyState.slotsLeft;
-                         const percentageSold = Math.max(0, Math.min(100, (slotsSold / this.urgencyState.initialSlots) * 100));
-                         translation = this.getTranslatedString(key, { PERCENT: Math.round(percentageSold) });
+                        const { initialSlots, totalSlotsToSellToday } = this.urgencyState.dailySlotData;
+                        if(initialSlots > 0) {
+                            const now = new Date();
+                            const startOfDay = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+                            const secondsInDay = 86400;
+                            const secondsPassed = (now.getTime() - startOfDay.getTime()) / 1000;
+                            let dayProgress = Math.min(1, secondsPassed / secondsInDay);
+                            const slotsSoldSoFar = Math.min(totalSlotsToSellToday, Math.floor(totalSlotsToSellToday * dayProgress));
+                            const percentageSold = Math.max(0, Math.min(100, (slotsSoldSoFar / initialSlots) * 100));
+                            translation = this.getTranslatedString(key, { PERCENT: Math.round(percentageSold) });
+                        }
                     }
                     el.innerHTML = translation; 
                 });
@@ -1921,4 +1954,3 @@
     </script>
 </body>
 </html>
-�
