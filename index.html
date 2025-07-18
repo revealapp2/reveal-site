@@ -325,7 +325,7 @@
                 <div id="language-switcher-mobile" class="language-switcher flex items-center justify-center space-x-4 text-2xl">
                     <button onclick="setLanguage('en')" aria-label="Switch to English">🇺🇸</button>
                     <button onclick="setLanguage('es')" aria-label="Switch to Spanish">🇪🇸</button>
-                    <button onclick="setLanguage('pt')" aria-label="Switch to Portuguese">�🇷</button>
+                    <button onclick="setLanguage('pt')" aria-label="Switch to Portuguese">🇧🇷</button>
                 </div>
                 <div id="google_translate_element_mobile"></div>
             </div>
@@ -878,7 +878,7 @@
             whyCrypto3: "<strong>Zero Risk:</strong> No banks means no blocks and no chargeback risk for us, ensuring we stay operational.",
             licenseProgressText: "{PERCENT}% of licenses in this batch have been sold.",
             discountPopupTitle: "Wait! A Special Offer For You!",
-            discountPopupText: "Because you are from {COUNTRY}, we are offering you a one-time discount of <strong>{DISCOUNT}%</strong>. Don't miss this chance!",
+            discountPopupText: "Congratulations! You've received a special one-time discount of <strong>{DISCOUNT}% OFF</strong>. Don't miss out!",
             discountPopupCta: "Claim My {DISCOUNT}% Discount",
             originalPrice: "Original Price:",
         },
@@ -1033,7 +1033,7 @@
             whyCrypto3: "<strong>Risco Zero:</strong> Sem bancos significa sem bloqueios e sem risco de estorno para nós, garantindo que continuemos operacionais.",
             licenseProgressText: "{PERCENT}% das licenças deste lote já foram vendidas.",
             discountPopupTitle: "Espere! Uma Oferta Especial Para Você!",
-            discountPopupText: "Por ser um visitante de {COUNTRY}, estamos oferecendo um desconto único de <strong>{DISCOUNT}%</strong>. Não perca esta chance!",
+            discountPopupText: "Parabéns! Você recebeu um desconto especial e único de <strong>{DISCOUNT}% OFF</strong>. Não perca!",
             discountPopupCta: "Resgatar Meus {DISCOUNT}% de Desconto",
             originalPrice: "Preço Original:",
         },
@@ -1188,7 +1188,7 @@
             whyCrypto3: "<strong>Riesgo Cero:</strong> No tener bancos significa que no hay bloqueos ni riesgo de contracargo para nosotros, lo que garantiza que sigamos operativos.",
             licenseProgressText: "{PERCENT}% de las licencias de este lote ya se han vendido.",
             discountPopupTitle: "¡Espera! ¡Una Oferta Especial Para Ti!",
-            discountPopupText: "Porque eres de {COUNTRY}, te ofrecemos un descuento único de <strong>{DISCOUNT}%</strong>. ¡No pierdas esta oportunidad!",
+            discountPopupText: "¡Felicidades! Has recibido un descuento especial y único de <strong>{DISCOUNT}% de DESCUENTO</strong>. ¡No te lo pierdas!",
             discountPopupCta: "Reclamar Mi {DISCOUNT}% de Descuento",
             originalPrice: "Precio Original:",
         }
@@ -1199,7 +1199,7 @@
         "de": { names: ["Klaus", "Lukas", "Finn", "Maximilian", "Sophie"], cities: ["Berlin", "Hamburg", "Munich", "Cologne"], flag: "🇩🇪", country: "Germany" },
         "it": { names: ["Giovanni", "Marco", "Luca", "Alessandro", "Giulia"], cities: ["Roma", "Milano", "Napoli", "Torino"], flag: "🇮🇹", country: "Italy" },
         "us": { names: ["James", "Michael", "David", "Chris", "Jessica"], cities: ["New York", "Miami", "Las Vegas", "Los Angeles"], flag: "🇺🇸", country: "the USA" },
-        "ru": { names: ["Дмитрий", "Алексей", "Сергей", "Иван", "Анна"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷🇺", country: "Russia" },
+        "ru": { names: ["Дмитрий", "Алексей", "Сергей", "Иван", "Анна"], cities: ["Moscow", "St. Petersburg", "Novosibirsk", "Yekaterinburg"], flag: "🇷�", country: "Russia" },
         "br": { names: ["Paulo", "Thiago", "Lucas", "Gabriel", "Juliana"], cities: ["São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília"], flag: "🇧🇷", country: "Brasil" },
         "cn": { names: ["Wang Wei", "Li Jie", "Zhang Wei", "Liu Yang", "Chen Lin"], cities: ["Shanghai", "Beijing", "Guangzhou", "Shenzhen"], flag: "🇨🇳", country: "China" },
         "es": { names: ["José", "Juan", "Diego", "Javier", "Carmen"], cities: ["Madrid", "Barcelona", "Mexico City", "Buenos Aires"], flag: "🇪🇸", country: "Spain" },
@@ -2108,11 +2108,15 @@
                 const countryData = countrySalaryData[countryCode] || {s: 6000}; // Default to high income
                 const salary = countryData.s;
                 
-                let discount = 10; // Default discount
+                let discount;
                 if (salary < 1000) {
                     discount = 30;
-                } else if (salary < 3000) {
+                } else if (salary < 2000) {
+                    discount = 25;
+                } else if (salary < 4000) {
                     discount = 20;
+                } else {
+                    discount = 15;
                 }
 
                 const content = `
@@ -2120,7 +2124,7 @@
                         <button id="close-discount-popup" class="absolute top-2 right-3 text-gray-400 hover:text-white text-2xl">&times;</button>
                         <div class="text-5xl text-yellow-400 mb-4"><i class="fas fa-gift"></i></div>
                         <h3 class="text-2xl font-bold mb-4">${this.getTranslatedString('discountPopupTitle')}</h3>
-                        <p class="text-gray-300 mb-6">${this.getTranslatedString('discountPopupText', {COUNTRY: this.state.userCountryName, DISCOUNT: discount})}</p>
+                        <p class="text-gray-300 mb-6">${this.getTranslatedString('discountPopupText', {DISCOUNT: discount})}</p>
                         <button id="claim-discount-btn" class="w-full cta-button font-bold py-3 px-5 rounded-lg">${this.getTranslatedString('discountPopupCta', {DISCOUNT: discount})}</button>
                     </div>`;
                 
