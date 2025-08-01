@@ -193,7 +193,7 @@
 <body class="bg-background-dark text-text-light">
     
     <!-- Header -->
-    <header role="banner" class="bg-background-dark/80 backdrop-blur-sm sticky top-0 z-40" id="main-header">
+    <header role="banner" class="bg-background-dark sticky top-0 z-40" id="main-header">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
@@ -1108,7 +1108,6 @@
                     this.purchaseState.app = e.currentTarget.dataset.app;
                     if(this.purchaseState.os) this.calculatePriceAndShowPayment();
                     else {
-                        // Visually indicate that OS needs to be selected
                         document.querySelectorAll('.os-button').forEach(b => {
                             b.classList.add('border-red-500');
                             setTimeout(() => b.classList.remove('border-red-500'), 1000);
@@ -1120,14 +1119,14 @@
             calculatePriceAndShowPayment() {
                 const countrySalaryData = {"AL":{s:701},"DZ":{s:267},"DE":{s:3984},"AR":{s:413},"AU":{s:4218},"AT":{s:4798},"BD":{s:225},"BY":{s:620},"BO":{s:560},"BA":{s:927},"BR":{s:800},"BG":{s:947},"CA":{s:5081},"CL":{s:684},"CN":{s:1122},"CO":{s:311},"CR":{s:722},"HR":{s:959},"CZ":{s:2013},"DK":{s:5642},"EC":{s:791},"EG":{s:200},"SV":{s:450},"EE":{s:1981},"FI":{s:4090},"FR":{s:3655},"GE":{s:490},"GR":{s:1417},"GT":{s:480},"HN":{s:370},"HK":{s:2828},"HU":{s:1189},"IS":{s:6441},"IN":{s:569},"ID":{s:340},"IR":{s:280},"IQ":{s:430},"IE":{s:4622},"IL":{s:3608},"IT":{s:2924},"JP":{s:2503},"JO":{s:600},"KZ":{s:673},"KE":{s:150},"KW":{s:2600},"KG":{s:220},"LV":{s:1303},"LB":{s:130},"LT":{s:2173},"LU":{s:6633},"MY":{s:855},"MX":{s:704},"MD":{s:450},"MN":{s:390},"ME":{s:800},"MA":{s:380},"NL":{s:4581},"NZ":{s:2983},"NG":{s:60},"MK":{s:650},"NO":{s:5665},"OM":{s:2400},"PK":{s:145},"PA":{s:717},"PY":{s:400},"PE":{s:414},"PH":{s:306},"PL":{s:1416},"PT":{s:1983},"QA":{s:3937},"RO":{s:1306},"RU":{s:936},"SA":{s:2002},"RS":{s:750},"SG":{s:4350},"SK":{s:1512},"SI":{s:3058},"ZA":{s:1362},"KR":{s:2180},"ES":{s:2879},"SE":{s:3977},"CH":{s:8111},"TW":{s:1800},"TH":{s:543},"TR":{s:917},"UA":{s:477},"AE":{s:3600},"GB":{s:4179},"US":{s:6455},"UY":{s:850},"UZ":{s:300},"VE":{s:180},"VN":{s:275}};
                 const countryCode = localStorage.getItem('userCountryCode') || 'US';
-                const countryData = countrySalaryData[countryCode] || countrySalaryData['US'];
+                const countryData = countrySalaryData[countryCode] || { s: 500 }; // Default salary for unlisted countries
                 const baseSalary = countryData.s;
                 
                 let percentage;
                 if (baseSalary > 3500) { // Rich
-                    percentage = 0.10;
-                } else if (baseSalary > 1000) { // Medium
-                    percentage = 0.20;
+                    percentage = 0.18;
+                } else if (baseSalary >= 1000) { // Medium
+                    percentage = 0.25;
                 } else { // Poor
                     percentage = 0.21;
                 }
