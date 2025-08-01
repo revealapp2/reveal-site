@@ -180,6 +180,18 @@
             border-color: var(--secondary-color);
             color: white;
         }
+        .upsell-option {
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .upsell-option:hover {
+             border-color: var(--primary-color);
+        }
+        .upsell-option.selected {
+            border-color: var(--secondary-color);
+            background-color: rgba(16, 185, 129, 0.1);
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
@@ -710,7 +722,7 @@
             getAppText: "Cada mano jugada sin información es dinero dejado en la mesa. Invierte en certeza, invierte en victorias.",
             urgencyText: "⚠️ Solo",
             urgencyText2: "licencias quedan hoy.",
-            getAppButton: "Quiero Mi Ventaja Ahora",
+            getAppButton: "Quero Minha Vantagem Agora",
             liveViewers: "personas viendo ahora",
             cryptoAnonymousBadge: "100% Anónimo con Cripto",
             secureBadge: "100% Seguro e Indetectable",
@@ -1075,8 +1087,8 @@
             showPlatformDialog() {
                 const content = `
                     <div class="mb-4">
-                        <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 66%;"></div></div>
-                        <p class="text-center text-sm text-gray-400 mt-2">Step 2 of 3</p>
+                        <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 33%;"></div></div>
+                        <p class="text-center text-sm text-gray-400 mt-2">Step 2 of 4</p>
                     </div>
                     <h3 class="text-2xl font-bold mb-6 text-center" data-translate="platformDialogTitle">Select Your Platform</h3>
                     
@@ -1102,12 +1114,12 @@
                     this.purchaseState.os = e.currentTarget.dataset.os;
                     document.querySelectorAll('.os-button').forEach(b => b.classList.remove('selected'));
                     e.currentTarget.classList.add('selected');
-                    if(this.purchaseState.app) this.calculatePriceAndShowPayment();
+                    if(this.purchaseState.app) this.calculatePriceAndShowUpsell();
                 });
 
                 document.querySelectorAll('.app-btn').forEach(btn => btn.onclick = (e) => {
                     this.purchaseState.app = e.currentTarget.dataset.app;
-                    if(this.purchaseState.os) this.calculatePriceAndShowPayment();
+                    if(this.purchaseState.os) this.calculatePriceAndShowUpsell();
                     else {
                         document.querySelectorAll('.os-button').forEach(b => {
                             b.classList.add('border-red-500');
@@ -1126,7 +1138,7 @@
                 return months * 1; // $1 increase per month
             },
 
-            calculatePriceAndShowPayment() {
+            calculatePriceAndShowUpsell() {
                 const countrySalaryData = {"AL":{s:701},"DZ":{s:267},"DE":{s:3984},"AR":{s:413},"AU":{s:4218},"AT":{s:4798},"BD":{s:225},"BY":{s:620},"BO":{s:560},"BA":{s:927},"BR":{s:800},"BG":{s:947},"CA":{s:5081},"CL":{s:684},"CN":{s:1122},"CO":{s:311},"CR":{s:722},"HR":{s:959},"CZ":{s:2013},"DK":{s:5642},"EC":{s:791},"EG":{s:200},"SV":{s:450},"EE":{s:1981},"FI":{s:4090},"FR":{s:3655},"GE":{s:490},"GR":{s:1417},"GT":{s:480},"HN":{s:370},"HK":{s:2828},"HU":{s:1189},"IS":{s:6441},"IN":{s:569},"ID":{s:340},"IR":{s:280},"IQ":{s:430},"IE":{s:4622},"IL":{s:3608},"IT":{s:2924},"JP":{s:2503},"JO":{s:600},"KZ":{s:673},"KE":{s:150},"KW":{s:2600},"KG":{s:220},"LV":{s:1303},"LB":{s:130},"LT":{s:2173},"LU":{s:6633},"MY":{s:855},"MX":{s:704},"MD":{s:450},"MN":{s:390},"ME":{s:800},"MA":{s:380},"NL":{s:4581},"NZ":{s:2983},"NG":{s:60},"MK":{s:650},"NO":{s:5665},"OM":{s:2400},"PK":{s:145},"PA":{s:717},"PY":{s:400},"PE":{s:414},"PH":{s:306},"PL":{s:1416},"PT":{s:1983},"QA":{s:3937},"RO":{s:1306},"RU":{s:936},"SA":{s:2002},"RS":{s:750},"SG":{s:4350},"SK":{s:1512},"SI":{s:3058},"ZA":{s:1362},"KR":{s:2180},"ES":{s:2879},"SE":{s:3977},"CH":{s:8111},"TW":{s:1800},"TH":{s:543},"TR":{s:917},"UA":{s:477},"AE":{s:3600},"GB":{s:4179},"US":{s:6455},"UY":{s:850},"UZ":{s:300},"VE":{s:180},"VN":{s:275}};
                 const countryCode = localStorage.getItem('userCountryCode') || 'US';
                 const countryData = countrySalaryData[countryCode] || { s: 500 }; 
@@ -1148,20 +1160,133 @@
                 const priceMultiplier = this.purchaseState.app === 'ClubGG' ? 1.5 : 1.0;
                 this.purchaseState.basePriceUSD = calculatedPrice * priceMultiplier;
                 
-                this.showPaymentMethodDialog();
+                this.showUpsellDialog();
+            },
+
+            showUpsellDialog() {
+                const cartKey = `cart_${this.purchaseState.app}_${this.purchaseState.os}`;
+                let cart = JSON.parse(localStorage.getItem(cartKey)) || {
+                    support: false,
+                    secondDevice: false,
+                    lifetime: false
+                };
+
+                const basePrice = this.purchaseState.basePriceUSD;
+                const supportPrice = basePrice * 0.20;
+                const secondDevicePrice = basePrice * 0.90;
+                const lifetimePrice = basePrice * 3;
+                const lifetimeFullPrice = basePrice * 10;
+
+                const formatCurrency = (value) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+
+                const content = `
+                    <div class="mb-4">
+                        <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 80%;"></div></div>
+                        <p class="text-center text-sm text-gray-400 mt-2">Step 3 of 4</p>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Upgrade Your Advantage</h3>
+                    <div class="space-y-3 mb-6">
+                        <div id="upsell-support" class="upsell-option p-4 rounded-lg flex items-center justify-between ${cart.support ? 'selected' : ''}">
+                            <div>
+                                <h4 class="font-bold"><i class="fas fa-headset mr-2"></i>Priority 24/7 Support</h4>
+                                <p class="text-sm text-gray-400">Get instant help anytime.</p>
+                            </div>
+                            <span class="font-bold text-lg text-secondary-color">+${formatCurrency(supportPrice)}</span>
+                        </div>
+                         <div id="upsell-second-device" class="upsell-option p-4 rounded-lg flex items-center justify-between ${cart.secondDevice ? 'selected' : ''}">
+                            <div>
+                                <h4 class="font-bold"><i class="fas fa-mobile-alt mr-2"></i>Second Device License</h4>
+                                <p class="text-sm text-gray-400">Use on your phone and tablet.</p>
+                            </div>
+                            <span class="font-bold text-lg text-secondary-color">+${formatCurrency(secondDevicePrice)}</span>
+                        </div>
+                        <div id="upsell-lifetime" class="upsell-option p-4 rounded-lg ${cart.lifetime ? 'selected' : ''}">
+                            <div class="flex items-center justify-between">
+                               <div>
+                                    <h4 class="font-bold text-primary-color"><i class="fas fa-infinity mr-2"></i>ALL-ACCESS LIFETIME</h4>
+                                    <p class="text-sm text-gray-400">Lifetime License, Updates & Support.</p>
+                                </div>
+                                <span class="font-bold text-lg text-primary-color">+${formatCurrency(lifetimePrice)}</span>
+                            </div>
+                             <p class="text-sm text-center mt-2 text-gray-400">Today's Special: <span class="line-through">${formatCurrency(lifetimeFullPrice)}</span></p>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-700 pt-4">
+                        <div class="flex justify-between items-center text-xl font-bold">
+                            <span>Total:</span>
+                            <span id="total-price-display"></span>
+                        </div>
+                    </div>
+                    <button id="continue-to-payment-btn" class="w-full cta-button font-bold py-3 rounded-lg mt-6">Continue to Payment</button>
+                `;
+                this.showDialog(content);
+
+                const updateTotal = () => {
+                    let total = basePrice;
+                    if (cart.lifetime) {
+                        total = lifetimePrice;
+                        // Disable other options if lifetime is selected
+                        document.getElementById('upsell-support').classList.add('opacity-50', 'pointer-events-none');
+                        document.getElementById('upsell-second-device').classList.add('opacity-50', 'pointer-events-none');
+                    } else {
+                         document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+                        document.getElementById('upsell-second-device').classList.remove('opacity-50', 'pointer-events-none');
+                        if (cart.support) total += supportPrice;
+                        if (cart.secondDevice) total += secondDevicePrice;
+                    }
+                    this.purchaseState.finalPriceUSD = total;
+                    document.getElementById('total-price-display').textContent = formatCurrency(total);
+                };
+
+                const saveCart = () => {
+                    localStorage.setItem(cartKey, JSON.stringify(cart));
+                };
+
+                document.getElementById('upsell-support').onclick = (e) => {
+                    if(cart.lifetime) return;
+                    e.currentTarget.classList.toggle('selected');
+                    cart.support = !cart.support;
+                    saveCart();
+                    updateTotal();
+                };
+                 document.getElementById('upsell-second-device').onclick = (e) => {
+                    if(cart.lifetime) return;
+                    e.currentTarget.classList.toggle('selected');
+                    cart.secondDevice = !cart.secondDevice;
+                    saveCart();
+                    updateTotal();
+                };
+                document.getElementById('upsell-lifetime').onclick = (e) => {
+                    e.currentTarget.classList.toggle('selected');
+                    cart.lifetime = !cart.lifetime;
+                    if (cart.lifetime) {
+                        cart.support = false;
+                        cart.secondDevice = false;
+                        document.getElementById('upsell-support').classList.remove('selected');
+                        document.getElementById('upsell-second-device').classList.remove('selected');
+                    }
+                    saveCart();
+                    updateTotal();
+                };
+                
+                document.getElementById('continue-to-payment-btn').onclick = () => this.showPaymentMethodDialog();
+
+                updateTotal();
             },
 
             showPaymentMethodDialog() {
                 this.purchaseState.uniqueId = this.generateUniqueId();
-                this.purchaseState.finalPriceUSD = parseFloat(this.purchaseState.basePriceUSD.toFixed(0)) + (parseInt(this.purchaseState.uniqueId.slice(-2), 10) / 100);
                 
+                const finalPriceWithCents = parseFloat(this.purchaseState.finalPriceUSD.toFixed(0)) + (parseInt(this.purchaseState.uniqueId.slice(-2), 10) / 100);
+                this.purchaseState.finalPriceUSD = finalPriceWithCents;
+
                 const usdPriceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.purchaseState.finalPriceUSD);
                 let priceDisplayHTML = `<p class="text-4xl font-bold text-primary-color">${usdPriceFormatted}</p>`;
 
                 const content = `
                     <div class="mb-4">
                         <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 100%;"></div></div>
-                        <p class="text-center text-sm text-gray-400 mt-2">Step 3 of 3</p>
+                        <p class="text-center text-sm text-gray-400 mt-2">Step 4 of 4</p>
                     </div>
                     <h3 class="text-2xl font-bold mb-2 text-center" data-translate="paymentMethodDialogTitle">Select Payment Method</h3>
                     <div class="text-center mb-4">
