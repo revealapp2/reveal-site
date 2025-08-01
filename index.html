@@ -780,6 +780,7 @@
                 finalPriceUSD: 0,
                 uniqueId: null,
                 app: null,
+                txid: null,
             },
             urgencyState: {
                 socialProofTimeout: null,
@@ -1116,10 +1117,19 @@
                 });
             },
 
+            calculateMonthlyPriceIncrease() {
+                const startDate = new Date('2025-01-01T00:00:00Z');
+                const now = new Date();
+                if (now < startDate) return 0;
+
+                const months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+                return months * 1; // $1 increase per month
+            },
+
             calculatePriceAndShowPayment() {
                 const countrySalaryData = {"AL":{s:701},"DZ":{s:267},"DE":{s:3984},"AR":{s:413},"AU":{s:4218},"AT":{s:4798},"BD":{s:225},"BY":{s:620},"BO":{s:560},"BA":{s:927},"BR":{s:800},"BG":{s:947},"CA":{s:5081},"CL":{s:684},"CN":{s:1122},"CO":{s:311},"CR":{s:722},"HR":{s:959},"CZ":{s:2013},"DK":{s:5642},"EC":{s:791},"EG":{s:200},"SV":{s:450},"EE":{s:1981},"FI":{s:4090},"FR":{s:3655},"GE":{s:490},"GR":{s:1417},"GT":{s:480},"HN":{s:370},"HK":{s:2828},"HU":{s:1189},"IS":{s:6441},"IN":{s:569},"ID":{s:340},"IR":{s:280},"IQ":{s:430},"IE":{s:4622},"IL":{s:3608},"IT":{s:2924},"JP":{s:2503},"JO":{s:600},"KZ":{s:673},"KE":{s:150},"KW":{s:2600},"KG":{s:220},"LV":{s:1303},"LB":{s:130},"LT":{s:2173},"LU":{s:6633},"MY":{s:855},"MX":{s:704},"MD":{s:450},"MN":{s:390},"ME":{s:800},"MA":{s:380},"NL":{s:4581},"NZ":{s:2983},"NG":{s:60},"MK":{s:650},"NO":{s:5665},"OM":{s:2400},"PK":{s:145},"PA":{s:717},"PY":{s:400},"PE":{s:414},"PH":{s:306},"PL":{s:1416},"PT":{s:1983},"QA":{s:3937},"RO":{s:1306},"RU":{s:936},"SA":{s:2002},"RS":{s:750},"SG":{s:4350},"SK":{s:1512},"SI":{s:3058},"ZA":{s:1362},"KR":{s:2180},"ES":{s:2879},"SE":{s:3977},"CH":{s:8111},"TW":{s:1800},"TH":{s:543},"TR":{s:917},"UA":{s:477},"AE":{s:3600},"GB":{s:4179},"US":{s:6455},"UY":{s:850},"UZ":{s:300},"VE":{s:180},"VN":{s:275}};
                 const countryCode = localStorage.getItem('userCountryCode') || 'US';
-                const countryData = countrySalaryData[countryCode] || { s: 500 }; // Default salary for unlisted countries
+                const countryData = countrySalaryData[countryCode] || { s: 500 }; 
                 const baseSalary = countryData.s;
                 
                 let percentage;
@@ -1132,6 +1142,7 @@
                 }
                 
                 let calculatedPrice = baseSalary * percentage;
+                calculatedPrice += this.calculateMonthlyPriceIncrease();
                 calculatedPrice = Math.max(250, calculatedPrice);
                 
                 const priceMultiplier = this.purchaseState.app === 'ClubGG' ? 1.5 : 1.0;
@@ -1141,7 +1152,7 @@
             },
 
             showPaymentMethodDialog() {
-                this.purchaseState.uniqueId = Date.now().toString();
+                this.purchaseState.uniqueId = this.generateUniqueId();
                 this.purchaseState.finalPriceUSD = parseFloat(this.purchaseState.basePriceUSD.toFixed(0)) + (parseInt(this.purchaseState.uniqueId.slice(-2), 10) / 100);
                 
                 const usdPriceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.purchaseState.finalPriceUSD);
@@ -1243,7 +1254,7 @@
                 this.showDialog(content);
 
                 document.getElementById('copy-address').onclick = () => this.copyToClipboard(address, 'copy-feedback');
-                document.getElementById('payment-done').onclick = () => this.showFinalConfirmation();
+                document.getElementById('payment-done').onclick = () => this.showTxidDialog();
 
                 const cryptoPrice = await this.getCryptoPrice(method);
                 const paymentAmountContainer = document.getElementById('payment-amount-container');
@@ -1297,25 +1308,43 @@
                 document.body.removeChild(textArea);
             },
 
+            generateUniqueId() {
+                const countryCode = localStorage.getItem('userCountryCode') || 'XX';
+                const now = new Date();
+                const pad = (num) => String(num).padStart(2, '0');
+                const timestamp = `${pad(now.getDate())}${pad(now.getMonth() + 1)}${now.getFullYear()}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+                return `${countryCode.toUpperCase()}-${timestamp}`;
+            },
+
+            showTxidDialog() {
+                const content = `
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-4">Provide Transaction ID</h3>
+                        <p class="text-gray-400 mb-6">To speed up activation, please paste the transaction ID (TxID/Hash) from your crypto payment below.</p>
+                        <input type="text" id="txid-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5 mb-4" placeholder="Paste your TxID here">
+                        <button id="submit-txid-btn" class="w-full cta-button font-bold py-3 rounded-lg">Submit and Activate</button>
+                    </div>`;
+                this.showDialog(content);
+                document.getElementById('submit-txid-btn').onclick = () => {
+                    const txidInput = document.getElementById('txid-input');
+                    this.purchaseState.txid = txidInput.value || 'Not Provided';
+                    this.showFinalConfirmation();
+                };
+            },
+
             showFinalConfirmation() {
-                const { uniqueId, app, os } = this.purchaseState;
-                const message = `Hello, I would like to activate my ID:\nID: ${uniqueId}\nApp: ${app}\nOS: ${os}`;
+                const { uniqueId, app, os, txid } = this.purchaseState;
+                const message = `Activation Request\n\nID: ${uniqueId}\nApp: ${app}\nOS: ${os}\nTxID: ${txid}`;
                 const telegramUrl = `https://t.me/bedmalcon_temp?text=${encodeURIComponent(message)}`;
 
                 const content = `
                     <div class="text-center">
                         <div class="text-6xl text-secondary-color mb-4"><i class="fas fa-check-circle"></i></div>
                         <h3 class="text-2xl font-bold mb-4" data-translate="telegramInstructionsTitle">Final Step: Activation</h3>
-                        <p class="text-gray-400 mb-6" data-translate="telegramInstructionsText">Your payment is being processed. To complete, send your unique ID to our administrator on Telegram.</p>
-                        <div class="flex items-center bg-background-dark p-3 rounded-lg max-w-sm mx-auto">
-                            <span class="flex-grow text-lg font-mono text-primary-color">${uniqueId}</span>
-                            <button id="copy-id-final" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded-lg ml-4"><i class="fas fa-copy"></i></button>
-                        </div>
-                        <p id="copy-feedback-final" class="text-green-400 text-sm mt-2 h-4"></p>
+                        <p class="text-gray-400 mb-6">Thank you! Your request has been submitted. Click the button below to contact our support on Telegram to finalize the activation.</p>
                         <a href="${telegramUrl}" target="_blank" class="inline-block mt-8 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition text-lg"><i class="fab fa-telegram-plane mr-2"></i><span data-translate="openTelegramButton">Contact Support on Telegram</span></a>
                     </div>`;
                 this.showDialog(content);
-                document.getElementById('copy-id-final').onclick = () => this.copyToClipboard(uniqueId, 'copy-feedback-final');
             }
         };
         
