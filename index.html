@@ -233,7 +233,7 @@
     </header>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden mobile-menu bg-background-dark transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl transition-transform duration-300 ease-in-out">
+    <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0B1120] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl transition-transform duration-300 ease-in-out">
         <nav class="flex flex-col space-y-6 mt-8 text-lg">
             <a href="#features" class="text-gray-300 hover:text-primary-color transition" data-translate="navFeatures">Features</a>
             <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition" data-translate="navHowItWorks">How It Works</a>
@@ -434,7 +434,7 @@
                             <span data-translate="faq3Question">Is it a one-time payment?</span>
                             <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
                         </summary>
-                        <p class="text-gray-400 mt-4" data-translate="faq3Answer">Yes. It is a one-time payment for a lifetime license. You will receive all future updates for your chosen poker app at no additional cost.</p>
+                        <p class="text-gray-400 mt-4" data-translate="faq3Answer">The standard license is valid for 3 months. You can choose to upgrade to a Lifetime License during checkout, which is a one-time payment for permanent access and all future updates.</p>
                     </details>
                      <details class="faq-item animate-on-scroll p-6 rounded-lg">
                         <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
@@ -1173,7 +1173,7 @@
 
                 const basePrice = this.purchaseState.basePriceUSD;
                 const supportPrice = basePrice * 0.20;
-                const secondDevicePrice = basePrice * 0.90;
+                const secondDevicePrice = basePrice * 0.50; // Changed to 50%
                 const lifetimePrice = basePrice * 3;
                 const lifetimeFullPrice = basePrice * 10;
 
@@ -1181,7 +1181,7 @@
 
                 const content = `
                     <div class="mb-4">
-                        <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 80%;"></div></div>
+                        <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 66%;"></div></div>
                         <p class="text-center text-sm text-gray-400 mt-2">Step 3 of 4</p>
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-center">Upgrade Your Advantage</h3>
@@ -1225,7 +1225,6 @@
                     let total = basePrice;
                     if (cart.lifetime) {
                         total = lifetimePrice;
-                        // Disable other options if lifetime is selected
                         document.getElementById('upsell-support').classList.add('opacity-50', 'pointer-events-none');
                         document.getElementById('upsell-second-device').classList.add('opacity-50', 'pointer-events-none');
                     } else {
