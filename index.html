@@ -166,16 +166,16 @@
             height: 100%;
             transition: width 0.5s ease-in-out;
         }
-        .crypto-button, .os-button {
+        .crypto-button, .os-button, .combo-option {
             background-color: var(--background-dark);
             border: 1px solid var(--border-color);
             transition: all 0.2s ease-in-out;
         }
-        .crypto-button:hover, .os-button:hover {
+        .crypto-button:hover, .os-button:hover, .combo-option:hover {
             border-color: var(--primary-color);
             transform: translateY(-2px);
         }
-        .os-button.selected {
+        .os-button.selected, .combo-option.selected {
             background-color: var(--secondary-color);
             border-color: var(--secondary-color);
             color: white;
@@ -264,7 +264,7 @@
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
                     <div class="animate-on-scroll">
-                        <p class="text-4xl font-bold text-primary-color" id="counter-players">+1,200</p>
+                        <p class="text-4xl font-bold text-primary-color" id="counter-players">+1,284</p>
                         <p class="text-gray-400" data-translate="counterPlayers">Active Players</p>
                     </div>
                      <div class="animate-on-scroll" style="transition-delay: 0.2s;">
@@ -553,7 +553,7 @@
             faq2Question: "How does the payment work?",
             faq2Answer: "We use cryptocurrency to ensure your complete anonymity. The process is simple: you choose your crypto, send the amount to the provided address, and contact our support on Telegram with your unique ID to finalize the activation.",
             faq3Question: "Is it a one-time payment?",
-            faq3Answer: "Yes. It is a one-time payment for a lifetime license. You will receive all future updates for your chosen poker app at no additional cost.",
+            faq3Answer: "The standard license is valid for 3 months. You can choose to upgrade to a Lifetime License during checkout, which is a one-time payment for permanent access and all future updates.",
             faq4Question: "How long for activation?",
             faq4Answer: "Activation is almost instant. After sending your ID to our 24/7 support on Telegram, the process is usually completed in under 5 minutes.",
             footerAboutTitle: "About Reveal App",
@@ -587,8 +587,13 @@
             telegramInstructionsText: "Your payment is being processed. To complete, send your unique ID to our administrator on Telegram.",
             openTelegramButton: "Contact Support on Telegram",
             priceReservation: "Your price is reserved for:",
-            usdtFee: "(+ $20 network fee)",
-            xrpNoTag: "(No destination tag required)"
+            usdtFeeTag: "+ $20 Fee",
+            paymentSubtotal: "Subtotal:",
+            paymentNetworkFee: "Network Fee (TRC20):",
+            paymentTotal: "Total to Pay:",
+            paymentImportant: "Important:",
+            paymentNetworkNotice: "Please ensure you send via the",
+            paymentSendExact: "Send the exact amount to the address below for automatic activation."
         },
         pt: {
             navFeatures: "Recursos",
@@ -643,7 +648,7 @@
             faq2Question: "Como funciona o pagamento?",
             faq2Answer: "Usamos criptomoedas para garantir seu total anonimato. O processo é simples: você escolhe sua cripto, envia o valor para o endereço fornecido e contata nosso suporte no Telegram com seu ID único para finalizar a ativação.",
             faq3Question: "É um pagamento único?",
-            faq3Answer: "Sim. É um pagamento único para uma licença vitalícia. Você receberá todas as futuras atualizações para o app de poker escolhido sem custo adicional.",
+            faq3Answer: "A licença padrão é válida por 3 meses. Você pode optar por atualizar para uma Licença Vitalícia durante a finalização da compra, que é um pagamento único para acesso permanente e todas as futuras atualizações.",
             faq4Question: "Quanto tempo para ativar?",
             faq4Answer: "A ativação é quase instantânea. Após enviar seu ID para nosso suporte 24/7 no Telegram, o processo geralmente é concluído em menos de 5 minutos.",
             footerAboutTitle: "Sobre o Reveal App",
@@ -677,8 +682,13 @@
             telegramInstructionsText: "Seu pagamento está sendo processado. Para completar, envie seu ID único para nosso administrador no Telegram.",
             openTelegramButton: "Contatar Suporte no Telegram",
             priceReservation: "Seu preço está reservado por:",
-            usdtFee: "(+ $20 taxa de rede)",
-            xrpNoTag: "(Não precisa de tag de destino)"
+            usdtFeeTag: "+ $20 Taxa",
+            paymentSubtotal: "Subtotal:",
+            paymentNetworkFee: "Taxa de Rede (TRC20):",
+            paymentTotal: "Total a Pagar:",
+            paymentImportant: "Importante:",
+            paymentNetworkNotice: "Certifique-se de enviar pela",
+            paymentSendExact: "Envie o valor exato para o endereço abaixo para ativação automática."
         },
         es: {
             navFeatures: "Características",
@@ -731,9 +741,9 @@
             faq1Question: "¿Es seguro? ¿Me pueden prohibir?",
             faq1Answer: "Sí, 100% seguro. Reveal App opera como un asistente externo y no modifica los archivos de la aplicación de póker, lo que la hace completamente indetectable. Miles de usuarios han estado jugando de forma segura durante meses sin ningún problema.",
             faq2Question: "¿Cómo funciona el pago?",
-            faq2Answer: "Usamos criptomonedas para garantizar tu completo anonimato. El proceso es simple: eliges tu cripto, envías la cantidad a la dirección proporcionada y contactas a nuestro soporte en Telegram con tu ID único para finalizar la activación.",
+            faq2Answer: "Usamos criptomoedas para garantizar tu completo anonimato. El proceso es simple: eliges tu cripto, envías la cantidad a la dirección proporcionada y contactas a nuestro soporte en Telegram con tu ID único para finalizar la activación.",
             faq3Question: "¿Es un pago único?",
-            faq3Answer: "Sí. Es un pago único por una licencia de por vida. Recibirás todas las futuras actualizaciones para la aplicación de póker que elijas sin costo adicional.",
+            faq3Answer: "La licencia estándar es válida por 3 meses. Puede optar por actualizar a una Licencia Vitalicia durante el proceso de pago, que es un pago único para acceso permanente y todas las futuras actualizaciones.",
             faq4Question: "¿Cuánto tiempo para la activación?",
             faq4Answer: "La activación es casi instantánea. Después de enviar tu ID a nuestro soporte 24/7 en Telegram, el proceso generalmente se completa en menos de 5 minutos.",
             footerAboutTitle: "Acerca de Reveal App",
@@ -767,8 +777,13 @@
             telegramInstructionsText: "Tu pago se está procesando. Para completar, envía tu ID único a nuestro administrador en Telegram.",
             openTelegramButton: "Contactar Soporte en Telegram",
             priceReservation: "Tu precio está reservado por:",
-            usdtFee: "(+ $20 de tarifa de red)",
-            xrpNoTag: "(No se requiere etiqueta de destino)"
+            usdtFeeTag: "+ $20 Tarifa",
+            paymentSubtotal: "Subtotal:",
+            paymentNetworkFee: "Tarifa de Red (TRC20):",
+            paymentTotal: "Total a Pagar:",
+            paymentImportant: "Importante:",
+            paymentNetworkNotice: "Asegúrese de enviar a través de la",
+            paymentSendExact: "Envíe la cantidad exacta a la siguiente dirección para la activación automática."
         }
     };
     
@@ -793,6 +808,11 @@
                 uniqueId: null,
                 app: null,
                 txid: null,
+                upsells: {
+                    support: false,
+                    secondDevice: false,
+                    lifetime: false
+                }
             },
             urgencyState: {
                 socialProofTimeout: null,
@@ -821,7 +841,7 @@
                 this.setLanguage(localStorage.getItem('language') || 'en');
                 await this.fetchInitialData();
                 this.initEventListeners();
-                this.initStaticCounters();
+                this.initConsistentCounters();
                 this.initUrgencyFeatures();
                 this.initScrollAnimations();
                 this.scheduleSocialProof();
@@ -858,8 +878,11 @@
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                     anchor.addEventListener('click', function (e) {
                         e.preventDefault();
-                        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-                        if (App.dom.mobileMenu && App.dom.mobileMenu.classList.contains('-translate-x-full') === false) {
+                        const targetElement = document.querySelector(this.getAttribute('href'));
+                        if (targetElement) {
+                           targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        if (App.dom.mobileMenu && !App.dom.mobileMenu.classList.contains('-translate-x-full')) {
                              App.dom.mobileMenu.classList.add('-translate-x-full');
                         }
                     });
@@ -898,13 +921,18 @@
 
             scheduleSocialProof() {
                 clearTimeout(this.urgencyState.socialProofTimeout);
+                 // Start first notification after a delay
+                this.urgencyState.socialProofTimeout = setTimeout(() => {
+                    this.triggerSocialProof();
+                }, 15000);
             },
 
             triggerSocialProof() {
                 this.showSocialProofNotification();
+                // Schedule the next one
                 this.urgencyState.socialProofTimeout = setTimeout(() => {
                     this.triggerSocialProof();
-                }, 120000);
+                }, Math.random() * (120000 - 45000) + 45000); // Randomly between 45s and 2min
             },
 
             showSocialProofNotification() {
@@ -933,24 +961,48 @@
                 }, 6000);
             },
 
-            initStaticCounters() {
-                if (this.dom.counterSatisfaction) this.dom.counterSatisfaction.textContent = `98.7%`;
-                if (this.dom.counterWinnings) this.dom.counterWinnings.textContent = `$${(150).toLocaleString()}K+`;
+            initConsistentCounters() {
+                // 1. Active Players: Static value, same for everyone.
                 if (this.dom.counterPlayers) this.dom.counterPlayers.textContent = `+1,284`;
+
+                // 2. Weekly Winnings: Changes daily, but is the same for everyone on a given day.
+                const calculateWeeklyWinnings = () => {
+                    const startDate = new Date(new Date().getFullYear(), 0, 1);
+                    const today = new Date();
+                    const dayOfYear = Math.floor((today - startDate) / (1000 * 60 * 60 * 24)) + 1;
+                    const baseWinnings = 150000;
+                    // A simple, deterministic calculation based on the day of the year
+                    const dailyIncrement = (dayOfYear * 137) % 5000; 
+                    const totalWinnings = baseWinnings + dailyIncrement;
+                    return `$${Math.floor(totalWinnings / 1000)}K+`;
+                };
+                if (this.dom.counterWinnings) {
+                    this.dom.counterWinnings.textContent = calculateWeeklyWinnings();
+                }
+
+                // 3. Satisfaction Rate: Static
+                if (this.dom.counterSatisfaction) this.dom.counterSatisfaction.textContent = `98.7%`;
             },
             
             initUrgencyFeatures() {
+                // Live Viewers: Dynamic but consistent for all users at the same time.
+                this.updateLiveViewers = () => {
+                    const now = new Date();
+                    const minutes = now.getMinutes();
+                    const baseViewers = 30;
+                    // Fluctuates based on the minute of the hour, same for everyone.
+                    const minuteBasedFluctuation = Math.floor(Math.sin(minutes * (Math.PI / 15)) * 10 + Math.sin(minutes * (Math.PI / 10)) * 5);
+                    const viewers = baseViewers + minuteBasedFluctuation;
+                    if (this.dom.liveViewersCount) {
+                        this.dom.liveViewersCount.textContent = viewers;
+                    }
+                };
                 this.updateLiveViewers();
-                this.urgencyState.viewersInterval = setInterval(() => this.updateLiveViewers(), 7000);
+                this.urgencyState.viewersInterval = setInterval(this.updateLiveViewers, 15000); // Update every 15 seconds
 
+                // Slots logic remains the same as it's based on user's localStorage
                 this.initializeSlots();
                 this.urgencyState.slotsInterval = setInterval(() => this.updateAvailableSlots(), 180000);
-            },
-
-            updateLiveViewers() {
-                const base = 25;
-                const random = Math.floor(Math.random() * 50);
-                this.dom.liveViewersCount.textContent = base + random;
             },
 
             initializeSlots() {
@@ -1173,7 +1225,7 @@
 
                 const basePrice = this.purchaseState.basePriceUSD;
                 const supportPrice = basePrice * 0.20;
-                const secondDevicePrice = basePrice * 0.50; // Changed to 50%
+                const secondDevicePrice = basePrice * 0.50;
                 const lifetimePrice = basePrice * 3;
                 const lifetimeFullPrice = basePrice * 10;
 
@@ -1229,7 +1281,7 @@
                         document.getElementById('upsell-second-device').classList.add('opacity-50', 'pointer-events-none');
                     } else {
                          document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
-                        document.getElementById('upsell-second-device').classList.remove('opacity-50', 'pointer-events-none');
+                         document.getElementById('upsell-second-device').classList.remove('opacity-50', 'pointer-events-none');
                         if (cart.support) total += supportPrice;
                         if (cart.secondDevice) total += secondDevicePrice;
                     }
@@ -1296,28 +1348,32 @@
                             <span id="price-timer" class="ml-1">15:00</span>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
-                        <button data-crypto="btc" class="crypto-button p-3 rounded-lg">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
+                        <button data-crypto="btc" class="crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
                             <img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" class="h-8 w-8 mx-auto mb-1" alt="Bitcoin">
                             <span class="text-sm font-semibold">BTC</span>
+                            <span class="text-xs text-gray-400">Bitcoin Network</span>
                         </button>
-                        <button data-crypto="eth" class="crypto-button p-3 rounded-lg">
+                        <button data-crypto="eth" class="crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
                              <img src="https://img.icons8.com/color/48/000000/ethereum.png" class="h-8 w-8 mx-auto mb-1" alt="Ethereum">
                             <span class="text-sm font-semibold">ETH</span>
+                            <span class="text-xs text-gray-400">ERC20 Network</span>
                         </button>
-                        <button data-crypto="usdt" class="crypto-button p-3 rounded-lg">
+                        <button data-crypto="usdt" class="crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24 relative overflow-hidden">
                              <img src="https://img.icons8.com/color/48/000000/tether.png" class="h-8 w-8 mx-auto mb-1" alt="USDT">
                             <span class="text-sm font-semibold">USDT</span>
-                            <span class="text-xs text-gray-400 block" data-translate="usdtFee">(+ $20 fee)</span>
+                            <span class="text-xs text-gray-400">TRC20 Network</span>
+                            <div class="absolute -top-2 -right-10 bg-primary-color text-background-dark text-[10px] font-bold px-8 py-1 transform rotate-45" data-translate="usdtFeeTag">+ $20 Fee</div>
                         </button>
-                        <button data-crypto="sol" class="crypto-button p-3 rounded-lg">
+                        <button data-crypto="sol" class="crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
                              <img src="https://img.icons8.com/nolan/64/solana.png" class="h-8 w-8 mx-auto mb-1" alt="Solana">
                             <span class="text-sm font-semibold">SOL</span>
+                             <span class="text-xs text-gray-400">Solana Network</span>
                         </button>
-                        <button data-crypto="xrp" class="crypto-button p-3 rounded-lg">
+                        <button data-crypto="xrp" class="crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
                              <img src="https://img.icons8.com/color/48/xrp.png" class="h-8 w-8 mx-auto mb-1" alt="XRP">
                             <span class="text-sm font-semibold">XRP</span>
-                             <span class="text-xs text-gray-400 block" data-translate="xrpNoTag">(No Tag)</span>
+                             <span class="text-xs text-gray-400">Ripple Network</span>
                         </button>
                     </div>`;
                 this.showDialog(content);
@@ -1350,9 +1406,32 @@
                 this.triggerSocialProof();
                 
                 let finalPrice = this.purchaseState.finalPriceUSD;
+                let priceBreakdownHTML = '';
+                
+                const networkNames = {
+                    usdt: "TRC20 (Tron)",
+                    eth: "ERC20 (Ethereum)",
+                    btc: "Bitcoin",
+                    sol: "Solana",
+                    xrp: "Ripple"
+                };
+
                 if (method === 'usdt') {
+                    const basePriceFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(this.purchaseState.finalPriceUSD);
+                    const feeFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(20);
                     finalPrice += 20;
+                    const totalFormatted = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(finalPrice);
+
+                    priceBreakdownHTML = `
+                        <div class="text-left mb-4 p-4 bg-background-dark rounded-lg border border-border-color">
+                            <div class="flex justify-between text-gray-300 text-sm"><span data-translate="paymentSubtotal">Subtotal:</span><span>${basePriceFormatted}</span></div>
+                            <div class="flex justify-between text-gray-300 text-sm"><span data-translate="paymentNetworkFee">Network Fee (TRC20):</span><span>+ ${feeFormatted}</span></div>
+                            <hr class="border-gray-700 my-2">
+                            <div class="flex justify-between font-bold text-lg"><span data-translate="paymentTotal">Total to Pay:</span><span>${totalFormatted}</span></div>
+                        </div>
+                    `;
                 }
+
 
                 const addresses = { 
                     usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK", 
@@ -1365,8 +1444,12 @@
                 let cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner w-6 h-6"></div></div>`;
                 
                 const content = `
-                    <h3 class="text-2xl font-bold mb-4 text-center" data-translate="paymentDialogTitle">Complete Your Payment</h3>
-                    <p class="text-center text-gray-400 mb-4">Send the exact amount to the address below for automatic activation.</p>
+                    <h3 class="text-2xl font-bold mb-2 text-center" data-translate="paymentDialogTitle">Complete Your Payment</h3>
+                    ${priceBreakdownHTML}
+                    <div class="text-center bg-yellow-500/10 border border-yellow-500/30 text-yellow-300 text-sm rounded-lg p-3 mb-4">
+                        <strong data-translate="paymentImportant">Important:</strong> <span data-translate="paymentNetworkNotice">Please ensure you send via the</span> <strong>${networkNames[method]} Network</strong>.
+                    </div>
+                    <p class="text-center text-gray-400 mb-4" data-translate="paymentSendExact">Send the exact amount to the address below for automatic activation.</p>
                     <div id="payment-amount-container" class="text-center mb-4 min-h-[56px] flex flex-col justify-center">${cryptoAmountHTML}</div>
                     <div id="qr-code-container" class="flex justify-center mb-4 p-2 bg-white rounded-lg w-48 h-48 mx-auto"></div>
                     <div class="flex items-center bg-background-dark p-2 rounded-lg">
