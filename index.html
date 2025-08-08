@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal App: Strategic Poker Tool for All Major Platforms</title>
     
-    <meta name="description" content="Elevate your game with Reveal App, the premier strategic assistant for PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, and PokerStars. Gain critical insights by seeing opponent and board cards to make smarter, data-driven decisions. Undetectable, safe, and secure.">
-    <meta name="keywords" content="poker tool, poker analysis, pppoker hack, ggpoker hack, upoker hack, pokerbros hack, xpoker hack, pokerrr2 hack, pokerstars hack, see cards poker, online poker cheat, poker cheat engine, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
+    <meta name="description" content="Elevate your game with Reveal App, the premier strategic assistant for PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker, and Suprema Poker. Gain critical insights by seeing opponent and board cards to make smarter, data-driven decisions. Undetectable, safe, and secure.">
+    <meta name="keywords" content="poker tool, poker analysis, pppoker hack, ggpoker hack, upoker hack, pokerbros hack, xpoker hack, pokerrr2 hack, pokerstars hack, kkpoker hack, suprema poker hack, see cards poker, online poker cheat, poker cheat engine, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
     
     <link rel="canonical" href="https://revealpoker.top/">
     <meta property="og:title" content="Reveal App: Your Unbeatable Strategic Poker Advantage">
@@ -266,8 +266,8 @@
             <a href="#faq" class="text-gray-300 hover:text-primary-color transition">FAQ</a>
             <a href="#get-app" class="cta-button text-center font-bold py-3 px-6 rounded-full mt-6">Get Advantage</a>
              <div class="mt-4 pt-4 border-t border-gray-700">
-                <div id="google_translate_element_mobile"></div>
-            </div>
+                 <div id="google_translate_element_mobile"></div>
+             </div>
         </nav>
     </div>
 
@@ -278,7 +278,7 @@
             <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark to-background-dark"></div>
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
                 <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">Make Decisions with More Information. <br class="hidden md:block"> Master the Game.</h1>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-gray-300">While your opponents rely on luck, you'll play with superior information. Join the elite players profiting on <strong>PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2 & PokerStars</strong>.</p>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-gray-300">While your opponents rely on luck, you'll play with superior information. Join the elite players profiting on <strong>PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker & Suprema Poker</strong>.</p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a href="#get-app" class="cta-button cta-pulse text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto">Activate My Advantage Now</a>
                     <a href="#pricing" class="btn-secondary text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto flex items-center justify-center gap-2">
@@ -595,6 +595,8 @@
                 cheatTier: null, // 1, 2, or 3
                 platforms: [], // Array of selected platforms
                 txid: null,
+                paymentMethod: null,
+                cryptoAmountPaid: null,
                 upsells: {
                     platformCount: 0, // 0, 1, or 2
                     support: false,
@@ -627,13 +629,15 @@
 
             // --- Data & Constants ---
             platforms: [
-                { id: 'PPPOKER', name: 'PPPOKER' },
-                { id: 'GGPoker', name: 'GGPoker/ClubGG' },
-                { id: 'UPOKER', name: 'UPOKER' },
-                { id: 'PokerBros', name: 'PokerBros' },
-                { id: 'XPOKER', name: 'XPOKER' },
-                { id: 'Pokerrr2', name: 'Pokerrr2' },
-                { id: 'PokerStars', name: 'PokerStars' },
+                { id: 'PPPOKER', name: 'PPPOKER', logo: 'pppoker.png' },
+                { id: 'GGPoker', name: 'GGPoker/ClubGG', logo: 'clubgg.png' },
+                { id: 'UPOKER', name: 'UPOKER', logo: 'upoker.png' },
+                { id: 'PokerBros', name: 'PokerBros', logo: 'pokerbros.png' },
+                { id: 'XPOKER', name: 'XPOKER', logo: 'xpoker.png' },
+                { id: 'Pokerrr2', name: 'Pokerrr2', logo: 'pokerrrr2.png' },
+                { id: 'PokerStars', name: 'PokerStars', logo: 'pokerstars.png' },
+                { id: 'KKPoker', name: 'KKPoker', logo: 'kkpoker.png' },
+                { id: 'Suprema', name: 'Suprema Poker', logo: 'suprema.png' },
             ],
             countrySalaryData: {"AL":{s:701,c:"ALL"},"DZ":{s:267,c:"DZD"},"DE":{s:3984,c:"EUR"},"AR":{s:413,c:"ARS"},"AU":{s:4218,c:"AUD"},"AT":{s:4798,c:"EUR"},"BD":{s:225,c:"BDT"},"BY":{s:620,c:"BYN"},"BO":{s:560,c:"BOB"},"BA":{s:927,c:"BAM"},"BR":{s:800,c:"BRL"},"BG":{s:947,c:"BGN"},"CA":{s:5081,c:"CAD"},"CL":{s:684,c:"CLP"},"CN":{s:1122,c:"CNY"},"CO":{s:311,c:"COP"},"CR":{s:722,c:"CRC"},"HR":{s:959,c:"EUR"},"CZ":{s:2013,c:"CZK"},"DK":{s:5642,c:"DKK"},"EC":{s:791,c:"USD"},"EG":{s:200,c:"EGP"},"SV":{s:450,c:"USD"},"EE":{s:1981,c:"EUR"},"FI":{s:4090,c:"EUR"},"FR":{s:3655,c:"EUR"},"GE":{s:490,c:"GEL"},"GR":{s:1417,c:"EUR"},"GT":{s:480,c:"GTQ"},"HN":{s:370,c:"HNL"},"HK":{s:2828,c:"HKD"},"HU":{s:1189,c:"HUF"},"IS":{s:6441,c:"ISK"},"IN":{s:569,c:"INR"},"ID":{s:340,c:"IDR"},"IR":{s:280,c:"IRR"},"IQ":{s:430,c:"IQD"},"IE":{s:4622,c:"EUR"},"IL":{s:3608,c:"ILS"},"IT":{s:2924,c:"EUR"},"JP":{s:2503,c:"JPY"},"JO":{s:600,c:"JOD"},"KZ":{s:673,c:"KZT"},"KE":{s:150,c:"KES"},"KW":{s:2600,c:"KWD"},"KG":{s:220,c:"KGS"},"LV":{s:1303,c:"EUR"},"LB":{s:130,c:"LBP"},"LT":{s:2173,c:"EUR"},"LU":{s:6633,c:"EUR"},"MY":{s:855,c:"MYR"},"MX":{s:704,c:"MXN"},"MD":{s:450,c:"MDL"},"MN":{s:390,c:"MNT"},"ME":{s:800,c:"EUR"},"MA":{s:380,c:"MAD"},"NL":{s:4581,c:"EUR"},"NZ":{s:2983,c:"NZD"},"NG":{s:60,c:"NGN"},"MK":{s:650,c:"MKD"},"NO":{s:5665,c:"NOK"},"OM":{s:2400,c:"OMR"},"PK":{s:145,c:"PKR"},"PA":{s:717,c:"PAB"},"PY":{s:400,c:"PYG"},"PE":{s:414,c:"PEN"},"PH":{s:306,c:"PHP"},"PL":{s:1416,c:"PLN"},"PT":{s:1983,c:"EUR"},"QA":{s:3937,c:"QAR"},"RO":{s:1306,c:"RON"},"RU":{s:936,c:"RUB"},"SA":{s:2002,c:"SAR"},"RS":{s:750,c:"RSD"},"SG":{s:4350,c:"SGD"},"SK":{s:1512,c:"EUR"},"SI":{s:3058,c:"EUR"},"ZA":{s:1362,c:"ZAR"},"KR":{s:2180,c:"KRW"},"ES":{s:2879,c:"EUR"},"SE":{s:3977,c:"SEK"},"CH":{s:8111,c:"CHF"},"TW":{s:1800,c:"TWD"},"TH":{s:543,c:"THB"},"TR":{s:917,c:"TRY"},"UA":{s:477,c:"UAH"},"AE":{s:3600,c:"AED"},"GB":{s:4179,c:"GBP"},"US":{s:6455,c:"USD"},"UY":{s:850,c:"UYU"},"UZ":{s:300,c:"UZS"},"VE":{s:180,c:"VES"},"VN":{s:275,c:"VND"}},
             allTestimonials: [
@@ -641,7 +645,7 @@
                 { quote: "The best investment I've made in poker. The support on Telegram was super fast and helped me with everything. 100% recommended.", author: "Maria S.", location: "Home Games Enthusiast 🇧🇷" },
                 { quote: "Finally a tool that works as promised. It's safe, easy to use, and the return is absurd. It turned my game around completely.", author: "Javier G.", location: "Regular Player 🇪🇸" },
                 { quote: "I was losing consistently on PokerBros. After using Reveal App for a month, I'm now in profit. It's a game-changer.", author: "Wei L.", location: "Club Player 🇸🇬" },
-                { quote: "The ability to see the flop before anyone else is an insane advantage. My decision-making has improved tenfold.", author: "Lars E.", location: "Online Grinder 🇸🇪" },
+                { quote: "The ability to see the flop before anyone else is an insane advantage. My decision-making has improved tenfold.", author: "Lars E.", location: "Online Grinder  🇪" },
                 { quote: "This app paid for itself in a single weekend. The information it provides is priceless for any serious player.", author: "David C.", location: "Poker Enthusiast 🇨🇦" },
                 { quote: "I use it for GGPoker tournaments and the edge it gives me in the late stages is incredible. Highly recommended.", author: "Hans D.", location: "Tournament Player 🇩🇪" },
                 { quote: "The setup was easy and the support team was very helpful. Started winning big on Pokerrr2 right away.", author: "Yuki T.", location: "App Player 🇯🇵" },
@@ -875,10 +879,10 @@
             // --- Purchase Flow ---
             startPurchaseFlow() {
                  if (localStorage.getItem('userEmail') && localStorage.getItem('userCountryCode')) {
-                     this.purchaseState.email = localStorage.getItem('userEmail');
-                     this.showPlatformDialog();
+                      this.purchaseState.email = localStorage.getItem('userEmail');
+                      this.showPlatformDialog();
                  } else {
-                     this.showRegistrationDialog();
+                      this.showRegistrationDialog();
                  }
             },
 
@@ -996,7 +1000,10 @@
             
             showPlatformDialog() {
                 const platformButtons = this.platforms.map(p => `
-                    <button data-platform="${p.id}" class="selection-button app-btn font-semibold py-3 rounded-lg flex items-center justify-center gap-2">${p.name}</button>
+                    <button data-platform="${p.id}" class="selection-button app-btn font-semibold py-3 rounded-lg flex flex-col items-center justify-center gap-2 h-28">
+                        <img src="${p.logo}" alt="${p.name}" class="h-12 w-12 object-contain mb-1 rounded-md bg-white/10 p-1">
+                        <span class="text-xs text-center">${p.name}</span>
+                    </button>
                 `).join('');
 
                 const content = `
@@ -1017,7 +1024,7 @@
 
                     <div>
                         <p class="text-center text-gray-400 mb-2 font-semibold">2. Choose Your Primary Poker Platform</p>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-3 gap-4">
                            ${platformButtons}
                         </div>
                         <p id="platform-error" class="text-red-500 text-sm mt-1 h-4 text-center"></p>
@@ -1103,19 +1110,25 @@
             calculatePrice() {
                 const countryCode = this.state.userCountryCode || 'US';
                 const baseSalary = this.countrySalaryData[countryCode]?.s || 500;
-                const primaryPlatform = this.purchaseState.platforms[0];
+                const selectedPlatforms = this.purchaseState.platforms;
                 const premiumPlatforms = ['PokerStars', 'GGPoker'];
+                let percentage;
 
-                let tierPercentages;
+                const tierPercentagesStandard = { 1: 0.28, 2: 0.48, 3: 0.58 };
+                const tierPercentagesPremium = { 1: 0.40, 2: 0.60, 3: 0.70 };
                 const minimumPrice = 270;
 
-                if (premiumPlatforms.includes(primaryPlatform)) {
-                    tierPercentages = { 1: 0.40, 2: 0.60, 3: 0.70 };
+                // Determine the highest price tier among selected platforms
+                if (selectedPlatforms.includes('Suprema')) {
+                    percentage = 0.40;
+                } else if (selectedPlatforms.some(p => premiumPlatforms.includes(p))) {
+                    percentage = tierPercentagesPremium[this.purchaseState.cheatTier];
+                } else if (selectedPlatforms.includes('KKPoker')) {
+                    percentage = 0.30;
                 } else {
-                    tierPercentages = { 1: 0.28, 2: 0.48, 3: 0.58 };
+                    percentage = tierPercentagesStandard[this.purchaseState.cheatTier];
                 }
                 
-                const percentage = tierPercentages[this.purchaseState.cheatTier];
                 const dailyIncrease = this.calculateDailyIncrease();
                 
                 let calculatedPrice = (baseSalary * percentage) + dailyIncrease;
@@ -1123,6 +1136,8 @@
             },
 
             showPlatformUpsellDialog() {
+                // Recalculate price based on all selected platforms before showing upsells
+                this.calculatePrice(); 
                 let currentPriceUSD = this.purchaseState.basePriceUSD;
                 const upsell1PriceUSD = currentPriceUSD * 0.5;
                 const upsell2PriceUSD = currentPriceUSD * 0.9;
@@ -1211,10 +1226,18 @@
                             e.currentTarget.classList.add('selected');
                         }
                     }
+                    // Recalculate price every time a platform is added/removed
+                    this.calculatePrice();
                 });
             },
 
             showFeatureUpsellDialog() {
+                // Reset upsell choices before showing the dialog
+                this.purchaseState.upsells.support = false;
+                this.purchaseState.upsells.lifetime = false;
+
+                // Final price calculation before this step
+                this.calculatePrice();
                 let basePriceUSD = this.purchaseState.basePriceUSD;
                 if (this.purchaseState.upsells.platformCount === 1) {
                     basePriceUSD *= 1.5;
@@ -1266,6 +1289,7 @@
                     if (this.purchaseState.upsells.lifetime) {
                         totalUSD = lifetimePriceUSD;
                         document.getElementById('upsell-support').classList.add('opacity-50', 'pointer-events-none');
+                        document.getElementById('upsell-support').classList.remove('selected');
                     } else {
                         document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
                         if (this.purchaseState.upsells.support) totalUSD += supportPriceUSD;
@@ -1285,13 +1309,12 @@
                     this.purchaseState.upsells.lifetime = !this.purchaseState.upsells.lifetime;
                     if (this.purchaseState.upsells.lifetime) {
                         this.purchaseState.upsells.support = false;
-                        document.getElementById('upsell-support').classList.remove('selected');
                     }
                     updateTotal();
                 };
                 
                 document.getElementById('continue-to-payment-btn').onclick = () => this.showPaymentMethodDialog();
-                updateTotal();
+                updateTotal(); // Initial call to display base price
             },
 
             showPaymentMethodDialog() {
@@ -1369,6 +1392,7 @@
             },
 
             async showPaymentDetailsDialog(method) {
+                this.purchaseState.paymentMethod = method;
                 const addresses = { 
                     usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK", 
                     btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3", 
@@ -1425,6 +1449,7 @@
                 
                 if (cryptoPrice && paymentAmountContainer && qrCodeContainer) {
                     const cryptoAmount = (finalPriceUSD / cryptoPrice).toFixed(method === 'usdt' ? 2 : 8);
+                    this.purchaseState.cryptoAmountPaid = cryptoAmount; // Store crypto amount
                     paymentAmountContainer.innerHTML = `<p class="text-3xl font-bold text-primary-color tabular-nums">${cryptoAmount} ${method.toUpperCase()}</p>`;
                     
                     let qrData = `${method}:${address}?amount=${cryptoAmount}`;
@@ -1467,22 +1492,35 @@
             },
 
             showFinalConfirmation() {
-                const { uniqueId, os, platforms, cheatTier, upsells } = this.purchaseState;
+                const { uniqueId, os, platforms, cheatTier, upsells, finalPriceUSD, cryptoAmountPaid, paymentMethod } = this.purchaseState;
                 const tierNames = {1: "Board Reader", 2: "Opponent Insight", 3: "Total Vision"};
                 
-                let message = `--- New Subscription ---\n\n`;
-                message += `ID: ${uniqueId}\n`;
-                message += `OS: ${os}\n`;
-                message += `Cheat Tier: ${tierNames[cheatTier]}\n`;
-                message += `Platforms: ${platforms.join(', ')}\n`;
-                message += `Lifetime: ${upsells.lifetime ? 'YES' : 'NO'}\n`;
-                message += `Priority Support: ${upsells.support || upsells.lifetime ? 'YES' : 'NO'}\n\n`;
-                message += `--- IMPORTANT ---\n`;
-                message += `Monthly payments are due on the 30th of each month (Feb 28th).\n`;
-                if (cheatTier === 3) {
-                    message += `A 25% fee of your monthly winnings is also required.\n`;
+                let message = `🚀 --- New Activation | Reveal App --- 🚀\n\n`;
+                message += `🆔 Activation ID: ${uniqueId}\n`;
+                message += `📧 Email: ${this.purchaseState.email}\n`;
+                message += `📱 System: ${os}\n`;
+                message += `⭐ Tier: ${tierNames[cheatTier]}\n`;
+                message += `🃏 Platforms: ${platforms.join(', ')}\n\n`;
+                message += `--- Payment Details ---\n`;
+                message += `💰 Amount: ${cryptoAmountPaid} ${paymentMethod.toUpperCase()}\n`;
+                message += `💵 Equivalent: ~$${finalPriceUSD.toFixed(2)} USD\n`;
+                message += `💳 Plan: ${upsells.lifetime ? 'Lifetime (One-Time Payment)' : 'Monthly'}\n`;
+                message += `🔧 Priority Support: ${upsells.support || upsells.lifetime ? 'Yes' : 'No'}\n\n`;
+
+                if (upsells.lifetime) {
+                    message += `✅ Thank you for your one-time payment! Your access is permanent.\n`;
+                    if (cheatTier === 3) {
+                        message += `Reminder: The 25% fee on monthly winnings still applies.\n`;
+                    }
+                } else {
+                    message += `--- ⚠️ IMPORTANT ⚠️ ---\n`;
+                    message += `Your subscription is monthly. The next payment is due on the 30th of next month.\n`;
+                    if (cheatTier === 3) {
+                        message += `In addition to the monthly fee, the 25% fee on monthly winnings is also required.\n`;
+                    }
+                    message += `Please contact support to arrange future payments.\n`;
                 }
-                message += `Please contact support to arrange future payments.`;
+                message += `\nThank you for choosing Reveal App!`;
 
                 const telegramUrl = `https://t.me/bedmalcon_temp?text=${encodeURIComponent(message)}`;
 
@@ -1505,5 +1543,19 @@
         new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,pt,es,de,zh-CN,hi,ar,ru,tl,vi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element_mobile');
     }
     </script>
+    <script>
+        // Source Code Protection
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode == 123) { // F12
+                event.preventDefault();
+            } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Ctrl+Shift+I
+                event.preventDefault();
+            } else if (event.ctrlKey && event.keyCode == 85) { // Ctrl+U
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
+ 
