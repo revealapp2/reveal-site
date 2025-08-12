@@ -93,12 +93,12 @@
             width: 100%;
             height: 100%;
         }
-        .feature-card, .testimonial-card, .faq-item {
+        .feature-card, .testimonial-card, .faq-item, .pricing-card {
             background: var(--background-light);
             border: 1px solid var(--border-color);
             transition: all 0.3s ease;
         }
-        .feature-card:hover, .testimonial-card:hover {
+        .feature-card:hover, .testimonial-card:hover, .pricing-card:hover {
             transform: translateY(-8px);
             border-color: var(--primary-color);
             box-shadow: 0 0 30px rgba(251, 191, 36, 0.1);
@@ -226,336 +226,348 @@
     </script>
 </head>
 <body class="bg-background-dark text-text-light">
-    
-    <!-- Header -->
-    <header role="banner" class="bg-background-dark sticky top-0 z-40" id="main-header">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0">
-                    <a href="#" onclick="window.location.reload()" class="flex items-center space-x-3" aria-label="Reveal App Home">
-                        <svg class="h-10 w-auto" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logo-g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FBBF24"></stop><stop offset="100%" stop-color="#F59E0B"></stop></linearGradient></defs><circle cx="50" cy="50" r="45" stroke="url(#logo-g)" stroke-width="8" fill="none"></circle><circle cx="50" cy="50" r="20" fill="#10B981"></circle></svg>
-                        <span class="text-2xl font-bold text-white">Reveal App</span>
-                    </a>
-                </div>
-                <nav class="hidden md:flex md:space-x-8" aria-label="Main navigation">
-                    <a href="#features" class="text-gray-300 hover:text-primary-color transition">Features</a>
-                    <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition">How It Works</a>
-                    <a href="#demo" class="text-gray-300 hover:text-primary-color transition">Demo</a>
-                    <a href="#pricing" class="text-gray-300 hover:text-primary-color transition">Pricing</a>
-                    <a href="#faq" class="text-gray-300 hover:text-primary-color transition">FAQ</a>
-                </nav>
-                <div class="hidden md:flex items-center space-x-4">
-                    <div id="google_translate_element"></div>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none" aria-label="Open menu">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0B1120] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl transition-transform duration-300 ease-in-out">
-        <nav class="flex flex-col space-y-6 mt-8 text-lg">
-            <a href="#features" class="text-gray-300 hover:text-primary-color transition">Features</a>
-            <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition">How It Works</a>
-            <a href="#demo" class="text-gray-300 hover:text-primary-color transition">Demo</a>
-            <a href="#pricing" class="text-gray-300 hover:text-primary-color transition">Pricing</a>
-            <a href="#faq" class="text-gray-300 hover:text-primary-color transition">FAQ</a>
-            <a href="#get-app" class="cta-button text-center font-bold py-3 px-6 rounded-full mt-6">Get Advantage</a>
-             <div class="mt-4 pt-4 border-t border-gray-700">
-                 <div id="google_translate_element_mobile"></div>
-             </div>
-        </nav>
+    <!-- Country Selection Modal -->
+    <div id="country-selection-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 dialog">
+        <div class="dialog-content w-full max-w-md p-8 rounded-2xl text-center">
+            <h2 class="text-3xl font-bold mb-4 text-primary-color">Welcome!</h2>
+            <p class="text-gray-300 mb-6">For a better experience, select your country to get access to our tool.</p>
+            <select id="country-select-input" class="bg-gray-700 border border-gray-600 text-white text-lg rounded-lg block w-full p-3 mb-6">
+                <option value="">Select your country...</option>
+            </select>
+            <button id="country-select-btn" class="w-full cta-button font-bold py-3 text-lg rounded-lg">Continue</button>
+        </div>
     </div>
-
-    <main role="main" id="main-content">
-        <!-- Hero Section -->
-        <section class="hero relative py-24 md:py-40 text-center text-white overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg opacity-30"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark to-background-dark"></div>
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">Make Decisions with More Information. <br class="hidden md:block"> Master the Game.</h1>
-                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-gray-300">While your opponents rely on luck, you'll play with superior information. Join the elite players profiting on <strong>PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker & Suprema Poker</strong>.</p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#get-app" class="cta-button cta-pulse text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto">Activate My Advantage Now</a>
-                    <a href="#pricing" class="btn-secondary text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto flex items-center justify-center gap-2">
-                        <i class="fas fa-tags" aria-hidden="true"></i>
-                        <span>View Pricing</span>
-                    </a>
-                </div>
-                <p id="personalization-banner" class="mt-8 text-secondary-color font-semibold text-lg animate-on-scroll"></p>
-            </div>
-        </section>
-        
-        <!-- Social Proof / Counters -->
-        <section class="py-12 bg-background-dark" aria-labelledby="social-proof-heading">
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-                    <div class="animate-on-scroll">
-                        <p class="text-4xl font-bold text-primary-color" id="counter-players"></p>
-                        <p class="text-gray-400">Active Players</p>
-                    </div>
-                     <div class="animate-on-scroll" style="transition-delay: 0.2s;">
-                        <p class="text-4xl font-bold text-primary-color" id="counter-winnings"></p>
-                        <p class="text-gray-400">Weekly Winnings</p>
-                    </div>
-                     <div class="animate-on-scroll" style="transition-delay: 0.4s;">
-                        <p class="text-4xl font-bold text-primary-color" id="counter-satisfaction">98.7%</p>
-                        <p class="text-gray-400">Satisfaction Rate</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="py-20 md:py-28">
+    
+    <div id="page-content" class="hidden">
+        <!-- Header -->
+        <header role="banner" class="bg-background-dark sticky top-0 z-40" id="main-header">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Your Definitive Strategic Advantage</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="feature-card animate-on-scroll p-8 rounded-2xl">
-                        <div class="text-4xl text-primary-color mb-4"><i class="fas fa-eye"></i></div>
-                        <h3 class="text-2xl font-bold mb-3">Total Table Vision</h3>
-                        <p class="text-gray-400">See opponents' hole cards and community cards (Flop, Turn, River) before they are dealt. Make perfect decisions every time.</p>
+                <div class="flex items-center justify-between h-20">
+                    <div class="flex-shrink-0">
+                        <a href="#" onclick="window.location.reload()" class="flex items-center space-x-3" aria-label="Reveal App Home">
+                            <svg class="h-10 w-auto" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logo-g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FBBF24"></stop><stop offset="100%" stop-color="#F59E0B"></stop></linearGradient></defs><circle cx="50" cy="50" r="45" stroke="url(#logo-g)" stroke-width="8" fill="none"></circle><circle cx="50" cy="50" r="20" fill="#10B981"></circle></svg>
+                            <span class="text-2xl font-bold text-white">Reveal App</span>
+                        </a>
                     </div>
-                    <div class="feature-card animate-on-scroll p-8 rounded-2xl" style="transition-delay: 200ms;">
-                        <div class="text-4xl text-primary-color mb-4"><i class="fas fa-shield-alt"></i></div>
-                        <h3 class="text-2xl font-bold mb-3">100% Safe and Hidden</h3>
-                        <p class="text-gray-400">Our technology operates externally, without modifying game files. Play with complete peace of mind, your account is always protected.</p>
+                    <nav class="hidden md:flex md:space-x-8" aria-label="Main navigation">
+                        <a href="#features" class="text-gray-300 hover:text-primary-color transition">Features</a>
+                        <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition">How It Works</a>
+                        <a href="#demo" class="text-gray-300 hover:text-primary-color transition">Demo</a>
+                        <a href="#pricing" class="text-gray-300 hover:text-primary-color transition">Pricing</a>
+                        <a href="#faq" class="text-gray-300 hover:text-primary-color transition">FAQ</a>
+                    </nav>
+                    <div class="hidden md:flex items-center space-x-4">
+                        <div id="google_translate_element"></div>
                     </div>
-                    <div class="feature-card animate-on-scroll p-8 rounded-2xl" style="transition-delay: 400ms;">
-                        <div class="text-4xl text-primary-color mb-4"><i class="fas fa-microchip"></i></div>
-                        <h3 class="text-2xl font-bold mb-3">Advanced Decryption</h3>
-                        <p class="text-gray-400">Our system decrypts the game's data packets in real-time, revealing all card information for a complete strategic overview.</p>
-                    </div>
-                    <div class="feature-card animate-on-scroll p-8 rounded-2xl" style="transition-delay: 600ms;">
-                        <div class="text-4xl text-primary-color mb-4"><i class="fas fa-chart-line"></i></div>
-                        <h3 class="text-2xl font-bold mb-3">Immediate Results</h3>
-                        <p class="text-gray-400">Turn losses into consistent profits. Our subscription is an investment in your poker career, paying for itself in a few sessions.</p>
+                    <div class="md:hidden flex items-center">
+                        <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none" aria-label="Open menu">
+                            <i class="fas fa-bars text-2xl"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <!-- How It Works Section -->
-        <section id="how-it-works" class="py-20 md:py-28 bg-background-light">
-             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Activate Your Advantage in 3 Steps</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-                    <div class="text-center animate-on-scroll">
-                        <div class="w-24 h-24 bg-background-dark rounded-full mx-auto flex items-center justify-center text-4xl font-bold text-primary-color border-2 border-primary-color mb-6">1</div>
-                        <h3 class="text-2xl font-bold mb-2">Register & Choose</h3>
-                        <p class="text-gray-400">Provide your email, country, and select your desired poker platform and cheat level.</p>
-                    </div>
-                    <div class="text-center animate-on-scroll" style="transition-delay: 200ms;">
-                        <div class="w-24 h-24 bg-background-dark rounded-full mx-auto flex items-center justify-center text-4xl font-bold text-primary-color border-2 border-primary-color mb-6">2</div>
-                        <h3 class="text-2xl font-bold mb-2">Secure Payment</h3>
-                        <p class="text-gray-400">Make an anonymous monthly payment with cryptocurrency to start your subscription.</p>
-                    </div>
-                    <div class="text-center animate-on-scroll" style="transition-delay: 400ms;">
-                        <div class="w-24 h-24 bg-background-dark rounded-full mx-auto flex items-center justify-center text-4xl font-bold text-primary-color border-2 border-primary-color mb-6">3</div>
-                        <h3 class="text-2xl font-bold mb-2">Activate and Profit</h3>
-                        <p class="text-gray-400">Contact our support on Telegram with your ID for instant activation and start winning.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Demo Section -->
-        <section id="demo" class="py-20 md:py-28">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">See the Power in Action</h2>
-                <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Watch how our strategic assistant reveals everything. This is what victory looks like:</p>
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="animate-on-scroll">
-                        <h3 class="text-xl font-semibold mb-4 text-center">PPPOKER</h3>
-                        <div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/wgzzXJx_TAI" frameborder="0" allowfullscreen></iframe></div>
-                    </div>
-                    <div class="animate-on-scroll" style="transition-delay: 0.2s;">
-                        <h3 class="text-xl font-semibold mb-4 text-center">XPoker</h3>
-                        <div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/JejQNbgaSSo" frameborder="0" allowfullscreen></iframe></div>
-                    </div>
-                    <div class="animate-on-scroll" style="transition-delay: 0.4s;">
-                        <h3 class="text-xl font-semibold mb-4 text-center">ClubGG</h3>
-                        <div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" frameborder="0" allowfullscreen></iframe></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing Section -->
-        <section id="pricing" class="py-20 md:py-28">
-             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Your Exclusive Offer Is Waiting</h2>
-                <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Because of your location, you're eligible for a special, personalized price. This isn't a standard offer. Click below to reveal your exclusive discount and activate your advantage today.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <!-- Tier 1 -->
-                    <div class="feature-card animate-on-scroll p-8 rounded-2xl flex flex-col">
-                        <div class="flex-grow">
-                            <h3 class="text-2xl font-bold mb-2 text-primary-color">Board Reader</h3>
-                            <div class="my-4 text-center">
-                                <i class="fas fa-gift text-6xl text-primary-color/70"></i>
-                                <p class="text-xl font-bold mt-4">An Exclusive Offer</p>
-                            </div>
-                            <p class="text-gray-400 mb-6 text-center">Your personalized price is one click away.</p>
-                            <ul class="space-y-3 text-left">
-                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span><strong>See Community Cards:</strong> Know the Flop, Turn, and River in advance.</span></li>
-                            </ul>
-                        </div>
-                        <a href="#get-app" class="btn-secondary text-center mt-8 font-bold py-3 px-6 rounded-full">Reveal My Offer</a>
-                    </div>
-                    <!-- Tier 2 -->
-                    <div class="relative feature-card animate-on-scroll p-8 rounded-2xl flex flex-col border-2 border-primary-color shadow-2xl shadow-primary-color/10" style="transform: scale(1.05);">
-                         <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                            <span class="bg-primary-color text-background-dark font-bold text-sm px-4 py-1 rounded-full uppercase">Most Popular</span>
-                        </div>
-                        <div class="flex-grow">
-                            <h3 class="text-2xl font-bold mb-2 text-primary-color">Opponent Insight</h3>
-                             <div class="my-4 text-center">
-                                <i class="fas fa-gift text-6xl text-primary-color/70"></i>
-                                <p class="text-xl font-bold mt-4">An Exclusive Offer</p>
-                            </div>
-                            <p class="text-gray-400 mb-6 text-center">Your personalized price is one click away.</p>
-                            <ul class="space-y-3 text-left">
-                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span><strong>See Opponents' Cards:</strong> Know exactly what you're up against pre-flop.</span></li>
-                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span>Make perfect bluffs and value bets.</span></li>
-                            </ul>
-                        </div>
-                        <a href="#get-app" class="cta-button text-center mt-8 font-bold py-3 px-6 rounded-full">Reveal My Offer</a>
-                    </div>
-                    <!-- Tier 3 -->
-                    <div class="feature-card animate-on-scroll p-8 rounded-2xl flex flex-col">
-                        <div class="flex-grow">
-                            <h3 class="text-2xl font-bold mb-2 text-primary-color">Total Vision</h3>
-                             <div class="my-4 text-center">
-                                <i class="fas fa-gift text-6xl text-primary-color/70"></i>
-                                <p class="text-xl font-bold mt-4">An Exclusive Offer</p>
-                            </div>
-                            <p class="text-gray-400 mb-6 text-center">Your personalized price is one click away.</p>
-                            <ul class="space-y-3 text-left">
-                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span><strong>See ALL Cards:</strong> Combines Board Reader and Opponent Insight.</span></li>
-                                <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span>The ultimate advantage for maximum profit.</span></li>
-                            </ul>
-                        </div>
-                        <a href="#get-app" class="btn-secondary text-center mt-8 font-bold py-3 px-6 rounded-full">Reveal My Offer</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="py-20 md:py-28 bg-background-light">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                 <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">What Our Players Say</h2>
-                <div id="testimonials-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Testimonials will be dynamically inserted here -->
-                </div>
-            </div>
-        </section>
-        
-        <!-- Get App Section -->
-        <section id="get-app" class="py-20 md:py-28 text-center">
-             <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Your Turn to Dominate Has Arrived</h2>
-                <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-10">Every hand played without information is money left on the table. Invest in a strategic advantage, invest in wins.</p>
-                <div class="flex justify-center items-center space-x-4 mb-8">
-                    <div id="urgency-text-container" class="text-xl font-semibold text-red-500 animate-pulse">
-                        <span>⚠️ Only</span> <strong id="slots-left-main" class="text-2xl"></strong> <span>licenses left today.</span>
-                    </div>
-                    <div id="live-viewers-container" class="text-lg font-semibold text-secondary-color live-indicator">
-                        <strong id="live-viewers-count"></strong> <span>people viewing now</span>
-                    </div>
-                </div>
-                <button class="cta-button text-xl font-bold py-4 px-10 rounded-full" id="start-purchase-btn">I Want My Advantage Now</button>
-                <div class="flex justify-center items-center flex-wrap gap-x-8 gap-y-4 mt-10 text-gray-400">
-                    <div class="flex items-center space-x-2"><i class="fas fa-user-secret text-secondary-color"></i><span>100% Anonymous with Crypto</span></div>
-                    <div class="flex items-center space-x-2"><i class="fas fa-shield-alt text-secondary-color"></i><span>100% Secure & Undetectable</span></div>
-                    <div class="flex items-center space-x-2"><i class="fas fa-lock text-secondary-color"></i><span>Protected by Blockchain</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section id="faq" class="py-20 md:py-28 bg-background-light">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Frequently Asked Questions</h2>
-                <div class="max-w-3xl mx-auto space-y-4">
-                    <details class="faq-item animate-on-scroll p-6 rounded-lg">
-                        <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
-                            <span>Is it safe? Can I be banned?</span>
-                            <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
-                        </summary>
-                        <p class="text-gray-400 mt-4">Yes, 100% safe. Reveal App operates as an external assistant and does not modify the poker app's files, making it completely undetectable. Thousands of users have been playing safely for months without any issues.</p>
-                    </details>
-                    <details class="faq-item animate-on-scroll p-6 rounded-lg">
-                        <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
-                            <span>How does the technology work?</span>
-                            <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
-                        </summary>
-                        <p class="text-gray-400 mt-4">Our system intercepts encrypted game data packets in real-time. By leveraging advanced proprietary algorithms, we can decrypt the hand data before it's displayed. This gives you a clear, strategic overview of the table, allowing for more informed decisions.</p>
-                    </details>
-                    <details class="faq-item animate-on-scroll p-6 rounded-lg">
-                        <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
-                            <span>How does the payment work?</span>
-                            <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
-                        </summary>
-                        <p class="text-gray-400 mt-4">We use cryptocurrency to ensure your complete anonymity. The process is simple: you choose your crypto, send the amount for your first month's subscription to the provided address, and contact our support on Telegram with your unique ID to finalize the activation.</p>
-                    </details>
-                    <details class="faq-item animate-on-scroll p-6 rounded-lg">
-                        <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
-                            <span>Is this a subscription?</span>
-                            <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
-                        </summary>
-                        <p class="text-gray-400 mt-4">Yes. To ensure continuous development and support, Reveal App operates on a monthly subscription model. Your monthly fee is a percentage of your country's average salary, making it a fair and affordable investment in your success. Payments are due on the 30th of each month (or the 28th in February) via cryptocurrency.</p>
-                    </details>
-                     <details class="faq-item animate-on-scroll p-6 rounded-lg">
-                        <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
-                            <span>How long for activation?</span>
-                            <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
-                        </summary>
-                        <p class="text-gray-400 mt-4">Activation is almost instant. After sending your ID to our 24/7 support on Telegram, the process is usually completed in under 5 minutes.</p>
-                    </details>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="payment-confirmation-content" class="hidden"></div>
-
-    <!-- Footer -->
-    <footer class="bg-background-dark border-t border-gray-800">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-primary-color">About Reveal App</h3>
-                    <p class="text-gray-400">Reveal App offers a strategic advantage by providing crucial data on opponents' hands. Play smarter, win bigger.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4 text-primary-color">Contact & Support</h3>
-                    <div class="space-y-3">
-                        <a href="https://t.me/bedmalcon_temp" target="_blank" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fab fa-telegram w-6"></i><span class="ml-2">Telegram (24/7 Support)</span></a>
-                        <a href="https://instagram.com/hackpoker_updated" target="_blank" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fab fa-instagram w-6"></i><span class="ml-2">@hackpoker_updated</span></a>
-                        <a href="mailto:support@revealpoker.top" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fas fa-envelope w-6"></i><span class="ml-2">support@revealpoker.top</span></a>
-                    </div>
-                </div>
-                 <div>
-                    <h3 class="text-lg font-semibold mb-4 text-primary-color">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
-                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white">How It Works</a></li>
-                        <li><a href="#pricing" class="text-gray-400 hover:text-white">Pricing</a></li>
-                        <li><a href="#faq" class="text-gray-400 hover:text-white">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
-                <p>&copy; <span id="current-year"></span> Reveal App. <span>All Rights Reserved.</span></p>
-                <p class="text-sm mt-2">Disclaimer: This tool is an external assistant. Use responsibly and in accordance with the terms of service of the poker platforms.</p>
-            </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0B1120] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl transition-transform duration-300 ease-in-out">
+            <nav class="flex flex-col space-y-6 mt-8 text-lg">
+                <a href="#features" class="text-gray-300 hover:text-primary-color transition">Features</a>
+                <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition">How It Works</a>
+                <a href="#demo" class="text-gray-300 hover:text-primary-color transition">Demo</a>
+                <a href="#pricing" class="text-gray-300 hover:text-primary-color transition">Pricing</a>
+                <a href="#faq" class="text-gray-300 hover:text-primary-color transition">FAQ</a>
+                <a href="#get-app" class="cta-button text-center font-bold py-3 px-6 rounded-full mt-6">Get Advantage</a>
+                 <div class="mt-4 pt-4 border-t border-gray-700">
+                     <div id="google_translate_element_mobile"></div>
+                 </div>
+            </nav>
         </div>
-    </footer>
+
+        <main role="main" id="main-content">
+            <!-- Hero Section -->
+            <section class="hero relative py-24 md:py-40 text-center text-white overflow-hidden">
+                <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg opacity-30"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark to-background-dark"></div>
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">Make Decisions with More Information. <br class="hidden md:block"> Master the Game.</h1>
+                    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-gray-300">While your opponents rely on luck, you'll play with superior information. Join the elite players profiting on <strong>PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker & Suprema Poker</strong>.</p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#get-app" class="cta-button cta-pulse text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto">Activate My Advantage Now</a>
+                        <a href="#pricing" class="btn-secondary text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto flex items-center justify-center gap-2">
+                            <i class="fas fa-tags" aria-hidden="true"></i>
+                            <span>View Pricing</span>
+                        </a>
+                    </div>
+                    <p id="personalization-banner" class="mt-8 text-secondary-color font-semibold text-lg animate-on-scroll"></p>
+                </div>
+            </section>
+            
+            <!-- Social Proof / Counters -->
+            <section class="py-12 bg-background-dark" aria-labelledby="social-proof-heading">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                        <div class="animate-on-scroll">
+                            <p class="text-4xl font-bold text-primary-color" id="counter-players"></p>
+                            <p class="text-gray-400">Active Players</p>
+                        </div>
+                         <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                            <p class="text-4xl font-bold text-primary-color" id="counter-winnings"></p>
+                            <p class="text-gray-400">Weekly Winnings</p>
+                        </div>
+                         <div class="animate-on-scroll" style="transition-delay: 0.4s;">
+                            <p class="text-4xl font-bold text-primary-color" id="counter-satisfaction">98.7%</p>
+                            <p class="text-gray-400">Satisfaction Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="py-20 md:py-28">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Your Definitive Strategic Advantage</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="feature-card animate-on-scroll p-8 rounded-2xl">
+                            <div class="text-4xl text-primary-color mb-4"><i class="fas fa-eye"></i></div>
+                            <h3 class="text-2xl font-bold mb-3">Total Table Vision</h3>
+                            <p class="text-gray-400">See opponents' hole cards and community cards (Flop, Turn, River) before they are dealt. Make perfect decisions every time.</p>
+                        </div>
+                        <div class="feature-card animate-on-scroll p-8 rounded-2xl" style="transition-delay: 200ms;">
+                            <div class="text-4xl text-primary-color mb-4"><i class="fas fa-shield-alt"></i></div>
+                            <h3 class="text-2xl font-bold mb-3">100% Safe and Hidden</h3>
+                            <p class="text-gray-400">Our technology operates externally, without modifying game files. Play with complete peace of mind, your account is always protected.</p>
+                        </div>
+                        <div class="feature-card animate-on-scroll p-8 rounded-2xl" style="transition-delay: 400ms;">
+                            <div class="text-4xl text-primary-color mb-4"><i class="fas fa-microchip"></i></div>
+                            <h3 class="text-2xl font-bold mb-3">Advanced Decryption</h3>
+                            <p class="text-gray-400">Our system decrypts the game's data packets in real-time, revealing all card information for a complete strategic overview.</p>
+                        </div>
+                        <div class="feature-card animate-on-scroll p-8 rounded-2xl" style="transition-delay: 600ms;">
+                            <div class="text-4xl text-primary-color mb-4"><i class="fas fa-chart-line"></i></div>
+                            <h3 class="text-2xl font-bold mb-3">Immediate Results</h3>
+                            <p class="text-gray-400">Turn losses into consistent profits. Your monthly plan is an investment in your poker career, paying for itself in a few sessions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section id="how-it-works" class="py-20 md:py-28 bg-background-light">
+                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Activate Your Advantage in 3 Steps</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+                        <div class="text-center animate-on-scroll">
+                            <div class="w-24 h-24 bg-background-dark rounded-full mx-auto flex items-center justify-center text-4xl font-bold text-primary-color border-2 border-primary-color mb-6">1</div>
+                            <h3 class="text-2xl font-bold mb-2">Register & Choose</h3>
+                            <p class="text-gray-400">Provide your email, country, and select your desired poker platform and advantage level.</p>
+                        </div>
+                        <div class="text-center animate-on-scroll" style="transition-delay: 200ms;">
+                            <div class="w-24 h-24 bg-background-dark rounded-full mx-auto flex items-center justify-center text-4xl font-bold text-primary-color border-2 border-primary-color mb-6">2</div>
+                            <h3 class="text-2xl font-bold mb-2">Secure Payment</h3>
+                            <p class="text-gray-400">Make an anonymous monthly payment with cryptocurrency to start your plan.</p>
+                        </div>
+                        <div class="text-center animate-on-scroll" style="transition-delay: 400ms;">
+                            <div class="w-24 h-24 bg-background-dark rounded-full mx-auto flex items-center justify-center text-4xl font-bold text-primary-color border-2 border-primary-color mb-6">3</div>
+                            <h3 class="text-2xl font-bold mb-2">Activate and Profit</h3>
+                            <p class="text-gray-400">Contact our support on Telegram with your ID for instant activation and start winning.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Demo Section -->
+            <section id="demo" class="py-20 md:py-28">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">See the Power in Action</h2>
+                    <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Watch how our strategic assistant reveals everything. This is what victory looks like:</p>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="animate-on-scroll">
+                            <h3 class="text-xl font-semibold mb-4 text-center">PPPOKER</h3>
+                            <div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/wgzzXJx_TAI" frameborder="0" allowfullscreen></iframe></div>
+                        </div>
+                        <div class="animate-on-scroll" style="transition-delay: 0.2s;">
+                            <h3 class="text-xl font-semibold mb-4 text-center">XPoker</h3>
+                            <div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/JejQNbgaSSo" frameborder="0" allowfullscreen></iframe></div>
+                        </div>
+                        <div class="animate-on-scroll" style="transition-delay: 0.4s;">
+                            <h3 class="text-xl font-semibold mb-4 text-center">ClubGG</h3>
+                            <div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" frameborder="0" allowfullscreen></iframe></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pricing Section -->
+            <section id="pricing" class="py-20 md:py-28 bg-background-light">
+                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Your Exclusive Offer Is Waiting</h2>
+                    <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Because of your location, you're eligible for a special, personalized price. This isn't a standard offer. Choose your plan to activate your advantage today.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <!-- Tier 1 -->
+                        <div class="pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col" data-tier="1">
+                            <div class="flex-grow">
+                                <h3 class="text-2xl font-bold mb-2 text-primary-color">Board Reader</h3>
+                                <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
+                                    <i class="fas fa-gift text-6xl text-primary-color/70"></i>
+                                    <p class="text-xl font-bold mt-4">An Exclusive Offer</p>
+                                </div>
+                                <p class="text-gray-400 mb-6 text-center">Your personalized price is one click away.</p>
+                                <ul class="space-y-3 text-left">
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span><strong>See Community Cards:</strong> Know the Flop, Turn, and River in advance.</span></li>
+                                </ul>
+                            </div>
+                            <a href="#get-app" class="btn-secondary text-center mt-8 font-bold py-3 px-6 rounded-full">Select Plan</a>
+                        </div>
+                        <!-- Tier 2 -->
+                        <div class="relative pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col border-2 border-primary-color shadow-2xl shadow-primary-color/10" style="transform: scale(1.05);" data-tier="2">
+                             <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                                <span class="bg-primary-color text-background-dark font-bold text-sm px-4 py-1 rounded-full uppercase">Most Popular</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-2xl font-bold mb-2 text-primary-color">Opponent Insight</h3>
+                                 <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
+                                    <i class="fas fa-gift text-6xl text-primary-color/70"></i>
+                                    <p class="text-xl font-bold mt-4">An Exclusive Offer</p>
+                                </div>
+                                <p class="text-gray-400 mb-6 text-center">Your personalized price is one click away.</p>
+                                <ul class="space-y-3 text-left">
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span><strong>See Opponents' Cards:</strong> Know exactly what you're up against pre-flop.</span></li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span>Make perfect bluffs and value bets.</span></li>
+                                </ul>
+                            </div>
+                            <a href="#get-app" class="cta-button text-center mt-8 font-bold py-3 px-6 rounded-full">Select Plan</a>
+                        </div>
+                        <!-- Tier 3 -->
+                        <div class="pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col" data-tier="3">
+                            <div class="flex-grow">
+                                <h3 class="text-2xl font-bold mb-2 text-primary-color">Total Vision</h3>
+                                 <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
+                                    <i class="fas fa-gift text-6xl text-primary-color/70"></i>
+                                    <p class="text-xl font-bold mt-4">An Exclusive Offer</p>
+                                </div>
+                                <p class="text-gray-400 mb-6 text-center">Your personalized price is one click away.</p>
+                                <ul class="space-y-3 text-left">
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span><strong>See ALL Cards:</strong> Combines Board Reader and Opponent Insight.</span></li>
+                                    <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3"></i> <span>The ultimate advantage for maximum profit.</span></li>
+                                </ul>
+                            </div>
+                            <a href="#get-app" class="btn-secondary text-center mt-8 font-bold py-3 px-6 rounded-full">Select Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="py-20 md:py-28">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                     <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">What Our Players Say</h2>
+                    <div id="testimonials-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Testimonials will be dynamically inserted here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Get App Section -->
+            <section id="get-app" class="py-20 md:py-28 text-center bg-background-light">
+                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Your Turn to Dominate Has Arrived</h2>
+                    <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-10">Every hand played without information is money left on the table. Invest in a strategic advantage, invest in wins.</p>
+                    <div class="flex justify-center items-center space-x-4 mb-8">
+                        <div id="urgency-text-container" class="text-xl font-semibold text-red-500 animate-pulse">
+                            <span>⚠️ Only</span> <strong id="slots-left-main" class="text-2xl"></strong> <span>licenses left today.</span>
+                        </div>
+                        <div id="live-viewers-container" class="text-lg font-semibold text-secondary-color live-indicator">
+                            <strong id="live-viewers-count"></strong> <span>people viewing now</span>
+                        </div>
+                    </div>
+                    <button class="cta-button text-xl font-bold py-4 px-10 rounded-full" id="start-purchase-btn">I Want My Advantage Now</button>
+                    <div class="flex justify-center items-center flex-wrap gap-x-8 gap-y-4 mt-10 text-gray-400">
+                        <div class="flex items-center space-x-2"><i class="fas fa-user-secret text-secondary-color"></i><span>100% Anonymous with Crypto</span></div>
+                        <div class="flex items-center space-x-2"><i class="fas fa-shield-alt text-secondary-color"></i><span>100% Secure & Undetectable</span></div>
+                        <div class="flex items-center space-x-2"><i class="fas fa-lock text-secondary-color"></i><span>Protected by Blockchain</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Section -->
+            <section id="faq" class="py-20 md:py-28">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Frequently Asked Questions</h2>
+                    <div class="max-w-3xl mx-auto space-y-4">
+                        <details class="faq-item animate-on-scroll p-6 rounded-lg">
+                            <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
+                                <span>Is it safe? Can I be banned?</span>
+                                <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
+                            </summary>
+                            <p class="text-gray-400 mt-4">Yes, 100% safe. Reveal App operates as an external assistant and does not modify the poker app's files, making it completely undetectable. Thousands of users have been playing safely for months without any issues.</p>
+                        </details>
+                        <details class="faq-item animate-on-scroll p-6 rounded-lg">
+                            <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
+                                <span>How does the technology work?</span>
+                                <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
+                            </summary>
+                            <p class="text-gray-400 mt-4">Our system intercepts encrypted game data packets in real-time. By leveraging advanced proprietary algorithms, we can decrypt the hand data before it's displayed. This gives you a clear, strategic overview of the table, allowing for more informed decisions.</p>
+                        </details>
+                        <details class="faq-item animate-on-scroll p-6 rounded-lg">
+                            <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
+                                <span>How does the payment work?</span>
+                                <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
+                            </summary>
+                            <p class="text-gray-400 mt-4">We use cryptocurrency to ensure your complete anonymity. The process is simple: you choose your crypto, send the amount for your first month's plan to the provided address, and contact our support on Telegram with your unique ID to finalize the activation.</p>
+                        </details>
+                        <details class="faq-item animate-on-scroll p-6 rounded-lg">
+                            <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
+                                <span>Is this a subscription?</span>
+                                <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
+                            </summary>
+                            <p class="text-gray-400 mt-4">Yes. To ensure continuous development and support, Reveal App operates on a monthly plan. Your monthly fee is personalized based on your country, making it a fair and affordable investment in your success. You can also choose a lifetime plan for a one-time payment.</p>
+                        </details>
+                         <details class="faq-item animate-on-scroll p-6 rounded-lg">
+                            <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
+                                <span>How long for activation?</span>
+                                <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300"></i>
+                            </summary>
+                            <p class="text-gray-400 mt-4">Activation is almost instant. After sending your ID to our 24/7 support on Telegram, the process is usually completed in under 5 minutes.</p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-background-dark border-t border-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-primary-color">About Reveal App</h3>
+                        <p class="text-gray-400">Reveal App offers a strategic advantage by providing crucial data on opponents' hands. Play smarter, win bigger.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-primary-color">Contact & Support</h3>
+                        <div class="space-y-3">
+                            <a href="https://t.me/bedmalcon_temp" target="_blank" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fab fa-telegram w-6"></i><span class="ml-2">Telegram (24/7 Support)</span></a>
+                            <a href="https://instagram.com/hackpoker_updated" target="_blank" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fab fa-instagram w-6"></i><span class="ml-2">@hackpoker_updated</span></a>
+                            <a href="mailto:support@revealpoker.top" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fas fa-envelope w-6"></i><span class="ml-2">support@revealpoker.top</span></a>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="text-lg font-semibold mb-4 text-primary-color">Quick Links</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                            <li><a href="#how-it-works" class="text-gray-400 hover:text-white">How It Works</a></li>
+                            <li><a href="#pricing" class="text-gray-400 hover:text-white">Pricing</a></li>
+                            <li><a href="#faq" class="text-gray-400 hover:text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
+                    <p>&copy; <span id="current-year"></span> Reveal App. <span>All Rights Reserved.</span></p>
+                    <p class="text-sm mt-2">Disclaimer: This tool is an external assistant. Use responsibly and in accordance with the terms of service of the poker platforms.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
     
     <!-- Floating Action Buttons -->
     <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end space-y-4">
@@ -575,6 +587,7 @@
     <script>
     // --- Main Application Logic ---
     document.addEventListener('DOMContentLoaded', () => {
+        
         const App = {
             state: {
                 userCountryCode: null,
@@ -591,6 +604,7 @@
                 os: null,
                 basePriceUSD: 0,
                 finalPriceUSD: 0,
+                supportFee: 0,
                 uniqueId: null,
                 cheatTier: null, // 1, 2, or 3
                 platforms: [], // Array of selected platforms
@@ -600,7 +614,7 @@
                 upsells: {
                     platformCount: 0, // 0, 1, or 2
                     support: false,
-                    lifetime: false
+                    annual: false
                 }
             },
             urgencyState: {
@@ -609,8 +623,12 @@
                 viewersInterval: null,
                 priceTimerInterval: null,
             },
-            observer: null, // Property to hold the IntersectionObserver instance
+            observer: null,
             dom: {
+                pageContent: document.getElementById('page-content'),
+                countrySelectionModal: document.getElementById('country-selection-modal'),
+                countrySelectInput: document.getElementById('country-select-input'),
+                countrySelectBtn: document.getElementById('country-select-btn'),
                 currentYear: document.getElementById('current-year'),
                 mobileMenu: document.getElementById('mobile-menu'),
                 mobileMenuButton: document.getElementById('mobile-menu-button'),
@@ -658,16 +676,59 @@
             // --- Initialization ---
             async init() {
                 this.dom.currentYear.textContent = new Date().getFullYear();
-                await this.fetchCurrencyRates();
-                await this.fetchInitialData();
                 this.initEventListeners();
                 this.initConsistentCounters();
                 this.initUrgencyFeatures();
                 this.initScrollAnimations();
                 this.scheduleSocialProof();
                 this.initRotatingTestimonials();
+                this.updatePricingCards();
             },
 
+            async initCountrySelection() {
+                const savedCountry = localStorage.getItem('userCountryCode');
+                if (savedCountry) {
+                    await this.fetchCurrencyRates();
+                    this.updateUserStateFromCountry(savedCountry, true);
+                    this.dom.countrySelectionModal.classList.add('hidden');
+                    this.dom.pageContent.classList.remove('hidden');
+                    this.init();
+                    return;
+                }
+
+                // Populate country dropdown
+                const countryOptions = Object.keys(this.countrySalaryData).map(code => {
+                    const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(code);
+                    return `<option value="${code}">${countryName}</option>`;
+                }).sort((a,b) => a.localeCompare(b)).join('');
+                this.dom.countrySelectInput.innerHTML += countryOptions;
+
+                // Pre-select based on IP
+                try {
+                    const geoResponse = await fetch('https://ipapi.co/json/');
+                    if (!geoResponse.ok) throw new Error('IP-based geolocation failed');
+                    const geoData = await geoResponse.json();
+                    if (geoData.country_code) {
+                        this.dom.countrySelectInput.value = geoData.country_code;
+                    }
+                } catch (error) {
+                    console.warn("Could not fetch IP geolocation.", error);
+                }
+
+                this.dom.countrySelectBtn.addEventListener('click', async () => {
+                    const selectedCountry = this.dom.countrySelectInput.value;
+                    if (selectedCountry) {
+                        await this.fetchCurrencyRates();
+                        this.updateUserStateFromCountry(selectedCountry, true);
+                        localStorage.setItem('userCountryCode', selectedCountry);
+                        
+                        this.dom.countrySelectionModal.classList.add('hidden');
+                        this.dom.pageContent.classList.remove('hidden');
+                        this.init();
+                    }
+                });
+            },
+            
             async fetchCurrencyRates() {
                 try {
                     const response = await fetch('https://open.er-api.com/v6/latest/USD');
@@ -676,24 +737,7 @@
                     this.state.currencyRates = data.rates;
                 } catch (error) {
                     console.error("Currency fetch error:", error);
-                    // Fallback to USD if API fails
                     this.state.currencyRates = { USD: 1 };
-                }
-            },
-
-            async fetchInitialData() {
-                if (!localStorage.getItem('userCountryCode')) {
-                    try {
-                        const geoResponse = await fetch('https://ipapi.co/json/');
-                        if (!geoResponse.ok) throw new Error('IP-based geolocation failed');
-                        const geoData = await geoResponse.json();
-                        this.updateUserStateFromCountry(geoData.country_code, true);
-                    } catch (error) {
-                        console.warn("Could not fetch IP geolocation.", error);
-                        this.updateUserStateFromCountry('US', true);
-                    }
-                } else {
-                    this.updateUserStateFromCountry(localStorage.getItem('userCountryCode'), false);
                 }
             },
 
@@ -705,11 +749,20 @@
                     if (e.target === this.dom.dialogContainer) this.closeDialog();
                 });
                 this.dom.startPurchaseBtn.addEventListener('click', () => this.startPurchaseFlow());
+                
+                document.querySelectorAll('.pricing-card a').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const tier = e.currentTarget.closest('.pricing-card').dataset.tier;
+                        this.startPurchaseFlow(tier);
+                    });
+                });
+
                 this.dom.floatingCtaButton.addEventListener('click', (e) => {
                     e.preventDefault();
                     document.querySelector('#get-app').scrollIntoView({ behavior: 'smooth' });
                 });
-                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                document.querySelectorAll('a[href^="#"]:not(.pricing-card a)').forEach(anchor => {
                     anchor.addEventListener('click', function (e) {
                         e.preventDefault();
                         const targetElement = document.querySelector(this.getAttribute('href'));
@@ -855,13 +908,56 @@
                 const container = this.dom.testimonialsContainer;
                 if(container) {
                     container.innerHTML = testimonialsHTML;
-                    // FIX: Observe the newly added elements for animations
                     container.querySelectorAll('.animate-on-scroll').forEach(el => {
                         if (this.observer) {
                             this.observer.observe(el);
                         }
                     });
                 }
+            },
+
+            updatePricingCards() {
+                const pricingCards = document.querySelectorAll('#pricing .pricing-card');
+                if (!pricingCards.length) return;
+
+                const getPriceForTier = (tier, isPremium) => {
+                    const countryCode = this.state.userCountryCode || 'US';
+                    const baseSalary = this.countrySalaryData[countryCode]?.s || 500;
+                    let percentage;
+                    const minimumPrice = 350;
+                    
+                    if (isPremium) {
+                        percentage = baseSalary < 1000 ? 0.35 : 0.25;
+                    } else {
+                        percentage = 0.20;
+                    }
+                    
+                    let calculatedPrice = baseSalary * percentage;
+                    let finalPrice = Math.max(minimumPrice, calculatedPrice);
+
+                    if (tier === 2) return finalPrice * 1.8;
+                    if (tier === 3) return finalPrice * 2.2;
+                    return finalPrice;
+                }
+
+                pricingCards.forEach(card => {
+                    const tier = parseInt(card.dataset.tier);
+                    if (!tier) return;
+
+                    // For display purposes, we calculate based on a standard platform.
+                    const priceUSD = getPriceForTier(tier, false);
+                    const formattedPrice = this.formatLocalCurrency(priceUSD);
+
+                    const priceContainer = card.querySelector('.my-4');
+                    if (priceContainer) {
+                        priceContainer.innerHTML = `
+                            <div class="flex items-baseline justify-center gap-x-2">
+                                <span class="text-4xl md:text-5xl font-extrabold text-white leading-tight">${formattedPrice}</span>
+                                <span class="text-gray-400 font-medium">/ month</span>
+                            </div>
+                        `;
+                    }
+                });
             },
 
             showDialog(content) {
@@ -877,8 +973,9 @@
             },
             
             // --- Purchase Flow ---
-            startPurchaseFlow() {
-                 if (localStorage.getItem('userEmail') && localStorage.getItem('userCountryCode')) {
+            startPurchaseFlow(tier = null) {
+                 this.purchaseState.cheatTier = tier ? parseInt(tier) : null;
+                 if (localStorage.getItem('userEmail')) {
                       this.purchaseState.email = localStorage.getItem('userEmail');
                       this.showPlatformDialog();
                  } else {
@@ -887,46 +984,27 @@
             },
 
             showRegistrationDialog() {
-                const countryOptions = Object.keys(this.countrySalaryData).map(code => {
-                    const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(code);
-                    return `<option value="${code}">${countryName}</option>`;
-                }).sort((a,b) => a.localeCompare(b)).join('');
-
                 const content = `
                     <div class="mb-4">
                         <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 10%;"></div></div>
                         <p class="text-center text-sm text-gray-400 mt-2">Step 1 of 6</p>
                     </div>
-                    <h3 class="text-2xl font-bold mb-6 text-center">Register to Reveal Your Offer</h3>
+                    <h3 class="text-2xl font-bold mb-6 text-center">Register to Select Your Plan</h3>
                     <div class="space-y-4">
                         <div>
                             <label for="email-input" class="block mb-2 text-sm font-medium text-gray-300">Email Address</label>
                             <input type="email" id="email-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5" placeholder="Enter your email" required value="${localStorage.getItem('userEmail') || ''}">
                             <p id="email-error" class="text-red-500 text-sm mt-1 h-4"></p>
                         </div>
-                        <div>
-                            <label for="country-input" class="block mb-2 text-sm font-medium text-gray-300">Country</label>
-                            <select id="country-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5">
-                                <option value="">Select your country</option>
-                                ${countryOptions}
-                            </select>
-                            <p id="country-error" class="text-red-500 text-sm mt-1 h-4"></p>
-                        </div>
                         <button id="register-btn" class="w-full cta-button font-bold py-3 rounded-lg">Continue</button>
                     </div>`;
                 this.showDialog(content);
-                const countryInput = document.getElementById('country-input');
-                if (this.state.userCountryCode) {
-                    countryInput.value = this.state.userCountryCode;
-                }
                 document.getElementById('register-btn').onclick = () => this.submitRegistration();
             },
 
             submitRegistration() {
                 const emailInput = document.getElementById('email-input');
-                const countryInput = document.getElementById('country-input');
                 const emailError = document.getElementById('email-error');
-                const countryError = document.getElementById('country-error');
                 let isValid = true;
 
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
@@ -934,16 +1012,9 @@
                     isValid = false;
                 } else { emailError.textContent = ''; }
 
-                if (!countryInput.value) {
-                    countryError.textContent = "Please select your country.";
-                    isValid = false;
-                } else { countryError.textContent = ''; }
-
                 if (isValid) {
                     localStorage.setItem('userEmail', emailInput.value);
-                    localStorage.setItem('userCountryCode', countryInput.value);
                     this.purchaseState.email = emailInput.value;
-                    this.updateUserStateFromCountry(countryInput.value, false);
                     this.showPlatformDialog();
                 }
             },
@@ -975,12 +1046,14 @@
             formatLocalCurrency(usdValue) {
                 try {
                     const localValue = usdValue * this.state.usdToLocalRate;
-                    return new Intl.NumberFormat(this.state.userCountryCode.toLowerCase() + '-' + this.state.userCountryCode, {
+                    const lang = (this.state.userCountryCode || 'US').toLowerCase();
+                    const locale = lang === 'br' ? 'pt-BR' : `en-${this.state.userCountryCode}`;
+
+                    return new Intl.NumberFormat(locale, {
                         style: 'currency',
                         currency: this.state.userCurrencyCode,
                     }).format(localValue);
                 } catch (error) {
-                    // Fallback to USD formatting
                     return new Intl.NumberFormat('en-US', {
                         style: 'currency',
                         currency: 'USD',
@@ -988,16 +1061,41 @@
                 }
             },
             
-            calculateDailyIncrease() {
-                const startDate = new Date('2025-01-01T00:00:00Z');
-                const now = new Date();
-                if (now < startDate) return 0;
+            calculatePrice() {
+                this.purchaseState.supportFee = 0; // Reset fee
+                const countryCode = this.state.userCountryCode || 'US';
+                const baseSalary = this.countrySalaryData[countryCode]?.s || 500;
+                const selectedPlatforms = this.purchaseState.platforms;
+                const premiumPlatforms = ['GGPoker', 'Suprema', 'PokerStars', 'Pokerrr2'];
+                let percentage;
 
-                const diffTime = Math.abs(now - startDate);
-                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-                return diffDays * 0.05;
+                const minimumPrice = 350;
+
+                const isPremiumSelected = selectedPlatforms.some(p => premiumPlatforms.includes(p));
+
+                if (isPremiumSelected) {
+                    percentage = baseSalary < 1000 ? 0.35 : 0.25;
+                } else {
+                    percentage = 0.20;
+                }
+                
+                let calculatedPrice = baseSalary * percentage;
+                let basePriceBeforeTiers = Math.max(minimumPrice, calculatedPrice);
+                
+                let finalPrice = basePriceBeforeTiers;
+                if (this.purchaseState.cheatTier === 2) {
+                    finalPrice *= 1.8;
+                } else if (this.purchaseState.cheatTier === 3) {
+                    finalPrice *= 2.2;
+                }
+
+                if (finalPrice <= 500) {
+                    this.purchaseState.supportFee = 50;
+                }
+
+                this.purchaseState.basePriceUSD = finalPrice + this.purchaseState.supportFee;
             },
-            
+
             showPlatformDialog() {
                 const platformButtons = this.platforms.map(p => `
                     <button data-platform="${p.id}" class="selection-button app-btn font-semibold py-3 rounded-lg flex flex-col items-center justify-center gap-2 h-28">
@@ -1060,7 +1158,12 @@
                     }
 
                     if(isValid) {
-                        this.showCheatSelectionDialog();
+                        if (this.purchaseState.cheatTier) {
+                            this.calculatePrice();
+                            this.showFeatureUpsellDialog();
+                        } else {
+                            this.showCheatSelectionDialog();
+                        }
                     }
                 };
             },
@@ -1083,7 +1186,7 @@
                         </div>
                         <div data-tier="3" class="selection-button cheat-tier-btn p-4 rounded-lg">
                             <h4 class="font-bold text-lg text-primary-color">Total Vision</h4>
-                            <p class="text-sm text-gray-300">See ALL cards: board and opponents. Includes a 25% fee on monthly winnings.</p>
+                            <p class="text-sm text-gray-300">See ALL cards: board and opponents. The ultimate advantage.</p>
                         </div>
                     </div>
                     <p id="tier-error" class="text-red-500 text-sm mt-2 h-4 text-center"></p>
@@ -1100,182 +1203,66 @@
                 document.getElementById('cheat-tier-continue-btn').onclick = () => {
                     if (this.purchaseState.cheatTier) {
                         this.calculatePrice();
-                        this.showPlatformUpsellDialog();
+                        this.showFeatureUpsellDialog();
                     } else {
                         document.getElementById('tier-error').textContent = 'Please select an advantage level.';
                     }
                 };
             },
 
-            calculatePrice() {
-                const countryCode = this.state.userCountryCode || 'US';
-                const baseSalary = this.countrySalaryData[countryCode]?.s || 500;
-                const selectedPlatforms = this.purchaseState.platforms;
-                const premiumPlatforms = ['PokerStars', 'GGPoker'];
-                let percentage;
-
-                const tierPercentagesStandard = { 1: 0.28, 2: 0.48, 3: 0.58 };
-                const tierPercentagesPremium = { 1: 0.40, 2: 0.60, 3: 0.70 };
-                const minimumPrice = 270;
-
-                // Determine the highest price tier among selected platforms
-                if (selectedPlatforms.includes('Suprema')) {
-                    percentage = 0.40;
-                } else if (selectedPlatforms.some(p => premiumPlatforms.includes(p))) {
-                    percentage = tierPercentagesPremium[this.purchaseState.cheatTier];
-                } else if (selectedPlatforms.includes('KKPoker')) {
-                    percentage = 0.30;
-                } else {
-                    percentage = tierPercentagesStandard[this.purchaseState.cheatTier];
-                }
-                
-                const dailyIncrease = this.calculateDailyIncrease();
-                
-                let calculatedPrice = (baseSalary * percentage) + dailyIncrease;
-                this.purchaseState.basePriceUSD = Math.max(minimumPrice, calculatedPrice);
-            },
-
-            showPlatformUpsellDialog() {
-                // Recalculate price based on all selected platforms before showing upsells
-                this.calculatePrice(); 
-                let currentPriceUSD = this.purchaseState.basePriceUSD;
-                const upsell1PriceUSD = currentPriceUSD * 0.5;
-                const upsell2PriceUSD = currentPriceUSD * 0.9;
-                
-                const content = `
-                     <div class="mb-4">
-                        <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 55%;"></div></div>
-                        <p class="text-center text-sm text-gray-400 mt-2">Step 4 of 6 (Optional)</p>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-2 text-center">Dominate More Tables</h3>
-                    <p class="text-gray-400 text-center mb-6">Expand your advantage to more platforms for a fraction of the cost.</p>
-                    
-                    <div class="space-y-4">
-                        <div data-count="1" class="selection-button platform-upsell-btn p-4 rounded-lg">
-                            <h4 class="font-bold text-lg">Add 1 More Platform</h4>
-                            <p class="text-sm text-secondary-color font-semibold">For just +${this.formatLocalCurrency(upsell1PriceUSD)}</p>
-                        </div>
-                        <div data-count="2" class="selection-button platform-upsell-btn p-4 rounded-lg">
-                            <h4 class="font-bold text-lg">Add 2 More Platforms</h4>
-                            <p class="text-sm text-secondary-color font-semibold">Best Value: For just +${this.formatLocalCurrency(upsell2PriceUSD)}</p>
-                        </div>
-                    </div>
-
-                    <div id="additional-platforms-container" class="hidden mt-6"></div>
-                    
-                    <div class="flex gap-4 mt-8">
-                        <button id="skip-platform-upsell-btn" class="w-full btn-secondary font-bold py-3 rounded-lg">No, Thanks</button>
-                        <button id="confirm-platform-upsell-btn" class="w-full cta-button font-bold py-3 rounded-lg hidden">Confirm Selection</button>
-                    </div>
-                `;
-                this.showDialog(content);
-
-                document.querySelectorAll('.platform-upsell-btn').forEach(btn => btn.onclick = (e) => {
-                    document.querySelectorAll('.platform-upsell-btn').forEach(b => b.classList.remove('selected'));
-                    e.currentTarget.classList.add('selected');
-                    const count = parseInt(e.currentTarget.dataset.count);
-                    this.purchaseState.upsells.platformCount = count;
-                    this.renderAdditionalPlatformSelector(count);
-                });
-                
-                document.getElementById('skip-platform-upsell-btn').onclick = () => {
-                    this.purchaseState.upsells.platformCount = 0;
-                    this.showFeatureUpsellDialog();
-                };
-
-                document.getElementById('confirm-platform-upsell-btn').onclick = () => {
-                    const selectedCount = this.purchaseState.platforms.length - 1;
-                    if (selectedCount === this.purchaseState.upsells.platformCount) {
-                        this.showFeatureUpsellDialog();
-                    } else {
-                        document.getElementById('platform-upsell-error').textContent = `Please select exactly ${this.purchaseState.upsells.platformCount} more platform(s).`;
-                    }
-                };
-            },
-
-            renderAdditionalPlatformSelector(count) {
-                const container = document.getElementById('additional-platforms-container');
-                const primaryPlatform = this.purchaseState.platforms[0];
-                
-                const availablePlatforms = this.platforms.filter(p => p.id !== primaryPlatform);
-                
-                const platformButtons = availablePlatforms.map(p => `
-                    <button data-platform="${p.id}" class="selection-button additional-platform-btn font-semibold py-2 px-3 rounded-lg text-sm">${p.name}</button>
-                `).join('');
-
-                container.innerHTML = `
-                    <p class="text-center font-semibold mb-2">Select ${count} additional platform(s):</p>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                        ${platformButtons}
-                    </div>
-                    <p id="platform-upsell-error" class="text-red-500 text-sm mt-2 h-4 text-center"></p>
-                `;
-                container.classList.remove('hidden');
-                document.getElementById('confirm-platform-upsell-btn').classList.remove('hidden');
-
-                document.querySelectorAll('.additional-platform-btn').forEach(btn => btn.onclick = (e) => {
-                    const platformId = e.currentTarget.dataset.platform;
-                    const platformIndex = this.purchaseState.platforms.indexOf(platformId);
-
-                    if (platformIndex > -1) { // Already selected, de-select
-                        this.purchaseState.platforms.splice(platformIndex, 1);
-                        e.currentTarget.classList.remove('selected');
-                    } else { // Not selected, add if not exceeding limit
-                        if (this.purchaseState.platforms.length - 1 < count) {
-                            this.purchaseState.platforms.push(platformId);
-                            e.currentTarget.classList.add('selected');
-                        }
-                    }
-                    // Recalculate price every time a platform is added/removed
-                    this.calculatePrice();
-                });
-            },
-
             showFeatureUpsellDialog() {
-                // Reset upsell choices before showing the dialog
                 this.purchaseState.upsells.support = false;
-                this.purchaseState.upsells.lifetime = false;
+                this.purchaseState.upsells.annual = false;
 
-                // Final price calculation before this step
                 this.calculatePrice();
-                let basePriceUSD = this.purchaseState.basePriceUSD;
-                if (this.purchaseState.upsells.platformCount === 1) {
-                    basePriceUSD *= 1.5;
-                } else if (this.purchaseState.upsells.platformCount === 2) {
-                    basePriceUSD *= 1.9;
-                }
+                let basePriceUSD = this.purchaseState.basePriceUSD - this.purchaseState.supportFee;
+                
+                const supportPriceUSD = 50;
+                const annualPriceUSD = basePriceUSD * 3.5;
+                const annualFullPriceUSD = basePriceUSD * 12;
 
-                const supportPriceUSD = basePriceUSD * 0.20;
-                const lifetimePriceUSD = basePriceUSD * 3;
-                const lifetimeFullPriceUSD = basePriceUSD * 10;
+                let supportFeeHTML = '';
+                if (this.purchaseState.supportFee > 0) {
+                    supportFeeHTML = `
+                        <div class="flex justify-between text-gray-300 text-sm">
+                            <span>Mandatory Support Fee:</span>
+                            <span>+ ${this.formatLocalCurrency(this.purchaseState.supportFee)}</span>
+                        </div>
+                    `;
+                }
 
                 const content = `
                     <div class="mb-4">
                         <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 75%;"></div></div>
-                        <p class="text-center text-sm text-gray-400 mt-2">Step 5 of 6 (Optional)</p>
+                        <p class="text-center text-sm text-gray-400 mt-2">Step 5 of 6</p>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-center">Upgrade Your Experience</h3>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Finalize Your Plan</h3>
                     <div class="space-y-3 mb-6">
-                        <div id="upsell-support" class="upsell-option p-4 rounded-lg flex items-center justify-between">
+                        <div id="upsell-support" class="upsell-option p-4 rounded-lg flex items-center justify-between ${this.purchaseState.supportFee > 0 ? 'opacity-50 pointer-events-none selected' : ''}">
                             <div>
                                 <h4 class="font-bold"><i class="fas fa-headset mr-2"></i>Priority 24/7 Support</h4>
                                 <p class="text-sm text-gray-400">Get instant help anytime.</p>
                             </div>
                             <span class="font-bold text-lg text-secondary-color">+${this.formatLocalCurrency(supportPriceUSD)}</span>
                         </div>
-                        <div id="upsell-lifetime" class="upsell-option p-4 rounded-lg">
+                        <div id="upsell-annual" class="upsell-option p-4 rounded-lg">
                             <div class="flex items-center justify-between">
                                <div>
-                                    <h4 class="font-bold text-primary-color"><i class="fas fa-infinity mr-2"></i>ALL-ACCESS LIFETIME</h4>
-                                    <p class="text-sm text-gray-400">One-time payment for permanent access, all updates & support.</p>
+                                    <h4 class="font-bold text-primary-color"><i class="fas fa-calendar-check mr-2"></i>ALL-ACCESS ANNUAL</h4>
+                                    <p class="text-sm text-gray-400">Pay once every 12 months and avoid monthly fees.</p>
                                 </div>
-                                <span class="font-bold text-lg text-primary-color">+${this.formatLocalCurrency(lifetimePriceUSD)}</span>
+                                <span class="font-bold text-lg text-primary-color">+${this.formatLocalCurrency(annualPriceUSD)}</span>
                             </div>
-                             <p class="text-sm text-center mt-2 text-gray-400">Today's Special: <span class="line-through">${this.formatLocalCurrency(lifetimeFullPriceUSD)}</span></p>
+                             <p class="text-sm text-center mt-2 text-gray-400">Save Big! Regular price: <span class="line-through">${this.formatLocalCurrency(annualFullPriceUSD)}</span></p>
                         </div>
                     </div>
-                    <div class="border-t border-gray-700 pt-4">
-                        <div class="flex justify-between items-center text-xl font-bold">
+                    <div class="border-t border-gray-700 pt-4 text-sm">
+                         <div class="flex justify-between text-gray-300">
+                            <span>Base Price:</span>
+                            <span>${this.formatLocalCurrency(basePriceUSD)}</span>
+                        </div>
+                        ${supportFeeHTML}
+                        <div class="flex justify-between items-center text-xl font-bold mt-2">
                             <span>Total Due Today:</span>
                             <span id="total-price-display"></span>
                         </div>
@@ -1285,13 +1272,14 @@
                 this.showDialog(content);
 
                 const updateTotal = () => {
-                    let totalUSD = basePriceUSD;
-                    if (this.purchaseState.upsells.lifetime) {
-                        totalUSD = lifetimePriceUSD;
+                    let totalUSD = basePriceUSD + this.purchaseState.supportFee;
+                    
+                    if (this.purchaseState.upsells.annual) {
+                        totalUSD = annualPriceUSD;
                         document.getElementById('upsell-support').classList.add('opacity-50', 'pointer-events-none');
                         document.getElementById('upsell-support').classList.remove('selected');
                     } else {
-                        document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+                         document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
                         if (this.purchaseState.upsells.support) totalUSD += supportPriceUSD;
                     }
                     this.purchaseState.finalPriceUSD = totalUSD;
@@ -1299,22 +1287,22 @@
                 };
 
                 document.getElementById('upsell-support').onclick = (e) => {
-                    if(this.purchaseState.upsells.lifetime) return;
+                    if(this.purchaseState.upsells.annual || this.purchaseState.supportFee > 0) return;
                     e.currentTarget.classList.toggle('selected');
                     this.purchaseState.upsells.support = !this.purchaseState.upsells.support;
                     updateTotal();
                 };
-                document.getElementById('upsell-lifetime').onclick = (e) => {
+                document.getElementById('upsell-annual').onclick = (e) => {
                     e.currentTarget.classList.toggle('selected');
-                    this.purchaseState.upsells.lifetime = !this.purchaseState.upsells.lifetime;
-                    if (this.purchaseState.upsells.lifetime) {
+                    this.purchaseState.upsells.annual = !this.purchaseState.upsells.annual;
+                    if (this.purchaseState.upsells.annual) {
                         this.purchaseState.upsells.support = false;
                     }
                     updateTotal();
                 };
                 
                 document.getElementById('continue-to-payment-btn').onclick = () => this.showPaymentMethodDialog();
-                updateTotal(); // Initial call to display base price
+                updateTotal();
             },
 
             showPaymentMethodDialog() {
@@ -1322,7 +1310,9 @@
                 const finalPriceWithCents = parseFloat(this.purchaseState.finalPriceUSD.toFixed(0)) + (parseInt(this.purchaseState.uniqueId.slice(-2), 10) / 100);
                 this.purchaseState.finalPriceUSD = finalPriceWithCents;
 
-                let priceDisplayHTML = `<p class="text-4xl font-bold text-primary-color">${this.formatLocalCurrency(this.purchaseState.finalPriceUSD)}</p>`;
+                let finalPriceForDisplay = this.purchaseState.finalPriceUSD;
+                
+                let priceDisplayHTML = `<p class="text-4xl font-bold text-primary-color">${this.formatLocalCurrency(finalPriceForDisplay)}</p>`;
 
                 const content = `
                     <div class="mb-4">
@@ -1371,6 +1361,7 @@
                 document.querySelectorAll('.crypto-button').forEach(button => {
                     button.addEventListener('click', (e) => {
                         const cryptoMethod = e.currentTarget.dataset.crypto;
+                        this.purchaseState.paymentMethod = cryptoMethod;
                         this.showPaymentDetailsDialog(cryptoMethod);
                     });
                 });
@@ -1392,7 +1383,6 @@
             },
 
             async showPaymentDetailsDialog(method) {
-                this.purchaseState.paymentMethod = method;
                 const addresses = { 
                     usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK", 
                     btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3", 
@@ -1406,9 +1396,7 @@
                 let finalPriceUSD = this.purchaseState.finalPriceUSD;
 
                 if (method === 'usdt') {
-                    const countryCode = this.state.userCountryCode || 'US';
-                    const baseSalary = this.countrySalaryData[countryCode]?.s || 500;
-                    const feeUSD = baseSalary * 0.10;
+                    const feeUSD = 20;
                     const basePriceFormatted = this.formatLocalCurrency(this.purchaseState.finalPriceUSD);
                     const feeFormatted = this.formatLocalCurrency(feeUSD);
                     finalPriceUSD += feeUSD;
@@ -1417,7 +1405,7 @@
                     priceBreakdownHTML = `
                         <div class="text-left mb-4 p-4 bg-background-dark rounded-lg border border-border-color">
                             <div class="flex justify-between text-gray-300 text-sm"><span>Subtotal:</span><span>${basePriceFormatted}</span></div>
-                            <div class="flex justify-between text-gray-300 text-sm"><span>USDT Fee:</span><span>+ ${feeFormatted}</span></div>
+                            <div class="flex justify-between text-gray-300 text-sm"><span>USDT Network Fee:</span><span>+ ${feeFormatted}</span></div>
                             <hr class="border-gray-700 my-2">
                             <div class="flex justify-between font-bold text-lg"><span>Total to Pay:</span><span>${totalFormatted}</span></div>
                         </div>
@@ -1449,7 +1437,7 @@
                 
                 if (cryptoPrice && paymentAmountContainer && qrCodeContainer) {
                     const cryptoAmount = (finalPriceUSD / cryptoPrice).toFixed(method === 'usdt' ? 2 : 8);
-                    this.purchaseState.cryptoAmountPaid = cryptoAmount; // Store crypto amount
+                    this.purchaseState.cryptoAmountPaid = cryptoAmount;
                     paymentAmountContainer.innerHTML = `<p class="text-3xl font-bold text-primary-color tabular-nums">${cryptoAmount} ${method.toUpperCase()}</p>`;
                     
                     let qrData = `${method}:${address}?amount=${cryptoAmount}`;
@@ -1492,9 +1480,14 @@
             },
 
             showFinalConfirmation() {
-                const { uniqueId, os, platforms, cheatTier, upsells, finalPriceUSD, cryptoAmountPaid, paymentMethod } = this.purchaseState;
+                const { uniqueId, os, platforms, cheatTier, upsells, finalPriceUSD, cryptoAmountPaid, paymentMethod, supportFee } = this.purchaseState;
                 const tierNames = {1: "Board Reader", 2: "Opponent Insight", 3: "Total Vision"};
                 
+                let finalPrice = finalPriceUSD;
+                if (paymentMethod === 'usdt') {
+                    finalPrice += 20;
+                }
+
                 let message = `🚀 --- New Activation | Reveal App --- 🚀\n\n`;
                 message += `🆔 Activation ID: ${uniqueId}\n`;
                 message += `📧 Email: ${this.purchaseState.email}\n`;
@@ -1503,21 +1496,14 @@
                 message += `🃏 Platforms: ${platforms.join(', ')}\n\n`;
                 message += `--- Payment Details ---\n`;
                 message += `💰 Amount: ${cryptoAmountPaid} ${paymentMethod.toUpperCase()}\n`;
-                message += `💵 Equivalent: ~$${finalPriceUSD.toFixed(2)} USD\n`;
-                message += `💳 Plan: ${upsells.lifetime ? 'Lifetime (One-Time Payment)' : 'Monthly'}\n`;
-                message += `🔧 Priority Support: ${upsells.support || upsells.lifetime ? 'Yes' : 'No'}\n\n`;
+                message += `💵 Equivalent: ~$${finalPrice.toFixed(2)} USD\n`;
+                message += `💳 Plan: ${upsells.annual ? 'Annual (Billed every 12 months)' : 'Monthly'}\n`;
+                let hasSupport = upsells.support || upsells.annual || supportFee > 0;
+                message += `🔧 Priority Support: ${hasSupport ? 'Yes' : 'No'}\n\n`;
 
-                if (upsells.lifetime) {
-                    message += `✅ Thank you for your one-time payment! Your access is permanent.\n`;
-                    if (cheatTier === 3) {
-                        message += `Reminder: The 25% fee on monthly winnings still applies.\n`;
-                    }
-                } else {
+                if (!upsells.annual) {
                     message += `--- ⚠️ IMPORTANT ⚠️ ---\n`;
                     message += `Your subscription is monthly. The next payment is due on the 30th of next month.\n`;
-                    if (cheatTier === 3) {
-                        message += `In addition to the monthly fee, the 25% fee on monthly winnings is also required.\n`;
-                    }
                     message += `Please contact support to arrange future payments.\n`;
                 }
                 message += `\nThank you for choosing Reveal App!`;
@@ -1535,8 +1521,9 @@
             }
         };
         
-        App.init();
+        App.initCountrySelection();
     });
+
     // --- Google Translate ---
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,pt,es,de,zh-CN,hi,ar,ru,tl,vi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
@@ -1558,4 +1545,3 @@
     </script>
 </body>
 </html>
- 
