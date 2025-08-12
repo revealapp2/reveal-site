@@ -927,16 +927,21 @@
                     const minimumPrice = 350;
                     
                     if (isPremium) {
-                        percentage = baseSalary < 1000 ? 0.35 : 0.25;
+                        percentage = 0.30;
                     } else {
                         percentage = 0.20;
                     }
                     
                     let calculatedPrice = baseSalary * percentage;
-                    let finalPrice = Math.max(minimumPrice, calculatedPrice);
+                    let basePriceBeforeTiers = Math.max(minimumPrice, calculatedPrice);
+                    
+                    let finalPrice = basePriceBeforeTiers;
+                    if (tier === 2) finalPrice *= 1.8;
+                    if (tier === 3) finalPrice *= 2.2;
 
-                    if (tier === 2) return finalPrice * 1.8;
-                    if (tier === 3) return finalPrice * 2.2;
+                    if (finalPrice <= 500) {
+                        finalPrice += 50; // Add mandatory support fee for display
+                    }
                     return finalPrice;
                 }
 
@@ -944,15 +949,24 @@
                     const tier = parseInt(card.dataset.tier);
                     if (!tier) return;
 
-                    // For display purposes, we calculate based on a standard platform.
+                    // For display purposes, we calculate based on a standard platform (false for isPremium)
                     const priceUSD = getPriceForTier(tier, false);
                     const formattedPrice = this.formatLocalCurrency(priceUSD);
 
                     const priceContainer = card.querySelector('.my-4');
+                    
+                    // Dynamically adjust font size for long currency strings
+                    let priceFontSizeClass = 'text-4xl md:text-5xl';
+                    if (formattedPrice.length > 15) {
+                        priceFontSizeClass = 'text-3xl md:text-4xl';
+                    } else if (formattedPrice.length > 11) {
+                        priceFontSizeClass = 'text-4xl';
+                    }
+
                     if (priceContainer) {
                         priceContainer.innerHTML = `
                             <div class="flex items-baseline justify-center gap-x-2">
-                                <span class="text-4xl md:text-5xl font-extrabold text-white leading-tight">${formattedPrice}</span>
+                                <span class="${priceFontSizeClass} font-extrabold text-white leading-tight">${formattedPrice}</span>
                                 <span class="text-gray-400 font-medium">/ month</span>
                             </div>
                         `;
@@ -1074,7 +1088,7 @@
                 const isPremiumSelected = selectedPlatforms.some(p => premiumPlatforms.includes(p));
 
                 if (isPremiumSelected) {
-                    percentage = baseSalary < 1000 ? 0.35 : 0.25;
+                    percentage = 0.30;
                 } else {
                     percentage = 0.20;
                 }
