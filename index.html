@@ -15,7 +15,7 @@
     <meta property="og:url" content="https://revealpoker.top/">
     <meta property="og:type" content="website">
 
-    <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%220%25%22><stop offset=%220%25%22 stop-color=%22%23F59E0B%22 /><stop offset=%22100%25%22 stop-color=%22%23FBBF24%22 /></linearGradient></defs><path fill=%22url(%23g)%22 d=%22M50 0A50 50 0 1 0 50 100 50 50 0 0 0 50 0zm0 87.5A37.5 37.5 0 1 1 50 12.5a37.5 37.5 0 0 1 0 75z%22/><path fill=%22%2310B981%22 d=%22M50 25a25 25 0 1 0 0 50 25 25 0 0 0 0-50zm0 37.5a12.5 12.5 0 1 1 0-25 12.5 12.5 0 0 1 0 25z%22/><circle cx=%2250%22 cy=%2250%22 r=%225%22 fill=%22white%22/></svg>">
+    <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 stop-color=%22%23FBBF24%22 /><stop offset=%22100%25%22 stop-color=%22%2310B981%22 /></linearGradient></defs><g style=%22transform-origin:center;%22><path fill=%22url(%23g)%22 d=%22M85.1,62.4c-5.1,19.3-23.5,32.2-43.4,29.3c-19.9-2.9-34.9-19.6-34-39.5c0.9-19.9,18.4-35.4,38.4-34.5 C66,18.5,80,33.5,85.1,50.8C86.7,56.2,86.7,60.1,85.1,62.4z%22/></g><circle cx=%2250%22 cy=%2250%22 r=%2215%22 fill=%22%230B1120%22/></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -371,6 +371,25 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* New Logo Animation */
+        .animated-logo-path-1 {
+            animation: rotate-slow 20s linear infinite;
+            transform-origin: center;
+        }
+        .animated-logo-path-2 {
+            animation: rotate-fast 15s linear infinite;
+            transform-origin: center;
+        }
+
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes rotate-fast {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
@@ -402,7 +421,21 @@
                 <div class="flex items-center justify-between h-20">
                     <div class="flex-shrink-0">
                         <a href="#" onclick="window.location.reload()" class="flex items-center space-x-3" aria-label="Reveal App Home">
-                            <svg class="h-10 w-auto" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="logo-g" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FBBF24"></stop><stop offset="100%" stop-color="#F59E0B"></stop></linearGradient></defs><circle cx="50" cy="50" r="45" stroke="url(#logo-g)" stroke-width="8" fill="none"></circle><circle cx="50" cy="50" r="20" fill="#10B981"></circle></svg>
+                            <svg class="h-10 w-auto" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="dynamic-logo-gradient-header" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#FBBF24"/>
+                                        <stop offset="100%" stop-color="#10B981"/>
+                                    </linearGradient>
+                                </defs>
+                                <g class="animated-logo-path-1">
+                                    <path fill="url(#dynamic-logo-gradient-header)" d="M85.1,62.4c-5.1,19.3-23.5,32.2-43.4,29.3c-19.9-2.9-34.9-19.6-34-39.5c0.9-19.9,18.4-35.4,38.4-34.5 C66,18.5,80,33.5,85.1,50.8C86.7,56.2,86.7,60.1,85.1,62.4z"/>
+                                </g>
+                                <g class="animated-logo-path-2">
+                                    <path fill="url(#dynamic-logo-gradient-header)" d="M62.2,19.3C49.5,10.6,30.3,13.9,21.6,26.6c-8.7,12.7-5.4,31.9,7.3,40.6c12.7,8.7,31.9,5.4,40.6-7.3 C78.1,47.2,74.8,28.1,62.2,19.3z"/>
+                                </g>
+                                <circle cx="50" cy="50" r="15" fill="var(--background-dark)"/>
+                            </svg>
                             <span class="text-2xl font-bold text-white">Reveal App</span>
                         </a>
                     </div>
@@ -411,7 +444,7 @@
                         <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition">How It Works</a>
                         <a href="#demo" class="text-gray-300 hover:text-primary-color transition">Demo</a>
                         <a href="#pricing" class="text-gray-300 hover:text-primary-color transition">Pricing</a>
-                        <a href="#community" class="text-gray-300 hover:text-primary-color transition">Community</a>
+                        <a href="#activity-feed-section" class="text-gray-300 hover:text-primary-color transition">Activity Feed</a>
                         <a href="#faq" class="text-gray-300 hover:text-primary-color transition">FAQ</a>
                     </nav>
                     <div class="hidden md:flex items-center space-x-4">
@@ -433,7 +466,7 @@
                 <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition">How It Works</a>
                 <a href="#demo" class="text-gray-300 hover:text-primary-color transition">Demo</a>
                 <a href="#pricing" class="text-gray-300 hover:text-primary-color transition">Pricing</a>
-                <a href="#community" class="text-gray-300 hover:text-primary-color transition">Community</a>
+                <a href="#activity-feed-section" class="text-gray-300 hover:text-primary-color transition">Activity Feed</a>
                 <a href="#faq" class="text-gray-300 hover:text-primary-color transition">FAQ</a>
                 <a href="#get-app" class="cta-button text-center font-bold py-3 px-6 rounded-full mt-6">Get Advantage</a>
                  <div class="mt-4 pt-4 border-t border-gray-700">
@@ -622,8 +655,23 @@
                 </div>
             </section>
             
+            <!-- Activity Feed Section -->
+            <section id="activity-feed-section" class="py-20 md:py-28" aria-labelledby="activity-heading">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 animate-on-scroll">
+                        <h2 id="activity-heading" class="text-4xl md:text-5xl font-bold tracking-tight">Feed de Atividade</h2>
+                        <p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">Veja a atividade em tempo real (anonimizada) dos usuários do Reveal App em todo o mundo. Esta é a prova de que nossa ferramenta funciona.</p>
+                    </div>
+                    <div class="max-w-4xl mx-auto animate-on-scroll" style="transition-delay: 200ms;">
+                        <div id="activity-feed" class="activity-feed">
+                            <!-- Activity items will be dynamically inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Testimonials Section -->
-            <section id="testimonials" class="py-20 md:py-28" aria-labelledby="testimonials-heading">
+            <section id="testimonials" class="py-20 md:py-28 bg-background-light" aria-labelledby="testimonials-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                        <h2 id="testimonials-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">What Our Players Say</h2>
                     <div id="testimonials-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -633,7 +681,7 @@
             </section>
             
             <!-- Get App Section -->
-            <section id="get-app" class="py-20 md:py-28 text-center bg-background-light" aria-labelledby="get-app-heading">
+            <section id="get-app" class="py-20 md:py-28 text-center" aria-labelledby="get-app-heading">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
                     <h2 id="get-app-heading" class="text-4xl md:text-5xl font-bold mb-4">Your Turn to Dominate Has Arrived</h2>
                     <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-10">Every hand played without information is money left on the table. Invest in a strategic advantage, invest in wins.</p>
@@ -650,21 +698,6 @@
                         <div class="flex items-center space-x-2"><i class="fas fa-user-secret text-secondary-color" aria-hidden="true"></i><span>100% Anonymous with Crypto</span></div>
                         <div class="flex items-center space-x-2"><i class="fas fa-shield-alt text-secondary-color" aria-hidden="true"></i><span>100% Secure & Undetectable</span></div>
                         <div class="flex items-center space-x-2"><i class="fas fa-lock text-secondary-color" aria-hidden="true"></i><span>Protected by Blockchain</span></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Community Activity Section -->
-            <section id="community" class="py-20 md:py-28" aria-labelledby="community-heading">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-16 animate-on-scroll">
-                        <h2 id="community-heading" class="text-4xl md:text-5xl font-bold tracking-tight">Community Activity</h2>
-                        <p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">See real-time (anonymized) activity from Reveal App users around the world. This is the proof that our tool works.</p>
-                    </div>
-                    <div class="max-w-4xl mx-auto animate-on-scroll" style="transition-delay: 200ms;">
-                        <div id="activity-feed" class="activity-feed">
-                            <!-- Activity items will be dynamically inserted here -->
-                        </div>
                     </div>
                 </div>
             </section>
