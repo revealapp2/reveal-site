@@ -11,11 +11,7 @@
     <link rel="canonical" href="https://revealpoker.top/">
     <meta property="og:title" content="Reveal App: Your Unbeatable Strategic Poker Advantage">
     <meta property="og:description" content="The professional tool to see your opponents' cards on PPPOKER, GGPoker, UPOKER, PokerBros, and more. Play with superior information and multiply your winnings.">
-    
-    <!-- ATUALIZAÇÃO: Esta é a tag que o WhatsApp e outras redes sociais usam para a prévia do link. -->
-    <!-- Substitua o link abaixo pelo URL da imagem do seu logo (em formato .png ou .jpg). Tamanho recomendado: 1200x630 pixels. -->
     <meta property="og:image" content="https://revealpoker.top/reveal-app-preview.png">
-    
     <meta property="og:url" content="https://revealpoker.top/">
     <meta property="og:type" content="website">
 
@@ -884,7 +880,7 @@
                 { quote: "Skeptical at first, but the results are undeniable. My win rate tripled. It's like playing with a superpower.", author: "Alex R.", location: "Professional Player 🇺🇸" },
                 { quote: "The best investment I've made in poker. The support on Telegram was super fast and helped me with everything. 100% recommended.", author: "Maria S.", location: "Home Games Enthusiast 🇧🇷" },
                 { quote: "Finally a tool that works as promised. It's safe, easy to use, and the return is absurd. It turned my game around completely.", author: "Javier G.", location: "Regular Player 🇪🇸" },
-                { quote: "I was losing consistently on PokerBros. After using Reveal App for a month, I'm now in profit. It's a game-changer.", author: "Wei L.", location: "Club Player �🇬" },
+                { quote: "I was losing consistently on PokerBros. After using Reveal App for a month, I'm now in profit. It's a game-changer.", author: "Wei L.", location: "Club Player 🇸🇬" },
                 { quote: "The ability to see the flop before anyone else is an insane advantage. My decision-making has improved tenfold.", author: "Lars E.", location: "Online Grinder 🇩🇰" },
                 { quote: "This app paid for itself in a single weekend. The information it provides is priceless for any serious player.", author: "David C.", location: "Poker Enthusiast 🇨🇦" },
                 { quote: "I use it for GGPoker tournaments and the edge it gives me in the late stages is incredible. Highly recommended.", author: "Hans D.", location: "Tournament Player 🇩🇪" },
@@ -1156,6 +1152,17 @@
             initActivityFeed() {
                 const feed = this.dom.activityFeed;
                 if (!feed) return;
+                
+                clearInterval(this.state.activityFeedInterval);
+
+                // Simple Pseudo-Random Number Generator (PRNG) for consistency
+                const seededRandom = (seed) => {
+                    let state = seed;
+                    return () => {
+                        state = (state * 1103515245 + 12345) % 2147483648;
+                        return state / 2147483648;
+                    };
+                };
 
                 const activityTemplates = [
                     { icon: '🏆', text: 'Player from {flag} just won a ${amount} pot on {platform}!' },
@@ -1165,14 +1172,18 @@
                 ];
                 const countryCodes = Object.keys(this.countrySalaryData);
 
-                const addActivityItem = () => {
-                    const template = activityTemplates[Math.floor(Math.random() * activityTemplates.length)];
-                    const countryCode = countryCodes[Math.floor(Math.random() * countryCodes.length)];
+                const generateActivityItem = (seed) => {
+                    const random = seededRandom(seed);
+                    
+                    const template = activityTemplates[Math.floor(random() * activityTemplates.length)];
+                    const countryCode = countryCodes[Math.floor(random() * countryCodes.length)];
                     const flag = countryCode.toUpperCase().replace(/./g, char => String.fromCodePoint(char.charCodeAt(0) + 127397));
-                    const amount = Math.floor(Math.random() * (2500 - 150 + 1) + 150);
-                    const platform = this.platforms[Math.floor(Math.random() * this.platforms.length)].name;
+                    const amount = Math.floor(random() * (2500 - 150 + 1) + 150);
+                    const platform = this.platforms[Math.floor(random() * this.platforms.length)].name;
 
                     let text = template.text.replace('{flag}', flag).replace('{platform}', platform).replace('{amount}', amount);
+                    
+                    const time = new Date(seed * 30000);
 
                     const item = document.createElement('div');
                     item.className = 'activity-item';
@@ -1181,25 +1192,36 @@
                             <span class="text-2xl">${template.icon}</span>
                             <div class="flex-1">
                                 <p class="text-gray-300">${text}</p>
-                                <p class="text-xs text-gray-500">${new Date().toLocaleTimeString()}</p>
+                                <p class="text-xs text-gray-500">${time.toLocaleTimeString()}</p>
                             </div>
                         </div>
                     `;
+                    return item;
+                };
 
-                    feed.insertBefore(item, feed.firstChild);
+                const updateFeed = () => {
+                    const currentInterval = Math.floor(Date.now() / 30000);
+                    const newItem = generateActivityItem(currentInterval);
+                    
+                    feed.insertBefore(newItem, feed.firstChild);
 
-                    if (feed.children.length > 15) {
+                    while (feed.children.length > 15) {
                         feed.removeChild(feed.lastChild);
                     }
                 };
 
-                // Initial items
-                for(let i=0; i<7; i++) {
-                    addActivityItem();
+                // Clear and populate initial items
+                feed.innerHTML = '';
+                const initialInterval = Math.floor(Date.now() / 30000);
+                for (let i = 14; i >= 0; i--) {
+                    const item = generateActivityItem(initialInterval - i);
+                    feed.appendChild(item);
                 }
-
-                this.state.activityFeedInterval = setInterval(addActivityItem, Math.random() * (7000 - 4000) + 4000);
+                
+                // Set interval to update every 30 seconds
+                this.state.activityFeedInterval = setInterval(updateFeed, 30000);
             },
+
 
             updatePricingCards() {
                 const pricingCards = document.querySelectorAll('#pricing .pricing-card');
@@ -1829,4 +1851,3 @@
     </script>
 </body>
 </html>
-�
