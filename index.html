@@ -824,6 +824,7 @@
                 txid: null,
                 paymentMethod: null,
                 cryptoAmountPaid: null,
+                coupon: { code: null, discount: 0 },
                 upsells: {
                     additionalPlatforms: [],
                     support: false,
@@ -1555,19 +1556,15 @@
 
             showUpsellDialog() {
                 this.purchaseState.upsells = { additionalPlatforms: [], support: false, annual: false };
-                this.calculatePrice(); // Recalculates basePriceUSD
+                this.purchaseState.coupon = { code: null, discount: 0 };
+                this.calculatePrice();
 
                 const basePrice = this.purchaseState.basePriceUSD;
                 const isSupportMandatory = basePrice < 800;
                 if (isSupportMandatory) {
                     this.purchaseState.upsells.support = true;
                 }
-
-                const annualPriceUSD = this.purchaseState.monthlyPriceUSD * 8;
-                const annualFullPriceUSD = this.purchaseState.monthlyPriceUSD * 12;
-                const supportPriceUSD = 49.99;
-                const additionalPlatformsPriceUSD = basePrice * 1.20;
-
+                
                 const primaryPlatform = this.purchaseState.platforms[0];
                 const availablePlatformsForUpsell = this.platforms.filter(p => p.id !== primaryPlatform);
                 const platformUpsellButtons = availablePlatformsForUpsell.map(p => `
@@ -1588,9 +1585,9 @@
                     <div class="space-y-4 mb-6">
                         <!-- Platform Upsell -->
                         <div id="upsell-platforms-container" class="upsell-option p-4 rounded-lg">
-                            <h4 class="font-bold"><i class="fas fa-layer-group mr-2"></i>Add up to 2 More Platforms</h4>
-                            <p class="text-sm text-gray-400 mb-4">Expand your dominance. Price for the bundle: <span class="font-bold text-secondary-color">+${this.formatLocalCurrency(additionalPlatformsPriceUSD)}</span></p>
-                            <div class="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                            <h4 class="font-bold"><i class="fas fa-layer-group mr-2"></i>Add More Platforms</h4>
+                            <p id="platform-upsell-price-display" class="text-sm text-gray-400 mb-4"></p>
+                            <div class="grid grid-cols-4 sm:grid-cols-7 gap-2">
                                 ${platformUpsellButtons}
                             </div>
                              <p id="platform-upsell-error" class="text-red-500 text-xs mt-2 h-4 text-center"></p>
@@ -1602,7 +1599,7 @@
                                 <h4 class="font-bold"><i class="fas fa-headset mr-2"></i>Priority VIP Support</h4>
                                 <p class="text-sm text-gray-400">Get assisted installation and instant 24/7 help. ${isSupportMandatory ? '(Mandatory for this plan)' : ''}</p>
                             </div>
-                            <span class="font-bold text-lg text-secondary-color">+${this.formatLocalCurrency(supportPriceUSD)}</span>
+                            <span id="support-price-display" class="font-bold text-lg text-secondary-color"></span>
                         </div>
                         
                         <!-- Annual Upsell -->
@@ -1612,13 +1609,26 @@
                                     <h4 class="font-bold text-primary-color"><i class="fas fa-calendar-check mr-2"></i>ALL-ACCESS ANNUAL</h4>
                                     <p class="text-sm text-gray-400">Pay once for 12 months and get a huge discount.</p>
                                 </div>
-                                <span class="font-bold text-lg text-primary-color">+${this.formatLocalCurrency(annualPriceUSD)}</span>
+                                <span class="font-bold text-lg text-primary-color" id="annual-price-display"></span>
                             </div>
-                             <p class="text-sm text-center mt-2 text-gray-400">Save Big! Regular price: <span class="line-through">${this.formatLocalCurrency(annualFullPriceUSD)}</span></p>
+                             <p class="text-sm text-center mt-2 text-gray-400">Save Big! Regular price: <span id="annual-full-price" class="line-through"></span></p>
                         </div>
                     </div>
+
+                     <div class="mt-4">
+                        <label for="coupon-input" class="text-sm text-gray-400">Discount Code</label>
+                        <div class="flex gap-2 mt-1">
+                            <input type="text" id="coupon-input" class="bg-background-dark border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5" placeholder="Enter code">
+                            <button id="apply-coupon-btn" class="btn-secondary font-bold py-2 px-4 rounded-lg">Apply</button>
+                        </div>
+                        <p id="coupon-feedback" class="text-sm mt-1 h-4"></p>
+                    </div>
                     
-                    <div class="border-t border-gray-700 pt-4 text-sm">
+                    <div class="border-t border-gray-700 pt-4 mt-4 text-sm space-y-2">
+                         <div id="discount-row" class="hidden flex justify-between text-secondary-color">
+                            <span>Discount (<span id="coupon-code-display"></span>):</span>
+                            <span id="discount-amount-display"></span>
+                        </div>
                          <div class="flex justify-between items-center text-xl font-bold mt-2">
                             <span>Total Due Today:</span>
                             <span id="total-price-display"></span>
@@ -1631,38 +1641,14 @@
                     </div>
                 `;
                 this.showDialog(content);
-
-                const updateTotal = () => {
-                    let totalUSD;
-                    if (this.purchaseState.upsells.annual) {
-                        totalUSD = annualPriceUSD;
-                        document.getElementById('upsell-support').classList.add('opacity-50', 'pointer-events-none', 'selected');
-                        document.getElementById('upsell-platforms-container').classList.add('opacity-50', 'pointer-events-none');
-                        document.querySelectorAll('.platform-upsell-btn').forEach(b => b.classList.remove('selected'));
-
-                    } else {
-                        totalUSD = this.purchaseState.basePriceUSD;
-                        if (!isSupportMandatory) document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
-                        document.getElementById('upsell-platforms-container').classList.remove('opacity-50', 'pointer-events-none');
-
-                        if (this.purchaseState.upsells.support) totalUSD += supportPriceUSD;
-                        if (this.purchaseState.upsells.additionalPlatforms.length > 0) {
-                             totalUSD += additionalPlatformsPriceUSD;
-                        }
-                    }
-                    this.purchaseState.finalPriceUSD = totalUSD;
-                    document.getElementById('total-price-display').textContent = this.formatLocalCurrency(totalUSD);
-                };
+                document.getElementById('apply-coupon-btn').onclick = () => this.applyCoupon();
                 
                 const platformButtons = document.querySelectorAll('.platform-upsell-btn');
                 platformButtons.forEach(btn => {
                     btn.onclick = (e) => {
-                        if(this.purchaseState.upsells.annual) return;
-
                         const platformId = e.currentTarget.dataset.platformId;
                         const errorEl = document.getElementById('platform-upsell-error');
                         errorEl.textContent = '';
-
                         const isSelected = this.purchaseState.upsells.additionalPlatforms.includes(platformId);
 
                         if (isSelected) {
@@ -1676,7 +1662,7 @@
                                 errorEl.textContent = 'You can select a maximum of 2 additional platforms.';
                             }
                         }
-                        updateTotal();
+                        this.updateUpsellTotalDisplay();
                     };
                 });
 
@@ -1684,36 +1670,146 @@
                     if (isSupportMandatory || this.purchaseState.upsells.annual) return;
                     e.currentTarget.classList.toggle('selected');
                     this.purchaseState.upsells.support = !this.purchaseState.upsells.support;
-                    updateTotal();
+                    this.updateUpsellTotalDisplay();
                 };
                 document.getElementById('upsell-annual').onclick = (e) => {
                     e.currentTarget.classList.toggle('selected');
                     this.purchaseState.upsells.annual = !this.purchaseState.upsells.annual;
                     
                     if (this.purchaseState.upsells.annual) {
-                        this.purchaseState.upsells.additionalPlatforms = [];
                         this.purchaseState.upsells.support = true;
                     } else {
                         this.purchaseState.upsells.support = isSupportMandatory;
+                         if(!isSupportMandatory) {
+                             document.getElementById('upsell-support').classList.remove('selected');
+                         }
                     }
-                    updateTotal();
+                    this.updateUpsellTotalDisplay();
                 };
                 
                 document.getElementById('upsell-continue-btn').onclick = () => this.showPaymentMethodDialog();
                 document.getElementById('upsell-skip-btn').onclick = () => {
                     this.purchaseState.upsells = { additionalPlatforms: [], support: isSupportMandatory, annual: false };
-                    let finalPrice = this.purchaseState.basePriceUSD;
-                    if(isSupportMandatory) finalPrice += supportPriceUSD;
-                    this.purchaseState.finalPriceUSD = finalPrice;
+                    this.updateUpsellTotalDisplay(); // Recalculate with skipped upsells
                     this.showPaymentMethodDialog();
                 };
 
-                updateTotal();
+                this.updateUpsellTotalDisplay();
+            },
+            
+            updateUpsellTotalDisplay() {
+                const supportPriceUSD = 49.99;
+                const basePrice = this.purchaseState.basePriceUSD;
+                const isSupportMandatory = basePrice < 800;
+
+                let totalUSD = 0;
+                const numSelectedPlatforms = this.purchaseState.upsells.additionalPlatforms.length;
+                
+                const monthlyBase = this.purchaseState.monthlyPriceUSD;
+                const annualBase = monthlyBase * 8;
+                
+                let platformUpsellCost = 0;
+                if (numSelectedPlatforms === 1) {
+                    platformUpsellCost = this.purchaseState.upsells.annual ? annualBase * 0.80 : monthlyBase * 0.80;
+                } else if (numSelectedPlatforms === 2) {
+                    platformUpsellCost = this.purchaseState.upsells.annual ? annualBase * 1.25 : monthlyBase * 1.25;
+                }
+
+                if (this.purchaseState.upsells.annual) {
+                    totalUSD = annualBase + platformUpsellCost;
+                    this.purchaseState.upsells.support = true; 
+                    document.getElementById('upsell-support').classList.add('selected', 'opacity-50', 'pointer-events-none');
+                } else {
+                    totalUSD = this.purchaseState.basePriceUSD + platformUpsellCost;
+                     if (!isSupportMandatory) {
+                        document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+                     }
+                    if (this.purchaseState.upsells.support) {
+                        totalUSD += supportPriceUSD;
+                    }
+                }
+                
+                const preDiscountTotal = totalUSD;
+                if(this.purchaseState.coupon.discount > 0) {
+                    totalUSD *= (1 - this.purchaseState.coupon.discount);
+                }
+                
+                const discountAmount = preDiscountTotal - totalUSD;
+                const discountRow = document.getElementById('discount-row');
+                if (discountAmount > 0) {
+                    document.getElementById('coupon-code-display').textContent = this.purchaseState.coupon.code.toUpperCase();
+                    document.getElementById('discount-amount-display').textContent = `- ${this.formatLocalCurrency(discountAmount)}`;
+                    discountRow.classList.remove('hidden');
+                } else {
+                    discountRow.classList.add('hidden');
+                }
+
+                let platformPriceText = `Add 1 for +${this.formatLocalCurrency(monthlyBase * 0.80)}, or 2 for +${this.formatLocalCurrency(monthlyBase * 1.25)}.`;
+                if(this.purchaseState.upsells.annual) {
+                    platformPriceText = `Add 1 for +${this.formatLocalCurrency(annualBase * 0.80)}, or 2 for +${this.formatLocalCurrency(annualBase * 1.25)}.`;
+                }
+                document.getElementById('platform-upsell-price-display').innerHTML = platformPriceText;
+                
+                let annualDisplayPrice = annualBase;
+                let annualFullPrice = this.purchaseState.monthlyPriceUSD * 12;
+                if(numSelectedPlatforms === 1) { annualDisplayPrice += annualBase * 0.80; annualFullPrice += monthlyBase * 12 * 0.80; }
+                if(numSelectedPlatforms === 2) { annualDisplayPrice += annualBase * 1.25; annualFullPrice += monthlyBase * 12 * 1.25; }
+                document.getElementById('annual-price-display').textContent = `+${this.formatLocalCurrency(annualDisplayPrice)}`;
+                document.getElementById('annual-full-price').textContent = this.formatLocalCurrency(annualFullPrice);
+                document.getElementById('support-price-display').textContent = `+${this.formatLocalCurrency(supportPriceUSD)}`;
+
+                this.purchaseState.finalPriceUSD = totalUSD;
+                document.getElementById('total-price-display').textContent = this.formatLocalCurrency(totalUSD);
+            },
+            
+            applyCoupon() {
+                const input = document.getElementById('coupon-input');
+                const feedback = document.getElementById('coupon-feedback');
+                const code = input.value.trim().toLowerCase();
+                let applied = false;
+                feedback.textContent = '';
+
+                this.purchaseState.coupon = { code: null, discount: 0 };
+
+                if (code === 'hack10off') {
+                    this.purchaseState.coupon = { code: 'hack10off', discount: 0.10 };
+                    applied = true;
+                } else if (code === 'heck15off') {
+                    this.purchaseState.coupon = { code: 'heck15off', discount: 0.15 };
+                    applied = true;
+                } else if (code === 'heck30off') {
+                    if (this.purchaseState.upsells.annual && this.purchaseState.upsells.additionalPlatforms.length === 1) {
+                         this.purchaseState.coupon = { code: 'heck30off', discount: 0.30 };
+                         applied = true;
+                    } else {
+                        feedback.textContent = 'Coupon valid only for annual plan with 1 extra platform.';
+                        feedback.className = 'text-red-500 text-sm mt-1 h-4';
+                    }
+                } else if (code === 'heck50off') {
+                    if (this.purchaseState.upsells.annual && this.purchaseState.upsells.additionalPlatforms.length === 2) {
+                        this.purchaseState.coupon = { code: 'heck50off', discount: 0.50 };
+                        applied = true;
+                    } else {
+                        feedback.textContent = 'Coupon valid only for annual plan with 2 extra platforms.';
+                        feedback.className = 'text-red-500 text-sm mt-1 h-4';
+                    }
+                }
+
+                if (applied) {
+                    feedback.textContent = `Coupon "${code.toUpperCase()}" applied!`;
+                    feedback.className = 'text-secondary-color text-sm mt-1 h-4';
+                } else if (!feedback.textContent) {
+                    feedback.textContent = 'Invalid coupon code.';
+                    feedback.className = 'text-red-500 text-sm mt-1 h-4';
+                }
+                
+                this.updateUpsellTotalDisplay();
             },
 
 
             showPaymentMethodDialog() {
                 this.purchaseState.uniqueId = this.generateUniqueId();
+                // Ensure finalPrice is calculated with a small random component for tracking
                 const finalPriceWithCents = parseFloat(this.purchaseState.finalPriceUSD.toFixed(0)) + (parseInt(this.purchaseState.uniqueId.slice(-2), 10) / 100);
                 this.purchaseState.finalPriceUSD = finalPriceWithCents;
 
@@ -1869,7 +1965,7 @@
             },
 
             showFinalConfirmation() {
-                const { uniqueId, os, platforms, cheatTier, upsells, finalPriceUSD, cryptoAmountPaid, paymentMethod } = this.purchaseState;
+                const { uniqueId, os, platforms, cheatTier, upsells, finalPriceUSD, cryptoAmountPaid, paymentMethod, coupon } = this.purchaseState;
                 const tierNames = {1: "Board Reader", 2: "Opponent Insight", 3: "Total Vision"};
                 
                 let message = `🚀 --- New Activation | Reveal App --- 🚀\n\n`;
@@ -1880,8 +1976,8 @@
 
                 let platformList = [...platforms, ...upsells.additionalPlatforms];
                 let platformMessage;
-                if (upsells.annual) {
-                    platformMessage = `🃏 Platforms: All-Access Annual Pack\n`;
+                if (upsells.annual && upsells.additionalPlatforms.length === 0) {
+                    platformMessage = `🃏 Platforms: All-Access Annual Pack (All Platforms)\n`;
                 } else {
                     platformMessage = `🃏 Platforms: ${platformList.join(', ')}\n`;
                 }
@@ -1891,6 +1987,10 @@
                 message += `💰 Amount: ${cryptoAmountPaid} ${paymentMethod.toUpperCase()}\n`;
                 message += `💵 Equivalent: ~$${finalPriceUSD.toFixed(2)} USD\n`;
                 
+                if (coupon && coupon.code) {
+                    message += `🎟️ Coupon Used: ${coupon.code.toUpperCase()} (${coupon.discount * 100}% off)\n`;
+                }
+
                 const planType = upsells.annual ? 'Annual (Billed every 12 months)' : (this.state.isQuarterlyBilling ? 'Quarterly' : 'Monthly');
                 message += `💳 Plan: ${planType}\n`;
 
