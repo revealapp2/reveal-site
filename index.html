@@ -470,7 +470,7 @@
                 <a href="#faq" class="text-gray-300 hover:text-primary-color transition">FAQ</a>
                 <a href="#get-app" class="cta-button text-center font-bold py-3 px-6 rounded-full mt-6">Get Advantage</a>
                  <div class="mt-4 pt-4 border-t border-gray-700">
-                     <div id="google_translate_element_mobile"></div>
+                      <div id="google_translate_element_mobile"></div>
                  </div>
             </nav>
         </div>
@@ -670,7 +670,7 @@
             <!-- Testimonials Section -->
             <section id="testimonials" class="py-20 md:py-28 bg-background-light" aria-labelledby="testimonials-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                           <h2 id="testimonials-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">What Our Players Say</h2>
+                             <h2 id="testimonials-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">What Our Players Say</h2>
                     <div id="testimonials-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         <!-- Testimonials will be dynamically inserted here -->
                     </div>
@@ -824,6 +824,7 @@
                 txid: null,
                 paymentMethod: null,
                 cryptoAmountPaid: null,
+                feeAmountUSD: 0, // Fee for crypto transaction
                 coupon: { code: null, discount: 0 },
                 upsells: {
                     additionalPlatforms: [],
@@ -1024,11 +1025,11 @@
                         teCombo.dispatchEvent(new Event('change'));
                     }
                 };
-            
+                
                 const attemptTranslation = () => {
                     const userLang = (navigator.language || navigator.userLanguage).split('-')[0];
                     const supportedLanguages = ['pt', 'es', 'de', 'zh-CN', 'hi', 'ar', 'ru', 'tl', 'vi'];
-            
+                
                     if (userLang !== 'en' && supportedLanguages.includes(userLang)) {
                         const teCombo = document.querySelector('.goog-te-combo');
                         if (teCombo && teCombo.options.length > 1) {
@@ -1467,7 +1468,7 @@
                     <div>
                         <p class="text-center text-gray-400 mb-2 font-semibold">2. Choose Your Primary Poker Platform</p>
                         <div class="grid grid-cols-3 sm:grid-cols-5 gap-4">
-                           ${platformButtons}
+                            ${platformButtons}
                         </div>
                         <p id="platform-error" class="text-red-500 text-sm mt-1 h-4 text-center"></p>
                     </div>
@@ -1618,7 +1619,7 @@
                      <div class="mt-4">
                         <label for="coupon-input" class="text-sm text-gray-400">Discount Code</label>
                         <div class="flex gap-2 mt-1">
-                            <input type="text" id="coupon-input" class="bg-background-dark border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5" placeholder="Enter code">
+                            <input type="text" id="coupon-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5" placeholder="Enter code">
                             <button id="apply-coupon-btn" class="btn-secondary font-bold py-2 px-4 rounded-lg">Apply</button>
                         </div>
                         <p id="coupon-feedback" class="text-sm mt-1 h-4"></p>
@@ -1722,7 +1723,7 @@
                 } else {
                     totalUSD = this.purchaseState.basePriceUSD + platformUpsellCost;
                      if (!isSupportMandatory) {
-                        document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+                         document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
                      }
                     if (this.purchaseState.upsells.support) {
                         totalUSD += supportPriceUSD;
@@ -1813,7 +1814,7 @@
                 const finalPriceWithCents = parseFloat(this.purchaseState.finalPriceUSD.toFixed(0)) + (parseInt(this.purchaseState.uniqueId.slice(-2), 10) / 100);
                 this.purchaseState.finalPriceUSD = finalPriceWithCents;
 
-                let priceDisplayHTML = `<p class="text-4xl font-bold text-primary-color">${this.formatLocalCurrency(this.purchaseState.finalPriceUSD)}</p>`;
+                let priceDisplayHTML = `<p class="text-4xl font-bold text-primary-color">${this.formatLocalCurrency(this.purchaseState.finalPriceUSD)}</p><p class="text-sm text-gray-400">(Network fees will be added)</p>`;
 
                 const content = `
                     <div class="mb-4">
@@ -1892,7 +1893,11 @@
                     xrp: "r4QRtFWqJXcjWk5s4ACN8ujagwK4AU4s6p"
                 };
                 const address = addresses[method];
-                let cryptoAmountHTML = `<div class="h-8 flex items-center justify-center"><div class="spinner w-6 h-6"></div></div>`;
+                let cryptoAmountHTML = `
+                    <div class="h-24 flex flex-col items-center justify-center">
+                        <div class="spinner w-6 h-6"></div>
+                        <p class="text-sm text-gray-400 mt-2">Calculating final amount...</p>
+                    </div>`;
                 
                 const content = `
                      <div class="mb-4">
@@ -1921,9 +1926,25 @@
                 const qrCodeContainer = document.getElementById('qr-code-container');
                 
                 if (cryptoPrice && paymentAmountContainer && qrCodeContainer) {
-                    const cryptoAmount = (this.purchaseState.finalPriceUSD / cryptoPrice).toFixed(method === 'usdt' ? 2 : 8);
+                    const originalPriceUSD = this.purchaseState.finalPriceUSD;
+                    const feePercentage = (method === 'usdt') ? 0.06 : 0.01;
+                    const feeAmountUSD = originalPriceUSD * feePercentage;
+                    const totalWithFeeUSD = originalPriceUSD + feeAmountUSD;
+                    
+                    this.purchaseState.feeAmountUSD = feeAmountUSD; // Store fee amount
+
+                    const cryptoAmount = (totalWithFeeUSD / cryptoPrice).toFixed(method === 'usdt' ? 2 : 8);
                     this.purchaseState.cryptoAmountPaid = cryptoAmount;
-                    paymentAmountContainer.innerHTML = `<p class="text-3xl font-bold text-primary-color tabular-nums">${cryptoAmount} ${method.toUpperCase()}</p>`;
+                    
+                    paymentAmountContainer.innerHTML = `
+                        <div class="text-sm text-gray-400 text-right w-full max-w-xs mx-auto">
+                            <div class="flex justify-between"><span>Subtotal:</span><span>${this.formatLocalCurrency(originalPriceUSD)}</span></div>
+                            <div class="flex justify-between"><span>Network Fee (${feePercentage * 100}%):</span><span>+ ${this.formatLocalCurrency(feeAmountUSD)}</span></div>
+                            <hr class="border-gray-600 my-1">
+                            <div class="flex justify-between font-bold text-base text-white"><span>Total:</span><span>${this.formatLocalCurrency(totalWithFeeUSD)}</span></div>
+                        </div>
+                        <p class="text-3xl font-bold text-primary-color tabular-nums mt-2">${cryptoAmount} ${method.toUpperCase()}</p>
+                    `;
                     
                     let qrData = `${method}:${address}?amount=${cryptoAmount}`;
                     const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(qrData)}`;
@@ -1965,9 +1986,10 @@
             },
 
             showFinalConfirmation() {
-                const { uniqueId, os, platforms, cheatTier, upsells, finalPriceUSD, cryptoAmountPaid, paymentMethod, coupon } = this.purchaseState;
+                const { uniqueId, os, platforms, cheatTier, upsells, finalPriceUSD, cryptoAmountPaid, paymentMethod, coupon, feeAmountUSD } = this.purchaseState;
                 const tierNames = {1: "Board Reader", 2: "Opponent Insight", 3: "Total Vision"};
-                
+                const totalWithFeeUSD = finalPriceUSD + (feeAmountUSD || 0);
+
                 let message = `🚀 --- New Activation | Reveal App --- 🚀\n\n`;
                 message += `🆔 Activation ID: ${uniqueId}\n`;
                 message += `📧 Email: ${this.purchaseState.email}\n`;
@@ -1985,14 +2007,19 @@
                 
                 message += `--- Payment Details ---\n`;
                 message += `💰 Amount: ${cryptoAmountPaid} ${paymentMethod.toUpperCase()}\n`;
-                message += `💵 Equivalent: ~$${finalPriceUSD.toFixed(2)} USD\n`;
+                message += `💵 Subtotal: ~$${finalPriceUSD.toFixed(2)} USD\n`;
+                if (feeAmountUSD && feeAmountUSD > 0) {
+                    const feePercentage = (paymentMethod === 'usdt' ? 6 : 1);
+                    message += `🔌 Network Fee (${feePercentage}%): ~$${feeAmountUSD.toFixed(2)} USD\n`;
+                }
+                message += `💳 Total: ~$${totalWithFeeUSD.toFixed(2)} USD\n\n`;
                 
                 if (coupon && coupon.code) {
                     message += `🎟️ Coupon Used: ${coupon.code.toUpperCase()} (${coupon.discount * 100}% off)\n`;
                 }
 
                 const planType = upsells.annual ? 'Annual (Billed every 12 months)' : (this.state.isQuarterlyBilling ? 'Quarterly' : 'Monthly');
-                message += `💳 Plan: ${planType}\n`;
+                message += `📅 Plan: ${planType}\n`;
 
                 let hasSupport = upsells.support || upsells.annual;
                 message += `🔧 Priority Support: ${hasSupport ? 'Yes' : 'No'}\n\n`;
@@ -2040,3 +2067,4 @@
     </script>
 </body>
 </html>
+
