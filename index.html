@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reveal App: Strategic Poker Tool for All Major Platforms</title>
+    <!-- SEO: Título otimizado para focar no benefício principal e incluir palavras-chave. -->
+    <title>Reveal App: See Opponent Cards & Win More | Strategic Poker Tool</title>
     
-    <meta name="description" content="Elevate your game with Reveal App, the premier strategic assistant for PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker, Suprema Poker, and more. Gain critical insights by seeing opponent and board cards to make smarter, data-driven decisions. Undetectable, safe, and secure.">
-    <meta name="keywords" content="poker tool, poker analysis, pppoker hack, ggpoker hack, upoker hack, pokerbros hack, xpoker hack, pokerrr2 hack, pokerstars hack, kkpoker hack, suprema poker hack, wepoker hack, acr poker hack, coinpoker hack, see cards poker, online poker cheat, poker cheat engine, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
+    <!-- SEO: Meta description otimizada para ser mais direta, focada em benefícios e com um CTA. -->
+    <meta name="description" content="Reveal App gives you the ultimate advantage in online poker. See opponent hole cards and community cards on GGPoker, PokerBros, and more. Make perfect decisions. Undetectable & 100% safe. Start winning today!">
+    
+    <!-- SEO: A tag meta keywords foi removida por ser obsoleta e não ter impacto no SEO moderno. -->
     
     <link rel="canonical" href="https://revealpoker.top/">
     <meta property="og:title" content="Reveal App: Your Unbeatable Strategic Poker Advantage">
@@ -24,6 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- SEO: Dados estruturados com descrições de produtos otimizadas para maior clareza e riqueza de palavras-chave. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -56,7 +60,7 @@
         {
           "@type": "Product",
           "name": "Reveal App - Board Reader",
-          "description": "See community cards (Flop, Turn, and River) before they are dealt.",
+          "description": "See all community cards (Flop, Turn, and River) before they are dealt. Gain a massive pre-flop advantage with this feature of our strategic poker tool.",
           "brand": { "@type": "Brand", "name": "Reveal App" },
           "offers": {
             "@type": "Offer",
@@ -67,7 +71,7 @@
         {
           "@type": "Product",
           "name": "Reveal App - Opponent Insight",
-          "description": "See opponents' hole cards to know exactly what you're up against pre-flop.",
+          "description": "See opponents' hole cards in real-time. Know exactly what you're up against and make unbeatable bluffs, calls, and folds.",
           "brand": { "@type": "Brand", "name": "Reveal App" },
           "offers": {
             "@type": "Offer",
@@ -78,7 +82,7 @@
         {
           "@type": "Product",
           "name": "Reveal App - Total Vision",
-          "description": "The ultimate advantage combining Board Reader and Opponent Insight to see ALL cards.",
+          "description": "The ultimate poker advantage. Combines Board Reader and Opponent Insight to see ALL cards at the table for maximum profit and strategic dominance.",
           "brand": { "@type": "Brand", "name": "Reveal App" },
           "offers": {
             "@type": "Offer",
@@ -481,8 +485,10 @@
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg opacity-30"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark to-background-dark"></div>
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">They play in the dark. <br class="hidden md:block"> You play with all the cards in hand.</h1>
-                    <p class="text-lg md:text-xl max-w-4xl mx-auto mb-10 text-gray-300">While your opponents rely on luck, you'll play with superior information. Join the elite players profiting on <strong>PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker, Suprema Poker, WEPoker, ACR Poker, FishPoker, PokerMaster, Poker 21Plus & CoinPoker</strong>.</p>
+                    <!-- SEO: H1 otimizado para incluir palavras-chave primárias e ser mais direto. -->
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">See Every Card, Dominate Every Hand. <br class="hidden md:block"> The Ultimate Strategic Poker Tool.</h1>
+                    <!-- SEO: Parágrafo otimizado com mais palavras-chave contextuais como "poker assistant" e "hole cards". -->
+                    <p class="text-lg md:text-xl max-w-4xl mx-auto mb-10 text-gray-300">While opponents guess, you'll know. Our strategic poker assistant reveals opponent hole cards and board cards in real-time. Join elite players profiting on <strong>PPPOKER, GGPoker, PokerBros, UPOKER, XPOKER, Pokerrr2, PokerStars, KKPoker, Suprema Poker</strong>, and more.</p>
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <a href="#get-app" class="cta-button cta-pulse text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto">I want to see all the cards now</a>
                         <a href="#pricing" class="btn-secondary text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto flex items-center justify-center gap-2">
@@ -862,6 +868,7 @@
             },
 
             // --- Data & Constants ---
+            disabledPlatforms: ['WEPoker', 'ACRPoker', 'FishPoker', 'PokerMaster', 'Poker21Plus', 'CoinPoker'],
             platforms: [
                 { id: 'PPPOKER', name: 'PPPOKER', logo: 'pppoker.png' },
                 { id: 'GGPoker', name: 'GGPoker/ClubGG', logo: 'clubgg.png' },
@@ -1441,12 +1448,19 @@
             },
 
             showPlatformDialog() {
-                const platformButtons = this.platforms.map(p => `
-                    <button data-platform="${p.id}" class="selection-button app-btn font-semibold py-3 rounded-lg flex flex-col items-center justify-center gap-2 h-28">
-                        <img src="${p.logo}" alt="${p.name}" class="h-12 w-12 object-contain mb-1 rounded-md bg-white/10 p-1">
-                        <span class="text-xs text-center">${p.name}</span>
-                    </button>
-                `).join('');
+                const platformButtons = this.platforms.map(p => {
+                    const isDisabled = this.disabledPlatforms.includes(p.id);
+                    const disabledClass = isDisabled ? 'disabled' : '';
+                    const disabledTitle = isDisabled ? 'title="Em breve"' : '';
+                    const buttonClass = `selection-button app-btn font-semibold py-3 rounded-lg flex flex-col items-center justify-center gap-2 h-28 ${disabledClass}`;
+
+                    return `
+                        <button data-platform="${p.id}" class="${buttonClass}" ${disabledTitle} ${isDisabled ? 'disabled' : ''}>
+                            <img src="${p.logo}" alt="${p.name}" class="h-12 w-12 object-contain mb-1 rounded-md bg-white/10 p-1">
+                            <span class="text-xs text-center">${p.name}</span>
+                        </button>
+                    `;
+                }).join('');
 
                 const content = `
                     <div class="mb-4">
@@ -1480,7 +1494,7 @@
                     document.querySelectorAll('.os-btn').forEach(b => b.classList.remove('selected'));
                     e.currentTarget.classList.add('selected');
                 });
-                document.querySelectorAll('.app-btn').forEach(btn => btn.onclick = (e) => {
+                document.querySelectorAll('.app-btn:not(.disabled)').forEach(btn => btn.onclick = (e) => {
                     this.purchaseState.platforms = [e.currentTarget.dataset.platform];
                     document.querySelectorAll('.app-btn').forEach(b => b.classList.remove('selected'));
                     e.currentTarget.classList.add('selected');
@@ -1566,7 +1580,7 @@
                 }
                 
                 const primaryPlatform = this.purchaseState.platforms[0];
-                const availablePlatformsForUpsell = this.platforms.filter(p => p.id !== primaryPlatform);
+                const availablePlatformsForUpsell = this.platforms.filter(p => p.id !== primaryPlatform && !this.disabledPlatforms.includes(p.id));
                 const platformUpsellButtons = availablePlatformsForUpsell.map(p => `
                     <button data-platform-id="${p.id}" class="selection-button platform-upsell-btn font-semibold py-2 px-3 rounded-lg flex flex-col items-center justify-center gap-1 text-xs">
                          <img src="${p.logo}" alt="${p.name}" class="h-8 w-8 object-contain mb-1 rounded-md bg-white/10 p-1">
@@ -2040,4 +2054,3 @@
     </script>
 </body>
 </html>
-
