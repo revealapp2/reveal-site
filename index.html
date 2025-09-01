@@ -963,10 +963,19 @@
                     return;
                 }
 
-                const countryOptions = Object.keys(this.countrySalaryData).map(code => {
-                    const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(code);
-                    return `<option value="${code}">${countryName}</option>`;
-                }).sort((a,b) => a.localeCompare(b)).join('');
+                const countryList = Object.keys(this.countrySalaryData).map(code => {
+                    return {
+                        code: code,
+                        name: new Intl.DisplayNames(['en'], { type: 'region' }).of(code)
+                    };
+                });
+
+                countryList.sort((a, b) => a.name.localeCompare(b.name));
+                
+                const countryOptions = countryList.map(country => {
+                    return `<option value="${country.code}">${country.name}</option>`;
+                }).join('');
+
                 this.dom.countrySelectInput.innerHTML += countryOptions;
 
                 // Disable continue button until a country is selected
