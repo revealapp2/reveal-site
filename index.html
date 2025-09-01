@@ -66,7 +66,7 @@
           "offers": {
             "@type": "Offer",
             "priceCurrency": "USD",
-            "description": "Monthly subscription for the Board Reader plan. Price is personalized based on user's location."
+            "description": "Monthly subscription for the Board Reader plan."
           }
         },
         {
@@ -77,7 +77,7 @@
           "offers": {
             "@type": "Offer",
             "priceCurrency": "USD",
-            "description": "Monthly subscription for the Opponent Insight plan. Price is personalized based on user's location."
+            "description": "Monthly subscription for the Opponent Insight plan."
           }
         },
         {
@@ -88,7 +88,7 @@
           "offers": {
             "@type": "Offer",
             "priceCurrency": "USD",
-            "description": "Monthly subscription for the Total Vision plan. Price is personalized based on user's location."
+            "description": "Monthly subscription for the Total Vision plan."
           }
         },
         {
@@ -123,7 +123,7 @@
               "name": "Is this a subscription?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes, Reveal App operates on a monthly plan to ensure continuous development and support. The fee is personalized based on your country. A lifetime plan is also available for a one-time payment."
+                "text": "Yes. To ensure continuous development and support, Reveal App operates on a monthly plan (or quarterly after Sep 2025). This makes it a fair and affordable investment in your success. You can also choose an annual plan for a significant discount."
               }
             },
             {
@@ -376,28 +376,31 @@
         .activity-item:last-child {
             border-bottom: none;
         }
+        .testimonial-card {
+            position: relative; /* Needed for quote icon positioning */
+        }
+        .testimonial-card .quote-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.1;
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            z-index: 0;
+        }
+        .verified-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 0.65rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* New Logo Animation */
-        .animated-logo-path-1 {
-            animation: rotate-slow 20s linear infinite;
-            transform-origin: center;
-        }
-        .animated-logo-path-2 {
-            animation: rotate-fast 15s linear infinite;
-            transform-origin: center;
-        }
-
-        @keyframes rotate-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes rotate-fast {
-            from { transform: rotate(360deg); }
-            to { transform: rotate(0deg); }
         }
     </style>
     <!-- Google tag (gtag.js) -->
@@ -420,6 +423,7 @@
                 <option value="">Select your country...</option>
             </select>
             <button id="country-select-btn" class="w-full cta-button font-bold py-3 text-lg rounded-lg">Continue</button>
+            <p id="api-error-notice" class="text-red-400 text-sm mt-4 hidden">Could not load location data. Using default values.</p>
         </div>
     </div>
     
@@ -431,21 +435,7 @@
                     <div class="flex-shrink-0">
                         <!-- Note: aria-label is static and won't be translated by Google Translate. For full localization, a dedicated i18n library is needed. -->
                         <a href="#" onclick="window.location.reload()" class="flex items-center space-x-3" aria-label="Reveal App Home">
-                            <svg class="h-10 w-auto" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="dynamic-logo-gradient-header" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#FBBF24"/>
-                                        <stop offset="100%" stop-color="#10B981"/>
-                                    </linearGradient>
-                                </defs>
-                                <g class="animated-logo-path-1">
-                                    <path fill="url(#dynamic-logo-gradient-header)" d="M85.1,62.4c-5.1,19.3-23.5,32.2-43.4,29.3c-19.9-2.9-34.9-19.6-34-39.5c0.9-19.9,18.4-35.4,38.4-34.5 C66,18.5,80,33.5,85.1,50.8C86.7,56.2,86.7,60.1,85.1,62.4z"/>
-                                </g>
-                                <g class="animated-logo-path-2">
-                                    <path fill="url(#dynamic-logo-gradient-header)" d="M62.2,19.3C49.5,10.6,30.3,13.9,21.6,26.6c-8.7,12.7-5.4,31.9,7.3,40.6c12.7,8.7,31.9,5.4,40.6-7.3 C78.1,47.2,74.8,28.1,62.2,19.3z"/>
-                                </g>
-                                <circle cx="50" cy="50" r="15" fill="var(--background-dark)"/>
-                            </svg>
+                            <img src="favicon.svg" alt="Reveal App Logo" class="h-10 w-auto">
                             <span class="text-2xl font-bold text-white">Reveal App</span>
                         </a>
                     </div>
@@ -461,7 +451,7 @@
                         <div id="google_translate_element"></div>
                     </div>
                     <div class="md:hidden flex items-center">
-                        <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none" aria-label="Open main menu" aria-expanded="false">
+                        <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none" aria-label="Open main menu" aria-expanded="false" aria-controls="mobile-menu">
                             <i class="fas fa-bars text-2xl"></i>
                         </button>
                     </div>
@@ -500,7 +490,6 @@
                             <span>View Pricing</span>
                         </a>
                     </div>
-                    <p id="personalization-banner" class="mt-8 text-secondary-color font-semibold text-lg animate-on-scroll"></p>
                 </div>
             </section>
             
@@ -608,8 +597,8 @@
                             <p><i class="fas fa-info-circle mr-2"></i><strong>Important Update:</strong> Starting September 9, 2025, our standard plans will transition to a quarterly subscription model.</p>
                         </div>
                     </div>
-                    <h2 id="pricing-heading" class="text-4xl md:text-5xl font-bold text-center mb-4">Your Exclusive Offer Is Waiting</h2>
-                    <p id="pricing-subtitle" class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Your final price is personalized for fairness based on your location.</p>
+                    <h2 id="pricing-heading" class="text-4xl md:text-5xl font-bold text-center mb-4">Choose Your Plan</h2>
+                    <p id="pricing-subtitle" class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Invest in your success with a plan that fits your strategy.</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         <!-- Tier 1 -->
                         <div class="pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col" data-tier="1">
@@ -618,7 +607,7 @@
                                 <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
                                     <!-- Price will be injected by JS -->
                                 </div>
-                                <p class="text-gray-400 mb-6 text-center">Your personalized price is calculated for your region.</p>
+                                <p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
                                 <ul class="space-y-3 text-left">
                                     <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See Community Cards:</strong> Know the Flop, Turn, and River in advance.</span></li>
                                 </ul>
@@ -635,7 +624,7 @@
                                  <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
                                      <!-- Price will be injected by JS -->
                                 </div>
-                                <p class="text-gray-400 mb-6 text-center">Your personalized price is calculated for your region.</p>
+                                <p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
                                 <ul class="space-y-3 text-left">
                                     <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See Opponents' Cards:</strong> Know exactly what you're up against pre-flop.</span></li>
                                     <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span>Make perfect bluffs and value bets.</span></li>
@@ -650,7 +639,7 @@
                                  <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
                                      <!-- Price will be injected by JS -->
                                 </div>
-                                <p class="text-gray-400 mb-6 text-center">Your personalized price is calculated for your region.</p>
+                                <p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
                                 <ul class="space-y-3 text-left">
                                     <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See ALL Cards:</strong> Combines Board Reader and Opponent Insight.</span></li>
                                     <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span>The ultimate advantage for maximum profit.</span></li>
@@ -741,7 +730,7 @@
                                 <span>Is this a subscription?</span>
                                 <i class="fas fa-chevron-down absolute right-0 top-1 transition-transform duration-300" aria-hidden="true"></i>
                             </summary>
-                            <p class="text-gray-400 mt-4">Yes. To ensure continuous development and support, Reveal App operates on a monthly plan (or quarterly after Sep 2025). Your monthly fee is personalized based on your country, making it a fair and affordable investment in your success. You can also choose an annual plan for a significant discount.</p>
+                            <p class="text-gray-400 mt-4">Yes. To ensure continuous development and support, Reveal App operates on a monthly plan (or quarterly after Sep 2025). This makes it a fair and affordable investment in your success. You can also choose an annual plan for a significant discount.</p>
                         </details>
                          <details class="faq-item animate-on-scroll p-6 rounded-lg">
                             <summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
@@ -804,8 +793,8 @@
     <div id="social-proof-container" class="fixed bottom-5 left-5 z-50 overflow-hidden"></div>
     <div id="dialog-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden dialog"></div>
     
-    <!-- Google Translate script does not support SRI. -->
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+    <!-- Google Translate script does not support SRI. Deferring its load improves performance. -->
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript" defer></script>
     <script>
     // --- Main Application Logic ---
     document.addEventListener('DOMContentLoaded', () => {
@@ -867,10 +856,10 @@
                 slotsLeftMain: document.getElementById('slots-left-main'),
                 liveViewersCount: document.getElementById('live-viewers-count'),
                 socialProofContainer: document.getElementById('social-proof-container'),
-                personalizationBanner: document.getElementById('personalization-banner'),
                 testimonialsContainer: document.getElementById('testimonials-container'),
                 pricingNotice: document.getElementById('pricing-notice'),
                 activityFeed: document.getElementById('activity-feed'),
+                apiErrorNotice: document.getElementById('api-error-notice'),
             },
 
             // --- Data & Constants ---
@@ -935,14 +924,12 @@
                     return;
                 }
 
-                // Populate country dropdown
                 const countryOptions = Object.keys(this.countrySalaryData).map(code => {
                     const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(code);
                     return `<option value="${code}">${countryName}</option>`;
                 }).sort((a,b) => a.localeCompare(b)).join('');
                 this.dom.countrySelectInput.innerHTML += countryOptions;
 
-                // Pre-select based on IP, with a fallback
                 try {
                     const geoResponse = await fetch('https://ipapi.co/json/');
                     if (!geoResponse.ok) throw new Error('IP-based geolocation failed');
@@ -951,8 +938,8 @@
                         this.dom.countrySelectInput.value = geoData.country_code;
                     }
                 } catch (error) {
-                    console.warn("Could not fetch IP geolocation. Defaulting to US.", error);
-                    // No need to set value here, as the flow will proceed with empty selection, prompting user.
+                    console.warn("Could not fetch IP geolocation. User will need to select manually.", error);
+                    if (this.dom.apiErrorNotice) this.dom.apiErrorNotice.classList.remove('hidden');
                 }
 
                 this.dom.countrySelectBtn.addEventListener('click', async () => {
@@ -978,8 +965,8 @@
                     this.state.currencyRates = data.rates;
                 } catch (error) {
                     console.error("Currency fetch error:", error);
-                    // Fallback to USD only if API fails
                     this.state.currencyRates = { USD: 1 };
+                    if (this.dom.apiErrorNotice) this.dom.apiErrorNotice.classList.remove('hidden');
                 }
             },
 
@@ -1181,13 +1168,17 @@
                     const testimonial = this.allTestimonials[(startIndex + i) % this.allTestimonials.length];
                     const delay = i * 200;
                     testimonialsHTML += `
-                        <div class="testimonial-card animate-on-scroll p-8 rounded-2xl" style="transition-delay: ${delay}ms;">
-                            <p class="text-gray-300 mb-6 text-lg">"${testimonial.quote}"</p>
-                            <div class="flex items-center">
+                        <div class="testimonial-card animate-on-scroll p-8 rounded-2xl relative overflow-hidden">
+                            <i class="fas fa-quote-left quote-icon" aria-hidden="true"></i>
+                            <p class="text-gray-300 mb-6 text-lg relative z-10">"${testimonial.quote}"</p>
+                            <div class="flex items-center relative z-10">
                                 <img loading="lazy" src="https://i.pravatar.cc/48?u=${testimonial.author.replace(/\s/g, '')}" class="w-12 h-12 rounded-full mr-4" alt="User photo for ${testimonial.author}">
                                 <div>
                                     <p class="font-semibold text-lg">${testimonial.author}</p>
-                                    <p class="text-sm text-gray-400">${testimonial.location}</p>
+                                    <div class="flex items-center gap-2">
+                                        <p class="text-sm text-gray-400">${testimonial.location}</p>
+                                        <span class="verified-badge">✓ Verified</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1283,7 +1274,6 @@
                     const tier = parseInt(card.dataset.tier);
                     if (!tier) return;
 
-                    // Calculate price based on a standard (non-premium, non-super-premium) platform for the "Starts from" text
                     let priceUSD = this.calculateMonthlyPrice(tier, 'PPPOKER'); 
                     let billingCycleText = '/ month';
 
@@ -1389,10 +1379,6 @@
                     } catch (e) {
                         this.state.userCurrencySymbol = '$'; // Fallback
                     }
-
-                    if (isGeoDetection && this.dom.personalizationBanner) {
-                       this.dom.personalizationBanner.innerHTML = `Special offer for players from ${this.state.userCountryName} ${this.state.userCountryFlag}`;
-                    }
                 }
             },
 
@@ -1446,7 +1432,6 @@
             },
 
             calculatePrice() {
-                // Base price is determined by the primary platform selection
                 const primaryPlatform = this.purchaseState.platforms[0];
                 const monthlyPrice = this.calculateMonthlyPrice(this.purchaseState.cheatTier, primaryPlatform);
                 this.purchaseState.monthlyPriceUSD = monthlyPrice;
@@ -1462,7 +1447,7 @@
             showPlatformDialog() {
                 const platformButtons = this.platforms.map(p => `
                     <button data-platform="${p.id}" class="selection-button app-btn font-semibold py-3 rounded-lg flex flex-col items-center justify-center gap-2 h-28">
-                        <img src="${p.logo}" alt="${p.name}" class="h-12 w-12 object-contain mb-1 rounded-md bg-white/10 p-1">
+                        <img loading="lazy" src="${p.logo}" alt="${p.name} logo" class="h-12 w-12 object-contain mb-1 rounded-md bg-white/10 p-1">
                         <span class="text-xs text-center">${p.name}</span>
                     </button>
                 `).join('');
@@ -1588,7 +1573,7 @@
                 const availablePlatformsForUpsell = this.platforms.filter(p => p.id !== primaryPlatform);
                 const platformUpsellButtons = availablePlatformsForUpsell.map(p => `
                     <button data-platform-id="${p.id}" class="selection-button platform-upsell-btn font-semibold py-2 px-3 rounded-lg flex flex-col items-center justify-center gap-1 text-xs">
-                         <img src="${p.logo}" alt="${p.name}" class="h-8 w-8 object-contain mb-1 rounded-md bg-white/10 p-1">
+                         <img loading="lazy" src="${p.logo}" alt="${p.name} logo" class="h-8 w-8 object-contain mb-1 rounded-md bg-white/10 p-1">
                          <span>${p.name}</span>
                     </button>
                 `).join('');
@@ -1828,7 +1813,6 @@
 
             showPaymentMethodDialog() {
                 this.purchaseState.uniqueId = this.generateUniqueId();
-                // Ensure finalPrice is calculated with a small random component for tracking
                 const finalPriceWithCents = parseFloat(this.purchaseState.finalPriceUSD.toFixed(0)) + (parseInt(this.purchaseState.uniqueId.slice(-2), 10) / 100);
                 this.purchaseState.finalPriceUSD = finalPriceWithCents;
 
@@ -1850,27 +1834,27 @@
                     </div>
                     <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
                         <button data-crypto="btc" class="selection-button crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
-                            <img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" class="h-8 w-8 mx-auto mb-1" alt="Bitcoin">
+                            <img loading="lazy" src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" class="h-8 w-8 mx-auto mb-1" alt="Bitcoin">
                             <span class="text-sm font-semibold">BTC</span>
                             <span class="text-xs text-gray-400">Bitcoin Network</span>
                         </button>
                         <button data-crypto="eth" class="selection-button crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
-                             <img src="https://img.icons8.com/color/48/000000/ethereum.png" class="h-8 w-8 mx-auto mb-1" alt="Ethereum">
+                             <img loading="lazy" src="https://img.icons8.com/color/48/000000/ethereum.png" class="h-8 w-8 mx-auto mb-1" alt="Ethereum">
                             <span class="text-sm font-semibold">ETH</span>
                             <span class="text-xs text-gray-400">ERC20 Network</span>
                         </button>
                         <button data-crypto="usdt" class="selection-button crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
-                             <img src="https://img.icons8.com/color/48/000000/tether.png" class="h-8 w-8 mx-auto mb-1" alt="USDT">
+                             <img loading="lazy" src="https://img.icons8.com/color/48/000000/tether.png" class="h-8 w-8 mx-auto mb-1" alt="USDT">
                             <span class="text-sm font-semibold">USDT</span>
                             <span class="text-xs text-gray-400">TRC20 Network</span>
                         </button>
                         <button data-crypto="sol" class="selection-button crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
-                             <img src="https://img.icons8.com/nolan/64/solana.png" class="h-8 w-8 mx-auto mb-1" alt="Solana">
+                             <img loading="lazy" src="https://img.icons8.com/nolan/64/solana.png" class="h-8 w-8 mx-auto mb-1" alt="Solana">
                             <span class="text-sm font-semibold">SOL</span>
                              <span class="text-xs text-gray-400">Solana Network</span>
                         </button>
                         <button data-crypto="xrp" class="selection-button crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
-                             <img src="https://img.icons8.com/color/48/xrp.png" class="h-8 w-8 mx-auto mb-1" alt="XRP">
+                             <img loading="lazy" src="https://img.icons8.com/color/48/xrp.png" class="h-8 w-8 mx-auto mb-1" alt="XRP">
                             <span class="text-sm font-semibold">XRP</span>
                              <span class="text-xs text-gray-400">Ripple Network</span>
                         </button>
@@ -1949,7 +1933,7 @@
                     const feeAmountUSD = originalPriceUSD * feePercentage;
                     const totalWithFeeUSD = originalPriceUSD + feeAmountUSD;
                     
-                    this.purchaseState.feeAmountUSD = feeAmountUSD; // Store fee amount
+                    this.purchaseState.feeAmountUSD = feeAmountUSD;
 
                     const cryptoAmount = (totalWithFeeUSD / cryptoPrice).toFixed(method === 'usdt' ? 2 : 8);
                     this.purchaseState.cryptoAmountPaid = cryptoAmount;
@@ -1980,6 +1964,7 @@
                     const data = await response.json();
                     return data[ids[cryptoId]].usd;
                 } catch (error) {
+                    console.error("Crypto price fetch error:", error);
                     return null;
                 }
             },
