@@ -189,7 +189,7 @@
             color: var(--text-dark);
             transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
         }
-        .cta-button:hover {
+        .cta-button:hover:not(:disabled) {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 30px rgba(251, 191, 36, 0.3);
             will-change: transform, box-shadow;
@@ -197,10 +197,6 @@
         .cta-button:disabled {
             opacity: 0.5;
             cursor: not-allowed;
-        }
-        .cta-button:disabled:hover {
-            transform: none;
-            box-shadow: none;
         }
         .btn-secondary {
             background-color: transparent;
@@ -414,6 +410,18 @@
         .animated-logo-path-2 {
             animation: rotate-fast 15s linear infinite;
             transform-origin: center;
+        }
+        #bonus-offer-modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #bonus-offer-modal .dialog-content {
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        #bonus-offer-modal.visible .dialog-content {
+            transform: scale(1);
+            opacity: 1;
         }
         @keyframes rotate-slow {
             from { transform: rotate(0deg); }
@@ -829,6 +837,26 @@
         </a>
     </div>
 
+    <!-- Bonus Offer Modal -->
+    <div id="bonus-offer-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 dialog hidden">
+        <div class="dialog-content w-full max-w-lg p-8 rounded-2xl text-center transform-gpu">
+            <div class="text-5xl text-yellow-400 mb-4 animate-pulse">
+                <i class="fas fa-star"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-4 text-primary-color">Wait! A Special Offer For High Rollers!</h2>
+            <p class="text-gray-300 mb-6">Because you're building a professional-grade package, we want to reward your commitment to winning with an exclusive, one-time offer.</p>
+            <div class="bg-background-dark border border-secondary-color p-4 rounded-lg mb-6">
+                <p class="text-xl font-semibold">Upgrade to an Annual Plan and get <span class="text-secondary-color font-bold">40% OFF</span> your entire purchase!</p>
+                <p class="text-gray-400 mt-2">Plus, we'll include licenses for <span class="font-bold text-white">two more apps of your choice</span>, completely free.</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button id="claim-bonus-btn" class="w-full cta-button font-bold py-3 text-lg rounded-lg">Yes, Claim 40% OFF Now!</button>
+                <button id="decline-bonus-btn" class="w-full btn-secondary font-bold py-3 text-lg rounded-lg">No Thanks, I'll Pay Full Price</button>
+            </div>
+        </div>
+    </div>
+
+
     <div id="social-proof-container" class="fixed bottom-5 left-5 z-50 overflow-hidden"></div>
     <div id="dialog-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden dialog"></div>
     
@@ -850,6 +878,7 @@
                 isDialogActive: false,
                 isQuarterlyBilling: false,
                 activityFeedInterval: null,
+                bonusOfferShown: false,
             },
             purchaseState: {
                 email: null,
@@ -980,7 +1009,6 @@
 
                 // Disable continue button until a country is selected
                 this.dom.countrySelectBtn.disabled = true;
-                this.dom.countrySelectBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
                 this.dom.countrySelectInput.addEventListener('change', () => {
                     if (this.dom.countrySelectInput.value) {
@@ -1000,6 +1028,8 @@
                         this.dom.countrySelectInput.value = geoData.country_code;
                         // Trigger change event to enable button
                         this.dom.countrySelectInput.dispatchEvent(new Event('change'));
+                    } else {
+                        throw new Error('Country from geoIP not in our list.');
                     }
                 } catch (error) {
                     console.warn("Could not fetch IP geolocation. User will need to select manually.", error);
@@ -1834,8 +1864,64 @@
 
                 this.purchaseState.finalPriceUSD = totalUSD;
                 document.getElementById('total-price-display').textContent = `${this.formatLocalCurrency(totalUSD)} ${this.state.userCurrencyCode}`;
+
+                this.checkAndShowBonusOffer(totalUSD);
             },
             
+            checkAndShowBonusOffer(totalUSD) {
+                if (totalUSD > 4000 && !this.state.bonusOfferShown) {
+                    this.state.bonusOfferShown = true; 
+                    this.showBonusOffer();
+                }
+            },
+            
+            showBonusOffer() {
+                const bonusModal = document.getElementById('bonus-offer-modal');
+                if (!bonusModal) return;
+            
+                bonusModal.classList.remove('hidden');
+                setTimeout(() => bonusModal.classList.add('visible'), 10);
+            
+                document.getElementById('claim-bonus-btn').onclick = () => this.applyBonusOffer();
+                document.getElementById('decline-bonus-btn').onclick = () => {
+                    bonusModal.classList.remove('visible');
+                    setTimeout(() => bonusModal.classList.add('hidden'), 300);
+                };
+            },
+
+            applyBonusOffer() {
+                const bonusModal = document.getElementById('bonus-offer-modal');
+                // Ensure annual and 2 platforms are selected
+                document.getElementById('upsell-annual').classList.add('selected');
+                this.purchaseState.upsells.annual = true;
+            
+                const platformButtons = document.querySelectorAll('.platform-upsell-btn');
+                let selectedCount = this.purchaseState.upsells.additionalPlatforms.length;
+                for (let i = 0; i < platformButtons.length && selectedCount < 2; i++) {
+                    const btn = platformButtons[i];
+                    const platformId = btn.dataset.platformId;
+                    if (!this.purchaseState.upsells.additionalPlatforms.includes(platformId)) {
+                        btn.classList.add('selected');
+                        this.purchaseState.upsells.additionalPlatforms.push(platformId);
+                        selectedCount++;
+                    }
+                }
+                
+                // Apply coupon
+                document.getElementById('coupon-input').value = 'HIGHROLLER40';
+                this.purchaseState.coupon = { code: 'HIGHROLLER40', discount: 0.40 };
+                const feedback = document.getElementById('coupon-feedback');
+                feedback.textContent = `Coupon "HIGHROLLER40" applied!`;
+                feedback.className = 'text-secondary-color text-sm mt-1 h-4';
+            
+                this.updateUpsellTotalDisplay();
+            
+                if (bonusModal) {
+                    bonusModal.classList.remove('visible');
+                    setTimeout(() => bonusModal.classList.add('hidden'), 300);
+                }
+            },
+
             applyCoupon() {
                 const input = document.getElementById('coupon-input');
                 const feedback = document.getElementById('coupon-feedback');
