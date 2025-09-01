@@ -1619,7 +1619,7 @@
                      <div class="mt-4">
                         <label for="coupon-input" class="text-sm text-gray-400">Discount Code</label>
                         <div class="flex gap-2 mt-1">
-                            <input type="text" id="coupon-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5" placeholder="Enter code">
+                            <input type="text" id="coupon-input" class="bg-gray-200 border border-gray-400 text-gray-900 text-sm rounded-lg block w-full p-2.5 placeholder-gray-500" placeholder="Enter code">
                             <button id="apply-coupon-btn" class="btn-secondary font-bold py-2 px-4 rounded-lg">Apply</button>
                         </div>
                         <p id="coupon-feedback" class="text-sm mt-1 h-4"></p>
@@ -1760,7 +1760,7 @@
                 document.getElementById('support-price-display').textContent = `+${this.formatLocalCurrency(supportPriceUSD)}`;
 
                 this.purchaseState.finalPriceUSD = totalUSD;
-                document.getElementById('total-price-display').textContent = this.formatLocalCurrency(totalUSD);
+                document.getElementById('total-price-display').textContent = `${this.formatLocalCurrency(totalUSD)} ${this.state.userCurrencyCode}`;
             },
             
             applyCoupon() {
@@ -1938,10 +1938,10 @@
                     
                     paymentAmountContainer.innerHTML = `
                         <div class="text-sm text-gray-400 text-right w-full max-w-xs mx-auto">
-                            <div class="flex justify-between"><span>Subtotal:</span><span>${this.formatLocalCurrency(originalPriceUSD)}</span></div>
-                            <div class="flex justify-between"><span>Network Fee (${feePercentage * 100}%):</span><span>+ ${this.formatLocalCurrency(feeAmountUSD)}</span></div>
+                            <div class="flex justify-between"><span>Subtotal:</span><span>${this.formatLocalCurrency(originalPriceUSD)} ${this.state.userCurrencyCode}</span></div>
+                            <div class="flex justify-between"><span>Network Fee (${feePercentage * 100}%):</span><span>+ ${this.formatLocalCurrency(feeAmountUSD)} ${this.state.userCurrencyCode}</span></div>
                             <hr class="border-gray-600 my-1">
-                            <div class="flex justify-between font-bold text-base text-white"><span>Total:</span><span>${this.formatLocalCurrency(totalWithFeeUSD)}</span></div>
+                            <div class="flex justify-between font-bold text-base text-white"><span>Total:</span><span>${this.formatLocalCurrency(totalWithFeeUSD)} ${this.state.userCurrencyCode}</span></div>
                         </div>
                         <p class="text-3xl font-bold text-primary-color tabular-nums mt-2">${cryptoAmount} ${method.toUpperCase()}</p>
                     `;
@@ -2067,4 +2067,5 @@
     </script>
 </body>
 </html>
+
 
