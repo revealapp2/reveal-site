@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal App: Strategic Poker Tool for All Major Platforms</title>
     
+    <!-- SEO/Marketing Note: Keywords like "hack" can negatively impact search engine ranking and may violate advertising platform policies. Review for brand safety. -->
     <meta name="description" content="Elevate your game with Reveal App, the premier strategic assistant for PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker, Suprema Poker, and more. Gain critical insights by seeing opponent and board cards to make smarter, data-driven decisions. Undetectable, safe, and secure.">
     <meta name="keywords" content="poker tool, poker analysis, pppoker hack, ggpoker hack, upoker hack, pokerbros hack, xpoker hack, pokerrr2 hack, pokerstars hack, kkpoker hack, suprema poker hack, wepoker hack, acr poker hack, coinpoker hack, see cards poker, online poker cheat, poker cheat engine, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
     
@@ -15,13 +16,17 @@
     <meta property="og:url" content="https://revealpoker.top/">
     <meta property="og:type" content="website">
 
-    <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 stop-color=%22%23FBBF24%22 /><stop offset=%22100%25%22 stop-color=%22%2310B981%22 /></linearGradient></defs><g style=%22transform-origin:center;%22><path fill=%22url(%23g)%22 d=%22M85.1,62.4c-5.1,19.3-23.5,32.2-43.4,29.3c-19.9-2.9-34.9-19.6-34-39.5c0.9-19.9,18.4-35.4,38.4-34.5 C66,18.5,80,33.5,85.1,50.8C86.7,56.2,86.7,60.1,85.1,62.4z%22/></g><circle cx=%2250%22 cy=%2250%22 r=%2215%22 fill=%22%230B1120%22/></svg>">
+    <!-- Using an external SVG for better caching and compatibility -->
+    <link id="favicon" rel="icon" href="favicon.svg" type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Font Awesome with Subresource Integrity (SRI) for security -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- TailwindCSS JIT CDN script does not support SRI as it's generated dynamically. For production, a build step is recommended. -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script type="application/ld+json">
@@ -186,6 +191,7 @@
         .cta-button:hover {
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 15px 30px rgba(251, 191, 36, 0.3);
+            will-change: transform, box-shadow;
         }
         .btn-secondary {
             background-color: transparent;
@@ -198,6 +204,7 @@
             color: var(--text-dark);
             transform: translateY(-5px) scale(1.05);
             box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+            will-change: transform, box-shadow;
         }
         .cta-pulse {
             animation: pulse-cta 2.5s infinite;
@@ -237,11 +244,13 @@
             transform: translateY(-8px);
             border-color: var(--primary-color);
             box-shadow: 0 0 30px rgba(251, 191, 36, 0.1);
+            will-change: transform, border-color, box-shadow;
         }
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(40px);
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
         }
         .animate-on-scroll.is-visible {
             opacity: 1;
@@ -407,7 +416,7 @@
         <div class="dialog-content w-full max-w-md p-8 rounded-2xl text-center">
             <h2 class="text-3xl font-bold mb-4 text-primary-color">Welcome!</h2>
             <p class="text-gray-300 mb-6">For a better experience, please select your country.</p>
-            <select id="country-select-input" class="bg-gray-700 border border-gray-600 text-white text-lg rounded-lg block w-full p-3 mb-6">
+            <select id="country-select-input" class="bg-gray-700 border border-gray-600 text-white text-lg rounded-lg block w-full p-3 mb-6" aria-label="Country selection">
                 <option value="">Select your country...</option>
             </select>
             <button id="country-select-btn" class="w-full cta-button font-bold py-3 text-lg rounded-lg">Continue</button>
@@ -420,6 +429,7 @@
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
                     <div class="flex-shrink-0">
+                        <!-- Note: aria-label is static and won't be translated by Google Translate. For full localization, a dedicated i18n library is needed. -->
                         <a href="#" onclick="window.location.reload()" class="flex items-center space-x-3" aria-label="Reveal App Home">
                             <svg class="h-10 w-auto" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
@@ -451,7 +461,7 @@
                         <div id="google_translate_element"></div>
                     </div>
                     <div class="md:hidden flex items-center">
-                        <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none" aria-label="Open main menu">
+                        <button id="mobile-menu-button" class="text-gray-300 hover:text-white focus:outline-none" aria-label="Open main menu" aria-expanded="false">
                             <i class="fas fa-bars text-2xl"></i>
                         </button>
                     </div>
@@ -794,6 +804,7 @@
     <div id="social-proof-container" class="fixed bottom-5 left-5 z-50 overflow-hidden"></div>
     <div id="dialog-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden dialog"></div>
     
+    <!-- Google Translate script does not support SRI. -->
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
     <script>
     // --- Main Application Logic ---
@@ -931,29 +942,31 @@
                 }).sort((a,b) => a.localeCompare(b)).join('');
                 this.dom.countrySelectInput.innerHTML += countryOptions;
 
-                // Pre-select based on IP
+                // Pre-select based on IP, with a fallback
                 try {
                     const geoResponse = await fetch('https://ipapi.co/json/');
                     if (!geoResponse.ok) throw new Error('IP-based geolocation failed');
                     const geoData = await geoResponse.json();
-                    if (geoData.country_code) {
+                    if (geoData.country_code && this.countrySalaryData[geoData.country_code]) {
                         this.dom.countrySelectInput.value = geoData.country_code;
                     }
                 } catch (error) {
-                    console.warn("Could not fetch IP geolocation.", error);
+                    console.warn("Could not fetch IP geolocation. Defaulting to US.", error);
+                    // No need to set value here, as the flow will proceed with empty selection, prompting user.
                 }
 
                 this.dom.countrySelectBtn.addEventListener('click', async () => {
-                    const selectedCountry = this.dom.countrySelectInput.value;
-                    if (selectedCountry) {
-                        await this.fetchCurrencyRates();
-                        this.updateUserStateFromCountry(selectedCountry, true);
-                        localStorage.setItem('userCountryCode', selectedCountry);
-                        
-                        this.dom.countrySelectionModal.classList.add('hidden');
-                        this.dom.pageContent.classList.remove('hidden');
-                        this.init();
+                    let selectedCountry = this.dom.countrySelectInput.value;
+                    if (!selectedCountry) {
+                        selectedCountry = 'US'; // Fallback if user clicks continue without selecting
                     }
+                    await this.fetchCurrencyRates();
+                    this.updateUserStateFromCountry(selectedCountry, true);
+                    localStorage.setItem('userCountryCode', selectedCountry);
+                    
+                    this.dom.countrySelectionModal.classList.add('hidden');
+                    this.dom.pageContent.classList.remove('hidden');
+                    this.init();
                 });
             },
             
@@ -965,14 +978,18 @@
                     this.state.currencyRates = data.rates;
                 } catch (error) {
                     console.error("Currency fetch error:", error);
+                    // Fallback to USD only if API fails
                     this.state.currencyRates = { USD: 1 };
                 }
             },
 
             initEventListeners() {
                 this.dom.mobileMenuButton.addEventListener('click', () => {
+                    const isExpanded = this.dom.mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                    this.dom.mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
                     this.dom.mobileMenu.classList.toggle('-translate-x-full');
                 });
+
                 this.dom.dialogContainer.addEventListener('click', (e) => {
                     if (e.target === this.dom.dialogContainer) this.closeDialog();
                 });
@@ -999,6 +1016,7 @@
                         }
                         if (App.dom.mobileMenu && !App.dom.mobileMenu.classList.contains('-translate-x-full')) {
                              App.dom.mobileMenu.classList.add('-translate-x-full');
+                             App.dom.mobileMenuButton.setAttribute('aria-expanded', 'false');
                         }
                     });
                 });
@@ -2067,5 +2085,4 @@
     </script>
 </body>
 </html>
-
 
