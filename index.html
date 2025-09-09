@@ -897,13 +897,12 @@
                 <i class="fas fa-star"></i>
             </div>
             <h2 class="text-3xl font-bold mb-4 text-primary-color">Wait! A Special Offer For High Rollers!</h2>
-            <p class="text-gray-300 mb-6">Because you're building a professional-grade package, we want to reward your commitment to winning with an exclusive, one-time offer.</p>
+            <p class="text-gray-300 mb-6">Your purchase has unlocked an exclusive offer! Get a <strong>30% discount</strong> on your total if you add an extra platform or upgrade to an annual plan.</p>
             <div class="bg-background-dark border border-secondary-color p-4 rounded-lg mb-6">
-                <p class="text-xl font-semibold">Upgrade to an Annual Plan and get <span class="text-secondary-color font-bold">40% OFF</span> your entire purchase!</p>
-                <p class="text-gray-400 mt-2">Plus, we'll include licenses for <span class="font-bold text-white">two more apps of your choice</span>, completely free.</p>
+                <p class="text-xl font-semibold">Claim your <span class="text-secondary-color font-bold">30% DISCOUNT</span> coupon!</p>
             </div>
             <div class="flex flex-col sm:flex-row gap-4">
-                <button id="claim-bonus-btn" class="w-full cta-button font-bold py-3 text-lg rounded-lg">Yes, Claim 40% OFF Now!</button>
+                <button id="claim-bonus-btn" class="w-full cta-button font-bold py-3 text-lg rounded-lg">Yes, Apply 30% Coupon!</button>
                 <button id="decline-bonus-btn" class="w-full btn-secondary font-bold py-3 text-lg rounded-lg">No Thanks, I'll Pay Full Price</button>
             </div>
         </div>
@@ -1894,15 +1893,30 @@
                 }
                 
                 const preDiscountTotal = totalUSD;
-                if(this.purchaseState.coupon.discount > 0) {
-                    totalUSD *= (1 - this.purchaseState.coupon.discount);
+                let finalDiscountAmount = 0;
+
+                // Handle conditional high roller coupon first
+                if (this.purchaseState.coupon.code === 'HIGHROLLER30' && this.purchaseState.coupon.discount > 0) {
+                    const feedback = document.getElementById('coupon-feedback');
+                    if (this.purchaseState.upsells.annual || this.purchaseState.upsells.additionalPlatforms.length > 0) {
+                        finalDiscountAmount = preDiscountTotal * this.purchaseState.coupon.discount;
+                        if(feedback) feedback.textContent = `High Roller 30% discount applied!`;
+                    } else if (feedback) {
+                        feedback.textContent = `Add a platform or upgrade to annual to get 30% off.`;
+                        feedback.className = 'text-yellow-400 text-sm mt-1 h-4';
+                    }
+                } 
+                // Handle regular, unconditional coupons
+                else if (this.purchaseState.coupon.discount > 0) {
+                    finalDiscountAmount = preDiscountTotal * this.purchaseState.coupon.discount;
                 }
                 
-                const discountAmount = preDiscountTotal - totalUSD;
+                totalUSD = preDiscountTotal - finalDiscountAmount;
+                
                 const discountRow = document.getElementById('discount-row');
-                if (discountAmount > 0) {
+                if (finalDiscountAmount > 0) {
                     document.getElementById('coupon-code-display').textContent = this.purchaseState.coupon.code.toUpperCase();
-                    document.getElementById('discount-amount-display').textContent = `- ${this.formatLocalCurrency(discountAmount)}`;
+                    document.getElementById('discount-amount-display').textContent = `- ${this.formatLocalCurrency(finalDiscountAmount)}`;
                     discountRow.classList.remove('hidden');
                 } else {
                     discountRow.classList.add('hidden');
@@ -1928,51 +1942,17 @@
                 this.checkAndShowBonusOffer(totalUSD);
             },
             
-            checkAndShowBonusOffer(totalUSD) {
-                if (totalUSD > 4000 && !this.state.bonusOfferShown) {
-                    this.state.bonusOfferShown = true; 
-                    this.showBonusOffer();
-                }
-            },
-            
-            showBonusOffer() {
-                const bonusModal = document.getElementById('bonus-offer-modal');
-                if (!bonusModal) return;
-                
-                bonusModal.classList.remove('hidden');
-                setTimeout(() => bonusModal.classList.add('visible'), 10);
-                
-                document.getElementById('claim-bonus-btn').onclick = () => this.applyBonusOffer();
-                document.getElementById('decline-bonus-btn').onclick = () => {
-                    bonusModal.classList.remove('visible');
-                    setTimeout(() => bonusModal.classList.add('hidden'), 300);
-                };
-            },
-
             applyBonusOffer() {
                 const bonusModal = document.getElementById('bonus-offer-modal');
-                // Ensure annual and 2 platforms are selected
-                document.getElementById('upsell-annual').classList.add('selected');
-                this.purchaseState.upsells.annual = true;
                 
-                const platformButtons = document.querySelectorAll('.platform-upsell-btn');
-                let selectedCount = this.purchaseState.upsells.additionalPlatforms.length;
-                for (let i = 0; i < platformButtons.length && selectedCount < 2; i++) {
-                    const btn = platformButtons[i];
-                    const platformId = btn.dataset.platformId;
-                    if (!this.purchaseState.upsells.additionalPlatforms.includes(platformId)) {
-                        btn.classList.add('selected');
-                        this.purchaseState.upsells.additionalPlatforms.push(platformId);
-                        selectedCount++;
-                    }
-                }
-                
-                // Apply coupon
-                document.getElementById('coupon-input').value = 'HIGHROLLER40';
-                this.purchaseState.coupon = { code: 'HIGHROLLER40', discount: 0.40 };
+                // Apply special high roller coupon
+                this.purchaseState.coupon = { code: 'HIGHROLLER30', discount: 0.30 };
                 const feedback = document.getElementById('coupon-feedback');
-                feedback.textContent = `Coupon "HIGHROLLER40" applied!`;
+                feedback.textContent = `High Roller 30% coupon applied!`;
                 feedback.className = 'text-secondary-color text-sm mt-1 h-4';
+                document.getElementById('coupon-input').value = 'HIGHROLLER30';
+                document.getElementById('coupon-input').disabled = true;
+                document.getElementById('apply-coupon-btn').disabled = true;
                 
                 this.updateUpsellTotalDisplay();
                 
@@ -1998,21 +1978,11 @@
                     this.purchaseState.coupon = { code: 'heck15off', discount: 0.15 };
                     applied = true;
                 } else if (code === 'heck30off') {
-                    if (this.purchaseState.upsells.annual && this.purchaseState.upsells.additionalPlatforms.length === 1) {
-                         this.purchaseState.coupon = { code: 'heck30off', discount: 0.30 };
-                         applied = true;
-                    } else {
-                        feedback.textContent = 'Coupon valid only for annual plan with 1 extra platform.';
-                        feedback.className = 'text-red-500 text-sm mt-1 h-4';
-                    }
+                    this.purchaseState.coupon = { code: 'heck30off', discount: 0.30 };
+                    applied = true;
                 } else if (code === 'heck50off') {
-                    if (this.purchaseState.upsells.annual && this.purchaseState.upsells.additionalPlatforms.length === 2) {
-                        this.purchaseState.coupon = { code: 'heck50off', discount: 0.50 };
-                        applied = true;
-                    } else {
-                        feedback.textContent = 'Coupon valid only for annual plan with 2 extra platforms.';
-                        feedback.className = 'text-red-500 text-sm mt-1 h-4';
-                    }
+                    this.purchaseState.coupon = { code: 'heck50off', discount: 0.50 };
+                    applied = true;
                 }
 
                 if (applied) {
@@ -2296,4 +2266,5 @@
     </script>
 </body>
 </html>
+
 
