@@ -5,24 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal App: Strategic Poker Tool for All Major Platforms</title>
     
+    <!-- SEO/Marketing Note: Keywords like "hack" can negatively impact search engine ranking and may violate advertising platform policies. Review for brand safety. -->
     <meta name="description" content="Elevate your game with Reveal App, the premier strategic assistant for PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker, Suprema Poker, and more. Gain critical insights by seeing opponent and board cards to make smarter, data-driven decisions. Undetectable, safe, and secure.">
     <meta name="keywords" content="poker tool, poker analysis, pppoker hack, ggpoker hack, upoker hack, pokerbros hack, xpoker hack, pokerrr2 hack, pokerstars hack, kkpoker hack, suprema poker hack, wepoker hack, acr poker hack, coinpoker hack, see cards poker, online poker cheat, poker cheat engine, reveal cards app, poker advantage software, how to win at online poker, android poker hack, ios poker hack, mobile poker cheat, poker solver, GTO solver, real time poker assistant, poker predictor, win poker online">
     
     <link rel="canonical" href="https://revealpoker.top/">
     <meta property="og:title" content="Reveal App: Your Unbeatable Strategic Poker Advantage">
     <meta property="og:description" content="The professional tool to see your opponents' cards on PPPOKER, GGPoker, UPOKER, PokerBros, and more. Play with superior information and multiply your winnings.">
+    <!-- Note: The og:image URL must be absolute. Ensure 'reveal-app-preview.png' is accessible at https://revealpoker.top/reveal-app-preview.png -->
     <meta property="og:image" content="https://revealpoker.top/reveal-app-preview.png">
     <meta property="og:url" content="https://revealpoker.top/">
     <meta property="og:type" content="website">
 
+    <!-- Using an external SVG for better caching and compatibility -->
     <link id="favicon" rel="icon" href="favicon.svg" type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome with Subresource Integrity (SRI) for security -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
+    <!-- TailwindCSS JIT CDN script does not support SRI as it's generated dynamically. For production, a build step is recommended. -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script type="application/ld+json">
@@ -431,6 +436,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6WV95XF58S"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -438,12 +444,13 @@
       gtag('js', new Date());
       gtag('config', 'G-6WV95XF58S');
     </script>
-    
 </head>
 <body class="bg-background-dark text-text-light">
 
-    <div id="country-selection-modal" class="fixed inset-0 z-50 flex items-start justify-center p-4 pt-12 dialog">
+    <!-- Country Selection Modal -->
+    <div id="country-selection-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 dialog">
         <div class="dialog-content w-full max-w-xl p-8 rounded-2xl text-center relative overflow-hidden">
+            <!-- Subtle background pattern -->
             <div class="absolute inset-0 bg-repeat bg-center opacity-5" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22 width=%2280%22 height=%2280%22><path fill=%22%23FBBF24%22 fill-opacity=%220.1%22 d=%22M0 0h40v40H0zM40 40h40v40H40z%22/></svg>');"></div>
             
             <div class="relative z-10">
@@ -494,10 +501,12 @@
     </div>
     
     <div id="page-content" class="hidden">
+        <!-- Header -->
         <header role="banner" class="bg-background-dark sticky top-0 z-40" id="main-header">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-20">
                     <div class="flex-shrink-0">
+                        <!-- Note: aria-label is static and won't be translated by Google Translate. For full localization, a dedicated i18n library is needed. -->
                         <a href="#" onclick="window.location.reload()" class="flex items-center space-x-3" aria-label="Reveal App Home">
                             <svg class="h-10 w-auto" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
@@ -538,6 +547,7 @@
             </div>
         </header>
 
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0B1120] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl transition-transform duration-300 ease-in-out">
             <nav class="flex flex-col space-y-6 mt-8 text-lg" aria-label="Mobile navigation">
                 <a href="#features" class="text-gray-300 hover:text-primary-color transition">Features</a>
@@ -555,6 +565,7 @@
         </div>
 
         <main role="main" id="main-content">
+            <!-- Hero Section -->
             <section class="hero relative py-24 md:py-40 text-center text-white overflow-hidden">
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg opacity-30"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark to-background-dark"></div>
@@ -571,6 +582,7 @@
                 </div>
             </section>
             
+            <!-- Social Proof / Counters -->
             <section class="py-12 bg-background-dark" aria-labelledby="social-proof-heading">
                 <h2 id="social-proof-heading" class="sr-only">Social Proof</h2>
                 <div class="container mx-auto px-4">
@@ -591,6 +603,7 @@
                 </div>
             </section>
 
+            <!-- Features Section -->
             <section id="features" class="py-20 md:py-28" aria-labelledby="features-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 id="features-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">Your Definitive Strategic Advantage</h2>
@@ -619,21 +632,25 @@
                 </div>
             </section>
 
+            <!-- Security & Trust Section -->
             <section id="security" class="py-20 md:py-28 bg-background-light" aria-labelledby="security-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 id="security-heading" class="text-4xl md:text-5xl font-bold text-center mb-4 animate-on-scroll">Your Security is Our Priority</h2>
                     <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12 animate-on-scroll" style="transition-delay: 100ms;">We use multiple layers of security to protect your data and transactions, ensuring a safe and trustworthy experience.</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                        <!-- SSL/TLS Card -->
                         <div class="feature-card animate-on-scroll p-8 rounded-2xl text-center" style="transition-delay: 200ms;">
                             <div class="text-6xl text-primary-color mb-4"><i class="fas fa-lock"></i></div>
                             <h3 class="text-2xl font-bold mb-3">SSL/TLS Encrypted</h3>
                             <p class="text-gray-400">All communication between your device and our servers is secured with end-to-end SSL/TLS encryption, protecting your data from interception.</p>
                         </div>
+                        <!-- Security Monitoring Card -->
                         <div class="feature-card animate-on-scroll p-8 rounded-2xl text-center" style="transition-delay: 300ms;">
                              <div class="text-6xl text-primary-color mb-4"><i class="fas fa-shield-heart"></i></div>
                             <h3 class="text-2xl font-bold mb-3">Continuous Monitoring</h3>
                             <p class="text-gray-400">Our website is continuously monitored against malware and phishing attacks, keeping you safe from threats.</p>
                         </div>
+                        <!-- Data Privacy Card -->
                         <div class="feature-card animate-on-scroll p-8 rounded-2xl text-center" style="transition-delay: 400ms;">
                             <div class="text-6xl text-primary-color mb-4"><i class="fas fa-user-secret"></i></div>
                             <h3 class="text-2xl font-bold mb-3">Data Privacy Focused</h3>
@@ -643,6 +660,7 @@
                 </div>
             </section>
 
+            <!-- How It Works Section -->
             <section id="how-it-works" class="py-20 md:py-28" aria-labelledby="how-it-works-heading">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 id="how-it-works-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">Activate Your Advantage in 3 Steps</h2>
@@ -666,6 +684,7 @@
                 </div>
             </section>
             
+            <!-- Demo Section -->
             <section id="demo" class="py-20 md:py-28 bg-background-light" aria-labelledby="demo-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 id="demo-heading" class="text-4xl md:text-5xl font-bold text-center mb-4">See the Power in Action</h2>
@@ -687,6 +706,7 @@
                 </div>
             </section>
 
+            <!-- Pricing Section -->
             <section id="pricing" class="py-20 md:py-28" aria-labelledby="pricing-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div id="pricing-notice" class="hidden max-w-4xl mx-auto mb-12">
@@ -697,11 +717,13 @@
                     <h2 id="pricing-heading" class="text-4xl md:text-5xl font-bold text-center mb-4">Choose Your Plan</h2>
                     <p id="pricing-subtitle" class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Invest in your success with a plan that fits your strategy.</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <!-- Tier 1 -->
                         <div class="pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col" data-tier="1">
                             <div class="flex-grow">
                                 <h3 class="text-2xl font-bold mb-2 text-primary-color">Board Reader</h3>
                                 <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
-                                    </div>
+                                    <!-- Price will be injected by JS -->
+                                </div>
                                 <p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
                                 <ul class="space-y-3 text-left">
                                     <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See Community Cards:</strong> Know the Flop, Turn, and River in advance.</span></li>
@@ -709,6 +731,7 @@
                             </div>
                             <a href="#get-app" class="btn-secondary text-center mt-8 font-bold py-3 px-6 rounded-full">Select Plan</a>
                         </div>
+                        <!-- Tier 2 -->
                         <div class="relative pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col border-2 border-primary-color shadow-2xl shadow-primary-color/10" style="transform: scale(1.05);" data-tier="2">
                              <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
                                   <span class="bg-primary-color text-background-dark font-bold text-sm px-4 py-1 rounded-full uppercase">Most Popular</span>
@@ -716,7 +739,8 @@
                             <div class="flex-grow">
                                 <h3 class="text-2xl font-bold mb-2 text-primary-color">Opponent Insight</h3>
                                  <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
-                                      </div>
+                                      <!-- Price will be injected by JS -->
+                                 </div>
                                 <p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
                                 <ul class="space-y-3 text-left">
                                     <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See Opponents' Cards:</strong> Know exactly what you're up against pre-flop.</span></li>
@@ -725,11 +749,13 @@
                             </div>
                             <a href="#get-app" class="cta-button text-center mt-8 font-bold py-3 px-6 rounded-full">Select Plan</a>
                         </div>
+                        <!-- Tier 3 -->
                         <div class="pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col" data-tier="3">
                             <div class="flex-grow">
                                 <h3 class="text-2xl font-bold mb-2 text-primary-color">Total Vision</h3>
                                  <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
-                                      </div>
+                                      <!-- Price will be injected by JS -->
+                                 </div>
                                 <p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
                                 <ul class="space-y-3 text-left">
                                     <li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See ALL Cards:</strong> Combines Board Reader and Opponent Insight.</span></li>
@@ -742,6 +768,7 @@
                 </div>
             </section>
             
+            <!-- Activity Feed Section -->
             <section id="activity-feed-section" class="py-20 md:py-28 bg-background-light" aria-labelledby="activity-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16 animate-on-scroll">
@@ -750,19 +777,23 @@
                     </div>
                     <div class="max-w-4xl mx-auto animate-on-scroll" style="transition-delay: 200ms;">
                         <div id="activity-feed" class="activity-feed">
-                            </div>
+                            <!-- Activity items will be dynamically inserted here -->
+                        </div>
                     </div>
                 </div>
             </section>
 
+            <!-- Testimonials Section -->
             <section id="testimonials" class="py-20 md:py-28" aria-labelledby="testimonials-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                                <h2 id="testimonials-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">What Our Players Say</h2>
                     <div id="testimonials-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        </div>
+                        <!-- Testimonials will be dynamically inserted here -->
+                    </div>
                 </div>
             </section>
             
+            <!-- Get App Section -->
             <section id="get-app" class="py-20 md:py-28 text-center" aria-labelledby="get-app-heading">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
                     <h2 id="get-app-heading" class="text-4xl md:text-5xl font-bold mb-4">Your Turn to Dominate Has Arrived</h2>
@@ -785,6 +816,7 @@
                 </div>
             </section>
 
+            <!-- FAQ Section -->
             <section id="faq" class="py-20 md:py-28 bg-background-light" aria-labelledby="faq-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 id="faq-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">Frequently Asked Questions</h2>
@@ -829,6 +861,7 @@
             </section>
         </main>
 
+        <!-- Footer -->
         <footer class="bg-background-dark border-t border-gray-800" aria-labelledby="footer-heading">
             <h2 id="footer-heading" class="sr-only">Footer</h2>
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -856,6 +889,7 @@
                         </ul>
                     </div>
                 </div>
+                <!-- Crypto Logos -->
                 <div class="mt-12 border-t border-gray-800 pt-8">
                     <div class="text-center">
                         <h4 class="text-md font-semibold text-center text-gray-300 mb-4">We Accept Anonymous Payments</h4>
@@ -876,6 +910,7 @@
         </footer>
     </div>
     
+    <!-- Floating Action Buttons -->
     <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end space-y-4">
         <a href="#get-app" id="floating-cta-button" class="cta-button cta-pulse font-bold py-3 px-6 rounded-full shadow-lg flex items-center space-x-2">
             <i class="fas fa-bolt" aria-hidden="true"></i>
@@ -886,6 +921,7 @@
         </a>
     </div>
 
+    <!-- Bonus Offer Modal -->
     <div id="bonus-offer-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 dialog hidden">
         <div class="dialog-content w-full max-w-lg p-8 rounded-2xl text-center transform-gpu">
             <div class="text-5xl text-yellow-400 mb-4 animate-pulse">
@@ -908,6 +944,7 @@
     <div id="social-proof-container" class="fixed bottom-5 left-5 z-50 overflow-hidden"></div>
     <div id="dialog-container" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden dialog"></div>
     
+    <!-- Google Translate script does not support SRI. Deferring its load improves performance. -->
     <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript" defer></script>
     <script>
     // --- Main Application Logic ---
@@ -1741,6 +1778,7 @@
                     <p class="text-center text-gray-400 mb-6">The biggest winners use more than one platform and don't waste time with support. Do you want to be left behind or truly dominate?</p>
                     
                     <div class="space-y-4 mb-6">
+                        <!-- Platform Upsell -->
                         <div id="upsell-platforms-container" class="upsell-option p-4 rounded-lg">
                             <h4 class="font-bold"><i class="fas fa-layer-group mr-2"></i>Add More Platforms</h4>
                             <p id="platform-upsell-price-display" class="text-sm text-gray-400 mb-4"></p>
@@ -1750,6 +1788,7 @@
                              <p id="platform-upsell-error" class="text-red-500 text-xs mt-2 h-4 text-center"></p>
                         </div>
 
+                        <!-- Support Upsell -->
                         <div id="upsell-support" class="upsell-option p-4 rounded-lg flex items-center justify-between ${isSupportMandatory ? 'opacity-50 pointer-events-none selected' : ''}">
                             <div>
                                 <h4 class="font-bold"><i class="fas fa-headset mr-2"></i>Priority VIP Support</h4>
@@ -1758,6 +1797,7 @@
                             <span id="support-price-display" class="font-bold text-lg text-secondary-color"></span>
                         </div>
                         
+                        <!-- Annual Upsell -->
                         <div id="upsell-annual" class="upsell-option p-4 rounded-lg">
                             <div class="flex items-center justify-between">
                                <div>
@@ -1836,7 +1876,7 @@
                     } else {
                         this.purchaseState.upsells.support = isSupportMandatory;
                          if(!isSupportMandatory) {
-                              document.getElementById('upsell-support').classList.remove('selected');
+                               document.getElementById('upsell-support').classList.remove('selected');
                          }
                     }
                     this.updateUpsellTotalDisplay();
@@ -1877,7 +1917,7 @@
                 } else {
                     totalUSD = this.purchaseState.basePriceUSD + platformUpsellCost;
                      if (!isSupportMandatory) {
-                          document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+                           document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
                      }
                     if (this.purchaseState.upsells.support) {
                         totalUSD += supportPriceUSD;
@@ -2210,7 +2250,7 @@
                 const tierNames = {1: "Board Reader", 2: "Opponent Insight", 3: "Total Vision"};
                 const totalWithFeeUSD = finalPriceUSD + (feeAmountUSD || 0);
 
-                let message = `🚀 --- New Activation | Reveal App --- \n\n`;
+                let message = `🚀 --- New Activation | Reveal App --- 🚀\n\n`;
                 message += `🆔 Activation ID: ${uniqueId}\n`;
                 message += `📧 Email: ${this.purchaseState.email}\n`;
                 message += `📱 System: ${os}\n`;
