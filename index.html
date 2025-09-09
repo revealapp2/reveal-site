@@ -444,60 +444,19 @@
       gtag('js', new Date());
       gtag('config', 'G-6WV95XF58S');
     </script>
-    
 </head>
 <body class="bg-background-dark text-text-light">
 
     <!-- Country Selection Modal -->
-    <div id="country-selection-modal" class="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 pt-8 sm:pt-4 dialog">
-        <div class="dialog-content w-full max-w-xl p-8 rounded-2xl text-center relative overflow-hidden">
-            <!-- Subtle background pattern -->
-            <div class="absolute inset-0 bg-repeat bg-center opacity-5" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 80 80%22 width=%2280%22 height=%2280%22><path fill=%22%23FBBF24%22 fill-opacity=%220.1%22 d=%22M0 0h40v40H0zM40 40h40v40H40z%22/></svg>');"></div>
-            
-            <div class="relative z-10">
-                <div class="text-5xl text-primary-color mb-4">
-                    <i class="fas fa-crown"></i>
-                </div>
-                <h2 class="text-3xl font-bold mb-2 text-white">Become a Poker Legend</h2>
-                <p class="text-gray-300 mb-8">Reveal the entire table and play with an unbeatable edge.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-left">
-                    <div class="bg-background-dark/50 p-4 rounded-lg border border-border-color transform hover:scale-105 transition-transform duration-300">
-                        <div class="flex items-center">
-                            <i class="fas fa-eye text-2xl text-primary-color mr-3"></i>
-                            <div>
-                                <h3 class="font-bold">See Hole Cards</h3>
-                                <p class="text-xs text-gray-400">Know what your opponents hold.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-background-dark/50 p-4 rounded-lg border border-border-color transform hover:scale-105 transition-transform duration-300">
-                        <div class="flex items-center">
-                             <i class="fas fa-layer-group text-2xl text-primary-color mr-3"></i>
-                            <div>
-                                <h3 class="font-bold">Reveal The Board</h3>
-                                <p class="text-xs text-gray-400">See the Flop, Turn & River early.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-background-dark/50 p-4 rounded-lg border border-border-color transform hover:scale-105 transition-transform duration-300">
-                        <div class="flex items-center">
-                            <i class="fas fa-user-shield text-2xl text-secondary-color mr-3"></i>
-                            <div>
-                                <h3 class="font-bold">Stay Undetected</h3>
-                                 <p class="text-xs text-gray-400">100% safe and anonymous play.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <p class="text-gray-300 mb-4 font-semibold">First, select your country for a personalized experience:</p>
-                <select id="country-select-input" class="bg-gray-700 border border-gray-600 text-white text-lg rounded-lg block w-full p-3 mb-6 focus:ring-primary-color focus:border-primary-color" aria-label="Country selection">
-                    <option value="">Select your country...</option>
-                </select>
-                <button id="country-select-btn" class="w-full cta-button font-bold py-3 text-lg rounded-lg" disabled>Unlock My Advantage</button>
-                <p id="api-error-notice" class="text-yellow-400 text-sm mt-4 hidden">Could not auto-detect location. Please select your country to continue.</p>
-            </div>
+    <div id="country-selection-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 dialog">
+        <div class="dialog-content w-full max-w-md p-8 rounded-2xl text-center">
+            <h2 class="text-3xl font-bold mb-4 text-primary-color">Welcome!</h2>
+            <p class="text-gray-300 mb-6">To provide the best experience, please select your country.</p>
+            <select id="country-select-input" class="bg-gray-700 border border-gray-600 text-white text-lg rounded-lg block w-full p-3 mb-6" aria-label="Country selection">
+                <option value="">Select your country...</option>
+            </select>
+            <button id="country-select-btn" class="w-full cta-button font-bold py-3 text-lg rounded-lg" disabled>Continue</button>
+            <p id="api-error-notice" class="text-yellow-400 text-sm mt-4 hidden">Could not auto-detect location. Please select your country to continue.</p>
         </div>
     </div>
     
@@ -529,7 +488,6 @@
                     </div>
                     <nav class="hidden md:flex md:space-x-8" aria-label="Main navigation">
                         <a href="#features" class="text-gray-300 hover:text-primary-color transition">Features</a>
-                        <a href="#security" class="text-gray-300 hover:text-primary-color transition">Security</a>
                         <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition">How It Works</a>
                         <a href="#demo" class="text-gray-300 hover:text-primary-color transition">Demo</a>
                         <a href="#pricing" class="text-gray-300 hover:text-primary-color transition">Pricing</a>
@@ -552,7 +510,6 @@
         <div id="mobile-menu" class="md:hidden mobile-menu bg-[#0B1120] transform -translate-x-full fixed top-0 left-0 h-full w-64 z-50 p-6 shadow-2xl transition-transform duration-300 ease-in-out">
             <nav class="flex flex-col space-y-6 mt-8 text-lg" aria-label="Mobile navigation">
                 <a href="#features" class="text-gray-300 hover:text-primary-color transition">Features</a>
-                <a href="#security" class="text-gray-300 hover:text-primary-color transition">Security</a>
                 <a href="#how-it-works" class="text-gray-300 hover:text-primary-color transition">How It Works</a>
                 <a href="#demo" class="text-gray-300 hover:text-primary-color transition">Demo</a>
                 <a href="#pricing" class="text-gray-300 hover:text-primary-color transition">Pricing</a>
@@ -571,8 +528,8 @@
                 <div class="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg opacity-30"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark to-background-dark"></div>
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">Play Poker Like You're From The Future.<br class="hidden md:block"> See Every Card Before It's Dealt.</h1>
-                    <p class="text-lg md:text-xl max-w-4xl mx-auto mb-10 text-gray-300">Stop gambling, start dominating. Reveal App gives you the ultimate advantage on the world's biggest poker platforms, including <strong>PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker, Suprema Poker, WEPoker, ACR Poker, FishPoker, PokerMaster, Poker 21Plus & CoinPoker</strong>. Make flawless decisions and watch your bankroll explode.</p>
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 leading-tight">They play in the dark. <br class="hidden md:block"> You play with all the cards in hand.</h1>
+                    <p class="text-lg md:text-xl max-w-4xl mx-auto mb-10 text-gray-300">While your opponents rely on luck, you'll play with superior information. Join the elite players profiting on <strong>PPPOKER, GGPoker, UPOKER, PokerBros, XPOKER, Pokerrr2, PokerStars, KKPoker, Suprema Poker, WEPoker, ACR Poker, FishPoker, PokerMaster, Poker 21Plus & CoinPoker</strong>.</p>
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <a href="#get-app" class="cta-button cta-pulse text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto">I want to see all the cards now</a>
                         <a href="#pricing" class="btn-secondary text-xl font-bold py-4 px-10 rounded-full w-full sm:w-auto flex items-center justify-center gap-2">
@@ -633,36 +590,8 @@
                 </div>
             </section>
 
-            <!-- Security & Trust Section -->
-            <section id="security" class="py-20 md:py-28 bg-background-light" aria-labelledby="security-heading">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 id="security-heading" class="text-4xl md:text-5xl font-bold text-center mb-4 animate-on-scroll">Your Security is Our Priority</h2>
-                    <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12 animate-on-scroll" style="transition-delay: 100ms;">We use multiple layers of security to protect your data and transactions, ensuring a safe and trustworthy experience.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                        <!-- SSL/TLS Card -->
-                        <div class="feature-card animate-on-scroll p-8 rounded-2xl text-center" style="transition-delay: 200ms;">
-                            <div class="text-6xl text-primary-color mb-4"><i class="fas fa-lock"></i></div>
-                            <h3 class="text-2xl font-bold mb-3">SSL/TLS Encrypted</h3>
-                            <p class="text-gray-400">All communication between your device and our servers is secured with end-to-end SSL/TLS encryption, protecting your data from interception.</p>
-                        </div>
-                        <!-- Security Monitoring Card -->
-                        <div class="feature-card animate-on-scroll p-8 rounded-2xl text-center" style="transition-delay: 300ms;">
-                             <div class="text-6xl text-primary-color mb-4"><i class="fas fa-shield-heart"></i></div>
-                            <h3 class="text-2xl font-bold mb-3">Continuous Monitoring</h3>
-                            <p class="text-gray-400">Our website is continuously monitored against malware and phishing attacks, keeping you safe from threats.</p>
-                        </div>
-                        <!-- Data Privacy Card -->
-                        <div class="feature-card animate-on-scroll p-8 rounded-2xl text-center" style="transition-delay: 400ms;">
-                            <div class="text-6xl text-primary-color mb-4"><i class="fas fa-user-secret"></i></div>
-                            <h3 class="text-2xl font-bold mb-3">Data Privacy Focused</h3>
-                            <p class="text-gray-400">We are compliant with GDPR & LGPD standards, ensuring your personal data is handled ethically. We only accept crypto to maximize your anonymity.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <!-- How It Works Section -->
-            <section id="how-it-works" class="py-20 md:py-28" aria-labelledby="how-it-works-heading">
+            <section id="how-it-works" class="py-20 md:py-28 bg-background-light" aria-labelledby="how-it-works-heading">
                  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 id="how-it-works-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">Activate Your Advantage in 3 Steps</h2>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
@@ -686,7 +615,7 @@
             </section>
             
             <!-- Demo Section -->
-            <section id="demo" class="py-20 md:py-28 bg-background-light" aria-labelledby="demo-heading">
+            <section id="demo" class="py-20 md:py-28" aria-labelledby="demo-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 id="demo-heading" class="text-4xl md:text-5xl font-bold text-center mb-4">See the Power in Action</h2>
                     <p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Watch how our strategic assistant reveals everything. This is what victory looks like:</p>
@@ -708,7 +637,7 @@
             </section>
 
             <!-- Pricing Section -->
-            <section id="pricing" class="py-20 md:py-28" aria-labelledby="pricing-heading">
+            <section id="pricing" class="py-20 md:py-28 bg-background-light" aria-labelledby="pricing-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div id="pricing-notice" class="hidden max-w-4xl mx-auto mb-12">
                         <div class="bg-yellow-900/50 border border-yellow-500 text-yellow-300 px-4 py-3 rounded-lg text-center" role="alert">
@@ -770,7 +699,7 @@
             </section>
             
             <!-- Activity Feed Section -->
-            <section id="activity-feed-section" class="py-20 md:py-28 bg-background-light" aria-labelledby="activity-heading">
+            <section id="activity-feed-section" class="py-20 md:py-28" aria-labelledby="activity-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16 animate-on-scroll">
                         <h2 id="activity-heading" class="text-4xl md:text-5xl font-bold tracking-tight">Real-Time Activity</h2>
@@ -785,7 +714,7 @@
             </section>
 
             <!-- Testimonials Section -->
-            <section id="testimonials" class="py-20 md:py-28" aria-labelledby="testimonials-heading">
+            <section id="testimonials" class="py-20 md:py-28 bg-background-light" aria-labelledby="testimonials-heading">
                 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                                <h2 id="testimonials-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">What Our Players Say</h2>
                     <div id="testimonials-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -874,33 +803,19 @@
                     <div>
                         <h3 class="text-lg font-semibold mb-4 text-primary-color">Contact & Support</h3>
                         <div class="space-y-3">
-                            <a href="https://t.me/bedmalcon_temp" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-primary-color transition-all duration-300 transform hover:translate-x-2"><i class="fab fa-telegram w-6 text-xl" aria-hidden="true"></i><span class="ml-2">Telegram (24/7 Support)</span></a>
-                            <a href="https://instagram.com/hackpoker_updated" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-primary-color transition-all duration-300 transform hover:translate-x-2"><i class="fab fa-instagram w-6 text-xl" aria-hidden="true"></i><span class="ml-2">@hackpoker_updated</span></a>
-                            <a href="mailto:support@revealpoker.top" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-primary-color transition-all duration-300 transform hover:translate-x-2"><i class="fas fa-envelope w-6 text-xl" aria-hidden="true"></i><span class="ml-2">support@revealpoker.top</span></a>
+                            <a href="https://t.me/bedmalcon_temp" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fab fa-telegram w-6" aria-hidden="true"></i><span class="ml-2">Telegram (24/7 Support)</span></a>
+                            <a href="https://instagram.com/hackpoker_updated" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fab fa-instagram w-6" aria-hidden="true"></i><span class="ml-2">@hackpoker_updated</span></a>
+                            <a href="mailto:support@revealpoker.top" class="flex items-center justify-center md:justify-start text-gray-400 hover:text-white"><i class="fas fa-envelope w-6" aria-hidden="true"></i><span class="ml-2">support@revealpoker.top</span></a>
                         </div>
                     </div>
                      <div>
                         <h3 class="text-lg font-semibold mb-4 text-primary-color">Quick Links</h3>
                         <ul class="space-y-2">
                             <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
-                            <li><a href="#security" class="text-gray-400 hover:text-white">Security</a></li>
                             <li><a href="#how-it-works" class="text-gray-400 hover:text-white">How It Works</a></li>
                             <li><a href="#pricing" class="text-gray-400 hover:text-white">Pricing</a></li>
                             <li><a href="#faq" class="text-gray-400 hover:text-white">FAQ</a></li>
                         </ul>
-                    </div>
-                </div>
-                <!-- Crypto Logos -->
-                <div class="mt-12 border-t border-gray-800 pt-8">
-                    <div class="text-center">
-                        <h4 class="text-md font-semibold text-center text-gray-300 mb-4">We Accept Anonymous Payments</h4>
-                        <div class="flex items-center justify-center flex-wrap gap-x-6 gap-y-4">
-                            <img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" alt="Bitcoin" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Bitcoin (BTC)">
-                            <img src="https://img.icons8.com/color/48/000000/ethereum.png" alt="Ethereum" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Ethereum (ETH)">
-                            <img src="https://img.icons8.com/color/48/000000/tether.png" alt="Tether" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Tether (USDT)">
-                            <img src="https://img.icons8.com/nolan/64/solana.png" alt="Solana" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Solana (SOL)">
-                            <img src="https://img.icons8.com/color/48/xrp.png" alt="XRP" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="XRP (Ripple)">
-                        </div>
                     </div>
                 </div>
                 <div class="mt-12 border-t border-gray-800 pt-8 text-center text-gray-500">
@@ -1017,21 +932,21 @@
 
             // --- Data & Constants ---
             platforms: [
-                { id: 'PPPOKER', name: 'PPPOKER', logo: 'https://i.ibb.co/6r2V0Jg/pppoker.png' },
-                { id: 'GGPoker', name: 'GGPoker/ClubGG', logo: 'https://i.ibb.co/d2gdb6j/clubgg.png' },
-                { id: 'UPOKER', name: 'UPOKER', logo: 'https://i.ibb.co/3s8G1kz/upoker.png' },
-                { id: 'PokerBros', name: 'PokerBros', logo: 'https://i.ibb.co/D8V2d2D/pokerbros.png' },
-                { id: 'XPOKER', name: 'XPOKER', logo: 'https://i.ibb.co/SnY2hLd/xpoker.png' },
-                { id: 'Pokerrr2', name: 'Pokerrr2', logo: 'https://i.ibb.co/Qn3x4zC/pokerrrr2.png' },
-                { id: 'PokerStars', name: 'PokerStars', logo: 'https://i.ibb.co/JqjXJ1f/pokerstars.png' },
-                { id: 'KKPoker', name: 'KKPoker', logo: 'https://i.ibb.co/GdvX1vF/kkpoker.png' },
-                { id: 'Suprema', name: 'Suprema Poker', logo: 'https://i.ibb.co/P9bSgN5/suprema.png' },
-                { id: 'WEPoker', name: 'WEPoker', logo: 'https://i.ibb.co/9VGLFqJ/wepoker.png' },
-                { id: 'ACRPoker', name: 'ACR Poker', logo: 'https://i.ibb.co/Wc2zVzR/acrpoker.png' },
-                { id: 'FishPoker', name: 'FishPoker', logo: 'https://i.ibb.co/q0wZz2H/fishpoker.png' },
-                { id: 'PokerMaster', name: 'PokerMaster', logo: 'https://i.ibb.co/qj5Vq4q/pokermaster.png' },
-                { id: 'Poker21Plus', name: 'Poker 21Plus', logo: 'https://i.ibb.co/yQxG9M5/poker21plus.png' },
-                { id: 'CoinPoker', name: 'CoinPoker', logo: 'https://i.ibb.co/fDbXy5P/coinpoker.png' }
+                { id: 'PPPOKER', name: 'PPPOKER', logo: 'pppoker.png' },
+                { id: 'GGPoker', name: 'GGPoker/ClubGG', logo: 'clubgg.png' },
+                { id: 'UPOKER', name: 'UPOKER', logo: 'upoker.png' },
+                { id: 'PokerBros', name: 'PokerBros', logo: 'pokerbros.png' },
+                { id: 'XPOKER', name: 'XPOKER', logo: 'xpoker.png' },
+                { id: 'Pokerrr2', name: 'Pokerrr2', logo: 'pokerrrr2.png' },
+                { id: 'PokerStars', name: 'PokerStars', logo: 'pokerstars.png' },
+                { id: 'KKPoker', name: 'KKPoker', logo: 'kkpoker.png' },
+                { id: 'Suprema', name: 'Suprema Poker', logo: 'suprema.png' },
+                { id: 'WEPoker', name: 'WEPoker', logo: 'wepoker.png' },
+                { id: 'ACRPoker', name: 'ACR Poker', logo: 'acrpoker.png' },
+                { id: 'FishPoker', name: 'FishPoker', logo: 'fishpoker.png' },
+                { id: 'PokerMaster', name: 'PokerMaster', logo: 'pokermaster.png' },
+                { id: 'Poker21Plus', name: 'Poker 21Plus', logo: 'poker21plus.png' },
+                { id: 'CoinPoker', name: 'CoinPoker', logo: 'coinpoker.png' }
             ],
             premiumPlatforms: ['GGPoker', 'Suprema', 'PokerStars', 'Pokerrr2'],
             superPremiumPlatforms: ['WEPoker', 'ACRPoker', 'FishPoker', 'PokerMaster', 'Poker21Plus', 'CoinPoker'],
@@ -1877,7 +1792,7 @@
                     } else {
                         this.purchaseState.upsells.support = isSupportMandatory;
                          if(!isSupportMandatory) {
-                               document.getElementById('upsell-support').classList.remove('selected');
+                              document.getElementById('upsell-support').classList.remove('selected');
                          }
                     }
                     this.updateUpsellTotalDisplay();
@@ -1918,7 +1833,7 @@
                 } else {
                     totalUSD = this.purchaseState.basePriceUSD + platformUpsellCost;
                      if (!isSupportMandatory) {
-                           document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+                          document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
                      }
                     if (this.purchaseState.upsells.support) {
                         totalUSD += supportPriceUSD;
@@ -1970,10 +1885,10 @@
             showBonusOffer() {
                 const bonusModal = document.getElementById('bonus-offer-modal');
                 if (!bonusModal) return;
-                
+            
                 bonusModal.classList.remove('hidden');
                 setTimeout(() => bonusModal.classList.add('visible'), 10);
-                
+            
                 document.getElementById('claim-bonus-btn').onclick = () => this.applyBonusOffer();
                 document.getElementById('decline-bonus-btn').onclick = () => {
                     bonusModal.classList.remove('visible');
@@ -1986,7 +1901,7 @@
                 // Ensure annual and 2 platforms are selected
                 document.getElementById('upsell-annual').classList.add('selected');
                 this.purchaseState.upsells.annual = true;
-                
+            
                 const platformButtons = document.querySelectorAll('.platform-upsell-btn');
                 let selectedCount = this.purchaseState.upsells.additionalPlatforms.length;
                 for (let i = 0; i < platformButtons.length && selectedCount < 2; i++) {
@@ -2005,9 +1920,9 @@
                 const feedback = document.getElementById('coupon-feedback');
                 feedback.textContent = `Coupon "HIGHROLLER40" applied!`;
                 feedback.className = 'text-secondary-color text-sm mt-1 h-4';
-                
+            
                 this.updateUpsellTotalDisplay();
-                
+            
                 if (bonusModal) {
                     bonusModal.classList.remove('visible');
                     setTimeout(() => bonusModal.classList.add('hidden'), 300);
@@ -2154,17 +2069,7 @@
                          <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 100%;"></div></div>
                          <p class="text-center text-sm text-gray-400 mt-2">Step 6 of 6</p>
                      </div>
-                    <h3 class="text-2xl font-bold mb-2 text-center">Complete Your Payment</h3>
-                    <div class="flex items-center justify-center space-x-4 mb-4 text-sm text-gray-400">
-                        <div class="flex items-center space-x-1.5">
-                            <i class="fas fa-lock text-secondary-color"></i>
-                            <span>SSL Secured Checkout</span>
-                        </div>
-                        <div class="flex items-center space-x-1.5">
-                            <i class="fas fa-shield-alt text-secondary-color"></i>
-                            <span>Payment Protection</span>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center">Complete Your Payment</h3>
                     <div id="payment-amount-container" class="text-center mb-4 min-h-[56px] flex flex-col justify-center">${cryptoAmountHTML}</div>
                     <div id="qr-code-container" class="flex justify-center mb-4 p-2 bg-white rounded-lg w-48 h-48 mx-auto"></div>
                     <div class="bg-background-dark border border-gray-700 rounded-lg p-3 text-center">
