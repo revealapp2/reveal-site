@@ -2084,6 +2084,7 @@
 
             showPaymentMethodDialog() {
                 this.state.currentPurchaseStep = 5;
+                if(!this.purchaseState.uniqueId) this.purchaseState.uniqueId = this.generateUniqueId();
                 this.savePurchaseState();
 
                 const finalPriceWithCents = parseFloat(this.purchaseState.finalPriceUSD.toFixed(0)) + (parseInt(this.purchaseState.uniqueId.slice(-2), 10) / 100);
@@ -2329,7 +2330,7 @@
                 message += platformMessage + '\n';
                 
                 message += `--- Payment Details ---\n`;
-                message += `💰 Amount: ${cryptoAmountPaid} ${paymentMethod.toUpperCase()}\n`;
+                message += `💰 Amount: ${cryptoAmountPaid} ${(paymentMethod || '').toUpperCase()}\n`;
                 message += `💵 Subtotal: ~$${finalPriceUSD.toFixed(2)} USD\n`;
                 if (feeAmountUSD && feeAmountUSD > 0) {
                     const feePercentage = (paymentMethod === 'usdt' ? 6 : 1);
