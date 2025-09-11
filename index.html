@@ -451,14 +451,14 @@
     <!-- Country Selection Modal -->
     <div id="country-selection-modal" class="fixed inset-0 z-50 flex items-start sm:items-center justify-center p-4 dialog">
         <div class="dialog-content w-full max-w-lg p-6 sm:p-8 rounded-2xl text-center">
-             <h2 class="text-2xl sm:text-3xl font-bold mb-3 text-primary-color">Unlock Your Advantage</h2>
-             <p class="text-gray-300 mb-6 text-sm sm:text-base">First, see what Reveal App offers, then select your country to continue.</p>
+              <h2 class="text-2xl sm:text-3xl font-bold mb-3 text-primary-color">Unlock Your Advantage</h2>
+              <p class="text-gray-300 mb-6 text-sm sm:text-base">First, see what Reveal App offers, then select your country to continue.</p>
             
-             <div class="text-left space-y-2 bg-background-dark/50 p-4 rounded-lg mb-6 border border-border-color">
-                 <p class="flex items-center text-sm sm:text-base"><i class="fas fa-eye w-5 mr-3 text-secondary-color" aria-hidden="true"></i>See opponents' hole cards.</p>
-                 <p class="flex items-center text-sm sm:text-base"><i class="fas fa-layer-group w-5 mr-3 text-secondary-color" aria-hidden="true"></i>Know community cards in advance.</p>
-                 <p class="flex items-center text-sm sm:text-base"><i class="fas fa-user-shield w-5 mr-3 text-secondary-color" aria-hidden="true"></i>Play 100% safe and undetected.</p>
-             </div>
+              <div class="text-left space-y-2 bg-background-dark/50 p-4 rounded-lg mb-6 border border-border-color">
+                  <p class="flex items-center text-sm sm:text-base"><i class="fas fa-eye w-5 mr-3 text-secondary-color" aria-hidden="true"></i>See opponents' hole cards.</p>
+                  <p class="flex items-center text-sm sm:text-base"><i class="fas fa-layer-group w-5 mr-3 text-secondary-color" aria-hidden="true"></i>Know community cards in advance.</p>
+                  <p class="flex items-center text-sm sm:text-base"><i class="fas fa-user-shield w-5 mr-3 text-secondary-color" aria-hidden="true"></i>Play 100% safe and undetected.</p>
+              </div>
 
             <p class="text-gray-300 mb-3">Please select your country:</p>
             <select id="country-select-input" class="bg-gray-700 border border-gray-600 text-white text-base rounded-lg block w-full p-3 mb-4 focus:ring-primary-color focus:border-primary-color" aria-label="Country selection">
@@ -1771,7 +1771,7 @@
                                <div>
                                     <h4 class="font-bold text-primary-color"><i class="fas fa-calendar-check mr-2"></i>ALL-ACCESS ANNUAL</h4>
                                     <p class="text-sm text-gray-400">Pay once for 12 months and get a huge discount.</p>
-                                </div>
+                               </div>
                                 <span class="font-bold text-lg text-primary-color" id="annual-price-display"></span>
                             </div>
                              <p class="text-sm text-center mt-2 text-gray-400">Save Big! Regular price: <span id="annual-full-price" class="line-through"></span></p>
@@ -1844,7 +1844,7 @@
                     } else {
                         this.purchaseState.upsells.support = isSupportMandatory;
                          if(!isSupportMandatory) {
-                               document.getElementById('upsell-support').classList.remove('selected');
+                              document.getElementById('upsell-support').classList.remove('selected');
                          }
                     }
                     this.updateUpsellTotalDisplay();
@@ -1885,7 +1885,7 @@
                 } else {
                     totalUSD = this.purchaseState.basePriceUSD + platformUpsellCost;
                      if (!isSupportMandatory) {
-                           document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+                          document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
                      }
                     if (this.purchaseState.upsells.support) {
                         totalUSD += supportPriceUSD;
@@ -2177,11 +2177,41 @@
             },
 
             generateUniqueId() {
+                const storedId = localStorage.getItem('revealAppUserId');
+                if (storedId) {
+                    return storedId;
+                }
+
                 const countryCode = this.state.userCountryCode || 'XX';
-                const now = new Date();
-                const pad = (num) => String(num).padStart(2, '0');
-                const timestamp = `${pad(now.getDate())}${pad(now.getMonth() + 1)}${now.getFullYear()}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
-                return `${countryCode.toUpperCase()}-${timestamp}`;
+
+                // 1. Create a fingerprint string from browser data
+                const fingerprintString = [
+                    navigator.userAgent,
+                    screen.width,
+                    screen.height,
+                    new Date().getTimezoneOffset(),
+                    navigator.hardwareConcurrency,
+                    navigator.platform
+                ].join('|');
+
+                // 2. Simple hash function to convert string to a number
+                let hash = 0;
+                for (let i = 0; i < fingerprintString.length; i++) {
+                    const char = fingerprintString.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash |= 0; // Convert to 32bit integer
+                }
+
+                // 3. Make it a positive 9-digit number
+                const numericId = (Math.abs(hash) % 1000000000).toString().padStart(9, '0');
+                
+                // 4. Combine and format
+                const newId = `${countryCode.toUpperCase()}-${numericId}`;
+                
+                // 5. Store for persistence
+                localStorage.setItem('revealAppUserId', newId);
+                
+                return newId;
             },
 
             showFinalConfirmation() {
@@ -2266,5 +2296,4 @@
     </script>
 </body>
 </html>
-
 
