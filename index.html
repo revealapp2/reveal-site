@@ -690,12 +690,12 @@
                         <!-- Tier 2 -->
                         <div class="relative pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col border-2 border-primary-color shadow-2xl shadow-primary-color/10" style="transform: scale(1.05);" data-tier="2">
                              <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                                  <span class="bg-primary-color text-background-dark font-bold text-sm px-4 py-1 rounded-full uppercase">Most Popular</span>
+                                 <span class="bg-primary-color text-background-dark font-bold text-sm px-4 py-1 rounded-full uppercase">Most Popular</span>
                              </div>
                             <div class="flex-grow">
                                 <h3 class="text-2xl font-bold mb-2 text-primary-color">Opponent Insight</h3>
                                  <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
-                                      <!-- Price will be injected by JS -->
+                                     <!-- Price will be injected by JS -->
                                  </div>
                                 <p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
                                 <ul class="space-y-3 text-left">
@@ -710,7 +710,7 @@
                             <div class="flex-grow">
                                 <h3 class="text-2xl font-bold mb-2 text-primary-color">Total Vision</h3>
                                  <div class="my-4 text-center min-h-[100px] flex flex-col justify-center">
-                                      <!-- Price will be injected by JS -->
+                                     <!-- Price will be injected by JS -->
                                  </div>
                                 <p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
                                 <ul class="space-y-3 text-left">
@@ -1979,7 +1979,7 @@
                 } else {
                     totalUSD = this.purchaseState.basePriceUSD + platformUpsellCost;
                      if (!isSupportMandatory) {
-                          document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+                         document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
                      }
                     if (this.purchaseState.upsells.support) {
                         totalUSD += supportPriceUSD;
@@ -2218,9 +2218,9 @@
 
                 document.getElementById('copy-address').onclick = () => this.copyToClipboard(address, 'copy-address-text-span');
                 document.getElementById('payment-done').onclick = () => {
-                    this.clearPurchaseState();
                     this.showFinalConfirmation();
-                }
+                    this.clearPurchaseState();
+                };
 
                 const cryptoPrice = await this.getCryptoPrice(method);
                 const paymentAmountContainer = document.getElementById('payment-amount-container');
@@ -2400,4 +2400,3 @@
     </script>
 </body>
 </html>
-
