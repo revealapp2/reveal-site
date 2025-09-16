@@ -1557,9 +1557,9 @@
                 this.purchaseState.uniqueId = this.generateUniqueId();
                 this.purchaseState.cheatTier = tier ? parseInt(tier) : null;
                  if (localStorage.getItem('userEmail')) {
-                      this.purchaseState.email = localStorage.getItem('userEmail');
-                      this.state.currentPurchaseStep = 2;
-                      this.showPlatformDialog();
+                     this.purchaseState.email = localStorage.getItem('userEmail');
+                     this.state.currentPurchaseStep = 2;
+                     this.showPlatformDialog();
                  } else {
                     this.state.currentPurchaseStep = 1;
                     this.showRegistrationDialog();
@@ -1668,7 +1668,7 @@
                 
                 let finalPrice;
                 if (tier === 1) {
-                    finalPrice = basePriceBeforeTiers * 1.15;
+                    finalPrice = basePriceBeforeTiers * 1.3225; // Increased by 15% from 1.15
                 } else if (tier === 2) {
                     finalPrice = basePriceBeforeTiers * 1.8;
                 } else if (tier === 3) {
@@ -1875,16 +1875,16 @@
                      <div class="mt-4">
                          <label for="coupon-input" class="text-sm text-gray-400">Discount Code</label>
                          <div class="flex gap-2 mt-1">
-                              <input type="text" id="coupon-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-500" placeholder="Enter code" value="${this.purchaseState.coupon.code || ''}">
-                              <button id="apply-coupon-btn" class="btn-secondary font-bold py-2 px-4 rounded-lg">Apply</button>
+                             <input type="text" id="coupon-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-500" placeholder="Enter code" value="${this.purchaseState.coupon.code || ''}">
+                             <button id="apply-coupon-btn" class="btn-secondary font-bold py-2 px-4 rounded-lg">Apply</button>
                          </div>
                          <p id="coupon-feedback" class="text-sm mt-1 h-4"></p>
                      </div>
                     
                     <div class="border-t border-gray-700 pt-4 mt-4 text-sm space-y-2">
                          <div id="discount-row" class="hidden flex justify-between text-secondary-color">
-                              <span>Discount (<span id="coupon-code-display"></span>):</span>
-                              <span id="discount-amount-display"></span>
+                             <span>Discount (<span id="coupon-code-display"></span>):</span>
+                             <span id="discount-amount-display"></span>
                          </div>
                          <div class="flex justify-between items-center text-xl font-bold mt-2">
                             <span>Total Due Today:</span>
@@ -1965,19 +1965,23 @@
                 const monthlyBase = this.purchaseState.monthlyPriceUSD;
                 const annualBase = monthlyBase * 8;
                 
-                let platformUpsellCost = 0;
-                if (numSelectedPlatforms === 1) {
-                    platformUpsellCost = this.purchaseState.upsells.annual ? annualBase * 0.80 : monthlyBase * 0.80;
-                } else if (numSelectedPlatforms === 2) {
-                    platformUpsellCost = this.purchaseState.upsells.annual ? annualBase * 1.25 : monthlyBase * 1.25;
-                }
+                const multiplier1 = 1.3;
+                const multiplier2 = 2.2;
+
+                const monthlyPlatformUpsellCost = 
+                    numSelectedPlatforms === 1 ? monthlyBase * multiplier1 :
+                    numSelectedPlatforms === 2 ? monthlyBase * multiplier2 : 0;
+                    
+                const annualPlatformUpsellCost = 
+                    numSelectedPlatforms === 1 ? annualBase * multiplier1 :
+                    numSelectedPlatforms === 2 ? annualBase * multiplier2 : 0;
 
                 if (this.purchaseState.upsells.annual) {
-                    totalUSD = annualBase + platformUpsellCost;
+                    totalUSD = annualBase + annualPlatformUpsellCost;
                     this.purchaseState.upsells.support = true; 
                     document.getElementById('upsell-support').classList.add('selected', 'opacity-50', 'pointer-events-none');
                 } else {
-                    totalUSD = this.purchaseState.basePriceUSD + platformUpsellCost;
+                    totalUSD = this.purchaseState.basePriceUSD + monthlyPlatformUpsellCost;
                      if (!isSupportMandatory) {
                          document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
                      }
@@ -1993,7 +1997,8 @@
                 if (this.purchaseState.coupon.code === 'HIGHROLLER30' && this.purchaseState.coupon.discount > 0) {
                     const feedback = document.getElementById('coupon-feedback');
                     if (this.purchaseState.upsells.annual || this.purchaseState.upsells.additionalPlatforms.length > 0) {
-                        finalDiscountAmount = preDiscountTotal * this.purchaseState.coupon.discount;
+                        const discountableAmount = this.purchaseState.upsells.annual ? annualBase : this.purchaseState.basePriceUSD;
+                        finalDiscountAmount = discountableAmount * this.purchaseState.coupon.discount;
                         if(feedback) feedback.textContent = `High Roller 30% discount applied!`;
                     } else if (feedback) {
                         feedback.textContent = `Add a platform or upgrade to annual to get 30% off.`;
@@ -2016,17 +2021,15 @@
                     discountRow.classList.add('hidden');
                 }
 
-                let platformPriceText = `Add 1 for +${this.formatLocalCurrency(monthlyBase * 0.80)}, or 2 for +${this.formatLocalCurrency(monthlyBase * 1.25)}.`;
+                let platformPriceText = `Add 1 for +${this.formatLocalCurrency(monthlyBase * multiplier1)}, or 2 for +${this.formatLocalCurrency(monthlyBase * multiplier2)}.`;
                 if(this.purchaseState.upsells.annual) {
-                    platformPriceText = `Add 1 for +${this.formatLocalCurrency(annualBase * 0.80)}, or 2 for +${this.formatLocalCurrency(annualBase * 1.25)}.`;
+                    platformPriceText = `Add 1 for +${this.formatLocalCurrency(annualBase * multiplier1)}, or 2 for +${this.formatLocalCurrency(annualBase * multiplier2)}.`;
                 }
                 document.getElementById('platform-upsell-price-display').innerHTML = platformPriceText;
                 
-                let annualDisplayPrice = annualBase;
-                let annualFullPrice = this.purchaseState.monthlyPriceUSD * 12;
-                if(numSelectedPlatforms === 1) { annualDisplayPrice += annualBase * 0.80; annualFullPrice += monthlyBase * 12 * 0.80; }
-                if(numSelectedPlatforms === 2) { annualDisplayPrice += annualBase * 1.25; annualFullPrice += monthlyBase * 12 * 1.25; }
-                document.getElementById('annual-price-display').textContent = `+${this.formatLocalCurrency(annualDisplayPrice)}`;
+                const annualDisplayPrice = annualBase + annualPlatformUpsellCost;
+                const annualFullPrice = (this.purchaseState.monthlyPriceUSD + monthlyPlatformUpsellCost) * 12;
+                document.getElementById('annual-price-display').textContent = `${this.formatLocalCurrency(annualDisplayPrice)}`;
                 document.getElementById('annual-full-price').textContent = this.formatLocalCurrency(annualFullPrice);
                 document.getElementById('support-price-display').textContent = `+${this.formatLocalCurrency(supportPriceUSD)}`;
 
@@ -2075,8 +2078,15 @@
                     this.purchaseState.coupon = { code: 'heck30off', discount: 0.30 };
                     applied = true;
                 } else if (code === 'heck50off') {
-                    this.purchaseState.coupon = { code: 'heck50off', discount: 0.50 };
-                    applied = true;
+                    const totalPlatforms = this.purchaseState.platforms.length + this.purchaseState.upsells.additionalPlatforms.length;
+                    if (totalPlatforms >= 3) {
+                        this.purchaseState.coupon = { code: 'heck50off', discount: 0.50 };
+                        applied = true;
+                    } else {
+                        feedback.textContent = 'HECK50OFF requires at least 3 platforms.';
+                        feedback.className = 'text-yellow-400 text-sm mt-1 h-4';
+                        applied = false;
+                    }
                 }
 
                 if (applied) {
@@ -2400,3 +2410,7 @@
     </script>
 </body>
 </html>
+
+
+
+
