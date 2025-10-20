@@ -20,11 +20,11 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17375777569">
 </script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  gtag('config', 'AW-17375777569');
+  gtag('config', 'AW-17375777569');
 </script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17551308812">
@@ -203,12 +203,16 @@
 			background-color: rgba(11, 17, 32, 0.8);
 			backdrop-filter: blur(12px);
 		}
+		/* --- MODIFIED: Enhanced Modal Styling --- */
 		.dialog-content {
 			background: var(--background-light);
-			border: 1px solid var(--border-color);
+			border: 1px solid transparent; /* Hide original border */
+			background-clip: padding-box; /* Crucial for gradient border */
+			border-image: linear-gradient(145deg, var(--primary-color), var(--secondary-color)) 1;
 			box-shadow: 0 25px 50px -12px rgba(0,0,0,0.75);
 			max-height: 90vh;
 			overflow-y: auto;
+			animation: pulse-glow 5s infinite alternate; /* NEW: Animated Glow */
 		}
 		.video-container {
 			position: relative;
@@ -249,6 +253,11 @@
 		@keyframes pulse-cta {
 			0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
 			50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(251, 191, 36, 0); }
+		}
+		/* --- NEW: Modal Glow Animation --- */
+		@keyframes pulse-glow {
+			from { box-shadow: 0 0 50px rgba(0,0,0,0.5), 0 0 30px rgba(251, 191, 36, 0.15); }
+			to { box-shadow: 0 0 60px rgba(0,0,0,0.6), 0 0 50px rgba(16, 185, 129, 0.2); }
 		}
 		.social-proof-notification {
 			transition: opacity 0.5s, transform 0.5s;
@@ -307,8 +316,10 @@
 			overflow: hidden;
 			height: 8px;
 		}
+		/* --- MODIFIED: Enhanced Progress Bar --- */
 		.progress-bar {
-			background-color: var(--secondary-color);
+			background: linear-gradient(90deg, var(--secondary-color), #4ade80);
+			box-shadow: 0 0 10px var(--secondary-color);
 			height: 100%;
 			transition: width 0.5s ease-in-out;
 		}
@@ -317,15 +328,42 @@
 			border: 1px solid var(--border-color);
 			transition: all 0.2s ease-in-out;
 			cursor: pointer;
+			position: relative; /* For checkmark */
 		}
 		.selection-button:hover, .combo-option:hover {
 			border-color: var(--primary-color);
 			transform: translateY(-2px);
 		}
+		/* --- MODIFIED: Enhanced Selected Button State --- */
 		.selection-button.selected, .combo-option.selected {
 			background-color: var(--secondary-color);
 			border-color: var(--secondary-color);
 			color: white;
+			box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+		}
+		/* --- NEW: Checkmark for Selected Buttons --- */
+		.selection-button.selected::after {
+			content: '\f00c';
+			font-family: 'Font Awesome 6 Free';
+			font-weight: 900;
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			color: white;
+			background-color: rgba(0,0,0,0.3);
+			border-radius: 50%;
+			width: 20px;
+			height: 20px;
+			font-size: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transform: scale(0);
+			animation: pop-in 0.3s 0.1s ease-out forwards;
+		}
+		@keyframes pop-in {
+			from { transform: scale(0) rotate(-180deg); opacity: 0; }
+			to { transform: scale(1) rotate(0deg); opacity: 1; }
 		}
 		.selection-button.disabled {
 			opacity: 0.5;
@@ -407,6 +445,32 @@
 		@keyframes fadeIn {
 			from { opacity: 0; transform: translateY(10px); }
 			to { opacity: 1; transform: translateY(0); }
+		}
+		/* --- NEW: Icon Glow on Hover --- */
+		.feature-card .fas {
+			transition: all 0.3s ease;
+		}
+		.feature-card:hover .fas {
+			color: white;
+			text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color);
+			transform: scale(1.1);
+		}
+		/* --- NEW: Section Title Underline --- */
+		section h2 {
+			position: relative;
+			display: inline-block;
+			padding-bottom: 0.75rem;
+		}
+		section h2::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 80px;
+			height: 4px;
+			background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+			border-radius: 2px;
 		}
 	</style>
 	<!-- Google tag (gtag.js) -->
@@ -555,9 +619,9 @@
 
 			<!-- Features Section -->
 			<section id="features" class="py-20 md:py-28" aria-labelledby="features-heading">
-				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-					<h2 id="features-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">Your Definitive Strategic Advantage</h2>
-					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+					<h2 id="features-heading" class="text-4xl md:text-5xl font-bold mb-16">Your Definitive Strategic Advantage</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
 						<div class="feature-card animate-on-scroll p-8 rounded-2xl">
 							<div class="text-4xl text-primary-color mb-4"><i class="fas fa-eye" aria-hidden="true"></i></div>
 							<h3 class="text-2xl font-bold mb-3">Total Table Vision</h3>
@@ -584,9 +648,9 @@
 
 			<!-- Security & Trust Section -->
 			<section id="security" class="py-20 md:py-28 bg-background-light" aria-labelledby="security-heading">
-				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-					<h2 id="security-heading" class="text-4xl md:text-5xl font-bold text-center mb-4 animate-on-scroll">Your Security is Our Priority</h2>
-					<p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12 animate-on-scroll" style="transition-delay: 100ms;">We use multiple layers of security to protect your data and transactions, ensuring a safe and trustworthy experience.</p>
+				<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+					<h2 id="security-heading" class="text-4xl md:text-5xl font-bold mb-4 animate-on-scroll">Your Security is Our Priority</h2>
+					<p class="text-lg text-gray-400 max-w-3xl mx-auto mb-12 animate-on-scroll" style="transition-delay: 100ms;">We use multiple layers of security to protect your data and transactions, ensuring a safe and trustworthy experience.</p>
 					<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
 						<!-- SSL/TLS Card -->
 						<div class="feature-card animate-on-scroll p-8 rounded-2xl text-center" style="transition-delay: 200ms;">
@@ -612,8 +676,8 @@
 
 			<!-- How It Works Section -->
 			<section id="how-it-works" class="py-20 md:py-28" aria-labelledby="how-it-works-heading">
-				 <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-					<h2 id="how-it-works-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">Activate Your Advantage in 3 Steps</h2>
+				 <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+					<h2 id="how-it-works-heading" class="text-4xl md:text-5xl font-bold mb-16">Activate Your Advantage in 3 Steps</h2>
 					<div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
 						<div class="text-center animate-on-scroll">
 							<div class="w-24 h-24 bg-background-dark rounded-full mx-auto flex items-center justify-center text-4xl font-bold text-primary-color border-2 border-primary-color mb-6">1</div>
@@ -636,13 +700,14 @@
 			
 			<!-- Demo Section -->
 			<section id="demo" class="py-20 md:py-28 bg-background-light" aria-labelledby="demo-heading">
-				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-					<h2 id="demo-heading" class="text-4xl md:text-5xl font-bold text-center mb-4">See the Power in Action</h2>
-					<p class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Watch how our strategic assistant reveals everything. This is what victory looks like:</p>
+				<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+					<h2 id="demo-heading" class="text-4xl md:text-5xl font-bold mb-4">See the Power in Action</h2>
+					<p class="text-lg text-gray-400 max-w-3xl mx-auto mb-12">Watch how our strategic assistant reveals everything. This is what victory looks like:</p>
 					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 						<div class="animate-on-scroll">
 							<h3 class="text-xl font-semibold mb-4 text-center">PPPOKER</h3>
-							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/BmPblmvwROk" title="Reveal App Demo on PPPOKER" frameborder="0" allowfullscreen></iframe></div>
+							<!-- --- MODIFIED: Video URL updated as requested --- -->
+							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/ENkMDWKXiV8" title="Reveal App Demo on PPPOKER - Short" frameborder="0" allowfullscreen></iframe></div>
 						</div>
 						<div class="animate-on-scroll" style="transition-delay: 0.2s;">
 							<h3 class="text-xl font-semibold mb-4 text-center">XPoker</h3>
@@ -662,15 +727,15 @@
 
 			<!-- Pricing Section -->
 			<section id="pricing" class="py-20 md:py-28" aria-labelledby="pricing-heading">
-				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
 					<div id="pricing-notice" class="hidden max-w-4xl mx-auto mb-12">
-						<div class="bg-yellow-900/50 border border-yellow-500 text-yellow-300 px-4 py-3 rounded-lg text-center" role="alert">
+						<div class="bg-yellow-900/50 border border-yellow-500 text-yellow-300 px-4 py-3 rounded-lg" role="alert">
 							<p><i class="fas fa-info-circle mr-2"></i><strong>Important Update:</strong> Starting September 9, 2025, our standard plans will transition to a quarterly subscription model.</p>
 						</div>
 					</div>
-					<h2 id="pricing-heading" class="text-4xl md:text-5xl font-bold text-center mb-4">Choose Your Plan</h2>
-					<p id="pricing-subtitle" class="text-lg text-gray-400 text-center max-w-3xl mx-auto mb-12">Invest in your success with a plan that fits your strategy.</p>
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+					<h2 id="pricing-heading" class="text-4xl md:text-5xl font-bold mb-4">Choose Your Plan</h2>
+					<p id="pricing-subtitle" class="text-lg text-gray-400 max-w-3xl mx-auto mb-12">Invest in your success with a plan that fits your strategy.</p>
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto text-left">
 						<!-- Tier 1 -->
 						<div class="pricing-card animate-on-scroll p-8 rounded-2xl flex flex-col" data-tier="1">
 							<div class="flex-grow">
@@ -679,7 +744,7 @@
 									<!-- Price will be injected by JS -->
 								</div>
 								<p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
-								<ul class="space-y-3 text-left">
+								<ul class="space-y-3">
 									<li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See Community Cards:</strong> Know the Flop, Turn, and River in advance.</span></li>
 								</ul>
 							</div>
@@ -696,7 +761,7 @@
 									 <!-- Price will be injected by JS -->
 								 </div>
 								<p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
-								<ul class="space-y-3 text-left">
+								<ul class="space-y-3">
 									<li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See Opponents' Cards:</strong> Know exactly what you're up against pre-flop.</span></li>
 									<li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span>Make perfect bluffs and value bets.</span></li>
 								</ul>
@@ -711,7 +776,7 @@
 									 <!-- Price will be injected by JS -->
 								 </div>
 								<p class="text-gray-400 mb-6 text-center">Get started with our flexible monthly plan.</p>
-								<ul class="space-y-3 text-left">
+								<ul class="space-y-3">
 									<li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span><strong>See ALL Cards:</strong> Combines Board Reader and Opponent Insight.</span></li>
 									<li class="flex items-start"><i class="fas fa-check-circle text-secondary-color mt-1 mr-3" aria-hidden="true"></i> <span>The ultimate advantage for maximum profit.</span></li>
 								</ul>
@@ -724,8 +789,8 @@
 			
 			<!-- Activity Feed Section -->
 			<section id="activity-feed-section" class="py-20 md:py-28 bg-background-light" aria-labelledby="activity-heading">
-				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-					<div class="text-center mb-16 animate-on-scroll">
+				<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+					<div class="mb-16 animate-on-scroll">
 						<h2 id="activity-heading" class="text-4xl md:text-5xl font-bold tracking-tight">Real-Time Activity</h2>
 						<p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">See anonymized activity from Reveal App users around the world. This is proof that our tool delivers results.</p>
 					</div>
@@ -739,9 +804,9 @@
 
 			<!-- Testimonials Section -->
 			<section id="testimonials" class="py-20 md:py-28" aria-labelledby="testimonials-heading">
-				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-								 <h2 id="testimonials-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">What Our Players Say</h2>
-					<div id="testimonials-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+				<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+					<h2 id="testimonials-heading" class="text-4xl md:text-5xl font-bold mb-16">What Our Players Say</h2>
+					<div id="testimonials-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-left">
 						<!-- Testimonials will be dynamically inserted here -->
 					</div>
 				</div>
@@ -749,7 +814,7 @@
 			
 			<!-- Get App Section -->
 			<section id="get-app" class="py-20 md:py-28 text-center" aria-labelledby="get-app-heading">
-				 <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll">
+				 <div class="container mx-auto px-4 sm:px-6 lg:px-8 animate-on-scroll text-center">
 					<h2 id="get-app-heading" class="text-4xl md:text-5xl font-bold mb-4">Your Turn to Dominate Has Arrived</h2>
 					<p class="text-lg text-gray-400 max-w-3xl mx-auto mb-10">Every hand played without information is money left on the table. Invest in a strategic advantage, invest in wins.</p>
 					<div class="flex justify-center items-center flex-wrap gap-4 mb-8">
@@ -772,9 +837,9 @@
 
 			<!-- FAQ Section -->
 			<section id="faq" class="py-20 md:py-28 bg-background-light" aria-labelledby="faq-heading">
-				<div class="container mx-auto px-4 sm:px-6 lg:px-8">
-					<h2 id="faq-heading" class="text-4xl md:text-5xl font-bold text-center mb-16">Frequently Asked Questions</h2>
-					<div class="max-w-3xl mx-auto space-y-4">
+				<div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+					<h2 id="faq-heading" class="text-4xl md:text-5xl font-bold mb-16">Frequently Asked Questions</h2>
+					<div class="max-w-3xl mx-auto space-y-4 text-left">
 						<details class="faq-item animate-on-scroll p-6 rounded-lg">
 							<summary class="font-semibold text-xl list-none relative pr-8 cursor-pointer">
 								<span>Is it safe? Can I be banned?</span>
@@ -1517,9 +1582,9 @@
 				this.purchaseState.uniqueId = this.generateUniqueId();
 				this.purchaseState.cheatTier = tier ? parseInt(tier) : null;
 				 if (localStorage.getItem('userEmail')) {
-					  this.purchaseState.email = localStorage.getItem('userEmail');
-					  this.state.currentPurchaseStep = 2;
-					  this.showPlatformDialog();
+					  this.purchaseState.email = localStorage.getItem('userEmail');
+					  this.state.currentPurchaseStep = 2;
+					  this.showPlatformDialog();
 				 } else {
 					this.state.currentPurchaseStep = 1;
 					this.showRegistrationDialog();
@@ -1832,20 +1897,20 @@
 						</div>
 					</div>
 
-					  <div class="mt-4">
-						  <label for="coupon-input" class="text-sm text-gray-400">Discount Code</label>
-						  <div class="flex gap-2 mt-1">
-							  <input type="text" id="coupon-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-500" placeholder="Enter code" value="${this.purchaseState.coupon.code || ''}">
-							  <button id="apply-coupon-btn" class="btn-secondary font-bold py-2 px-4 rounded-lg">Apply</button>
-						  </div>
-						  <p id="coupon-feedback" class="text-sm mt-1 h-4"></p>
-					  </div>
+					  <div class="mt-4">
+						  <label for="coupon-input" class="text-sm text-gray-400">Discount Code</label>
+						  <div class="flex gap-2 mt-1">
+							  <input type="text" id="coupon-input" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-500" placeholder="Enter code" value="${this.purchaseState.coupon.code || ''}">
+							  <button id="apply-coupon-btn" class="btn-secondary font-bold py-2 px-4 rounded-lg">Apply</button>
+						  </div>
+						  <p id="coupon-feedback" class="text-sm mt-1 h-4"></p>
+					  </div>
 					
 					<div class="border-t border-gray-700 pt-4 mt-4 text-sm space-y-2">
-						  <div id="discount-row" class="hidden flex justify-between text-secondary-color">
-							  <span>Discount (<span id="coupon-code-display"></span>):</span>
-							  <span id="discount-amount-display"></span>
-						  </div>
+						  <div id="discount-row" class="hidden flex justify-between text-secondary-color">
+							  <span>Discount (<span id="coupon-code-display"></span>):</span>
+							  <span id="discount-amount-display"></span>
+						  </div>
 						<div class="flex justify-between items-center text-xl font-bold mt-2">
 							<span>Total Due Today:</span>
 							<span id="total-price-display"></span>
@@ -1898,7 +1963,7 @@
 					} else {
 						this.purchaseState.upsells.support = isSupportMandatory;
 						 if(!isSupportMandatory) {
-							  document.getElementById('upsell-support').classList.remove('selected');
+							  document.getElementById('upsell-support').classList.remove('selected');
 						 }
 					}
 					this.updateUpsellTotalDisplay();
@@ -1943,7 +2008,7 @@
 				} else {
 					totalUSD = this.purchaseState.basePriceUSD + monthlyPlatformUpsellCost;
 					 if (!isSupportMandatory) {
-						  document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
+						  document.getElementById('upsell-support').classList.remove('opacity-50', 'pointer-events-none');
 					 }
 					if (this.purchaseState.upsells.support) {
 						totalUSD += supportPriceUSD;
@@ -2124,10 +2189,10 @@
 					</div>`;
 				
 				const content = `
-					  <div class="mb-4">
-						  <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 100%;"></div></div>
-						  <p class="text-center text-sm text-gray-400 mt-2">Step 6 of 6</p>
-					  </div>
+					  <div class="mb-4">
+						  <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 100%;"></div></div>
+						  <p class="text-center text-sm text-gray-400 mt-2">Step 6 of 6</p>
+					  </div>
 					<h3 class="text-2xl font-bold mb-2 text-center">Complete Your Payment</h3>
 					<div class="flex items-center justify-center space-x-4 mb-4 text-sm text-gray-400">
 						<div class="flex items-center space-x-1.5">
@@ -2336,3 +2401,5 @@
 	</script>
 </body>
 </html>
+
+
