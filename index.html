@@ -1194,13 +1194,29 @@
 					const selectedCountry = this.dom.countrySelectInput.value;
 					if (!selectedCountry) return;
 
-					await this.fetchCurrencyRates();
-					this.updateUserStateFromCountry(selectedCountry);
-					localStorage.setItem('userCountryCode', selectedCountry);
-					
-					this.dom.countrySelectionModal.classList.add('hidden');
-					this.dom.pageContent.classList.remove('hidden');
-					this.init();
+					const originalButtonText = this.dom.countrySelectBtn.innerHTML;
+					this.dom.countrySelectBtn.disabled = true;
+					this.dom.countrySelectBtn.innerHTML = '<div class="spinner mx-auto"></div>';
+
+					try {
+						await this.fetchCurrencyRates();
+						this.updateUserStateFromCountry(selectedCountry);
+						localStorage.setItem('userCountryCode', selectedCountry);
+						
+						this.dom.countrySelectionModal.classList.add('hidden');
+						this.dom.pageContent.classList.remove('hidden');
+						
+						this.init();
+					} catch (error) {
+						console.error("Initialization failed after country selection:", error);
+						if (this.dom.apiErrorNotice) {
+							this.dom.apiErrorNotice.textContent = 'An error occurred. Please try again.';
+							this.dom.apiErrorNotice.classList.remove('hidden');
+						}
+						// Restore the button to its original state on error
+						this.dom.countrySelectBtn.disabled = false;
+						this.dom.countrySelectBtn.innerHTML = originalButtonText;
+					}
 				});
 			},
 			
@@ -2015,6 +2031,21 @@
 					}
 				}
 				
+				// Re-validate coupon if it's an annual-only coupon and the annual plan is not selected
+				const isAnnualOnlyCoupon = this.purchaseState.coupon.code && ['heck30off', 'heck50off'].includes(this.purchaseState.coupon.code);
+				if (isAnnualOnlyCoupon && !this.purchaseState.upsells.annual) {
+					this.purchaseState.coupon = { code: null, discount: 0 }; // Reset the coupon
+					const feedback = document.getElementById('coupon-feedback');
+					const couponInput = document.getElementById('coupon-input');
+					if (feedback) {
+						feedback.textContent = 'Coupon removed as it requires the annual plan.';
+						feedback.className = 'text-yellow-400 text-sm mt-1 h-4';
+					}
+					if (couponInput) {
+						couponInput.value = '';
+					}
+				}
+				
 				const preDiscountTotal = totalUSD;
 				let finalDiscountAmount = 0;
 
@@ -2058,6 +2089,7 @@
 				feedback.textContent = '';
 
 				this.purchaseState.coupon = { code: null, discount: 0 };
+				const isAnnual = this.purchaseState.upsells.annual;
 
 				if (code === 'hack10off') {
 					this.purchaseState.coupon = { code: 'hack10off', discount: 0.10 };
@@ -2066,15 +2098,20 @@
 					this.purchaseState.coupon = { code: 'heck15off', discount: 0.15 };
 					applied = true;
 				} else if (code === 'heck30off') {
-					this.purchaseState.coupon = { code: 'heck30off', discount: 0.30 };
-					applied = true;
+					if (isAnnual) {
+						this.purchaseState.coupon = { code: 'heck30off', discount: 0.30 };
+						applied = true;
+					} else {
+						feedback.textContent = 'HECK30OFF is for the annual plan only. Try HACK10OFF.';
+						feedback.className = 'text-yellow-400 text-sm mt-1 h-4';
+						applied = false;
+					}
 				} else if (code === 'heck50off') {
-					const totalPlatforms = this.purchaseState.platforms.length + this.purchaseState.upsells.additionalPlatforms.length;
-					if (totalPlatforms >= 3) {
+					if (isAnnual) {
 						this.purchaseState.coupon = { code: 'heck50off', discount: 0.50 };
 						applied = true;
 					} else {
-						feedback.textContent = 'HECK50OFF requires at least 3 platforms.';
+						feedback.textContent = 'HECK50OFF is for the annual plan only. Try HACK10OFF.';
 						feedback.className = 'text-yellow-400 text-sm mt-1 h-4';
 						applied = false;
 					}
@@ -2083,7 +2120,7 @@
 				if (applied) {
 					feedback.textContent = `Coupon "${code.toUpperCase()}" applied!`;
 					feedback.className = 'text-secondary-color text-sm mt-1 h-4';
-				} else if (!feedback.textContent) {
+				} else if (!feedback.textContent) { // Only show invalid if no other message is set
 					feedback.textContent = 'Invalid coupon code.';
 					feedback.className = 'text-red-500 text-sm mt-1 h-4';
 				}
