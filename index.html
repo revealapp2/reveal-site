@@ -916,6 +916,8 @@
 							<img src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" alt="Bitcoin" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Bitcoin (BTC)">
 							<img src="https://img.icons8.com/color/48/000000/ethereum.png" alt="Ethereum" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Ethereum (ETH)">
 							<img src="https://img.icons8.com/color/48/000000/tether.png" alt="Tether" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Tether (USDT)">
+							<!-- NEW: BNB Icon -->
+							<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Binance-coin-bnb-logo.png/48px-Binance-coin-bnb-logo.png" alt="Binance Coin" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Binance Coin (BNB)">
 							<img src="https://img.icons8.com/nolan/64/solana.png" alt="Solana" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="Solana (SOL)">
 							<img src="https://img.icons8.com/color/48/xrp.png" alt="XRP" class="h-8 w-8 grayscale hover:grayscale-0 transition duration-300" title="XRP (Ripple)">
 						</div>
@@ -2153,7 +2155,8 @@
 							<span id="price-timer" class="ml-1">15:00</span>
 						</div>
 					</div>
-					<div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
+					<!-- MODIFIED: Changed to grid-cols-3 for 6 items -->
+					<div class="grid grid-cols-3 gap-4 text-center">
 						<button data-crypto="btc" class="selection-button crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
 							<img loading="lazy" src="https://img.icons8.com/color/48/000000/bitcoin--v1.png" class="h-8 w-8 mx-auto mb-1" alt="Bitcoin">
 							<span class="text-sm font-semibold">BTC</span>
@@ -2178,6 +2181,12 @@
 							 <img loading="lazy" src="https://img.icons8.com/color/48/xrp.png" class="h-8 w-8 mx-auto mb-1" alt="XRP">
 							<span class="text-sm font-semibold">XRP</span>
 							 <span class="text-xs text-gray-400">Ripple Network</span>
+						</button>
+						<!-- NEW: BNB Button -->
+						<button data-crypto="bnb" class="selection-button crypto-button p-3 rounded-lg flex flex-col items-center justify-center h-24">
+							 <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Binance-coin-bnb-logo.png/48px-Binance-coin-bnb-logo.png" class="h-8 w-8 mx-auto mb-1" alt="BNB">
+							<span class="text-sm font-semibold">BNB</span>
+							 <span class="text-xs text-gray-400">BSC Network</span>
 						</button>
 					</div>`;
 				this.showDialog(content, true);
@@ -2211,12 +2220,14 @@
 				this.state.currentPurchaseStep = 6;
 				this.savePurchaseState();
 
+				// --- MODIFIED: Updated wallet addresses ---
 				const addresses = {
-					usdt: "TXxRAVZP8fUJVm2yMTS8uei2AsgKtLviuK",
-					btc: "bc1q983fl9ehgw88wqgs2k78vurrk2l2z6t6afphz3",
-					eth: "0x9b5877A847BE203FCbA421194C83E0af6f686cC7",
-					sol: "2ec6P1d7zNQbmFs85FuDfDrUhWbuV8vC87XpxGq2oJV7",
-					xrp: "r4QRtFWqJXcjWk5s4ACN8ujagwK4AU4s6p"
+					usdt: "TDZEoAmb9BuibfgZ4XJryq4TnSKr9XWRMH",
+					btc: "bc1qf9y2vazaar9pukrmd0d4e3xw3ywmc0tv82tjk2",
+					eth: "0xf0eE40129864CD9598EaAf2c6b1b2292aF89",
+					sol: "4JiDmdbAWFr14BqrvXJRSUGbHfdwLrhQUCCDjJ7FnMEE",
+					xrp: "rGG639h2EW9yVgaYtN1yVgTzoUerVjhZ4Q",
+					bnb: "0xf0eE40129864CD9598EaAf2c6b1b2292aF89"
 				};
 				const address = addresses[method];
 				let cryptoAmountHTML = `
@@ -2225,6 +2236,14 @@
 						<p class="text-sm text-gray-400 mt-2">Calculating final amount...</p>
 					</div>`;
 				
+				// --- NEW: Memo/Tag warning message ---
+				let memoWarning = '';
+				if (method === 'sol') {
+					memoWarning = '<p class="text-yellow-400 text-sm text-center mb-3 font-semibold"><i class="fas fa-info-circle mr-1"></i>No memo is required for this transaction.</p>';
+				} else if (method === 'xrp') {
+					memoWarning = '<p class="text-yellow-400 text-sm text-center mb-3 font-semibold"><i class="fas fa-info-circle mr-1"></i>No destination tag is required for this transaction.</p>';
+				}
+
 				const content = `
 					  <div class="mb-4">
 						  <div class="progress-bar-container w-full"><div class="progress-bar" style="width: 100%;"></div></div>
@@ -2243,6 +2262,7 @@
 					</div>
 					<div id="payment-amount-container" class="text-center mb-4 min-h-[56px] flex flex-col justify-center">${cryptoAmountHTML}</div>
 					<div id="qr-code-container" class="flex justify-center mb-4 p-2 bg-white rounded-lg w-48 h-48 mx-auto"></div>
+					${memoWarning} <!-- NEW: Added memo warning here -->
 					<div class="bg-background-dark border border-gray-700 rounded-lg p-3 text-center">
 						<p class="text-xs text-gray-400 mb-2">Send the exact amount to this address:</p>
 						<p id="wallet-address-text" class="text-primary-color font-mono text-sm break-all mb-3">${address}</p>
@@ -2287,6 +2307,11 @@
 					`;
 					
 					let qrData = `${method}:${address}?amount=${cryptoAmount}`;
+					// Special handling for ERC20/BEP20 tokens as they share an address format
+					if (method === 'eth' || method === 'bnb') {
+						qrData = `ethereum:${address}?amount=${cryptoAmount}`; // Use 'ethereum:' prefix for QR compatibility
+					}
+
 					const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(qrData)}`;
 					qrCodeContainer.innerHTML = `<img src="${qrUrl}" alt="${method.toUpperCase()} QR Code" class="w-full h-full">`;
 				} else if (paymentAmountContainer) {
@@ -2295,7 +2320,15 @@
 			},
 			
 			async getCryptoPrice(cryptoId) {
-				const ids = { btc: 'bitcoin', eth: 'ethereum', usdt: 'tether', sol: 'solana', xrp: 'ripple' };
+				// --- MODIFIED: Added 'bnb' ---
+				const ids = { 
+					btc: 'bitcoin', 
+					eth: 'ethereum', 
+					usdt: 'tether', 
+					sol: 'solana', 
+					xrp: 'ripple',
+					bnb: 'binancecoin' // Correct CoinGecko ID
+				};
 				try {
 					const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids[cryptoId]}&vs_currencies=usd`);
 					if (!response.ok) return null;
