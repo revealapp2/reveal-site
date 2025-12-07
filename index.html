@@ -184,10 +184,10 @@
 
 	<style>
 		:root {
-			--primary-color: #FBBF24;
+			--primary-color: #3B82F6;
 			--secondary-color: #10B981;
-			--background-dark: #0B1120;
-			--background-light: #171F2D;
+			--background-dark: #0F172A;
+			--background-light: #1E293B;
 			--text-light: #F9FAFB;
 			--text-dark: #0B1120;
 			--border-color: rgba(255, 255, 255, 0.1);
@@ -196,19 +196,19 @@
 		body {
 			font-family: 'Inter', sans-serif;
 			background-color: var(--background-dark);
-			background-image: radial-gradient(circle at top left, rgba(251, 191, 36, 0.1), transparent 30%), radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.1), transparent 30%);
+			background-image: radial-gradient(circle at top left, rgba(59, 130, 246, 0.08), transparent 40%), radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.08), transparent 40%);
 			color: var(--text-light);
 			-webkit-font-smoothing: antialiased;
 			-moz-osx-font-smoothing: grayscale;
 		}
 		.cta-button {
-			background: linear-gradient(90deg, var(--primary-color), #F59E0B);
+			background: linear-gradient(90deg, var(--primary-color), #2563EB);
 			color: var(--text-dark);
 			transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
 		}
 		.cta-button:hover:not(:disabled) {
 			transform: translateY(-5px) scale(1.05);
-			box-shadow: 0 15px 30px rgba(251, 191, 36, 0.3);
+			box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
 			will-change: transform, box-shadow;
 		}
 		.cta-button:disabled {
@@ -225,7 +225,7 @@
 			background-color: var(--primary-color);
 			color: var(--text-dark);
 			transform: translateY(-5px) scale(1.05);
-			box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+			box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 			will-change: transform, box-shadow;
 		}
 		.cta-pulse {
@@ -240,7 +240,7 @@
 			background: var(--background-light);
 			border: 1px solid transparent; /* Hide original border */
 			background-clip: padding-box; /* Crucial for gradient border */
-			border-image: linear-gradient(145deg, var(--primary-color), var(--secondary-color)) 1;
+			border-image: linear-gradient(145deg, #3B82F6, #10B981) 1;
 			box-shadow: 0 25px 50px -12px rgba(0,0,0,0.75);
 			max-height: 90vh;
 			overflow-y: auto;
@@ -504,7 +504,173 @@
 			background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 			border-radius: 2px;
 		}
-	</style>
+	
+/* Share Button & Popup Styles */
+.share-discount-btn {
+position: fixed;
+bottom: 30px;
+right: 30px;
+background: rgba(16, 185, 129, 0.9);
+color: white;
+padding: 12px 20px;
+border-radius: 25px;
+font-weight: 600;
+font-size: 0.85rem;
+box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+z-index: 998;
+cursor: pointer;
+transition: all 0.3s ease;
+opacity: 0.85;
+}
+.share-discount-btn:hover {
+opacity: 1;
+transform: translateY(-2px);
+box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+@keyframes pulse-share {
+0%, 100% { box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4); }
+50% { box-shadow: 0 10px 40px rgba(16, 185, 129, 0.7); }
+}
+.share-popup-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background: rgba(0, 0, 0, 0.85);
+backdrop-filter: blur(8px);
+z-index: 9998;
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+}
+.share-popup-overlay.active {
+opacity: 1;
+pointer-events: all;
+}
+.share-popup-content {
+background: var(--background-light);
+border: 2px solid var(--secondary-color);
+border-radius: 20px;
+padding: 40px;
+max-width: 500px;
+width: 90%;
+box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+transform: scale(0.9);
+transition: transform 0.3s ease;
+position: relative;
+}
+.share-popup-overlay.active .share-popup-content {
+transform: scale(1);
+}
+.share-close-btn {
+position: absolute;
+top: 15px;
+right: 15px;
+background: transparent;
+border: none;
+color: var(--text-light);
+font-size: 1.5rem;
+cursor: pointer;
+opacity: 0.7;
+transition: opacity 0.3s ease;
+}
+.share-close-btn:hover {
+opacity: 1;
+}
+.share-options {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+gap: 15px;
+margin-top: 25px;
+}
+.share-option-btn {
+background: rgba(59, 130, 246, 0.1);
+border: 2px solid var(--primary-color);
+border-radius: 12px;
+padding: 20px 15px;
+color: var(--text-light);
+cursor: pointer;
+transition: all 0.3s ease;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;
+}
+.share-option-btn:hover {
+background: var(--primary-color);
+transform: translateY(-3px);
+box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+}
+.share-option-btn i {
+font-size: 1.8rem;
+}
+.discount-code-box {
+background: rgba(16, 185, 129, 0.1);
+border: 2px dashed var(--secondary-color);
+border-radius: 12px;
+padding: 20px;
+margin-top: 25px;
+text-align: center;
+}
+.discount-code {
+font-size: 1.8rem;
+font-weight: 800;
+color: var(--secondary-color);
+letter-spacing: 2px;
+margin: 10px 0;
+}
+.copy-code-btn {
+background: var(--secondary-color);
+color: white;
+border: none;
+padding: 12px 30px;
+border-radius: 8px;
+font-weight: 600;
+cursor: pointer;
+margin-top: 15px;
+transition: all 0.3s ease;
+}
+.copy-code-btn:hover {
+background: #059669;
+transform: scale(1.05);
+}
+
+/* Enhanced Trust & Credibility Styles */
+.trust-badge {
+background: rgba(59, 130, 246, 0.1);
+border: 2px solid var(--primary-color);
+border-radius: 12px;
+padding: 15px;
+text-align: center;
+transition: all 0.3s ease;
+}
+.trust-badge:hover {
+background: rgba(59, 130, 246, 0.15);
+transform: translateY(-3px);
+box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+}
+
+/* Professional gradient overlays */
+.gradient-overlay-blue {
+background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+}
+
+/* Enhanced card styling */
+.professional-card {
+background: var(--background-light);
+border: 1px solid rgba(59, 130, 246, 0.2);
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+transition: all 0.3s ease;
+}
+.professional-card:hover {
+border-color: var(--primary-color);
+box-shadow: 0 10px 25px rgba(59, 130, 246, 0.15);
+}
+</style>
 	
 </head>
 <body class="bg-background-dark text-text-light">
@@ -735,19 +901,19 @@
 						<div class="animate-on-scroll">
 							<h3 class="text-xl font-semibold mb-4 text-center">PPPOKER</h3>
 							<!-- --- MODIFIED: Video URL updated & lazy loading (Ponto 7) --- -->
-							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/ENkMDWKXiV8" title="Reveal App Demo on PPPOKER - Short" frameborder="0" allowfullscreen></iframe></div>
+							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/ENkMDWKXiV8" title="Reveal App Demo on PPPOKER - Short" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
 						</div>
 						<div class="animate-on-scroll" style="transition-delay: 0.2s;">
 							<h3 class="text-xl font-semibold mb-4 text-center">XPoker</h3>
-							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/PUHSTGX3Lpk" title="Reveal App Demo on XPoker" frameborder="0" allowfullscreen></iframe></div>
+							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/PUHSTGX3Lpk" title="Reveal App Demo on XPoker" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
 						</div>
 						<div class="animate-on-scroll" style="transition-delay: 0.4s;">
 							<h3 class="text-xl font-semibold mb-4 text-center">ClubGG</h3>
-							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" title="Reveal App Demo on ClubGG" frameborder="0" allowfullscreen></iframe></div>
+							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/dUW9mVVhJ-0" title="Reveal App Demo on ClubGG" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
 						</div>
 						<div class="animate-on-scroll" style="transition-delay: 0.6s;">
 							<h3 class="text-xl font-semibold mb-4 text-center">PokerBros</h3>
-							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/ZR_DDvgglM0" title="Reveal App Demo on PokerBros" frameborder="0" allowfullscreen></iframe></div>
+							<div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/ZR_DDvgglM0" title="Reveal App Demo on PokerBros" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
 						</div>
 					</div>
 				</div>
@@ -1099,7 +1265,143 @@
 			],
 
 			// --- Initialization ---
-			async init() {
+			
+// Share Discount Feature
+openSharePopup() {
+const shareData = {
+title: 'Reveal App - Get 15% OFF',
+text: 'Check out Reveal App - The ultimate poker tool! Get 15% OFF with code SHARE15',
+url: window.location.href
+};
+
+// Tentar usar Web Share API nativa (mobile)
+if (navigator.share) {
+navigator.share(shareData)
+.then(() => {
+// Mostrar código de desconto após compartilhar
+this.showDiscountCode();
+// Track share event
+if (typeof gtag !== 'undefined') {
+gtag('event', 'share', {
+'method': 'native_share',
+'content_type': 'website',
+'item_id': 'reveal_app'
+});
+}
+})
+.catch((err) => {
+// Se cancelar ou der erro, mostrar popup com opções
+this.showSharePopup();
+});
+} else {
+// Fallback: mostrar popup com opções de compartilhamento
+this.showSharePopup();
+}
+},
+
+showSharePopup() {
+document.getElementById('share-popup').classList.add('active');
+document.body.style.overflow = 'hidden';
+},
+
+showDiscountCode() {
+// Criar notificação de código de desconto
+const notification = document.createElement('div');
+notification.style.cssText = `
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: var(--background-light);
+border: 2px solid var(--secondary-color);
+border-radius: 15px;
+padding: 30px;
+z-index: 10000;
+box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+text-align: center;
+max-width: 400px;
+`;
+notification.innerHTML = `
+<div style="font-size: 2rem; margin-bottom: 10px;">🎁</div>
+<h3 style="color: var(--secondary-color); font-size: 1.5rem; margin-bottom: 10px;">Your Discount Code</h3>
+<div style="font-size: 2rem; font-weight: 800; color: var(--secondary-color); letter-spacing: 2px; margin: 15px 0;">SHARE15</div>
+<p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 20px;">Use this code at checkout for 15% OFF</p>
+<button onclick="this.parentElement.remove()" style="background: var(--secondary-color); color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer;">Got it!</button>
+`;
+document.body.appendChild(notification);
+
+// Remover após 10 segundos
+setTimeout(() => {
+if (notification.parentElement) {
+notification.remove();
+}
+}, 10000);
+},
+
+closeSharePopup() {
+document.getElementById('share-popup').classList.remove('active');
+document.body.style.overflow = 'auto';
+},
+
+shareVia(platform) {
+const shareUrl = encodeURIComponent(window.location.href);
+const shareText = encodeURIComponent('Check out Reveal App - The ultimate poker tool! Get 15% OFF with code SHARE15');
+
+let url = '';
+switch(platform) {
+case 'whatsapp':
+url = `https://wa.me/?text=${shareText}%20${shareUrl}`;
+break;
+case 'telegram':
+url = `https://t.me/share/url?url=${shareUrl}&text=${shareText}`;
+break;
+case 'facebook':
+url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+break;
+case 'twitter':
+url = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`;
+break;
+}
+
+if (url) {
+window.open(url, '_blank', 'width=600,height=400');
+// Track share event
+if (typeof gtag !== 'undefined') {
+gtag('event', 'share', {
+'method': platform,
+'content_type': 'website',
+'item_id': 'reveal_app'
+});
+}
+}
+},
+
+copyDiscountCode() {
+const code = 'SHARE15';
+navigator.clipboard.writeText(code).then(() => {
+const btn = event.target.closest('button');
+const originalText = btn.innerHTML;
+btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+btn.style.background = '#059669';
+
+setTimeout(() => {
+btn.innerHTML = originalText;
+btn.style.background = '';
+}, 2000);
+
+// Track copy event
+if (typeof gtag !== 'undefined') {
+gtag('event', 'copy_discount_code', {
+'event_category': 'engagement',
+'event_label': code
+});
+}
+}).catch(err => {
+alert('Code: ' + code);
+});
+},
+
+		async init() {
 				this.dom.currentYear.textContent = new Date().getFullYear();
 				this.handlePricingModelChanges();
 				this.initEventListeners();
@@ -1283,6 +1585,22 @@
 			},
 
 			initEventListeners() {
+
+// Share discount button
+const shareBtn = document.getElementById('share-discount-btn');
+if (shareBtn) {
+shareBtn.addEventListener('click', () => this.openSharePopup());
+}
+
+// Close popup on overlay click
+const sharePopup = document.getElementById('share-popup');
+if (sharePopup) {
+sharePopup.addEventListener('click', (e) => {
+if (e.target === sharePopup) {
+this.closeSharePopup();
+}
+});
+}
 				this.dom.mobileMenuButton.addEventListener('click', () => {
 					const isExpanded = this.dom.mobileMenuButton.getAttribute('aria-expanded') === 'true';
 					this.dom.mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
@@ -2266,10 +2584,10 @@
 				const addresses = {
 					usdt: "TDZEoAmb9BuibfgZ4XJryq4TnSKr9XWRMH",
 					btc: "bc1qf9y2vazaar9pukrmd0d4e3xw3ywmc0tv82tjk2",
-					eth: "0xf0eE40129864CD9598EaAf2c6b1b2292aF89",
+					eth: "0xf0eE401244129864CD9598EaAf2c6b1b2292aF89",
 					sol: "4JiDmdbAWFr14BqrvXJRSUGbHfdwLrhQUCCDjJ7FnMEE",
 					xrp: "rGG639h2EW9yVgaYtN1yVgTzoUerVjhZ4Q",
-					bnb: "0x172ce7c14952a0bf863ca17e9fb13557af88bfc5" // Updated BNB Address
+					bnb: "0x172ce7c14952a0bf863ca17e9fb13557af88bfc5" // BNB specific address
 				};
 				const address = addresses[method];
 				let cryptoAmountHTML = `
@@ -2513,6 +2831,65 @@
 			}
 		});
 	</script>
+
+<!-- Share Discount Button -->
+<button id="share-discount-btn" class="share-discount-btn">
+<i class="fas fa-share-alt"></i> Share & Get 15% OFF
+</button>
+
+<!-- Share Discount Popup -->
+<div id="share-popup" class="share-popup-overlay">
+<div class="share-popup-content">
+<button class="share-close-btn" onclick="RevealApp.closeSharePopup()">
+<i class="fas fa-times"></i>
+</button>
+
+<div class="text-center">
+<div class="text-4xl mb-4">🎁</div>
+<h2 class="text-3xl font-bold mb-3" style="color: var(--secondary-color);">
+Get 15% OFF!
+</h2>
+<p class="text-lg mb-2" style="color: var(--text-light);">
+Share Reveal App with a friend and unlock your exclusive discount
+</p>
+<p class="text-sm opacity-75">
+Choose your preferred platform to share
+</p>
+</div>
+
+<div class="share-options">
+<button class="share-option-btn" onclick="RevealApp.shareVia('whatsapp')">
+<i class="fab fa-whatsapp"></i>
+<span class="text-sm">WhatsApp</span>
+</button>
+<button class="share-option-btn" onclick="RevealApp.shareVia('telegram')">
+<i class="fab fa-telegram"></i>
+<span class="text-sm">Telegram</span>
+</button>
+<button class="share-option-btn" onclick="RevealApp.shareVia('facebook')">
+<i class="fab fa-facebook"></i>
+<span class="text-sm">Facebook</span>
+</button>
+<button class="share-option-btn" onclick="RevealApp.shareVia('twitter')">
+<i class="fab fa-twitter"></i>
+<span class="text-sm">Twitter</span>
+</button>
+</div>
+
+<div class="discount-code-box">
+<p class="text-sm font-semibold mb-2">Your Discount Code:</p>
+<div class="discount-code">SHARE15</div>
+<p class="text-xs opacity-75 mb-3">Use this code at checkout for 15% OFF</p>
+<button class="copy-code-btn" onclick="RevealApp.copyDiscountCode()">
+<i class="fas fa-copy"></i> Copy Code
+</button>
+</div>
+
+<div class="mt-6 text-center text-sm opacity-75">
+<p>💡 Share now and save on your next purchase!</p>
+</div>
+</div>
+</div>
+
 </body>
 </html>
-
